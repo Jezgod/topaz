@@ -127,6 +127,8 @@ namespace luautils
 
     int32 random(lua_State*);
 
+    int32 OnMenuSelection(CCharEntity* PChar, CBaseEntity* NPC, string_t Choice);// Retribution - Returns a user menu response to the calling NPC
+
     int32 SendEntityVisualPacket(lua_State*);                                    // временное решение для работы гейзеров в Dangruf_Wadi
     int32 GetNPCByID(lua_State*);                                               // Returns NPC By Id
     int32 GetMobByID(lua_State*);                                               // Returns Mob By Id

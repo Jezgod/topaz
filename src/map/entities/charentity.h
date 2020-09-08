@@ -32,6 +32,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 #include "battleentity.h"
 #include "petentity.h"
+#include "../retrib/retrib_player.h" // RETRIB
 
 #define MAX_QUESTAREA	 11
 #define MAX_QUESTID     256
@@ -161,6 +162,7 @@ class CAbilityState;
 class CRangeState;
 class CItemState;
 class CItemUsable;
+class CRetribPlayer; // RETRIBUTION
 
 typedef std::deque<CBasicPacket*> PacketList_t;
 typedef std::map<uint32, CBaseEntity*> SpawnIDList_t;
@@ -169,6 +171,8 @@ typedef std::vector<EntityID_t> BazaarList_t;
 class CCharEntity : public CBattleEntity
 {
 public:
+
+    CRetribPlayer* RPC; // RETRIBUTION
 
     jobs_t					jobs;							// доступрые профессии персонажа
     keyitems_t				keys;							// таблица ключевых предметов

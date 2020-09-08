@@ -893,6 +893,7 @@ void CZone::CharZoneIn(CCharEntity* PChar)
             PBattlefield->InsertEntity(PChar, true);
 
     PChar->PLatentEffectContainer->CheckLatentsZone();
+    charutils::ResetPVPVar(PChar);
 }
 
 void CZone::CharZoneOut(CCharEntity* PChar)
@@ -955,6 +956,7 @@ void CZone::CharZoneOut(CCharEntity* PChar)
         charutils::SaveDeathTime(PChar);
 
     PChar->loc.zone = nullptr;
+    //charutils::ResetPVPVar(PChar);
 
     if (PChar->status == STATUS_SHUTDOWN)
     {

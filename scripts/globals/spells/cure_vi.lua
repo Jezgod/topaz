@@ -104,7 +104,7 @@ function onSpellCast(caster, target, spell)
             final = dmg
             target:takeDamage(final, caster, tpz.attackType.MAGICAL, tpz.damageType.LIGHT)
             target:updateEnmityFromDamage(caster, final)
-        elseif (caster:getObjType() == tpz.objType.PC) then
+        elseif (caster:getObjType() == tpz.objType.PC and target:getObjType() == tpz.objType.MOB) then
             spell:setMsg(tpz.msg.basic.MAGIC_NO_EFFECT)
         else
             -- e.g. monsters healing themselves.

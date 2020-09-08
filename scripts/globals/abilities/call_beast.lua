@@ -25,4 +25,5 @@ end
 function onUseAbility(player, target, ability)
     tpz.pet.spawnPet(player, player:getWeaponSubSkillType(tpz.slot.AMMO))
     player:removeAmmo()
+    player:setCharVar("familiar", 0)
 end

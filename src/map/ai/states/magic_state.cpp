@@ -53,7 +53,7 @@ CMagicState::CMagicState(CBattleEntity* PEntity, uint16 targid, SpellID spellid,
         throw CStateInitException(std::move(m_errorMsg));
     }
 
-    if (!CanCastSpell(PTarget))
+    if (!CanCastSpell(PTarget, uint8(m_PSpell->getRange())))
     {
         throw CStateInitException(std::move(m_errorMsg));
     }
@@ -94,10 +94,29 @@ bool CMagicState::Update(time_point tick)
         auto PTarget = m_PEntity->IsValidTarget(m_targid, m_PSpell->getValidTarget(), m_errorMsg);
         MSGBASIC_ID msg = MSGBASIC_IS_INTERRUPTED;
 
+        uint8 range = uint8(m_PSpell->getRange()); //m_PSpell->getRange()
+
+        if (range > 19)
+        {
+            if (tick > GetEntryTime()) // after checking for the initial time, the mob can move further away and not cancel our cast
+            {
+                range = 30; 
+            }
+        }
+        else
+        {
+            if (tick > GetEntryTime()) // after checking for the initial time, the mob can move further away and not cancel our cast
+            {
+                range = uint8(m_PSpell->getRange()) + 10; 
+            }
+        }
+
+        CanCastSpell(PTarget, range);
+
         action_t action;
 
         if (!PTarget || m_errorMsg || (HasMoved() && (m_PEntity->objtype != TYPE_PET ||
-            static_cast<CPetEntity*>(m_PEntity)->getPetType() != PETTYPE_AUTOMATON)) || !CanCastSpell(PTarget))
+            static_cast<CPetEntity*>(m_PEntity)->getPetType() != PETTYPE_AUTOMATON)) || !CanCastSpell(PTarget, range))
         {
             m_interrupted = true;
         }
@@ -153,7 +172,7 @@ CSpell* CMagicState::GetSpell()
     return m_PSpell.get();
 }
 
-bool CMagicState::CanCastSpell(CBattleEntity* PTarget)
+bool CMagicState::CanCastSpell(CBattleEntity* PTarget, uint8 range)
 {
     auto ret = m_PEntity->CanUseSpell(GetSpell());
 
@@ -190,7 +209,7 @@ bool CMagicState::CanCastSpell(CBattleEntity* PTarget)
         m_errorMsg = std::make_unique<CMessageBasicPacket>(m_PEntity, PTarget, static_cast<uint16>(m_PSpell->getID()), 0, MSGBASIC_TOO_FAR_AWAY);
         return false;
     }
-    if (m_PEntity->objtype == TYPE_PC && distance(m_PEntity->loc.p, PTarget->loc.p) > m_PSpell->getRange())
+    if (m_PEntity->objtype == TYPE_PC && distance(m_PEntity->loc.p, PTarget->loc.p) > range)
     {
         m_errorMsg = std::make_unique<CMessageBasicPacket>(m_PEntity, PTarget, static_cast<uint16>(m_PSpell->getID()), 0, MSGBASIC_OUT_OF_RANGE_UNABLE_CAST);
         return false;

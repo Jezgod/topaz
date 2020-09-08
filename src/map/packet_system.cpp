@@ -417,6 +417,11 @@ void SmallPacket0x00D(map_session_data_t* session, CCharEntity* PChar, CBasicPac
             PChar->setPetZoningInfo();
         }
 
+        if (PChar->loc.zone->GetID() == 71)
+        {
+            PChar->health.hp = 0;
+        }
+
         session->shuttingDown = 1;
         Sql_Query(SqlHandle, "UPDATE char_stats SET zoning = 0 WHERE charid = %u", PChar->id);
     }
@@ -3123,13 +3128,21 @@ void SmallPacket0x06E(map_session_data_t* session, CCharEntity* PChar, CBasicPac
             {
                 PInvitee = zoneutils::GetChar(charid);
             }
+
+            uint8 Pall_p = PChar->profile.nation;
+            uint8 Tall_p = 0;
+            if (PInvitee)
+            {
+                Tall_p = PInvitee->profile.nation;
+            }
+            
             if (PInvitee)
             {
                 ShowDebug(CL_CYAN"%s sent party invite to %s\n" CL_RESET, PChar->GetName(), PInvitee->GetName());
                 //make sure invitee isn't dead or in jail, they aren't a party member and don't already have an invite pending, and your party is not full
-                if (PInvitee->isDead() || jailutils::InPrison(PInvitee) || PInvitee->InvitePending.id != 0 || PInvitee->PParty != nullptr)
+                if (Pall_p != Tall_p || PInvitee->isDead() || jailutils::InPrison(PInvitee) || PInvitee->InvitePending.id != 0 || PInvitee->PParty != nullptr)
                 {
-                    ShowDebug(CL_CYAN"%s is dead, in jail, has a pending invite, or is already in a party\n" CL_RESET, PInvitee->GetName());
+                    ShowDebug(CL_CYAN"%s is a different nation. dead, in jail, has a pending invite, or is already in a party\n" CL_RESET, PInvitee->GetName());
                     PChar->pushPacket(new CMessageStandardPacket(PChar, 0, 0, MsgStd::CannotInvite));
                     break;
                 }
@@ -3196,6 +3209,14 @@ void SmallPacket0x06E(map_session_data_t* session, CCharEntity* PChar, CBasicPac
             {
                 PInvitee = zoneutils::GetChar(charid);
             }
+
+            uint8 Pall_a = PChar->profile.nation;
+            uint8 Tall_a = 0;
+            if (PInvitee)
+            {
+                Tall_a = PInvitee->profile.nation;
+            }
+
             if (PInvitee)
             {
                 ShowDebug(CL_CYAN"%s sent alliance invite to %s\n" CL_RESET, PChar->GetName(), PInvitee->GetName());
@@ -3212,10 +3233,10 @@ void SmallPacket0x06E(map_session_data_t* session, CCharEntity* PChar, CBasicPac
                     break;
                 }
                 //make sure intvitee isn't dead or in jail, they are an unallied party leader and don't already have an invite pending
-                if (PInvitee->isDead() || jailutils::InPrison(PInvitee) || PInvitee->InvitePending.id != 0 ||
+                if (Pall_a != Tall_a || PInvitee->isDead() || jailutils::InPrison(PInvitee) || PInvitee->InvitePending.id != 0 ||
                     PInvitee->PParty == nullptr || PInvitee->PParty->GetLeader() != PInvitee || PInvitee->PParty->m_PAlliance)
                 {
-                    ShowDebug(CL_CYAN"%s is dead, in jail, has a pending invite, or is already in a party/alliance\n" CL_RESET, PInvitee->GetName());
+                    ShowDebug(CL_CYAN"%s is a different nation, is dead, in jail, has a pending invite, or is already in a party/alliance\n" CL_RESET, PInvitee->GetName());
                     PChar->pushPacket(new CMessageStandardPacket(PChar, 0, 0, MsgStd::CannotInvite));
                     break;
                 }
@@ -4039,9 +4060,9 @@ void SmallPacket0x0B5(map_session_data_t* session, CCharEntity* PChar, CBasicPac
     {
         //this makes sure a command isn't sent to chat
     }
-    else if (data.ref<uint8>(0x06) == '#' && PChar->m_GMlevel > 0)
+    else if (data.ref<uint8>(0x06) == '#' && (PChar->m_GMlevel > 0 || PChar->RPC->HasMessageAuthority()))         // RETRIB
     {
-        message::send(MSG_CHAT_SERVMES, 0, 0, new CChatMessagePacket(PChar, MESSAGE_SYSTEM_1, (const char*)data[7]));
+        message::send(MSG_CHAT_SERVMES, 0, 0, new CChatMessagePacket(PChar, MESSAGE_TELL, (const char*)data[7])); // RETRIB
     }
     else
     {
@@ -4260,28 +4281,61 @@ void SmallPacket0x0B6(map_session_data_t* session, CCharEntity* PChar, CBasicPac
         PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 0, 316));
         return;
     }
-    string_t RecipientName = string_t((const char*)data[5], 15);
 
-    int8 packetData[64];
-    strncpy((char*)packetData + 4, RecipientName.c_str(), RecipientName.length() + 1);
-    ref<uint32>(packetData, 0) = PChar->id;
-    message::send(MSG_CHAT_TELL, packetData, RecipientName.length() + 5, new CChatMessagePacket(PChar, MESSAGE_TELL, (const char*)data[20]));
+    bool ShowMessage = true;
 
-    if (map_config.audit_chat == 1 && map_config.audit_tell == 1)
+    string_t Message = (const char*)data[20];
+
+    if (Message.find("GMTELL") != string_t::npos)
     {
-        char escaped_speaker[16 * 2 + 1];
-        Sql_EscapeString(SqlHandle, escaped_speaker, (const char*)PChar->GetName());
-
-        char escaped_recipient[16 * 2 + 1];
-        Sql_EscapeString(SqlHandle, escaped_recipient, (const char*)data[5]);
-
-        std::string escaped_full_string; escaped_full_string.reserve(strlen((const char*)data[20]) * 2 + 1);
-        Sql_EscapeString(SqlHandle, escaped_full_string.data(), (const char*)data[20]);
-
-        const char* fmtQuery = "INSERT into audit_chat (speaker,type,recipient,message,datetime) VALUES('%s','TELL','%s','%s',current_timestamp())";
-        if (Sql_Query(SqlHandle, fmtQuery, escaped_speaker, escaped_recipient, escaped_full_string.data()) == SQL_ERROR)
+        if (Message.find(": Question(") != string_t::npos)
         {
-            ShowError("packet_system::call: Failed to log MESSAGE_TELL.\n");
+            std::size_t Location = Message.find(": Result (");
+            if (Location != string_t::npos)
+            {
+                ShowMessage = false;
+
+                string_t Choice = Message.substr(Location + 10);
+                Choice.erase(Choice.end() - 1);
+
+                uint32 NPCID = PChar->RPC->Event->GetEventNPC();
+
+                if (!NPCID)
+                {
+                    ShowError("Packet System: No NPC defined for menu selection return.\n");
+                    return;
+                }
+                auto NPC = zoneutils::GetEntity(NPCID, TYPE_NPC);
+                luautils::OnMenuSelection(PChar, NPC, Choice);
+            }
+        }
+    }
+
+    if (ShowMessage) // Retribution
+    {
+        string_t RecipientName = string_t((const char*)data[5], 15);
+
+        int8 packetData[64];
+        strncpy((char*)packetData + 4, RecipientName.c_str(), RecipientName.length() + 1);
+        ref<uint32>(packetData, 0) = PChar->id;
+        message::send(MSG_CHAT_TELL, packetData, RecipientName.length() + 5, new CChatMessagePacket(PChar, MESSAGE_TELL, (const char*)data[20]));
+
+        if (map_config.audit_chat == 1 && map_config.audit_tell == 1)
+        {
+            char escaped_speaker[16 * 2 + 1];
+            Sql_EscapeString(SqlHandle, escaped_speaker, (const char*)PChar->GetName());
+
+            char escaped_recipient[16 * 2 + 1];
+            Sql_EscapeString(SqlHandle, escaped_recipient, (const char*)data[5]);
+
+            std::string escaped_full_string; escaped_full_string.reserve(strlen((const char*)data[20]) * 2 + 1);
+            Sql_EscapeString(SqlHandle, escaped_full_string.data(), (const char*)data[20]);
+
+            const char* fmtQuery = "INSERT into audit_chat (speaker,type,recipient,message,datetime) VALUES('%s','TELL','%s','%s',current_timestamp())";
+            if (Sql_Query(SqlHandle, fmtQuery, escaped_speaker, escaped_recipient, escaped_full_string.data()) == SQL_ERROR)
+            {
+                ShowError("packet_system::call: Failed to log MESSAGE_TELL.\n");
+            }
         }
     }
 }

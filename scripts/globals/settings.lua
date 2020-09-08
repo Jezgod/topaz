@@ -30,15 +30,15 @@ ENABLE_VOIDWATCH = 1 -- Not an expansion, but has its own storyline.
 -- FIELDS OF VALOR/Grounds of Valor settings
 ENABLE_FIELD_MANUALS  = 1 -- Enables Fields of Valor
 ENABLE_GROUNDS_TOMES  = 1 -- Enables Grounds of Valor
-REGIME_WAIT = 1 -- Make people wait till 00:00 game time as in retail. If it's 0, there is no wait time.
+REGIME_WAIT = 0 -- Make people wait till 00:00 game time as in retail. If it's 0, there is no wait time.
 FOV_REWARD_ALLIANCE = 0 -- Allow Fields of Valor rewards while being a member of an alliance. (default retail behavior: 0)
-GOV_REWARD_ALLIANCE = 1 -- Allow Grounds of Valor rewards while being a member of an alliance. (default retail behavior: 1)
+GOV_REWARD_ALLIANCE = 0 -- Allow Grounds of Valor rewards while being a member of an alliance. (default retail behavior: 1)
 
 -- TREASURE CASKETS
 -- Retail droprate = 0.1 (10%) with no other effects active
 -- Set to 0 to disable caskets.
 -- max is clamped to 1.0 (100%)
-CASKET_DROP_RATE = 0.1
+CASKET_DROP_RATE = 0.0
 
 -- Setting to lock content more accurately to the content you have defined above
 -- This generally results in a more accurate presentation of your selected expansions
@@ -47,15 +47,15 @@ CASKET_DROP_RATE = 0.1
 RESTRICT_CONTENT = 0
 
 -- CHARACTER CONFIG
-INITIAL_LEVEL_CAP = 50 -- The initial level cap for new players.  There seems to be a hardcap of 255.
+INITIAL_LEVEL_CAP = 99 -- The initial level cap for new players.  There seems to be a hardcap of 255.
 MAX_LEVEL = 99 -- Level max of the server, lowers the attainable cap by disabling Limit Break quests.
 NORMAL_MOB_MAX_LEVEL_RANGE_MIN = 0 -- Lower Bound of Max Level Range for Normal Mobs (0 = Uncapped)
 NORMAL_MOB_MAX_LEVEL_RANGE_MAX = 0 -- Upper Bound of Max Level Range for Normal Mobs (0 = Uncapped)
-START_GIL = 10 -- Amount of gil given to newly created characters.
-START_INVENTORY = 30 -- Starting inventory and satchel size.  Ignores values < 30.  Do not set above 80!
-NEW_CHARACTER_CUTSCENE = 1 -- Set to 1 to enable opening cutscenes, 0 to disable.
-SUBJOB_QUEST_LEVEL = 18 -- Minimum level to accept either subjob quest.  Set to 0 to start the game with subjobs unlocked.
-ADVANCED_JOB_LEVEL = 30 -- Minimum level to accept advanced job quests.  Set to 0 to start the game with advanced jobs.
+START_GIL = 1000 -- Amount of gil given to newly created characters.
+START_INVENTORY = 80 -- Starting inventory and satchel size.  Ignores values < 30.  Do not set above 80!
+NEW_CHARACTER_CUTSCENE = 0 -- Set to 1 to enable opening cutscenes, 0 to disable.
+SUBJOB_QUEST_LEVEL = 0 -- Minimum level to accept either subjob quest.  Set to 0 to start the game with subjobs unlocked.
+ADVANCED_JOB_LEVEL = 0 -- Minimum level to accept advanced job quests.  Set to 0 to start the game with advanced jobs.
 ALL_MAPS = 0 -- Set to 1 to give starting characters all the maps.
 UNLOCK_OUTPOST_WARPS = 0 -- Set to 1 to give starting characters all outpost warps.  2 to add Tu'Lia and Tavnazia.
 
@@ -89,15 +89,15 @@ HEALING_TP_CHANGE       = -100 -- Change in TP for each healing tick. Default is
 
 -- SE implemented coffer/chest illusion time in order to prevent coffer farming. No-one in the same area can open a chest or coffer for loot (gil, gems & items)
 -- till a random time between MIN_ILLSION_TIME and MAX_ILLUSION_TIME. During this time players can loot keyitem and item related to quests (AF, maps... etc.)
-COFFER_MAX_ILLUSION_TIME = 3600  -- 1 hour
-COFFER_MIN_ILLUSION_TIME = 1800  -- 30 minutes
-CHEST_MAX_ILLUSION_TIME  = 3600  -- 1 hour
-CHEST_MIN_ILLUSION_TIME  = 1800  -- 30 minutes
+COFFER_MAX_ILLUSION_TIME = 60  -- 60 seconds
+COFFER_MIN_ILLUSION_TIME = 30  -- 30 seconds
+CHEST_MAX_ILLUSION_TIME  = 60  -- 60 seconds
+CHEST_MIN_ILLUSION_TIME  = 30  -- 30 seconds
 
 -- Sets spawn type for: Behemoth, Fafnir, Adamantoise, King Behemoth, Nidhog, Aspidochelone.
 -- Use 0 for timed spawns, 1 for force pop only, 2 for both
-LandKingSystem_NQ = 1
-LandKingSystem_HQ = 1
+LandKingSystem_NQ = 2
+LandKingSystem_HQ = 2
 
 -- DYNAMIS SETTINGS
     BETWEEN_2DYNA_WAIT_TIME = 24       -- Hours before player can re-enter Dynamis. Default is 1 Earthday (24 hours).

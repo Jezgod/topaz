@@ -49,6 +49,8 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "zone.h"
 #include <chrono>
 
+#include "retrib/retrib_enums.h" // RETRIB
+
 CBattlefield::CBattlefield(uint16 id, CZone* PZone, uint8 area, CCharEntity* PInitiator)
 {
     m_ID = id;
@@ -561,6 +563,11 @@ void CBattlefield::Cleanup()
     {
         auto PChar = GetZone()->GetCharByID(id);
         if (PChar)
+            // RETRIB - STATS (BCNM, LIMBUS, ETC)
+            if (leavecode == BATTLEFIELD_LEAVE_CODE_WIN)
+            {
+                PChar->RPC->AddStat(Retrib::Stat::STAT_BATTLEFIELD, Retrib::StatPoints::SP_BATTLEFIELD);
+            }
             RemoveEntity(PChar, leavecode);
     }
 

@@ -498,6 +498,9 @@ void LoadMOBList()
 
                 PMob->setMobMod(MOBMOD_CHARMABLE, Sql_GetUIntData(SqlHandle, 67));
 
+                PMob->m_levelTier = (int16)PMob->m_minLevel / 10; // RETRIB
+                if (PMob->m_Type & MOBTYPE_NOTORIOUS) PMob->m_levelTier <<= 1;
+
                 // Overwrite base family charmables depending on mob type. Disallowed mobs which should be charmable
                 // can be set in mob_spawn_mods or in their onInitialize
                 if (PMob->m_Type & MOBTYPE_EVENT || PMob->m_Type & MOBTYPE_FISHED || PMob->m_Type & MOBTYPE_BATTLEFIELD ||

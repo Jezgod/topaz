@@ -16,6 +16,9 @@ require("scripts/globals/zone")
 tpz = tpz or {}
 tpz.conquest = tpz.conquest or {}
 
+local Stats = Retrib.Stat
+local Points = Retrib.StatPoints
+
 -----------------------------------
 -- (LOCAL) constants
 -----------------------------------
@@ -557,9 +560,9 @@ local crystals =
 
 local expRings =
 {
-    [15761] = {cp=350, charges=7},
-    [15762] = {cp=700, charges=7},
-    [15763] = {cp=600, charges=3},
+    [15761] = {cp=3500, charges=7},
+    [15762] = {cp=7000, charges=7},
+    [15763] = {cp=6000, charges=3},
 }
 
 local function conquestRanking()
@@ -620,15 +623,15 @@ end
 
 local overseerInvCommon =
 {
-    [32928] = {cp =     7, lvl =  1, item =  4182},             -- scroll_of_instant_reraise
-    [32929] = {cp =    10, lvl =  1, item =  4181},             -- scroll_of_instant_warp
-    [32930] = {cp =  2500, lvl =  1, item = 15542},             -- return_ring
-    [32931] = {cp =  9000, lvl =  1, item = 15541},             -- homing_ring
-    [32933] = {cp =   500, lvl =  1, item = 15761},             -- chariot_band
-    [32934] = {cp =  1000, lvl =  1, item = 15762},             -- empress_band
-    [32935] = {cp =  2000, lvl =  1, item = 15763},             -- emperor_band
-    [32936] = {cp =  5000, lvl =  1, item = 28540},             -- warp_ring
-    [32941] = {cp = 20000, lvl =  1, item =  6380, rank = 10},  -- refined_chair_set
+    [32928] = {cp =      7,  lvl =  1, item =  4182},             -- scroll_of_instant_reraise
+    [32929] = {cp =     10,  lvl =  1, item =  4181},             -- scroll_of_instant_warp
+    [32930] = {cp =   2500,  lvl =  1, item = 15542},             -- return_ring
+    [32931] = {cp =   9000,  lvl =  1, item = 15541},             -- homing_ring
+    [32933] = {cp =   5000,  lvl =  1, item = 15761},             -- chariot_band
+    [32934] = {cp =  10000,  lvl =  1, item = 15762},             -- empress_band
+    [32935] = {cp =  20000,  lvl =  1, item = 15763},             -- emperor_band
+    [32936] = {cp =   5000,  lvl =  1, item = 28540},             -- warp_ring
+    [32941] = {cp =  20000,  lvl =  1, item =  6380, rank = 10},  -- refined_chair_set
 }
 
 local overseerInvNation =
@@ -1112,6 +1115,8 @@ tpz.conquest.overseerOnEventFinish = function(player, csid, option, guardNation,
         player:setCharVar("supplyQuest_started", 0)
         player:setCharVar("supplyQuest_region", 0)
         player:setCharVar("supplyQuest_fresh", 0)
+	-- RETRIB: AVARATI CHALLENGE
+	player:AddRetribStat(Retrib.Stat.Supply, Retrib.StatPoints.Supply)
 
         if not player:hasTeleport(guardNation, sRegion + 5) then
             player:addTeleport(guardNation, sRegion + 5)

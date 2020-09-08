@@ -35,6 +35,16 @@ function onSpellCast(caster, target, spell)
     duration = calculateDurationForLvl(duration, 28, target:getMainLvl())
 
     local final = pAbs + pEquipMods
+
+    if (caster:getMainJob() == tpz.job.WHM and caster:hasStatusEffect(tpz.effect.DIVINE_SEAL)) then
+ 	duration = duration * 2
+        final = final * 2
+        caster:PrintToPlayer( string.format( "Spell enhanced by Divine Seal." ), 29);
+    else
+	duration = duration
+        final = final
+    end
+
     if target:addStatusEffect(tpz.effect.STONESKIN, final, 0, duration, 0, 0, 4) then
         spell:setMsg(tpz.msg.basic.MAGIC_GAIN_EFFECT)
     else

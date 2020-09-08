@@ -39,6 +39,7 @@
 #include "../packets/char_appearance.h"
 #include "../packets/message_system.h"
 #include "../packets/message_special.h"
+#include "../packets/chat_message.h"
 
 #include "../ai/ai_container.h"
 #include "../ai/controllers/player_controller.h"
@@ -76,7 +77,12 @@
 #include "../packets/char_job_extra.h"
 #include "../packets/status_effects.h"
 #include "../mobskill.h"
+#include "../zone.h"
+#include "../message.h"
 
+#include "../retrib/retrib_enums.h"         // RETRIB
+#include "../retrib/retrib_events.h"        // RETRIB
+extern CRetribEvent* ServerEvent;           // RETRIB
 
 CCharEntity::CCharEntity()
 {
@@ -213,6 +219,8 @@ CCharEntity::CCharEntity()
 
     PAI = std::make_unique<CAIContainer>(this, nullptr, std::make_unique<CPlayerController>(this),
         std::make_unique<CTargetFind>(this));
+
+    RPC = new CRetribPlayer(this); // RETRIBUTION
 }
 
 CCharEntity::~CCharEntity()
@@ -230,6 +238,7 @@ CCharEntity::~CCharEntity()
     delete UContainer;
     delete CraftContainer;
     delete PMeritPoints;
+    delete RPC; //RETRIBUTION
 }
 
 uint8 CCharEntity::GetGender()
@@ -907,6 +916,7 @@ void CCharEntity::OnWeaponSkillFinished(CWeaponSkillState& state, action_t& acti
                     {
                         charutils::AddWeaponSkillPoints(this, damslot, wspoints);
                     }
+                    this->RPC->AddStat(Retrib::Stat::STAT_WEAPONSKILL, Retrib::StatPoints::SP_WEAPONSKILL); // RETRIBUTION
                 }
             }
         }
@@ -1660,10 +1670,118 @@ CBattleEntity* CCharEntity::IsValidTarget(uint16 targid, uint16 validTargetFlags
 
 void CCharEntity::Die()
 {
-    if (PLastAttacker)
-        loc.zone->PushPacket(this, CHAR_INRANGE_SELF, new CMessageBasicPacket(PLastAttacker, this, 0, 0, MSGBASIC_PLAYER_DEFEATED_BY));
-    else
+    if (PLastAttacker == nullptr)
+    {
         loc.zone->PushPacket(this, CHAR_INRANGE_SELF, new CMessageBasicPacket(this, this, 0, 0, MSGBASIC_FALLS_TO_GROUND));
+    }
+    else if (PLastAttacker->allegiance == 0)
+    {
+        loc.zone->PushPacket(this, CHAR_INRANGE_SELF, new CMessageBasicPacket(PLastAttacker, this, 0, 0, MSGBASIC_PLAYER_DEFEATED_BY));
+        conquest::LoseInfluencePoints(this);  //influence for conquest system
+    }
+    else if (PLastAttacker->id == this->id)
+    {
+        loc.zone->PushPacket(this, CHAR_INRANGE_SELF, new CMessageBasicPacket(PLastAttacker, this, 0, 0, MSGBASIC_PLAYER_DEFEATED_BY));
+    }
+    else if (PLastAttacker->allegiance != 0)
+    {
+        if (PLastAttacker->objtype == TYPE_PET || TYPE_MOB && PLastAttacker->objtype != TYPE_PC)
+        {
+            PLastAttacker = PLastAttacker->PMaster;
+        }
+
+        uint8 LMlvl = PLastAttacker->GetMLevel();
+        uint8 TMlvl = this->GetMLevel();
+        std::string M1 = "~~~~~~~~~ PVP RESULT ~~~~~~~~~";
+        std::string M2 = PLastAttacker->name + " [Lv " + std::to_string(LMlvl) + "] defeated " + this->name + " [Lv " + std::to_string(TMlvl) + "].";
+        message::send(MSG_CHAT_SERVMES, 0, 0, new CChatMessagePacket(this, MESSAGE_NS_LINKSHELL3, M1));
+        message::send(MSG_CHAT_SERVMES, 0, 0, new CChatMessagePacket(this, MESSAGE_NS_LINKSHELL3, M2));
+
+        if ((LMlvl - TMlvl) > 1)
+        {
+            uint8 bounty = LMlvl - TMlvl;
+            charutils::AddBounty(PLastAttacker, bounty);
+        }
+
+        uint8 shift = 0;
+        if ((LMlvl - TMlvl) > 80)
+        {
+            shift = 10;
+        }
+        else if ((LMlvl - TMlvl) > 70)
+        {
+            shift = 9;
+        }
+        else if ((LMlvl - TMlvl) > 60)
+        {
+            shift = 8;
+        }
+        else if ((LMlvl - TMlvl) > 50)
+        {
+            shift = 7;
+        }
+        else if ((LMlvl - TMlvl) > 40)
+        {
+            shift = 6;
+        }
+        else if ((LMlvl - TMlvl) > 30)
+        {
+            shift = 5;
+        }
+        else if ((LMlvl - TMlvl) > 20)
+        {
+            shift = 4;
+        }
+        else if ((LMlvl - TMlvl) > 10)
+        {
+            shift = 3;
+        }
+        else if ((LMlvl - TMlvl) > 5)
+        {
+            shift = 2;
+        }
+        else if ((LMlvl - TMlvl) > 1)
+        {
+            shift = 1;
+        }
+        else
+        {
+            shift = shift;
+        }
+
+        CCharEntity* PCharL = dynamic_cast<CCharEntity*>(PLastAttacker);
+        PCharL->RPC->AddStat(Retrib::Stat::STAT_PVP, Retrib::StatPoints::SP_PVP >> shift);
+
+        uint16 infamy = 0;
+        infamy = (uint16)((Retrib::StatPoints::SP_PVP >> shift) * (TMlvl / 99.0f));
+        charutils::AddPoints(PCharL, "infamy", infamy);
+
+        std::string M3 = "Infamy Obtained: " + std::to_string(infamy);
+        message::send(MSG_CHAT_SERVMES, 0, 0, new CChatMessagePacket(this, MESSAGE_NS_SHOUT, M3));
+
+        REGIONTYPE region = PLastAttacker->loc.zone->GetRegionID();
+
+        if (PLastAttacker->StatusEffectContainer->HasStatusEffect(EFFECT_SIGNET) &&
+            (region >= 0 && region <= 22))
+        {
+            // Add influence for the players region..
+            charutils::PvPExpLostCPGain(this, PLastAttacker, 0); //PVP XP LOSS IS CP GAIN
+        }
+        else if (PLastAttacker->StatusEffectContainer->HasStatusEffect(EFFECT_SANCTION) &&
+            (region >= 28 && region <= 32))
+        {
+            charutils::PvPExpLostISGain(this, PLastAttacker, 0); //PVP XP LOSS IS IS GAIN
+        }
+        else if (PLastAttacker->StatusEffectContainer->HasStatusEffect(EFFECT_SIGIL) &&
+            (region >= 33 && region <= 40))
+        {
+            charutils::PvPExpLostANGain(this, PLastAttacker, 0); //PVP XP LOSS IS AN GAIN
+        }
+    }
+    else
+    {
+        loc.zone->PushPacket(this, CHAR_INRANGE_SELF, new CMessageBasicPacket(this, this, 0, 0, MSGBASIC_FALLS_TO_GROUND));
+    }
 
     battleutils::RelinquishClaim(this);
     Die(death_duration);
@@ -1678,6 +1796,7 @@ void CCharEntity::Die()
     {
         float retainPercent = std::clamp(map_config.exp_retain + getMod(Mod::EXPERIENCE_RETAINED) / 100.0f, 0.0f, 1.0f);
         charutils::DelExperiencePoints(this, retainPercent, 0);
+        this->RPC->DelStat(Retrib::Stat::STAT_DEATH, Retrib::StatPoints::SP_DEATH);
     }
 }
 

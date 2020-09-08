@@ -33,6 +33,13 @@
 #include "entities/charentity.h"
 #include "latent_effect_container.h"
 
+#include "retrib/retrib_events.h"       // RETRIB
+
+extern CRetribEvent* ServerEvent;       // RETRIB
+extern bool  EVENT_SERVER;              // RETRIB
+extern uint8 SERVER_DAY;                // RETRIB
+extern uint8 SERVER_WEEK;               // RETRIB
+
 
 int32 time_server(time_point tick,CTaskMgr::CTask* PTask)
 {
@@ -84,6 +91,27 @@ int32 time_server(time_point tick,CTaskMgr::CTask* PTask)
         {
             guildutils::UpdateGuildPointsPattern();
             CVanaTime::getInstance()->lastMidnight = tick;
+
+            // RETRIB
+            SERVER_DAY = CVanaTime::getInstance()->getSysWeekDay();
+
+            if (EVENT_SERVER)
+            {
+                uint32 MONTH = CVanaTime::getInstance()->getSysMonth();
+
+                if (SERVER_DAY == 0)
+                {
+                    ServerEvent->SA->Finish();
+                    ServerEvent->SA->Start();
+                }
+
+                else
+                {
+                    ServerEvent->SA->NewDay();
+                }
+
+                ServerEvent->DailyGiftUpdate();
+            }
         }
     }
 

@@ -30,12 +30,12 @@ local startingNationInfo =
 
 local startingJobGear =
 {
-    [tpz.job.WAR] = {16534},       -- onion sword
-    [tpz.job.MNK] = {13184},       -- white belt
-    [tpz.job.WHM] = {17068, 4608}, -- onion rod, scroll of cure
-    [tpz.job.BLM] = {17104, 4607}, -- onion staff, scroll of stone
-    [tpz.job.RDM] = {16482, 4606}, -- onion dagger, scroll of dia
-    [tpz.job.THF] = {16483},       -- onion knife
+    [tpz.job.WAR] = {16534},                -- onion sword
+    [tpz.job.MNK] = {13184},                -- white belt
+    [tpz.job.WHM] = {17068, 4608, 4899},    -- onion rod, scroll of cure
+    [tpz.job.BLM] = {17104, 4607, 4899},    -- onion staff, scroll of stone
+    [tpz.job.RDM] = {16482, 4606, 4899},    -- onion dagger, scroll of dia
+    [tpz.job.THF] = {16483},                -- onion knife
 }
 
 -----------------------------------
@@ -122,13 +122,24 @@ local function CharCreate(player)
        player:setGil(START_GIL)
     end
 
-    player:addItem(536) -- adventurer coupon
+    if nation == 0 then
+      player:addLSpearl("TheKingdom")
+      player:addLSpearl("Retribution")
+    elseif nation == 1 then
+      player:addLSpearl("TheRepublic")
+      player:addLSpearl("Retribution")
+    else
+     player:addLSpearl("TheFederation")
+     player:addLSpearl("Retribution")
+    end
+
+    player:addItem(536)                             -- adventurer coupon
     player:addTitle(tpz.title.NEW_ADVENTURER)
-    player:setCharVar("MoghouseExplication", 1) -- needs Moghouse intro
-    player:setCharVar("spokeKindlix", 1) -- Kindlix introduction
-    player:setCharVar("spokePyropox", 1) -- Pyropox introduction
-    player:setCharVar("TutorialProgress", 1) -- Has not started tutorial
-    player:setNewPlayer(true) -- apply new player flag
+    player:setCharVar("MoghouseExplication", 1)     -- needs Moghouse intro
+    player:setCharVar("spokeKindlix", 1)            -- Kindlix introduction
+    player:setCharVar("spokePyropox", 1)            -- Pyropox introduction
+    player:setCharVar("TutorialProgress", 1)        -- Has not started tutorial
+    player:setNewPlayer(true)                       -- apply new player flag
 end
 
 -----------------------------------

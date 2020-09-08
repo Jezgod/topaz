@@ -184,6 +184,7 @@ public:
 
     uint8     m_minLevel;                 // lowest possible level of the mob
     uint8     m_maxLevel;                 // highest possible level of the mob
+    int8      m_levelTier;                // m_minLevel / 10 (RETRIB)
     uint32    HPmodifier;                 // HP in Database (mob_groups)
     uint32    MPmodifier;                 // MP in Database (mob_groups)
 

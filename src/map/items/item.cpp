@@ -56,6 +56,15 @@ CItem::~CItem()
 {
 }
 
+void CItem::SetCategory(uint8 Category) 		// RETRIB - Set points category
+{
+    this->Category = Category;
+}
+uint8 CItem::GetCategory() 				        // RETRIB - Get points category
+{
+    return Category;
+}
+
 /************************************************************************
 *                                                                       *
 *  Уникальный номер предмета                                            *

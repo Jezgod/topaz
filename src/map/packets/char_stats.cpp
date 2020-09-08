@@ -75,6 +75,7 @@ CCharStatsPacket::CCharStatsPacket(CCharEntity * PChar)
     ref<uint16>(0x4A) = PChar->profile.home_point.destination;
 	ref<uint8>(0x50) = PChar->profile.nation;
     //0x52 = superior level (1 or 2)
+    ref<uint8>(0x52) = PChar->GetMLevel() == 99 ? 5 : 0;
     //0x54 = maximum item level
     //0x55 = itemlevel over 99
     //0x56 = main weapon item level

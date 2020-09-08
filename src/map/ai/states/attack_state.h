@@ -42,7 +42,7 @@ public:
 
 protected:
     virtual void UpdateTarget(uint16 = 0) override;
-    bool CanAttack(CBattleEntity* PTarget);
+    bool CanAttack(CBattleEntity* PTarget, uint8 range);
 
     bool AttackReady();
 private:

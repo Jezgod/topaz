@@ -62,6 +62,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "../packets/message_standard.h"
 #include "../packets/quest_mission_log.h"
 #include "../packets/server_ip.h"
+#include "../packets/chat_message.h"
 
 #include "../ability.h"
 #include "../alliance.h"
@@ -80,6 +81,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "../latent_effect_container.h"
 #include "../treasure_pool.h"
 #include "../mob_modifier.h"
+#include "../message.h"
 
 #include "../entities/charentity.h"
 #include "../entities/petentity.h"
@@ -93,6 +95,10 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "puppetutils.h"
 #include "petutils.h"
 #include "zoneutils.h"
+
+#include "../retrib/retrib_enums.h"         // RETRIB
+#include "../retrib/retrib_events.h"        // RETRIB
+extern CRetribEvent* ServerEvent;           // RETRIB
 
 /************************************************************************
 *                                                                       *
@@ -1232,6 +1238,16 @@ namespace charutils
                     PChar->pushPacket(new CMessageStandardPacket(PChar, PItem->getID(), 0, MsgStd::ItemEx));
                 delete PItem;
                 return ERROR_SLOTID;
+            }
+        }
+
+        // RETRIB - Store record of obtaining item if special
+        if (PItem->getFlag() & ITEM_FLAG_CANEQUIP)
+        {
+            uint8 Special = PItem->GetCategory();
+            if (Special)
+            {
+                PChar->RPC->ObtainGear(Special, PItem->getID());
             }
         }
 
@@ -2502,6 +2518,10 @@ namespace charutils
             }
         }
 
+        if (PChar->GetMJob() != JOB_NON || JOB_WAR) {
+            addAbility(PChar, ABILITY_PROVOKE);
+        }
+
         //To stop a character with no SJob to receive the traits with job = 0 in the DB.
         if (PChar->GetSJob() == JOB_NON) {
             return;
@@ -2894,6 +2914,7 @@ namespace charutils
     {
         if (!hasSpell(PChar, SpellID)) {
             PChar->m_SpellList[SpellID] = true;
+            PChar->RPC->AddStat(Retrib::Stat::STAT_SPELL, Retrib::StatPoints::SP_SPELL); // RETRIB
             return 1;
         }
         return 0;
@@ -3529,9 +3550,71 @@ namespace charutils
                         return;
                     }
 
-                    exp = charutils::AddExpBonus(PMember, exp);
+                    // RETRIB - STAT POINTS (MOB / NM)
+                    if (PMob->m_Type & MOBTYPE_NOTORIOUS)
+                    {
+                        PMember->RPC->AddStat(Retrib::Stat::STAT_NM_KILL, PMob->m_levelTier);
+                        auto Hunter = PMember->RPC->Hunter;
+                        if (PMember->RPC->IsHunter && Hunter->HasHunt() && !Hunter->HasKilledTarget())
+                        {
+                            auto Hunter = PMember->RPC->Hunter;
+                            if (PMob->id == Hunter->Hunt.MID || (PMob->name.compare(Hunter->Hunt.DBName) == 0 && PMob->loc.zone->GetID() == Hunter->Hunt.Zone))
+                            {
+                                exp += Hunter->KillHuntTarget();
+                                std::string Message = "You have slayed your target! The bounty can be collected from the M.T.F. Administrator.";
+                                PMember->pushPacket(new CChatMessagePacket(PMember, MESSAGE_NS_LINKSHELL2, Message));
+                            }
+                        }
+                    }
+                    else
+                    {
+                        PMember->RPC->AddStat(Retrib::Stat::STAT_MOB_KILL, PMob->m_levelTier);
+                    }
 
-                    charutils::AddExperiencePoints(false, PMember, PMob, (uint32)exp, mobCheck, chainactive);
+                    uint8 nation = PMember->profile.nation;
+                    if (region >= 0 && region <= 22)
+                    {
+                        exp = charutils::AddExpBonus(PMember, exp);
+                        float expR = exp * (1 + (conquest::GetConquestRatio(nation) / 100.f));
+                        charutils::AddExperiencePoints(false, PMember, PMob, (uint32)expR, mobCheck, chainactive);
+                    }
+
+                    else if (region >= 28 && region <= 32)
+                    {
+                        exp = charutils::AddExpBonus(PMember, exp);
+                        float expR = exp * (1 + (conquest::GetImperialRatio(nation) / 100.f));
+                        charutils::AddExperiencePoints(false, PMember, PMob, (uint32)expR, mobCheck, chainactive);
+                    }
+
+                    else if (region >= 33 && region <= 40)
+                    {
+                        exp = charutils::AddExpBonus(PMember, exp);
+                        float expR = exp * (1 + (conquest::GetAlliedRatio(nation) / 100.f));
+                        charutils::AddExperiencePoints(false, PMember, PMob, (uint32)expR, mobCheck, chainactive);
+                    }
+
+                    else
+                    {
+
+                        exp = charutils::AddExpBonus(PMember, exp);
+                        charutils::AddExperiencePoints(false, PMember, PMob, (uint32)exp, mobCheck, chainactive);
+                    }
+                }
+            }
+            else if (mobCheck == EMobDifficulty::TooWeak && PMob->m_Type & MOBTYPE_NOTORIOUS) // AVARATI - NM Hunts
+            {
+                PMember->RPC->AddStat(Retrib::Stat::STAT_NM_KILL, PMob->m_levelTier);
+                auto Hunter = PMember->RPC->Hunter;
+                if (PMember->RPC->IsHunter && Hunter->HasHunt() && !Hunter->HasKilledTarget())
+                {
+                    auto Hunter = PMember->RPC->Hunter;
+                    if (PMob->id == Hunter->Hunt.MID || (PMob->name.compare(Hunter->Hunt.DBName) == 0 && PMob->loc.zone->GetID() == Hunter->Hunt.Zone))
+                    {
+                        uint32 xp = Hunter->KillHuntTarget();
+                        charutils::AddExperiencePoints(false, PMember, PMob, xp, mobCheck, chainactive);
+                        std::string Message = "You have slayed your target! The bounty can be collected from the M.T.F. Administrator.";
+                        PMember->pushPacket(new CChatMessagePacket(PMember, MESSAGE_NS_LINKSHELL2, Message));
+                    }
                 }
             }
         });
@@ -3555,7 +3638,16 @@ namespace charutils
         }
 
         uint8 mLevel = (PChar->m_LevelRestriction != 0 && PChar->m_LevelRestriction < PChar->GetMLevel()) ? PChar->m_LevelRestriction : PChar->GetMLevel();
-        uint16 exploss = mLevel <= 67 ? (GetExpNEXTLevel(mLevel) * 8) / 100 : 2400;
+
+        uint16 exploss = 0;
+        if (mLevel == 99)
+        {
+            exploss = 1000;
+        }
+        else
+        {
+            exploss = mLevel <= 67 ? (GetExpNEXTLevel(mLevel) * 8) / 100 : 2400;
+        }
 
         if (forcedXpLoss > 0)
         {
@@ -3637,6 +3729,301 @@ namespace charutils
 
     /************************************************************************
     *                                                                       *
+    *  PvP EXP LOST FOR CONQUEST GAIN                                       *
+    *                                                                       *
+    ************************************************************************/
+    void PvPExpLostCPGain(CCharEntity* PChar, CBattleEntity* PLastAttacker, uint16 pvpexp)
+    {
+
+        uint8 mLevel = (PChar->m_LevelRestriction != 0 && PChar->m_LevelRestriction < PChar->GetMLevel()) ? PChar->m_LevelRestriction : PChar->GetMLevel();
+        pvpexp = mLevel <= 67 ? (GetExpNEXTLevel(mLevel) * 8) / 100 : 2400;
+        pvpexp = pvpexp * 10;
+
+        conquest::AddConquestPointsPVP(PChar, PLastAttacker, pvpexp);
+
+    }
+
+    /************************************************************************
+    *                                                                       *
+    *  SAVE PvP CONQUEST POINTS GAIN                                        *
+    *                                                                       *
+    ************************************************************************/
+    uint32 SaveConquestPointsPVP(CBattleEntity* PLastAttacker, uint32 exp)
+    {
+        CCharEntity* PChar = dynamic_cast<CCharEntity*>(PLastAttacker);
+        if (PChar)
+        {
+            const char* varcp = "conquestpvppoints";
+            const char* Query =
+                "INSERT INTO char_vars "
+                "SET charid = %u, varname = '%s', value = %i "
+                "ON DUPLICATE KEY UPDATE value = value + %i;";
+
+            Sql_Query(SqlHandle, Query,
+                PChar->id,
+                varcp,
+                exp,
+                exp);
+
+            return 0;
+        }
+        else
+        {
+            return 0;
+        }
+    }
+
+    /************************************************************************
+    *                                                                       *
+    *  PvP EXP LOST FOR IMP STANDING GAIN                                   *
+    *                                                                       *
+    ************************************************************************/
+    uint32 PvPExpLostISGain(CCharEntity* PChar, CBattleEntity* PLastAttacker, uint16 pvpexp)
+    {
+
+        uint8 mLevel = (PChar->m_LevelRestriction != 0 && PChar->m_LevelRestriction < PChar->GetMLevel()) ? PChar->m_LevelRestriction : PChar->GetMLevel();
+        pvpexp = mLevel <= 67 ? (GetExpNEXTLevel(mLevel) * 8) / 100 : 2400;
+        pvpexp = pvpexp * 10;
+
+        CCharEntity* PCharL = dynamic_cast<CCharEntity*>(PLastAttacker);
+
+        if (PCharL)
+        {
+            uint32 points = (uint32)(pvpexp * 0.5f);
+            uint32 bountyfactor = charutils::GetCharVar(PChar, "bounty_points");
+            uint8 bountymod = 0;
+            uint8 BMlvl = PChar->GetMLevel();
+            if (BMlvl > bountyfactor)
+            {
+                bountymod = bountyfactor;
+            }
+            else
+            {
+                bountymod = BMlvl;
+            }
+
+            charutils::ModBounty(PChar, bountymod);
+            points = points + ((points * bountyfactor) / 100);
+
+            charutils::SaveImperialStandingPVP(PCharL, points);
+            charutils::AddPoints(PCharL, "imperial_standing", points);
+            PCharL->pushPacket(new CConquestPacket(PCharL));
+
+            std::string a;
+            if (PCharL->allegiance == 2)
+            {
+                a = "San d'Oria";
+            }
+            else if (PCharL->allegiance == 3)
+            {
+                a = "Bastok";
+            }
+            else if (PCharL->allegiance == 4)
+            {
+                a = "Windurst";
+            }
+
+            std::string M1 = PCharL->name + " [" + a + "] earned " + std::to_string(points) + " Imperial Standing.";
+            std::string M2 = "Use the command '!pvpi' to see the current XP/Gil bonus in Sanction areas.";
+            std::string M3 = "~~~~~~~~~ PVP RESULT ~~~~~~~~~";
+            message::send(MSG_CHAT_SERVMES, 0, 0, new CChatMessagePacket(PCharL, MESSAGE_NS_LINKSHELL3, M1));
+            message::send(MSG_CHAT_SERVMES, 0, 0, new CChatMessagePacket(PCharL, MESSAGE_NS_LINKSHELL3, M2));
+            message::send(MSG_CHAT_SERVMES, 0, 0, new CChatMessagePacket(PCharL, MESSAGE_NS_LINKSHELL3, M3));
+            return 0;
+        }
+
+        else
+        {
+            return 0;
+        }
+    }
+
+    /************************************************************************
+    *                                                                       *
+    *  SAVE PvP IMPERIAL STANDING                                           *
+    *                                                                       *
+    ************************************************************************/
+    uint32 SaveImperialStandingPVP(CBattleEntity* PLastAttacker, uint32 exp)
+    {
+        CCharEntity* PChar = dynamic_cast<CCharEntity*>(PLastAttacker);
+        if (PChar)
+        {
+            const char* varip = "imperialpvppoints";
+            const char* Query =
+                "INSERT INTO char_vars "
+                "SET charid = %u, varname = '%s', value = %i "
+                "ON DUPLICATE KEY UPDATE value = value + %i;";
+
+            Sql_Query(SqlHandle, Query,
+                PChar->id,
+                varip,
+                exp,
+                exp);
+
+            return 0;
+        }
+        else
+        {
+            return 0;
+        }
+    }
+
+    /************************************************************************
+    *                                                                       *
+    *  PvP EXP LOST FOR ALIIED NOTES GAIN                                   *
+    *                                                                       *
+    ************************************************************************/
+    uint32 PvPExpLostANGain(CCharEntity* PChar, CBattleEntity* PLastAttacker, uint16 pvpexp)
+    {
+
+        uint8 mLevel = (PChar->m_LevelRestriction != 0 && PChar->m_LevelRestriction < PChar->GetMLevel()) ? PChar->m_LevelRestriction : PChar->GetMLevel();
+        pvpexp = mLevel <= 67 ? (GetExpNEXTLevel(mLevel) * 8) / 100 : 2400;
+        pvpexp = pvpexp * 10;
+
+        CCharEntity* PCharL = dynamic_cast<CCharEntity*>(PLastAttacker);
+
+        if (PCharL)
+        {
+            uint32 points = (uint32)(pvpexp * 0.5f);
+            uint32 bountyfactor = charutils::GetCharVar(PChar, "bounty_points");
+            uint8 bountymod = 0;
+            uint8 BMlvl = PChar->GetMLevel();
+            if (BMlvl > bountyfactor)
+            {
+                bountymod = bountyfactor;
+            }
+            else
+            {
+                bountymod = BMlvl;
+            }
+
+            charutils::ModBounty(PChar, bountymod);
+            points = points + ((points * bountyfactor) / 100);
+
+            charutils::SaveAlliedNotesPVP(PCharL, points);
+            charutils::AddPoints(PCharL, "allied_notes", points);
+            PCharL->pushPacket(new CConquestPacket(PCharL));
+
+            std::string a;
+            if (PCharL->allegiance == 2)
+            {
+                a = "San d'Oria";
+            }
+            else if (PCharL->allegiance == 3)
+            {
+                a = "Bastok";
+            }
+            else if (PCharL->allegiance == 4)
+            {
+                a = "Windurst";
+            }
+
+            std::string M1 = PCharL->name + " [" + a + "] earned " + std::to_string(points) + " Allied Notes.";
+            std::string M2 = "Use the command '!pvpa' to see the current XP/Gil bonus in Sigil areas.";
+            std::string M3 = "~~~~~~~~~ PVP RESULT ~~~~~~~~~";
+            message::send(MSG_CHAT_SERVMES, 0, 0, new CChatMessagePacket(PCharL, MESSAGE_NS_LINKSHELL3, M1));
+            message::send(MSG_CHAT_SERVMES, 0, 0, new CChatMessagePacket(PCharL, MESSAGE_NS_LINKSHELL3, M2));
+            message::send(MSG_CHAT_SERVMES, 0, 0, new CChatMessagePacket(PCharL, MESSAGE_NS_LINKSHELL3, M3));
+            return 0;
+        }
+
+        else
+        {
+            return 0;
+        }
+    }
+
+    /************************************************************************
+    *                                                                       *
+    *  SAVE PvP ALLIED NOTES                                                *
+    *                                                                       *
+    ************************************************************************/
+    uint32 SaveAlliedNotesPVP(CBattleEntity* PLastAttacker, uint32 exp)
+    {
+        CCharEntity* PChar = dynamic_cast<CCharEntity*>(PLastAttacker);
+        if (PChar)
+        {
+            const char* varan = "alliednotespvppoints";
+            const char* Query =
+                "INSERT INTO char_vars "
+                "SET charid = %u, varname = '%s', value = %i "
+                "ON DUPLICATE KEY UPDATE value = value + %i;";
+
+            Sql_Query(SqlHandle, Query,
+                PChar->id,
+                varan,
+                exp,
+                exp);
+
+            return 0;
+        }
+        else
+        {
+            return 0;
+        }
+    }
+
+    /************************************************************************
+    *                                                                       *
+    *  SAVE BOUNTY POINTS                                                   *
+    *                                                                       *
+    ************************************************************************/
+    uint8 AddBounty(CBattleEntity* PLastAttacker, uint8 bounty)
+    {
+        CCharEntity* PChar = dynamic_cast<CCharEntity*>(PLastAttacker);
+        if (PChar)
+        {
+            const char* var = "bounty_points";
+            const char* Query =
+                "INSERT INTO char_vars "
+                "SET charid = %u, varname = '%s', value = %i "
+                "ON DUPLICATE KEY UPDATE value = value + %i;";
+
+            Sql_Query(SqlHandle, Query,
+                PChar->id,
+                var,
+                bounty,
+                bounty);
+
+            return 0;
+        }
+        else
+        {
+            return 0;
+        }
+    }
+
+    /************************************************************************
+    *                                                                       *
+    *  MODIFY BOUNTY POINTS                                                   *
+    *                                                                       *
+    ************************************************************************/
+    uint8 ModBounty(CCharEntity* PChar, uint8 bountymod)
+    {
+        if (PChar)
+        {
+            const char* var = "bounty_points";
+            const char* Query =
+                "INSERT INTO char_vars "
+                "SET charid = %u, varname = '%s', value = %i "
+                "ON DUPLICATE KEY UPDATE value = value - %i;";
+
+            Sql_Query(SqlHandle, Query,
+                PChar->id,
+                var,
+                bountymod,
+                bountymod);
+
+            return 0;
+        }
+        else
+        {
+            return 0;
+        }
+    }
+
+    /************************************************************************
+    *                                                                       *
     *  Добавляем очки опытка указанному персонажу                           *
     *                                                                       *
     ************************************************************************/
@@ -3648,9 +4035,25 @@ namespace charutils
 
         if (!expFromRaise)
         {
-            exp = (uint32)(exp * map_config.exp_rate);
+            uint8 pvp = GetPVPVar(PChar);
+            if (pvp == 1)
+            {
+                exp = (uint32)(exp * 5.0);
+            }
+            else
+            {
+                exp = (uint32)(exp * map_config.exp_rate);
+            }    
         }
+
+        // RETRIB - Avarati Challenge
+        if (ServerEvent->SA->IsActive() && ServerEvent->SA->GetTask() == Retrib::Stat::STAT_EXPERIENCE)
+        {
+            ServerEvent->SA->AddPoints(PChar->id, (exp / 50) >> Retrib::StatPoints::SP_EXPERIENCE);
+        }
+
         uint16 currentExp = PChar->jobs.exp[PChar->GetMJob()];
+        uint16 currentExpSub = PChar->jobs.exp[PChar->GetSJob()];
         bool onLimitMode = false;
 
         // Incase player de-levels to 74 on the field
@@ -3707,6 +4110,7 @@ namespace charutils
         {
             //add normal exp
             PChar->jobs.exp[PChar->GetMJob()] += exp;
+            PChar->jobs.exp[PChar->GetSJob()] += uint32(exp * 0.5);
         }
 
         if (!expFromRaise)
@@ -3772,6 +4176,17 @@ namespace charutils
                 }
                 PChar->jobs.job[PChar->GetMJob()] += 1;
 
+                // RETRIB - Add Job to 75 Points
+                if (PChar->jobs.job[PChar->GetMJob()] == 75)
+                {
+                    if (!PChar->RPC->HasJobTo75(PChar->GetMJob()))
+                    {
+                        PChar->RPC->SetJobTo75(PChar->GetMJob());
+                        PChar->RPC->AddStat(Retrib::Stat::STAT_JOBTO75, Retrib::StatPoints::SP_JOBTO75);
+                    }
+                }
+                // RETRIB
+
                 if (PChar->m_LevelRestriction == 0 ||
                     PChar->m_LevelRestriction > PChar->GetMLevel())
                 {
@@ -3827,9 +4242,75 @@ namespace charutils
             }
         }
 
+        if (PChar->GetSJob())
+        {
+            if ((currentExpSub + (exp * 0.5)) >= GetExpNEXTLevel(PChar->jobs.job[PChar->GetSJob()]) && !onLimitMode)
+            {
+                if (PChar->jobs.job[PChar->GetSJob()] >= PChar->jobs.genkai)
+                {
+                    PChar->jobs.exp[PChar->GetSJob()] = GetExpNEXTLevel(PChar->jobs.job[PChar->GetSJob()]) - 1;
+                }
+                else
+                {
+                    PChar->jobs.exp[PChar->GetSJob()] -= GetExpNEXTLevel(PChar->jobs.job[PChar->GetSJob()]);
+                    if (PChar->jobs.exp[PChar->GetSJob()] >= GetExpNEXTLevel(PChar->jobs.job[PChar->GetSJob()] + 1))
+                    {
+                        PChar->jobs.exp[PChar->GetSJob()] = GetExpNEXTLevel(PChar->jobs.job[PChar->GetSJob()] + 1) - 1;
+                    }
+                    PChar->jobs.job[PChar->GetSJob()] += 1;
+
+                    if (PChar->m_LevelRestriction == 0 ||
+                        PChar->m_LevelRestriction > PChar->GetMLevel())
+                    {
+                        PChar->SetMLevel(PChar->jobs.job[PChar->GetMJob()]);
+                        PChar->SetSLevel(PChar->jobs.job[PChar->GetSJob()]);
+
+                        BuildingCharSkillsTable(PChar);
+                        CalculateStats(PChar);
+                        BuildingCharAbilityTable(PChar);
+                        BuildingCharTraitsTable(PChar);
+                        BuildingCharWeaponSkills(PChar);
+                        if (PChar->PAutomaton != nullptr && PChar->PAutomaton != PChar->PPet)
+                        {
+                            puppetutils::LoadAutomatonStats(PChar);
+                        }
+                    }
+                    PChar->PLatentEffectContainer->CheckLatentsJobLevel();
+
+                    PChar->UpdateHealth();
+
+                    SaveCharStats(PChar);
+                    SaveCharJob(PChar, PChar->GetSJob());
+                    SaveCharExp(PChar, PChar->GetSJob());
+
+                    PChar->pushPacket(new CCharJobsPacket(PChar));
+                    PChar->pushPacket(new CCharUpdatePacket(PChar));
+                    PChar->pushPacket(new CCharSkillsPacket(PChar));
+                    PChar->pushPacket(new CCharRecastPacket(PChar));
+                    PChar->pushPacket(new CCharAbilitiesPacket(PChar));
+                    PChar->pushPacket(new CMenuMeritPacket(PChar));
+                    PChar->pushPacket(new CCharJobExtraPacket(PChar, true));
+                    PChar->pushPacket(new CCharJobExtraPacket(PChar, true));
+                    PChar->pushPacket(new CCharSyncPacket(PChar));
+
+                    PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, new CMessageDebugPacket(PChar, PMob, PChar->jobs.job[PChar->GetSJob()], 0, 9));
+                    PChar->pushPacket(new CCharStatsPacket(PChar));
+
+                    luautils::OnPlayerLevelUp(PChar);
+                    PChar->updatemask |= UPDATE_HP;
+                    return;
+                }
+            }
+        }
+
         SaveCharStats(PChar);
         SaveCharJob(PChar, PChar->GetMJob());
         SaveCharExp(PChar, PChar->GetMJob());
+        if (PChar->GetSJob())
+        {
+            SaveCharJob(PChar, PChar->GetSJob());
+            SaveCharExp(PChar, PChar->GetSJob());
+        }
         PChar->pushPacket(new CCharStatsPacket(PChar));
 
         if (onLimitMode)
@@ -5100,6 +5581,29 @@ namespace charutils
         const char* fmtQuery = "SELECT value FROM char_vars WHERE charid = %u AND varname = '%s' LIMIT 1;";
 
         int32 ret = Sql_Query(SqlHandle, fmtQuery, PChar->id, var);
+
+        if (ret != SQL_ERROR &&
+            Sql_NumRows(SqlHandle) != 0 &&
+            Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+        {
+            return Sql_GetIntData(SqlHandle, 0);
+        }
+        return 0;
+    }
+
+    int32 ResetPVPVar(CCharEntity* PChar)
+    {
+        const char* fmtQuery = "UPDATE char_vars SET value = 0 WHERE charid = %u AND varname = 'pvp_flag' LIMIT 1;";
+
+        Sql_Query(SqlHandle, fmtQuery, PChar->id);
+        return 0;
+    }
+
+    int32 GetPVPVar(CCharEntity* PChar)
+    {
+        const char* fmtQuery = "SELECT value FROM char_vars WHERE charid = %u AND varname = 'pvp_flag' LIMIT 1;";
+
+        int32 ret = Sql_Query(SqlHandle, fmtQuery, PChar->id);
 
         if (ret != SQL_ERROR &&
             Sql_NumRows(SqlHandle) != 0 &&

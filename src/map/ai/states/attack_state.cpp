@@ -54,7 +54,14 @@ bool CAttackState::Update(time_point tick)
     }
     if (AttackReady())
     {
-        if (CanAttack(PTarget))
+        uint8 range = 4;
+
+        if (tick > GetEntryTime()) // after checking for the initial time, the mob can move further away and not cancel our RA
+        {
+            range = 12;
+        }
+
+        if (CanAttack(PTarget, range))
         {
             //CanAttack may have set target id to 0 (disengage from out of range)
             if (m_PEntity->GetBattleTargetID() == 0)
@@ -123,7 +130,7 @@ void CAttackState::UpdateTarget(uint16 targid)
     CState::UpdateTarget(m_PEntity->GetBattleTargetID());
 }
 
-bool CAttackState::CanAttack(CBattleEntity* PTarget)
+bool CAttackState::CanAttack(CBattleEntity* PTarget, uint8 range)
 {
     auto ret = m_PEntity->CanAttack(PTarget, m_errorMsg);
 

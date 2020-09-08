@@ -16,6 +16,8 @@ function onAbilityCheck(player, target, ability)
         return tpz.msg.basic.REQUIRES_A_PET, 0
     elseif not player:isJugPet() and pet:getObjType() ~= tpz.objType.MOB then
         return tpz.msg.basic.NO_EFFECT_ON_PET, 0
+    elseif player:getCharVar("familiar") == 1 then
+	return tpz.msg.basic.NO_EFFECT_ON_PET,0
     else
         return 0, 0
     end
@@ -23,6 +25,7 @@ end
 
 function onUseAbility(player, target, ability)
     player:familiar()
+    player:setCharVar("familiar", 1)
 
     -- pets powers increase!
     ability:setMsg(tpz.msg.basic.FAMILIAR_PC)

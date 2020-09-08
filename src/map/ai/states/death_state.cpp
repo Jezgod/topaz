@@ -38,6 +38,12 @@ CDeathState::CDeathState(CBattleEntity* PEntity, duration death_time) :
 
     m_PEntity->animation = ANIMATION_DEATH;
     m_PEntity->updatemask |= UPDATE_HP;
+
+    if (m_PEntity->objtype == TYPE_PC)
+    {
+        m_PEntity->speed = 50;
+    }
+
     if (m_PEntity->PAI->PathFind)
     {
         m_PEntity->PAI->PathFind->Clear();

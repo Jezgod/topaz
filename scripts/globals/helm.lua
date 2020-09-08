@@ -17,6 +17,9 @@ require("scripts/globals/zone")
 tpz = tpz or {}
 tpz.helm = tpz.helm or {}
 
+local Stats = Retrib.Stat
+local Points = Retrib.StatPoints
+
 tpz.helm.type =
 {
     HARVESTING = 1,
@@ -1413,6 +1416,19 @@ tpz.helm.onTrade = function(player, npc, trade, helmType, csid)
         -- success! reward item and decrement number of remaining uses on the point
         if item ~= 0 and full == 0 then
             player:addItem(item)
+
+	    -- RETRIB
+		if helmType == dsp.helm.type.HARVESTING then
+			player:AddRetribStat(Stats.Harvesting, Points.Harvesting)
+		elseif helmType == dsp.helm.type.EXCAVATION then
+                	player:AddRetribStat(Stats.Excavating, Points.Excavating)
+		elseif helmType == dsp.helm.type.LOGGING then
+                	player:AddRetribStat(Stats.Logging, Points.Logging)
+		elseif helmType == dsp.helm.type.MINING then
+                	player:AddRetribStat(Stats.Mining, Points.Mining)
+		end
+			
+		if Stat then player:AddRetribStat(Stat) end
 
             local uses = (npc:getLocalVar("uses") - 1) % 4
             npc:setLocalVar("uses", uses)

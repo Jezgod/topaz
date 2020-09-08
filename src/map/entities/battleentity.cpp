@@ -287,7 +287,7 @@ int16 CBattleEntity::GetWeaponDelay(bool tp)
 
 uint8 CBattleEntity::GetMeleeRange()
 {
-    return m_ModelSize + 3;
+    return m_ModelSize + 4;
 }
 
 int16 CBattleEntity::GetRangedWeaponDelay(bool tp)
@@ -1180,10 +1180,23 @@ bool CBattleEntity::ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags)
     {
         if (!isDead())
         {
-            if (allegiance == (PInitiator->allegiance % 2 == 0 ? PInitiator->allegiance + 1 : PInitiator->allegiance - 1))
+            if (allegiance == 0 || PInitiator->allegiance == 0)
             {
                 return true;
             }
+            //if (allegiance == (PInitiator->allegiance % 2 == 0 ? PInitiator->allegiance + 1 : PInitiator->allegiance - 1))//
+            else if (allegiance == 1 && PInitiator->allegiance != 0)
+            {
+                return false;
+            }
+            else if (PInitiator->allegiance == 1 && allegiance != 0)
+            {
+                return false;
+            }
+            else if (PInitiator->allegiance != allegiance)
+                {
+                    return true;
+                }              
         }
     }
     if ((targetFlags & TARGET_SELF) && (this == PInitiator || (PInitiator->objtype == TYPE_PET &&
@@ -1387,11 +1400,25 @@ void CBattleEntity::OnCastFinished(CMagicState& state, action_t& action)
     }
 
     // TODO: Pixies will probably break here, once they're added.
-    if (this->allegiance != PActionTarget->allegiance)
+    //if (this->allegiance != PActionTarget->allegiance)
+    //{
+    //    // Should not be removed by AoE effects that don't target the player or
+    //    // buffs cast by other players or mobs.
+    //    PActionTarget->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_DETECTABLE);
+    //}
+    if (this->objtype == TYPE_PC && PActionTarget->objtype == TYPE_PC)
+    {
+        if ((this->allegiance != PActionTarget->allegiance))
+        {
+        }
+    }
+    else
     {
         // Should not be removed by AoE effects that don't target the player or
-        // buffs cast by other players or mobs.
-        PActionTarget->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_DETECTABLE);
+           // buffs cast by other players or mobs.
+            /*this->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_MAGIC_END);*/
+        if ((this->allegiance != PActionTarget->allegiance))
+            PActionTarget->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_DETECTABLE);
     }
 
     this->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_MAGIC_END);
@@ -1445,6 +1472,12 @@ void CBattleEntity::OnDisengage(CAttackState& s)
         animation = ANIMATION_NONE;
     }
     updatemask |= UPDATE_HP;
+
+    if (objtype == TYPE_PC && speed >= 50)
+    {
+        speed = 50;                                     //Speed adjustment to normal value
+    }
+
     PAI->EventHandler.triggerListener("DISENGAGE", this);
 }
 
@@ -1740,6 +1773,12 @@ void CBattleEntity::OnEngage(CAttackState& state)
 {
     animation = ANIMATION_ATTACK;
     updatemask |= UPDATE_HP;
+
+    if (objtype == TYPE_PC && speed >= 50)
+    {
+        speed = 60;                                     //Speed adjustment to increased value
+    }
+
     PAI->EventHandler.triggerListener("ENGAGE", this, state.GetTarget());
 }
 

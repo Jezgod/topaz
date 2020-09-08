@@ -24,8 +24,11 @@
 #include "vana_time.h"
 #include "utils/zoneutils.h"
 #include "utils/charutils.h"
+#include "message.h"
 
 #include "packets/conquest_map.h"
+#include "packets/chat_message.h"
+#include "packets/message_system.h"
 
 #include "lua/luautils.h"
 #include "latent_effect_container.h"
@@ -135,7 +138,7 @@ namespace conquest
             case REGION_GUSTABERG:
             case REGION_SARUTABARUTA:
             {
-                points = 10;
+                points = 100;
                 break;
             }
             case REGION_ZULKHEIM:
@@ -144,7 +147,7 @@ namespace conquest
             case REGION_DERFLAND:
             case REGION_ARAGONEU:
             {
-                points = 50;
+                points = 500;
                 break;
             }
             case REGION_QUFIMISLAND:
@@ -152,7 +155,7 @@ namespace conquest
             case REGION_KUZOTZ:
             case REGION_ELSHIMOLOWLANDS:
             {
-                points = 75;
+                points = 750;
                 break;
             }
             case REGION_VOLLBOW:
@@ -160,14 +163,14 @@ namespace conquest
             case REGION_FAUREGANDI:
             case REGION_ELSHIMOUPLANDS:
             {
-                points = 300;
+                points = 1000;
                 break;
             }
             case REGION_TULIA:
             case REGION_MOVALPOLOS:
             case REGION_TAVNAZIA:
             {
-                points = 600;
+                points = 1500;
                 break;
             }
             default:
@@ -592,6 +595,224 @@ namespace conquest
         return 0; // added conquest points (пока не вижу в этом определенного смысла)
     }
 
+    uint32 AddConquestPointsPVP(CCharEntity* PChar, CBattleEntity* PLastAttacker, uint32 exp)
+    {
+        // ВНИМЕНИЕ: не нужно отправлять персонажу CConquestPacket,
+        // т.к. клиент сам запрашивает этот пакет через фиксированный промежуток времени
+
+        /*auto PChar = static_cast<CBattleEntity*>(PLastAttacker);*/
+        CCharEntity* PCharL = dynamic_cast<CCharEntity*>(PLastAttacker);
+        if (PCharL)
+        {
+            REGIONTYPE region = PCharL->loc.zone->GetRegionID();
+
+            if (region != REGION_UNKNOWN)
+            {
+                // 10% if region control is player's nation
+                // 15% otherwise
+
+                double percentage = PCharL->profile.nation == GetRegionOwner(region) ? 0.5 : 0.65;
+                percentage += PCharL->getMod(Mod::CONQUEST_BONUS) / 100.0;
+                uint32 points = (uint32)(exp * percentage);
+
+                uint32 bountyfactor = charutils::GetCharVar(PChar, "bounty_points");
+                uint8 bountymod = 0;
+                uint8 BMlvl = PChar->GetMLevel();
+                if (BMlvl > bountyfactor)
+                {
+                    bountymod = bountyfactor;
+                }
+                else
+                {
+                    bountymod = BMlvl;
+                }
+
+                charutils::ModBounty(PChar, bountymod);
+                points = points + ((points * bountyfactor) / 100);
+
+                charutils::SaveConquestPointsPVP(PCharL, points);
+                charutils::AddPoints(PCharL, charutils::GetConquestPointsName(PCharL).c_str(), points);
+                GainInfluencePoints(PCharL, points / 25);
+
+                std::string a;
+                if (PCharL->allegiance == 2)
+                {
+                    a = "San d'Oria";
+                }
+                else if (PCharL->allegiance == 3)
+                {
+                    a = "Bastok";
+                }
+                else if (PCharL->allegiance == 4)
+                {
+                    a = "Windurst";
+                }
+
+                std::string M1 = PCharL->name + " [" + a + "] earned " + std::to_string(points) + " Conquest Points.";
+                std::string M2 = "Use the command '!pvpc' to see the current XP/Gil bonus in Signet areas.";
+                std::string M3 = "~~~~~~~~~ PVP RESULT ~~~~~~~~~";
+                message::send(MSG_CHAT_SERVMES, 0, 0, new CChatMessagePacket(PCharL, MESSAGE_NS_LINKSHELL3, M1));
+                message::send(MSG_CHAT_SERVMES, 0, 0, new CChatMessagePacket(PCharL, MESSAGE_NS_LINKSHELL3, M2));
+                message::send(MSG_CHAT_SERVMES, 0, 0, new CChatMessagePacket(PCharL, MESSAGE_NS_LINKSHELL3, M3));
+
+            }
+            return 0; // added conquest points (пока не вижу в этом определенного смысла)
+        }
+        else
+        {
+            return 0;
+        }
+    }
+
+    uint32 GetConquestRatio(uint32 nationNum, uint32 sandoria, uint32 bastok, uint32 windurst)
+    {
+        uint32 cptotal = sandoria + bastok + windurst;
+        double ratio = (static_cast<double>(nationNum) / cptotal) * 100.0f;
+
+        return (uint8)ratio;
+    }
+
+    uint8 GetConquestRatio(uint8 nation)
+    {
+        uint32 sandoria = 0;
+        uint32 bastok = 0;
+        uint32 windurst = 0;
+        const char* Query = "SELECT nation, sum(VALUE) FROM char_vars INNER JOIN chars ON char_vars.charid = chars.charid WHERE varname='conquestpvppoints' GROUP BY nation;";
+
+        int32 ret = Sql_Query(SqlHandle, Query);
+
+        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+        {
+            while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+            {
+                if (Sql_GetIntData(SqlHandle, 0) == 0)
+                    sandoria = Sql_GetIntData(SqlHandle, 1);
+                else if (Sql_GetIntData(SqlHandle, 0) == 1)
+                    bastok = Sql_GetIntData(SqlHandle, 1);
+                else if (Sql_GetIntData(SqlHandle, 0) == 2)
+                    windurst = Sql_GetIntData(SqlHandle, 1);
+            }
+        }
+
+        uint32 nationNum = 0;
+
+        if (nation == 0)
+        {
+            nationNum = sandoria;
+        }
+
+        else if (nation == 1)
+        {
+            nationNum = bastok;
+        }
+
+        else
+        {
+            nationNum = windurst;
+        }
+
+        return GetConquestRatio(nationNum, sandoria, bastok, windurst);
+    }
+
+    uint32 GetImperialRatio(uint32 nationNum, uint32 sandoria, uint32 bastok, uint32 windurst)
+    {
+        uint32 cptotal = sandoria + bastok + windurst;
+        double ratio = (static_cast<double>(nationNum) / cptotal) * 100.f;
+
+        return (uint8)ratio;
+    }
+
+    uint8 GetImperialRatio(uint8 nation)
+    {
+        uint32 sandoria = 0;
+        uint32 bastok = 0;
+        uint32 windurst = 0;
+        const char* Query = "SELECT nation, sum(VALUE) FROM char_vars INNER JOIN chars ON char_vars.charid = chars.charid WHERE varname='imperialpvppoints' GROUP BY nation;";
+
+        int32 ret = Sql_Query(SqlHandle, Query);
+
+        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+        {
+            while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+            {
+                if (Sql_GetIntData(SqlHandle, 0) == 0)
+                    sandoria = Sql_GetIntData(SqlHandle, 1);
+                else if (Sql_GetIntData(SqlHandle, 0) == 1)
+                    bastok = Sql_GetIntData(SqlHandle, 1);
+                else if (Sql_GetIntData(SqlHandle, 0) == 2)
+                    windurst = Sql_GetIntData(SqlHandle, 1);
+            }
+        }
+
+        uint32 nationNum = 0;
+
+        if (nation == 0)
+        {
+            nationNum = sandoria;
+        }
+
+        else if (nation == 1)
+        {
+            nationNum = bastok;
+        }
+
+        else
+        {
+            nationNum = windurst;
+        }
+
+        return GetImperialRatio(nationNum, sandoria, bastok, windurst);
+    }
+
+    uint32 GetAlliedRatio(uint32 nationNum, uint32 sandoria, uint32 bastok, uint32 windurst)
+    {
+        uint32 cptotal = sandoria + bastok + windurst;
+        double ratio = (static_cast<double>(nationNum) / cptotal) * 100.f;
+
+        return (uint8)ratio;
+    }
+
+    uint8 GetAlliedRatio(uint8 nation)
+    {
+        uint32 sandoria = 0;
+        uint32 bastok = 0;
+        uint32 windurst = 0;
+        const char* Query = "SELECT nation, sum(VALUE) FROM char_vars INNER JOIN chars ON char_vars.charid = chars.charid WHERE varname='alliednotespvppoints' GROUP BY nation;";
+
+        int32 ret = Sql_Query(SqlHandle, Query);
+
+        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+        {
+            while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+            {
+                if (Sql_GetIntData(SqlHandle, 0) == 0)
+                    sandoria = Sql_GetIntData(SqlHandle, 1);
+                else if (Sql_GetIntData(SqlHandle, 0) == 1)
+                    bastok = Sql_GetIntData(SqlHandle, 1);
+                else if (Sql_GetIntData(SqlHandle, 0) == 2)
+                    windurst = Sql_GetIntData(SqlHandle, 1);
+            }
+        }
+
+        uint32 nationNum = 0;
+
+        if (nation == 0)
+        {
+            nationNum = sandoria;
+        }
+
+        else if (nation == 1)
+        {
+            nationNum = bastok;
+        }
+
+        else
+        {
+            nationNum = windurst;
+        }
+
+        return GetAlliedRatio(nationNum, sandoria, bastok, windurst);
+    }
 
 	//GetConquestInfluence(region,nation)
 	//AddConquestInfluence(region,nation)

@@ -126,6 +126,22 @@ uint32 CVanaTime::getSysYearDay()
     return ltm->tm_yday;
 }
 
+uint32 CVanaTime::getSysMonthDay()
+{
+    time_t now = time(0);
+    tm* ltm = localtime(&now);
+
+    return ltm->tm_mday;
+}
+
+uint32 CVanaTime::getSysMonth()
+{
+    time_t now = time(0);
+    tm* ltm = localtime(&now);
+
+    return ltm->tm_mon;
+}
+
 uint32 CVanaTime::getVanaTime()
 {
     //all functions/variables for in game time should be derived from this

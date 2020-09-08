@@ -16,7 +16,8 @@ function onTrigger(player, npc)
     local notes = player:getCurrency("allied_notes")
     local freelances = 99 -- Faking it for now
     local unknown = 12 -- Faking it for now
-    local medalRank = getMedalRank(player)
+    --local medalRank = getMedalRank(player)
+    local medalRank = 25
     local bonusEffects = 0 -- 1 = regen, 2 = refresh, 4 = meal duration, 8 = exp loss reduction, 15 = all
     local timeStamp = 0 -- getSigilTimeStamp(player)
 
@@ -46,7 +47,8 @@ function onEventUpdate(player, csid, option)
 end
 
 function onEventFinish(player, csid, option)
-    local medalRank = getMedalRank(player)
+    --local medalRank = getMedalRank(player)
+    local medalRank = 25
     if csid == 13 then
         -- Note: the event itself already verifies the player has enough AN, so no check needed here.
         if option >= 2 and option <= 2050 then -- player bought item

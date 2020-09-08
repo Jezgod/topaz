@@ -5,6 +5,79 @@
 -- Contains variable-ized definitions of things like core enums for use in lua scripts.
 ------------------------------------
 tpz = tpz or {}
+Retrib = Retrib or {}
+
+Retrib.Stat = 
+{
+	WS			=  0,
+	Death			=  1,
+	Mob 			=  2,
+	NM 			=  3,
+	Battlefield		=  4,
+	NQ			=  5,
+	HQ			=  6,
+	Enhancement 		=  7,
+	Mining 			=  8,
+	Logging 		=  9,
+	Harvesting 		= 10,
+	Excavating 		= 11,
+	Fishing 		= 12,
+	Digging 		= 13,
+	Spell 			= 14,
+	Supply 			= 15,
+	Quest 			= 16,
+	Mission 		= 17,
+        Valor                   = 18,
+	JobTo75 		= 19,
+	CrafTo100 		= 20
+
+}
+
+Retrib.Gear = 
+{
+    None            =  0,
+    Sea             =  1,
+    Minor           =  2,
+    Major           =  3,
+    Mission         =  4,
+    AF1             =  5,
+    AF2             =  6,
+    AF1P1           =  7,
+    AF2P1           =  8,
+    Cursed          =  9,
+    Limbus          = 10,
+    Assault         = 11,
+    Salvage         = 12,
+    ZNM             = 13,
+    Relic           = 14,
+    Mythic          = 15,
+}
+
+Retrib.StatPoints = 
+{
+    Battlefield  	= 150,
+    Enhancement 	=  10,
+    Mining 		=   1,
+    Logging 		=   1,
+    Harvesting 		=   1,
+    Excavating 		=   1,
+    Fishing 		=   1,
+    Digging 		=   1,
+    Supply 		=  15,
+    Valor               =  10
+}
+
+Retrib.Event =
+{
+    Overall         = 0,
+    Strongest       = 1,
+    Easter          = 2,
+    Summer          = 3,
+    Halloween       = 4,
+    Christmas       = 5,
+    NewYear         = 6,
+    Bounty	    = 7
+}
 
 ------------------------------------
 -- Zone Misc Flags

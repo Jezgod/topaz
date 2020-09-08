@@ -13,8 +13,11 @@ tpz = tpz or {}
 tpz.besieged = tpz.besieged or {}
 
 tpz.besieged.onTrigger = function(player, npc, eventBase)
-    local mercRank = tpz.besieged.getMercenaryRank(player)
-    if mercRank == 0 then
+    --local mercRank = tpz.besieged.getMercenaryRank(player)
+    local hasTAG = player:hasKeyItem(tpz.ki.IMPERIAL_ARMY_ID_TAG)
+    local mercRank = 12
+
+    if mercRank == 0 or not hasTAG then
         player:startEvent(eventBase + 1, npc)
     else
         local maps = getMapBitmask(player)

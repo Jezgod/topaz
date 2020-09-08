@@ -82,6 +82,8 @@
 #include "../battlefield.h"
 #include "../packets/char_emotion.h"
 
+#include "../retrib/retrib_enums.h"     // RETRIB
+
 namespace luautils
 {
 #define lua_prepscript(n,...) int8 File[255]; \
@@ -331,6 +333,41 @@ namespace luautils
             break;
         }
         return 1;
+    }
+
+    /************************************************************************
+   *  Retribution
+   *  OnMenuSelection(PChar, NPC, Choice)
+   *  Used for sending user menu choices back to the calling NPC
+   ************************************************************************/
+    int32 OnMenuSelection(CCharEntity* PChar, CBaseEntity* NPC, string_t Choice)
+    {
+        auto PZone = PChar->loc.zone->GetName();
+        auto NName = NPC->GetName();
+
+        int8 RetribFile[255];
+        snprintf((char*)RetribFile, sizeof(RetribFile), "scripts/zones/%s/npcs/%s.lua", PZone, NName);
+        lua_prepscript("scripts/zones/%s/npcs/%s.lua", PZone, NName);
+
+        if (prepFile(RetribFile, "onMenuSelection"))
+        {
+            return -1;
+        }
+
+        CLuaBaseEntity LuaCharEntity(PChar);
+        Lunar<CLuaBaseEntity>::push(LuaHandle, &LuaCharEntity);
+        CLuaBaseEntity LuaNPCEntity(NPC);
+        Lunar<CLuaBaseEntity>::push(LuaHandle, &LuaNPCEntity);
+        lua_pushstring(LuaHandle, (const char*)Choice.c_str());
+
+        if (lua_pcall(LuaHandle, 3, 0, 0))
+        {
+            ShowError("luautils::onMenuSelection: %s\n", lua_tostring(LuaHandle, -1));
+            lua_pop(LuaHandle, 1);
+            return -1;
+        }
+
+        return 0;
     }
 
     int32 GetNPCByID(lua_State* L)

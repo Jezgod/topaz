@@ -81,6 +81,8 @@ public:
 	uint32	 getSysSecond();
 	uint32	 getSysWeekDay();						// Number of day since sunday
 	uint32	 getSysYearDay();						// Number of day since 1st january
+    uint32   getSysMonthDay();                      // Day of the month (1-31)
+    uint32   getSysMonth();                         // Month of the year
 
     uint32   getVanaTime();
 	int32	 getCustomEpoch();

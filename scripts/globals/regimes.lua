@@ -20,6 +20,9 @@ require("scripts/globals/keyitems")
 tpz = tpz or {}
 tpz.regime = tpz.regime or {}
 
+local Stats = Retrib.Stat
+local Points = Retrib.StatPoints
+
 tpz.regime.type =
 {
     FIELDS  = 1,
@@ -1221,6 +1224,7 @@ tpz.regime.bookOnEventFinish = function(player, option, regimeType)
 end
 
 tpz.regime.checkRegime = function(player, mob, regimeId, index, regimeType)
+    local zoneId = player:getZoneID()
 
     -- dead players, or players not on this training regime, get no credit
     if not player or player:getHP() == 0 or player:getCharVar("[regime]id") ~= regimeId then
@@ -1345,8 +1349,15 @@ tpz.regime.checkRegime = function(player, mob, regimeId, index, regimeType)
 
             -- increment clears
             player:delStatusEffectSilent(tpz.effect.PROWESS)
-            player:addStatusEffect(tpz.effect.PROWESS, govClears + 1, 0, 0)
-
+	    if (zoneId == dsp.zone.VELUGANNON_PALACE or zoneId == dsp.zone.THE_SHRINE_OF_RUAVITAU) then
+		if (govClears > 24) then
+		    player:addStatusEffect(tpz.effect.PROWESS, 1, 0, 0)
+                else
+		    player:addStatusEffect(tpz.effect.PROWESS, govClears + 1, 0, 0)
+	  	end
+	    else
+		player:addStatusEffect(dsp.effect.PROWESS, govClears + 1, 0, 0)
+	    end
         else
             -- keep track of number of clears
             player:addStatusEffect(tpz.effect.PROWESS, 1, 0, 0)
@@ -1366,6 +1377,7 @@ tpz.regime.checkRegime = function(player, mob, regimeId, index, regimeType)
         local tabs = math.floor(reward / 10) * TABS_RATE
         tabs = utils.clamp(tabs, 0, 50000 - player:getCurrency("valor_point")) -- Retail caps players at 50000 tabs
         player:addCurrency("valor_point", tabs)
+	player:AddRetribStat(Stats.Valor, Points.Valor)
         player:messageBasic(tpz.msg.basic.FOV_OBTAINS_TABS, tabs, player:getCurrency("valor_point"))
 
         player:setCharVar("[regime]lastReward", vanadielEpoch)
