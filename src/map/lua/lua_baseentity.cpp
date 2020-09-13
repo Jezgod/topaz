@@ -5494,6 +5494,60 @@ inline int32 CLuaBaseEntity::getAlliedPointRatio(lua_State* L)
     return 1;
 }
 
+//GET CRUOR RATIO
+inline int32 CLuaBaseEntity::getCruorRatio(lua_State* L)
+{
+    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
+    TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+
+    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
+
+    auto nation = lua_tointeger(L, 1);
+
+    switch (nation)
+    {
+    case 0:
+        lua_pushinteger(L, conquest::GetCruorRatio(0));
+        break;
+    case 1:
+        lua_pushinteger(L, conquest::GetCruorRatio(1));
+        break;
+    case 2:
+        lua_pushinteger(L, conquest::GetCruorRatio(2));
+        break;
+    default:
+        lua_pushinteger(L, 0);
+    }
+    return 1;
+}
+
+//GET BAYLD RATIO
+inline int32 CLuaBaseEntity::getBayldRatio(lua_State* L)
+{
+    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
+    TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+
+    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
+
+    auto nation = lua_tointeger(L, 1);
+
+    switch (nation)
+    {
+    case 0:
+        lua_pushinteger(L, conquest::GetBayldRatio(0));
+        break;
+    case 1:
+        lua_pushinteger(L, conquest::GetBayldRatio(1));
+        break;
+    case 2:
+        lua_pushinteger(L, conquest::GetBayldRatio(2));
+        break;
+    default:
+        lua_pushinteger(L, 0);
+    }
+    return 1;
+}
+
 inline int32 CLuaBaseEntity::getBounty(lua_State* L)
 {
     CCharEntity* PC = (CCharEntity*)m_PBaseEntity;
@@ -15119,6 +15173,8 @@ Lunar<CLuaBaseEntity>::Register_t CLuaBaseEntity::methods[] =
     LUNAR_DECLARE_METHOD(CLuaBaseEntity, getConquestPointRatio),    //CP RATIO
     LUNAR_DECLARE_METHOD(CLuaBaseEntity, getImperialPointRatio),    //IS RATIO
     LUNAR_DECLARE_METHOD(CLuaBaseEntity, getAlliedPointRatio),      //AN RATIO
+    LUNAR_DECLARE_METHOD(CLuaBaseEntity, getCruorRatio),            //CRUOR RATIO
+    LUNAR_DECLARE_METHOD(CLuaBaseEntity, getBayldRatio),            //BAYLD RATIO
 
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,getNewPlayer),
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,setNewPlayer),

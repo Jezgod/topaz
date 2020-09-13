@@ -122,6 +122,7 @@ function onTrigger(player, target)
 	targ:setCharVar("arbiter_t" ,os.time() + 3600)
         player:setCharVar("arbiter_p" ,os.time() + 120)
         player:delCurrency("infamy", arbiter_cost)
+        targ:setCharVar("pvp_flag", 1)
 
     elseif not player:gotoPlayer(target) then
         error(player, string.format("Player named: %s not found!"), target)

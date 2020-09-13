@@ -2462,11 +2462,265 @@ namespace charutils
         }
         if (PPet->getPetType() == PETTYPE_JUG_PET)
         {
-            auto skillList {battleutils::GetMobSkillList(PPet->m_MobSkillList)};
+            int32 abilityidindex = 656;
+            int16 ab1 = -1; // always highest id
+            int16 ab2 = -1;
+            int16 ab3 = -1;
+            int16 ab4 = -1;
+            int16 ab5 = -1;
+            int16 ab6 = -1;
+            int16 ab7 = -1;
+            int16 ab8 = -1;
+
+            if (PetID == 21) // SHEEP FAMILIAR
+            {
+                ab1 = 676;
+                ab2 = 675;
+                ab3 = 674;
+                ab4 = 673;
+            }
+
+            if (PetID == 22) // HARE FAMILIAR
+            {
+                ab1 = 719;
+                ab2 = 658;
+                ab3 = 657;
+                ab4 = 656;
+            }
+
+            if (PetID == 23) // CRAB FAMILIAR
+            {
+                ab1 = 681;
+                ab2 = 680;
+                ab3 = 679;
+                ab4 = 678;
+                ab5 = 677;
+            }
+
+            if (PetID == 24) // COURIER CARRIE
+            {
+                ab1 = 681;
+                ab2 = 680;
+                ab3 = 679;
+                ab4 = 678;
+                ab5 = 677;
+            }
+
+            if (PetID == 25) // HOMUNCULUS
+            {
+                ab1 = 663;
+                ab2 = 662;
+                ab3 = 661;
+                ab4 = 660;
+                ab5 = 659;
+            }
+
+            if (PetID == 26) // FLYTRAP FAMILIAR
+            {
+                ab1 = 704;
+                ab2 = 703;
+                ab3 = 702;
+            }
+
+            if (PetID == 27) // TIGER FAMILIAR
+            {
+                ab1 = 666;
+                ab2 = 665;
+                ab3 = 664;
+            }
+
+            if (PetID == 28) // FLOWERPOT BILL
+            {
+                ab1 = 663;
+                ab2 = 662;
+                ab3 = 661;
+                ab4 = 660;
+                ab5 = 659;
+            }
+
+            if (PetID == 29) // EFT FAMILIAR
+            {
+                ab1 = 709;
+                ab2 = 708;
+                ab3 = 707;
+                ab4 = 706;
+                ab5 = 705;
+            }
+
+            if (PetID == 30) // LIZARD FAMILIAR
+            {
+                ab1 = 672;
+                ab2 = 671;
+                ab3 = 670;
+                ab4 = 669;
+                ab5 = 668;
+                ab6 = 667;
+            }
+
+            if (PetID == 31) // MAYFLY FAMILIAR
+            {
+                ab1 = 697;
+                ab2 = 696;
+            }
+
+            if (PetID == 32) // FUNGUAR FAMILIAR
+            {
+                ab1 = 690;
+                ab2 = 689;
+                ab3 = 688;
+                ab4 = 687;
+                ab5 = 686;
+                ab6 = 685;
+                ab7 = 684;
+            }
+
+            if (PetID == 33) // BEETLE FAMILIAR
+            {
+                ab1 = 695;
+                ab2 = 694;
+                ab3 = 693;
+                ab4 = 692;
+                ab5 = 691;
+            }
+
+            if (PetID == 34) // ANTLION FAMILIAR
+            {
+                ab1 = 701;
+                ab2 = 700;
+                ab3 = 699;
+                ab4 = 698;
+            }
+
+            if (PetID == 35) // MITE FAMILIAR
+            {
+                ab1 = 713;
+                ab2 = 712;
+                ab3 = 711;
+                ab4 = 710;
+            }
+
+            if (PetID == 36) // LULLABY MELODIA
+            {
+                ab1 = 676;
+                ab2 = 675;
+                ab3 = 674;
+                ab4 = 673;
+            }
+
+            if (PetID == 37) // KEENEARED STEFFI
+            {
+                ab1 = 658;
+                ab2 = 657;
+                ab3 = 656;
+            }
+
+            if (PetID == 38) // FLOWERPOT BEN
+            {
+                ab1 = 663;
+                ab2 = 662;
+                ab3 = 661;
+                ab4 = 660;
+                ab5 = 659;
+            }
+
+            if (PetID == 39) // SABER SIRAVARDE
+            {
+                ab1 = 666;
+                ab2 = 665;
+                ab3 = 664;
+            }
+
+            if (PetID == 40) // COLDBLOOD COMO
+            {
+                ab1 = 672;
+                ab2 = 671;
+                ab3 = 670;
+                ab4 = 669;
+                ab5 = 668;
+                ab6 = 667;
+            }
+
+            if (PetID == 41) // SHELLBUSTER OROB
+            {
+                ab1 = 697;
+                ab2 = 696;
+            }
+
+            if (PetID == 42) // VORACIOUS AUDREY
+            {
+                ab1 = 704;
+                ab2 = 703;
+                ab3 = 702;
+            }
+
+            if (PetID == 43) // AMBUSHER ALLIE
+            {
+                ab1 = 709;
+                ab2 = 708;
+                ab3 = 707;
+                ab4 = 706;
+                ab5 = 705;
+            }
+
+            if (PetID == 44) // LIFEDRINKER LARS
+            {
+                ab1 = 713;
+                ab2 = 712;
+                ab3 = 711;
+                ab4 = 710;
+            }
+
+            if (PetID == 45) // PANZER GALAHAD
+            {
+                ab1 = 695;
+                ab2 = 694;
+                ab3 = 693;
+                ab4 = 692;
+                ab5 = 691;
+            }
+
+            if (PetID == 46) // CHOPSUEY CHUCKY
+            {
+                ab1 = 701;
+                ab2 = 700;
+                ab3 = 699;
+                ab4 = 698;
+            }
+
+            if (PetID == 47) // AMIGO SABOTENDER
+            {
+                ab1 = 683;
+                ab2 = 682;
+            }
+
+            if (PetID == 68) // TURBID TOLOI
+            {
+                ab1 = 743;
+                ab2 = 742;
+            }
+
+            if (ab1 != -1) { abilityidindex = ab1; }
+            if (ab2 != -1) { abilityidindex = ab2; }
+            if (ab3 != -1) { abilityidindex = ab3; }
+            if (ab4 != -1) { abilityidindex = ab4; }
+            if (ab5 != -1) { abilityidindex = ab5; }
+            if (ab6 != -1) { abilityidindex = ab6; }
+            if (ab7 != -1) { abilityidindex = ab7; }
+            if (ab8 != -1) { abilityidindex = ab8; }
+
+            while (abilityidindex <= ab1)
+            {
+                if (abilityidindex == ab1 || abilityidindex == ab2 || abilityidindex == ab3 || abilityidindex == ab4 || abilityidindex == ab5 || abilityidindex == ab6 || abilityidindex == ab7 || abilityidindex == ab8)
+                {
+                    addPetAbility(PChar, abilityidindex - 496);
+                }
+                abilityidindex++;
+            }
+            /*auto skillList {battleutils::GetMobSkillList(PPet->m_MobSkillList)};
             for (auto&& abilityid : skillList)
             {
                 addPetAbility(PChar, abilityid - 496);
-            }
+            }*/
         }
         PChar->pushPacket(new CCharAbilitiesPacket(PChar));
     }
@@ -3205,6 +3459,7 @@ namespace charutils
         //work out the amount of gil to give (guessed; replace with testing)
         uint32 gil = PMob->GetRandomGil();
         uint32 gBonus = 0;
+        REGIONTYPE region = PChar->loc.zone->GetRegionID();
 
         if (gil && map_config.mob_gil_multiplier >= 0)
         {
@@ -3238,19 +3493,107 @@ namespace charutils
                 int32 gilPerPerson = static_cast<int32>(gil / members.size());
                 for (auto PMember : members)
                 {
-                    // Check for gilfinder
-                    gilPerPerson += gilPerPerson * PMember->getMod(Mod::GILFINDER) / 100;
-                    UpdateItem(PMember, LOC_INVENTORY, 0, gilPerPerson);
-                    PMember->pushPacket(new CMessageBasicPacket(PMember, PMember, gilPerPerson, 0, 565));
+                    uint8 gnation = PMember->profile.nation;
+                    if (region >= 0 && region <= 27)
+                    {
+                        gilPerPerson += gilPerPerson * PMember->getMod(Mod::GILFINDER) / 100;
+                        float gilPerPersonR = gilPerPerson * (1 + (conquest::GetConquestRatio(gnation) / 100.f));
+                        UpdateItem(PMember, LOC_INVENTORY, 0, (int32)gilPerPersonR);
+                        PMember->pushPacket(new CMessageBasicPacket(PMember, PMember, (int32)gilPerPersonR, 0, 565));
+                    }
+
+                    else if (region >= 28 && region <= 32)
+                    {
+                        gilPerPerson += gilPerPerson * PMember->getMod(Mod::GILFINDER) / 100;
+                        float gilPerPersonR = gilPerPerson * (1 + (conquest::GetImperialRatio(gnation) / 100.f));
+                        UpdateItem(PMember, LOC_INVENTORY, 0, (int32)gilPerPersonR);
+                        PMember->pushPacket(new CMessageBasicPacket(PMember, PMember, (int32)gilPerPersonR, 0, 565));
+                    }
+
+                    else if (region >= 33 && region <= 40)
+                    {
+                        gilPerPerson += gilPerPerson * PMember->getMod(Mod::GILFINDER) / 100;
+                        float gilPerPersonR = gilPerPerson * (1 + (conquest::GetAlliedRatio(gnation) / 100.f));
+                        UpdateItem(PMember, LOC_INVENTORY, 0, (int32)gilPerPersonR);
+                        PMember->pushPacket(new CMessageBasicPacket(PMember, PMember, (int32)gilPerPersonR, 0, 565));
+                    }
+
+                    else if (region == 41)
+                    {
+                        gilPerPerson += gilPerPerson * PMember->getMod(Mod::GILFINDER) / 100;
+                        float gilPerPersonR = gilPerPerson * (1 + (conquest::GetCruorRatio(gnation) / 100.f));
+                        UpdateItem(PMember, LOC_INVENTORY, 0, (int32)gilPerPersonR);
+                        PMember->pushPacket(new CMessageBasicPacket(PMember, PMember, (int32)gilPerPersonR, 0, 565));
+                    }
+
+                    else if (region >= 42 && region <= 45)
+                    {
+                        gilPerPerson += gilPerPerson * PMember->getMod(Mod::GILFINDER) / 100;
+                        float gilPerPersonR = gilPerPerson * (1 + (conquest::GetBayldRatio(gnation) / 100.f));
+                        UpdateItem(PMember, LOC_INVENTORY, 0, (int32)gilPerPersonR);
+                        PMember->pushPacket(new CMessageBasicPacket(PMember, PMember, (int32)gilPerPersonR, 0, 565));
+                    }
+
+                    else
+                    {
+                        // Check for gilfinder
+                        gilPerPerson += gilPerPerson * PMember->getMod(Mod::GILFINDER) / 100;
+                        UpdateItem(PMember, LOC_INVENTORY, 0, gilPerPerson);
+                        PMember->pushPacket(new CMessageBasicPacket(PMember, PMember, gilPerPerson, 0, 565));
+                    }
                 }
             }
         }
         else if (distanceSquared(PChar->loc.p, PMob->loc.p) < square(100.f))
         {
-            // Check for gilfinder
-            gil += gil * PChar->getMod(Mod::GILFINDER) / 100;
-            UpdateItem(PChar, LOC_INVENTORY, 0, static_cast<int32>(gil));
-            PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, static_cast<int32>(gil), 0, 565));
+            uint8 snation = PChar->profile.nation;
+            if (region >= 0 && region <= 27)
+            {
+                gil += gil * PChar->getMod(Mod::GILFINDER) / 100;
+                float gilR = gil * (1 + (conquest::GetConquestRatio(snation) / 100.f));
+                UpdateItem(PChar, LOC_INVENTORY, 0, static_cast<int32>(gilR));
+                PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, static_cast<int32>(gilR), 0, 565));
+            }
+
+            else if (region >= 28 && region <= 32)
+            {
+                gil += gil * PChar->getMod(Mod::GILFINDER) / 100;
+                float gilR = gil * (1 + (conquest::GetImperialRatio(snation) / 100.f));
+                UpdateItem(PChar, LOC_INVENTORY, 0, static_cast<int32>(gilR));
+                PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, static_cast<int32>(gilR), 0, 565));
+            }
+
+            else if (region >= 33 && region <= 40)
+            {
+                gil += gil * PChar->getMod(Mod::GILFINDER) / 100;
+                float gilR = gil * (1 + (conquest::GetAlliedRatio(snation) / 100.f));
+                UpdateItem(PChar, LOC_INVENTORY, 0, static_cast<int32>(gilR));
+                PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, static_cast<int32>(gilR), 0, 565));
+            }
+
+            else if (region == 41)
+            {
+                gil += gil * PChar->getMod(Mod::GILFINDER) / 100;
+                float gilR = gil * (1 + (conquest::GetCruorRatio(snation) / 100.f));
+                UpdateItem(PChar, LOC_INVENTORY, 0, static_cast<int32>(gilR));
+                PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, static_cast<int32>(gilR), 0, 565));
+            }
+
+            else if (region >= 42 && region <= 45)
+            {
+                gil += gil * PChar->getMod(Mod::GILFINDER) / 100;
+                float gilR = gil * (1 + (conquest::GetBayldRatio(snation) / 100.f));
+                UpdateItem(PChar, LOC_INVENTORY, 0, static_cast<int32>(gilR));
+                PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, static_cast<int32>(gilR), 0, 565));
+            }
+
+            else
+            {
+                // Check for gilfinder
+                gil += gil * PChar->getMod(Mod::GILFINDER) / 100;
+                UpdateItem(PChar, LOC_INVENTORY, 0, static_cast<int32>(gil));
+                PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, static_cast<int32>(gil), 0, 565));
+            }
         }
     }
 
@@ -3361,16 +3704,16 @@ namespace charutils
                         }
                     }
 
-                    if (PMember->StatusEffectContainer->HasStatusEffect(EFFECT_SIGNET) && region >= 0 && region <= 22)
+                    if (PMember->StatusEffectContainer->HasStatusEffect(EFFECT_SIGNET) && region >= 0 && region <= 27)
                     {
                         switch (pcinzone)
                         {
                             case 1: exp *= 1.00f; break;
                             case 2: exp *= 0.75f; break;
                             case 3: exp *= 0.55f; break;
-                            case 4: exp *= 0.45f; break;
-                            case 5: exp *= 0.39f; break;
-                            case 6: exp *= 0.35f; break;
+                            case 4: exp *= 0.15f; break;
+                            case 5: exp *= 0.09f; break;
+                            case 6: exp *= 0.05f; break;
                             default: exp *= (1.8f / pcinzone); break;
                         }
                     }
@@ -3381,9 +3724,9 @@ namespace charutils
                             case 1: exp *= 1.00f; break;
                             case 2: exp *= 0.75f; break;
                             case 3: exp *= 0.55f; break;
-                            case 4: exp *= 0.45f; break;
-                            case 5: exp *= 0.39f; break;
-                            case 6: exp *= 0.35f; break;
+                            case 4: exp *= 0.15f; break;
+                            case 5: exp *= 0.09f; break;
+                            case 6: exp *= 0.05f; break;
                             default: exp *= (1.8f / pcinzone); break;
                         }
 
@@ -3395,9 +3738,9 @@ namespace charutils
                             case 1: exp *= 1.00f; break;
                             case 2: exp *= 0.60f; break;
                             case 3: exp *= 0.45f; break;
-                            case 4: exp *= 0.40f; break;
-                            case 5: exp *= 0.37f; break;
-                            case 6: exp *= 0.35f; break;
+                            case 4: exp *= 0.10f; break;
+                            case 5: exp *= 0.07f; break;
+                            case 6: exp *= 0.05f; break;
                             default: exp *= (1.8f / pcinzone); break;
                         }
                     }
@@ -3572,7 +3915,7 @@ namespace charutils
                     }
 
                     uint8 nation = PMember->profile.nation;
-                    if (region >= 0 && region <= 22)
+                    if (region >= 0 && region <= 27)
                     {
                         exp = charutils::AddExpBonus(PMember, exp);
                         float expR = exp * (1 + (conquest::GetConquestRatio(nation) / 100.f));
@@ -3590,6 +3933,20 @@ namespace charutils
                     {
                         exp = charutils::AddExpBonus(PMember, exp);
                         float expR = exp * (1 + (conquest::GetAlliedRatio(nation) / 100.f));
+                        charutils::AddExperiencePoints(false, PMember, PMob, (uint32)expR, mobCheck, chainactive);
+                    }
+
+                    else if (region == 41)
+                    {
+                        exp = charutils::AddExpBonus(PMember, exp);
+                        float expR = exp * (1 + (conquest::GetCruorRatio(nation) / 100.f));
+                        charutils::AddExperiencePoints(false, PMember, PMob, (uint32)expR, mobCheck, chainactive);
+                    }
+
+                    else if (region >= 42 && region <= 45)
+                    {
+                        exp = charutils::AddExpBonus(PMember, exp);
+                        float expR = exp * (1 + (conquest::GetBayldRatio(nation) / 100.f));
                         charutils::AddExperiencePoints(false, PMember, PMob, (uint32)expR, mobCheck, chainactive);
                     }
 
@@ -3965,6 +4322,196 @@ namespace charutils
 
     /************************************************************************
     *                                                                       *
+    *  PvP EXP LOST FOR CRUOR GAIN                                          *
+    *                                                                       *
+    ************************************************************************/
+    uint32 PvPExpLostCruorGain(CCharEntity* PChar, CBattleEntity* PLastAttacker, uint16 pvpexp)
+    {
+
+        uint8 mLevel = (PChar->m_LevelRestriction != 0 && PChar->m_LevelRestriction < PChar->GetMLevel()) ? PChar->m_LevelRestriction : PChar->GetMLevel();
+        pvpexp = mLevel <= 67 ? (GetExpNEXTLevel(mLevel) * 8) / 100 : 2400;
+        pvpexp = pvpexp * 10;
+
+        CCharEntity* PCharL = dynamic_cast<CCharEntity*>(PLastAttacker);
+
+        if (PCharL)
+        {
+            uint32 points = (uint32)(pvpexp * 0.5f);
+            uint32 bountyfactor = charutils::GetCharVar(PChar, "bounty_points");
+            uint8 bountymod = 0;
+            uint8 BMlvl = PChar->GetMLevel();
+            if (BMlvl > bountyfactor)
+            {
+                bountymod = bountyfactor;
+            }
+            else
+            {
+                bountymod = BMlvl;
+            }
+
+            charutils::ModBounty(PChar, bountymod);
+            points = points + ((points * bountyfactor) / 100);
+
+            charutils::SaveCruorPVP(PCharL, points);
+            charutils::AddPoints(PCharL, "cruor", points);
+            PCharL->pushPacket(new CConquestPacket(PCharL));
+
+            std::string a;
+            if (PCharL->allegiance == 2)
+            {
+                a = "San d'Oria";
+            }
+            else if (PCharL->allegiance == 3)
+            {
+                a = "Bastok";
+            }
+            else if (PCharL->allegiance == 4)
+            {
+                a = "Windurst";
+            }
+
+            std::string M1 = PCharL->name + " [" + a + "] earned " + std::to_string(points) + " Cruor.";
+            std::string M2 = "Use the command '!pvpcr' to see the current XP/Gil bonus in Abyssea areas.";
+            std::string M3 = "~~~~~~~~~ PVP RESULT ~~~~~~~~~";
+            message::send(MSG_CHAT_SERVMES, 0, 0, new CChatMessagePacket(PCharL, MESSAGE_NS_LINKSHELL3, M1));
+            message::send(MSG_CHAT_SERVMES, 0, 0, new CChatMessagePacket(PCharL, MESSAGE_NS_LINKSHELL3, M2));
+            message::send(MSG_CHAT_SERVMES, 0, 0, new CChatMessagePacket(PCharL, MESSAGE_NS_LINKSHELL3, M3));
+            return 0;
+        }
+
+        else
+        {
+            return 0;
+        }
+    }
+
+    /************************************************************************
+    *                                                                       *
+    *  SAVE PvP CRUOR                                                       *
+    *                                                                       *
+    ************************************************************************/
+    uint32 SaveCruorPVP(CBattleEntity* PLastAttacker, uint32 exp)
+    {
+        CCharEntity* PChar = dynamic_cast<CCharEntity*>(PLastAttacker);
+        if (PChar)
+        {
+            const char* varan = "cruorpvppoints";
+            const char* Query =
+                "INSERT INTO char_vars "
+                "SET charid = %u, varname = '%s', value = %i "
+                "ON DUPLICATE KEY UPDATE value = value + %i;";
+
+            Sql_Query(SqlHandle, Query,
+                PChar->id,
+                varan,
+                exp,
+                exp);
+
+            return 0;
+        }
+        else
+        {
+            return 0;
+        }
+    }
+
+    /************************************************************************
+   *                                                                       *
+   *  PvP EXP LOST FOR BAYLD GAIN                                          *
+   *                                                                       *
+   ************************************************************************/
+    uint32 PvPExpLostBayldGain(CCharEntity* PChar, CBattleEntity* PLastAttacker, uint16 pvpexp)
+    {
+
+        uint8 mLevel = (PChar->m_LevelRestriction != 0 && PChar->m_LevelRestriction < PChar->GetMLevel()) ? PChar->m_LevelRestriction : PChar->GetMLevel();
+        pvpexp = mLevel <= 67 ? (GetExpNEXTLevel(mLevel) * 8) / 100 : 2400;
+        pvpexp = pvpexp * 10;
+
+        CCharEntity* PCharL = dynamic_cast<CCharEntity*>(PLastAttacker);
+
+        if (PCharL)
+        {
+            uint32 points = (uint32)(pvpexp * 0.5f);
+            uint32 bountyfactor = charutils::GetCharVar(PChar, "bounty_points");
+            uint8 bountymod = 0;
+            uint8 BMlvl = PChar->GetMLevel();
+            if (BMlvl > bountyfactor)
+            {
+                bountymod = bountyfactor;
+            }
+            else
+            {
+                bountymod = BMlvl;
+            }
+
+            charutils::ModBounty(PChar, bountymod);
+            points = points + ((points * bountyfactor) / 100);
+
+            charutils::SaveBayldPVP(PCharL, points);
+            charutils::AddPoints(PCharL, "bayld", points);
+            PCharL->pushPacket(new CConquestPacket(PCharL));
+
+            std::string a;
+            if (PCharL->allegiance == 2)
+            {
+                a = "San d'Oria";
+            }
+            else if (PCharL->allegiance == 3)
+            {
+                a = "Bastok";
+            }
+            else if (PCharL->allegiance == 4)
+            {
+                a = "Windurst";
+            }
+
+            std::string M1 = PCharL->name + " [" + a + "] earned " + std::to_string(points) + " Bayld.";
+            std::string M2 = "Use the command '!pvpb' to see the current XP/Gil bonus in Ionis areas.";
+            std::string M3 = "~~~~~~~~~ PVP RESULT ~~~~~~~~~";
+            message::send(MSG_CHAT_SERVMES, 0, 0, new CChatMessagePacket(PCharL, MESSAGE_NS_LINKSHELL3, M1));
+            message::send(MSG_CHAT_SERVMES, 0, 0, new CChatMessagePacket(PCharL, MESSAGE_NS_LINKSHELL3, M2));
+            message::send(MSG_CHAT_SERVMES, 0, 0, new CChatMessagePacket(PCharL, MESSAGE_NS_LINKSHELL3, M3));
+            return 0;
+        }
+
+        else
+        {
+            return 0;
+        }
+    }
+
+    /************************************************************************
+    *                                                                       *
+    *  SAVE PvP BAYLD                                                       *
+    *                                                                       *
+    ************************************************************************/
+    uint32 SaveBayldPVP(CBattleEntity* PLastAttacker, uint32 exp)
+    {
+        CCharEntity* PChar = dynamic_cast<CCharEntity*>(PLastAttacker);
+        if (PChar)
+        {
+            const char* var = "bayldpvppoints";
+            const char* Query =
+                "INSERT INTO char_vars "
+                "SET charid = %u, varname = '%s', value = %i "
+                "ON DUPLICATE KEY UPDATE value = value + %i;";
+
+            Sql_Query(SqlHandle, Query,
+                PChar->id,
+                var,
+                exp,
+                exp);
+
+            return 0;
+        }
+        else
+        {
+            return 0;
+        }
+    }
+
+    /************************************************************************
+    *                                                                       *
     *  SAVE BOUNTY POINTS                                                   *
     *                                                                       *
     ************************************************************************/
@@ -4061,7 +4608,7 @@ namespace charutils
             onLimitMode = true;
 
         //we check if the player is level capped and max exp..
-        if (PChar->jobs.job[PChar->GetMJob()] > 74 && PChar->jobs.job[PChar->GetMJob()] >= PChar->jobs.genkai && PChar->jobs.exp[PChar->GetMJob()] == GetExpNEXTLevel(PChar->jobs.job[PChar->GetMJob()]) - 1)
+        if (PChar->jobs.job[PChar->GetMJob()] > 98 && PChar->jobs.job[PChar->GetMJob()] >= PChar->jobs.genkai && PChar->jobs.exp[PChar->GetMJob()] == GetExpNEXTLevel(PChar->jobs.job[PChar->GetMJob()]) - 1)
             onLimitMode = true;
 
         // exp added from raise shouldn't display a message. Don't need a message for zero exp either
@@ -4133,13 +4680,22 @@ namespace charutils
                 PChar->pushPacket(new CConquestPacket(PChar));
             }
 
+            // Should this user be awarded allied notes..
+            if (PChar->StatusEffectContainer->HasStatusEffect(EFFECT_SIGIL) &&
+                (region >= 33 && region <= 40))
+            {
+                charutils::AddPoints(PChar, "allied_notes", (int32)(exp * 0.2f));
+                PChar->pushPacket(new CConquestPacket(PChar));
+            }
+
             // Cruor Drops in Abyssea zones.
             uint16 Pzone = PChar->getZone();
-            if (zoneutils::GetCurrentRegion(Pzone) == REGION_ABYSSEA)
+            if (PChar->StatusEffectContainer->HasStatusEffect(EFFECT_ATMA) &&
+                zoneutils::GetCurrentRegion(Pzone) == REGION_ABYSSEA)
             {
                 uint16 TextID = luautils::GetTextIDVariable(Pzone, "CRUOR_OBTAINED");
                 uint32 Total = charutils::GetPoints(PChar, "cruor");
-                uint32 Cruor = 0; // Need to work out how to do cruor chains, until then no cruor will drop unless this line is customized for non retail play.
+                uint32 Cruor = (uint32)(exp * 0.5f); // Need to work out how to do cruor chains, until then no cruor will drop unless this line is customized for non retail play.
 
                 if (TextID == 0)
                 {
@@ -4151,6 +4707,14 @@ namespace charutils
                     PChar->pushPacket(new CMessageSpecialPacket(PChar, TextID, Cruor, Total + Cruor, 0, 0));
                     charutils::AddPoints(PChar, "cruor", Cruor);
                 }
+            }
+
+            // Should this user be awarded bayld..
+            if (PChar->StatusEffectContainer->HasStatusEffect(EFFECT_IONIS) &&
+                (region >= 42 && region <= 45))
+            {
+                charutils::AddPoints(PChar, "bayld", (int32)(exp * 0.2f));
+                PChar->pushPacket(new CConquestPacket(PChar));
             }
         }
 
@@ -4177,7 +4741,7 @@ namespace charutils
                 PChar->jobs.job[PChar->GetMJob()] += 1;
 
                 // RETRIB - Add Job to 75 Points
-                if (PChar->jobs.job[PChar->GetMJob()] == 75)
+                if (PChar->jobs.job[PChar->GetMJob()] == 99)
                 {
                     if (!PChar->RPC->HasJobTo75(PChar->GetMJob()))
                     {

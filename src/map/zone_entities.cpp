@@ -348,6 +348,11 @@ void CZoneEntities::DecreaseZoneCounter(CCharEntity* PChar)
 
     m_charList.erase(PChar->targid);
 
+    while (PChar->StatusEffectContainer->HasStatusEffect(EFFECT_ATMA))
+    {
+        PChar->StatusEffectContainer->DelStatusEffectSilent(EFFECT_ATMA);
+    }
+
     ShowDebug(CL_CYAN"CZone:: %s DecreaseZoneCounter <%u> %s\n" CL_RESET, m_zone->GetName(), m_charList.size(), PChar->GetName());
 }
 

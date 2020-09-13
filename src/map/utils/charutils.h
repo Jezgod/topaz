@@ -77,9 +77,13 @@ namespace charutils
     void	PvPExpLostCPGain(CCharEntity* PChar, CBattleEntity* PLastAttacker, uint16 pvpexp);           //xp lost for conquest gain
     uint32  PvPExpLostISGain(CCharEntity* PChar, CBattleEntity* PLastAttacker, uint16 pvpexp);           //xp lost for imp standing gain
     uint32  PvPExpLostANGain(CCharEntity* PChar, CBattleEntity* PLastAttacker, uint16 pvpexp);           //xp lost for allied notes gain
-    uint32  SaveConquestPointsPVP(CBattleEntity* PLastAttacker, uint32 exp);                             //save conquest points to char_vars
-    uint32  SaveImperialStandingPVP(CBattleEntity* PLastAttacker, uint32 exp);                           //save imperial standing to char_vars
-    uint32  SaveAlliedNotesPVP(CBattleEntity* PLastAttacker, uint32 exp);                                //save allied notes to char_vars
+    uint32  PvPExpLostCruorGain(CCharEntity* PChar, CBattleEntity* PLastAttacker, uint16 pvpexp);        //xp lost for cruor gain
+    uint32  PvPExpLostBayldGain(CCharEntity* PChar, CBattleEntity* PLastAttacker, uint16 pvpexp);        //xp lost for bayld gain
+    uint32  SaveConquestPointsPVP(CBattleEntity* PLastAttacker, uint32 exp);                             //save pvp conquest points to char_vars
+    uint32  SaveImperialStandingPVP(CBattleEntity* PLastAttacker, uint32 exp);                           //save pvp imperial standing to char_vars
+    uint32  SaveAlliedNotesPVP(CBattleEntity* PLastAttacker, uint32 exp);                                //save pvp allied notes to char_vars
+    uint32  SaveCruorPVP(CBattleEntity* PLastAttacker, uint32 exp);                                      //save pvp cruor to char_vars
+    uint32  SaveBayldPVP(CBattleEntity* PLastAttacker, uint32 exp);                                      //save pvp bayld to char_vars
     uint8   AddBounty(CBattleEntity* PLastAttacker, uint8 bounty); 		                                 // Add bounty to player if PVP kill is more than 1 level diff
     uint8   ModBounty(CCharEntity* PChar, uint8 bountymod);                                              // Modify killed player bounty
     void	DistributeExperiencePoints(CCharEntity* PChar, CMobEntity* PMob);

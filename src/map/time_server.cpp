@@ -110,7 +110,7 @@ int32 time_server(time_point tick,CTaskMgr::CTask* PTask)
                     ServerEvent->SA->NewDay();
                 }
 
-                ServerEvent->DailyGiftUpdate();
+                /*ServerEvent->DailyGiftUpdate();*/
             }
         }
     }

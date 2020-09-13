@@ -12,11 +12,14 @@ function onAbilityCheck(player, target, ability)
     --ranged weapon/ammo: You do not have an appropriate ranged weapon equipped.
     --no card: <name> cannot perform that action.
     if player:getWeaponSkillType(tpz.slot.RANGED) ~= tpz.skill.MARKSMANSHIP or player:getWeaponSkillType(tpz.slot.AMMO) ~= tpz.skill.MARKSMANSHIP then
+          printf("a")
         return 216, 0
     end
     if player:hasItem(2176, 0) or player:hasItem(2974, 0) then
+        printf("b")
         return 0, 0
     else
+        printf("c")
         return 71, 0
     end
 end

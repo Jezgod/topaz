@@ -296,18 +296,21 @@ tpz.abyssea.qmOnTrade = function(player, npc, trade)
     local zoneId = player:getZoneID()
     local pop = zones[zoneId].npc.QM_POPS[npc:getID()]
     if not pop then
+	printf("A")
         return false
     end
 
     -- validate trade-to-pop
     local reqTrade = pop[2]
     if #reqTrade == 0 or trade:getItemCount() ~= #reqTrade then
+        printf("B")
         return false
     end
 
     -- validate traded items
     for k, v in pairs(reqTrade) do
         if not trade:hasItemQty(v, 1) then
+	    printf("C")
             return false
         end
     end

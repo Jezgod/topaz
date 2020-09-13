@@ -1349,12 +1349,9 @@ tpz.regime.checkRegime = function(player, mob, regimeId, index, regimeType)
 
             -- increment clears
             player:delStatusEffectSilent(tpz.effect.PROWESS)
-	    if (zoneId == dsp.zone.VELUGANNON_PALACE or zoneId == dsp.zone.THE_SHRINE_OF_RUAVITAU) then
-		if (govClears > 24) then
-		    player:addStatusEffect(tpz.effect.PROWESS, 1, 0, 0)
-                else
-		    player:addStatusEffect(tpz.effect.PROWESS, govClears + 1, 0, 0)
-	  	end
+	    --if (zoneId == dsp.zone.VELUGANNON_PALACE or zoneId == dsp.zone.THE_SHRINE_OF_RUAVITAU) then
+	    if (govClears > 24) then
+		player:addStatusEffect(tpz.effect.PROWESS, 1, 0, 0)
 	    else
 		player:addStatusEffect(dsp.effect.PROWESS, govClears + 1, 0, 0)
 	    end

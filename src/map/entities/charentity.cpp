@@ -1762,20 +1762,30 @@ void CCharEntity::Die()
         REGIONTYPE region = PLastAttacker->loc.zone->GetRegionID();
 
         if (PLastAttacker->StatusEffectContainer->HasStatusEffect(EFFECT_SIGNET) &&
-            (region >= 0 && region <= 22))
+            (region >= 0 && region <= 27))
         {
             // Add influence for the players region..
-            charutils::PvPExpLostCPGain(this, PLastAttacker, 0); //PVP XP LOSS IS CP GAIN
+            charutils::PvPExpLostCPGain(this, PLastAttacker, 0);                                //PVP XP LOSS IS CP GAIN
         }
         else if (PLastAttacker->StatusEffectContainer->HasStatusEffect(EFFECT_SANCTION) &&
             (region >= 28 && region <= 32))
         {
-            charutils::PvPExpLostISGain(this, PLastAttacker, 0); //PVP XP LOSS IS IS GAIN
+            charutils::PvPExpLostISGain(this, PLastAttacker, 0);                                //PVP XP LOSS IS IS GAIN
         }
         else if (PLastAttacker->StatusEffectContainer->HasStatusEffect(EFFECT_SIGIL) &&
             (region >= 33 && region <= 40))
         {
-            charutils::PvPExpLostANGain(this, PLastAttacker, 0); //PVP XP LOSS IS AN GAIN
+            charutils::PvPExpLostANGain(this, PLastAttacker, 0);                                //PVP XP LOSS IS AN GAIN
+        }
+        else if (PLastAttacker->StatusEffectContainer->HasStatusEffect(EFFECT_ATMA) &&
+            (region == 41))
+        {
+            charutils::PvPExpLostCruorGain(this, PLastAttacker, 0);                             //PVP XP LOSS IS CRUOR GAIN
+        }
+        else if (PLastAttacker->StatusEffectContainer->HasStatusEffect(EFFECT_IONIS) &&
+            (region >= 42 && region <= 45))
+        {
+            charutils::PvPExpLostBayldGain(this, PLastAttacker, 0);                             //PVP XP LOSS IS BAYLD GAIN
         }
     }
     else

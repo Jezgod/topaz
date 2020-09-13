@@ -282,6 +282,8 @@ public:
     int32 getConquestPointRatio(lua_State*); // CP Ratio
     int32 getImperialPointRatio(lua_State*); // IS Ratio
     int32 getAlliedPointRatio(lua_State*);   // AN Ratio
+    int32 getCruorRatio(lua_State*);         // Cruor Ratio
+    int32 getBayldRatio(lua_State*);         // Bayld Ratio
 
     int32 getNewPlayer(lua_State* L);
     int32 setNewPlayer(lua_State* L);

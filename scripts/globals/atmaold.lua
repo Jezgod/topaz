@@ -59,7 +59,7 @@ local atmaMods =
     [tpz.ki.ATMA_OF_THE_GNARLED_HORN]           = {tpz.mod.AGI, 50, tpz.mod.CRITHITRATE, 20, tpz.mod.COUNTER, 10},
     [tpz.ki.ATMA_OF_THE_STRANGLING_WIND]        = {tpz.mod.STR, 20, tpz.mod.VIT, 20, tpz.mod.AGI, 30},
     [tpz.ki.ATMA_OF_THE_DEEP_DEVOURER]          = {tpz.mod.SUBTLE_BLOW, 5, tpz.mod.STORETP, 5, tpz.mod.SONG_SPELLCASTING_TIME, 20},
-    [tpz.ki.ATMA_OF_THE_MOUNTED_CHAMPION]       = {tpz.mod.VIT, 50, tpz.mod.REGEN, 20, tpz.mod.ENMITY_LOSS_REDUCTION, -20},
+    [tpz.ki.ATMA_OF_THE_MOUNTED_CHAMPION]       = {tpz.mod.VIT, 50, tpz.mod.REGEN, 20, tpz.mod.ENMITY_REDUCTION_PHYSICAL, -20},
     [tpz.ki.ATMA_OF_THE_RAZED_RUINS]            = {tpz.mod.DEX, 50, tpz.mod.CRITHITRATE, 30, tpz.mod.CRIT_DMG_INCREASE, 30},
     [tpz.ki.ATMA_OF_THE_BLUDGEONING_BRUTE]      = {tpz.mod.REGAIN, 10, tpz.mod.THUNDERRES, 50, tpz.mod.WATERRES, 50},
     [tpz.ki.ATMA_OF_THE_RAPID_REPTILIAN]        = {tpz.mod.TRIPLE_ATTACK, 5, tpz.mod.DMGBREATH, -40},
@@ -106,7 +106,7 @@ local atmaMods =
     [tpz.ki.ATMA_OF_THE_SOLITARY_ONE]           = {tpz.mod.TRIPLE_ATTACK, 7, tpz.mod.DMGBREATH, -25, tpz.mod.ZANSHIN, 10},
     [tpz.ki.ATMA_OF_THE_WINGED_GLOOM]           = {tpz.mod.DMG, -25, tpz.mod.REGEN, 2},
     [tpz.ki.ATMA_OF_THE_SEA_DAUGHTER]           = {tpz.mod.REGAIN, 50, tpz.mod.HASTE_GEAR, -1500, tpz.mod.REGEN, 30},
-    [tpz.ki.ATMA_OF_THE_HATEFUL_STREAM]         = {}, -- Not yet implemented. No easy way to do this ATMA. No way I am doing bit crap in onTick for it..
+    [tpz.ki.ATMA_OF_THE_HATEFUL_STREAM]         = {}, -- Not yet implemented. No easy way to do this ATMA. No way I am doing bit work in onTick for it..
     [tpz.ki.ATMA_OF_THE_FOE_FLAYER]             = {tpz.mod.MPP, 20, tpz.mod.REFRESH, 20, tpz.mod.FASTCAST, 20, tpz.mod.MACC, 50},
     [tpz.ki.ATMA_OF_THE_ENDLESS_NIGHTMARE]      = {tpz.mod.MND, 20, tpz.mod.DARKRES, 100, tpz.mod.FORCE_DARK_DWBONUS, 1},
     [tpz.ki.ATMA_OF_THE_SUNDERING_SLASH]        = {tpz.mod.ATT, 20, tpz.mod.REGAIN, 30},
@@ -115,9 +115,8 @@ local atmaMods =
     [tpz.ki.ATMA_OF_AQUATIC_ARDOR]              = {tpz.mod.ABSORB_DMG_CHANCE, 6, tpz.mod.MAGIC_ABSORB, 6},
     [tpz.ki.ATMA_OF_THE_FALLEN_ONE]             = {tpz.mod.INT, 30, tpz.mod.MND, 30},
     [tpz.ki.ATMA_OF_FIRES_AND_FLARES]           = {tpz.mod.AGI, 20, tpz.mod.RATT, 40},
-    --[tpz.ki.ATMA_OF_THE_APOCALYPSE]             = {tpz.mod.TRIPLE_ATTACK, 15, tpz.mod.RERAISE_III, 1, tpz.mod.QUICK_MAGIC, 10},
-    [tpz.ki.ATMA_OF_THE_APOCALYPSE]             = {tpz.mod.TRIPLE_ATTACK, 15, tpz.mod.NULL_PHYSICAL_DAMAGE, 10, tpz.mod.MAGIC_NULL, 10, tpz.mod.QUICK_MAGIC, 10},
-    
+    [tpz.ki.ATMA_OF_THE_APOCALYPSE]             = {tpz.mod.TRIPLE_ATTACK, 15, tpz.mod.RERAISE_III, 1, tpz.mod.QUICK_MAGIC, 10},
+
     -- GROUP 2
     [tpz.ki.ATMA_OF_THE_HEIR]                   = {},
     [tpz.ki.ATMA_OF_THE_HERO]                   = {},
@@ -166,51 +165,22 @@ local atmaMods =
     [tpz.ki.ATMA_OF_THE_SAVIOR]                 = {},
 }
 
---tpz.atma.onEffectGain = function(target, effect)
-function tpz.atma.onEffectGain(target, effect)
+tpz.atma.onEffectGain = function(target, effect)
     local atma = ATMA_OFFSET + effect:getPower()
     local mods = atmaMods[atma]
-    local count = #mods
-    if count == 2 then
-	target:addMod(mods[1],mods[2])
-        printf("Count: %i", count)
-    elseif count == 4 then
-    	target:addMod(mods[1],mods[2])
-    	target:addMod(mods[3],mods[4])
-        printf("Count: %i", count)
-    elseif count == 6 then
- 	target:addMod(mods[1],mods[2])
-    	target:addMod(mods[3],mods[4])
-    	target:addMod(mods[5],mods[6])
-    	printf("Count: %i", count)
-    elseif count == 8 then
- 	target:addMod(mods[1],mods[2])
-    	target:addMod(mods[3],mods[4])
-    	target:addMod(mods[5],mods[6])
-        target:addMod(mods[7],mods[8])
-    	printf("Count: %i", count)
+    if mods ~= nil then
+        for i = 1, #mods, 2 do
+            target:addMod(i, i + 1)
+        end
     end
 end
 
---tpz.atma.onEffectLose = function(target, effect)
-function tpz.atma.onEffectLose(target, effect)
+tpz.atma.onEffectLose = function(target, effect)
     local atma = ATMA_OFFSET + effect:getPower()
     local mods = atmaMods[atma]
-    local count = #mods
-    if count == 2 then
-	target:delMod(mods[1],mods[2])
-    elseif count == 4 then
-    printf("Count: %i", count)
-    	target:delMod(mods[1],mods[2])
-    	target:delMod(mods[3],mods[4])
-    elseif count == 6 then
- 	target:delMod(mods[1],mods[2])
-    	target:delMod(mods[3],mods[4])
-    	target:delMod(mods[5],mods[6])
-    elseif count == 8 then
- 	target:delMod(mods[1],mods[2])
-    	target:delMod(mods[3],mods[4])
-    	target:delMod(mods[5],mods[6])
-    	target:delMod(mods[7],mods[8])
+    if mods ~= nil then
+        for i = 1, #mods, 2 do
+            target:delMod(i, i + 1)
+        end
     end
 end
