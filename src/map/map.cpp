@@ -269,6 +269,9 @@ int32 do_init(int32 argc, char** argv)
 
     ShowStatus("The map-server is " CL_GREEN"ready" CL_RESET" to work...\n");
     ShowMessage("=======================================================================\n");
+
+    ServerEvent->InitializeEvents(); // RETRIB
+
     return 0;
 }
 

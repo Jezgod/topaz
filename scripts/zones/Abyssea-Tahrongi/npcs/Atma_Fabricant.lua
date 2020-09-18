@@ -1,21 +1,21 @@
 -----------------------------------
--- Zone: Abyssea - Konschtat
+-- Zone: Abyssea - Tahrongi
 --  NPC: Atma Fabricant
 -----------------------------------
 require("scripts/globals/keyitems")
-local ID = require("scripts/zones/Abyssea-Konschtat/IDs");
+local ID = require("scripts/zones/Abyssea-Tahrongi/IDs");
 -----------------------------------
 
-local opt1  = "the.Voracious.Violet"
-local opt2  = "Cloak.and.Dagger"
-local opt3  = "the.Stormbird"
-local opt4  = "the.Noxious.Fang"    
-local opt5  = "Vicissitude"    
-local opt6  = "the.Beyond"
-local opt7  = "Stormbreath"   
-local opt8  = "Gales"   
-local opt9  = "Thrashing.Tendrils"   
-local opt10 = "the.Drifter"   
+local opt1  = "the.Stronghold"
+local opt2  = "the.Harvester"
+local opt3  = "Dunes"
+local opt4  = "the.Cosmos"    
+local opt5  = "the.Siren.Shadow"    
+local opt6  = "the.Impaler"
+local opt7  = "the.Adamantine"   
+local opt8  = "Calamity"   
+local opt9  = "the.Claw"   
+local opt10 = "Baleful.Bones"   
 
 function onTrade(player,npc,trade)
 end
@@ -30,16 +30,16 @@ end
 function onMenuSelection(player, npc, Choice)
 local AtmaData = 
 {
-	{ choice = "the.Voracious.Violet", id = 1289 },
-	{ choice = "Cloak.and.Dagger",     id = 1290 },
-	{ choice = "the.Stormbird",        id = 1291 },
-	{ choice = "the.Noxious.Fang",	   id = 1292 },
-	{ choice = "Vicissitude", 	   id = 1293 },
-	{ choice = "the.Beyond",           id = 1294 },
-	{ choice = "Stormbreath",          id = 1295 },
-	{ choice = "Gales", 		   id = 1296 },
-	{ choice = "Thrashing.Tendrils",   id = 1297 },
-	{ choice = "the.Drifter",          id = 1298 }
+	{ choice = "the.Stronghold",             id = 1299 },
+	{ choice = "the.Harvester",        	 id = 1300 },
+	{ choice = "Dunes",        		 id = 1301 },
+	{ choice = "the.Cosmos",    	   	 id = 1302 },
+	{ choice = "the.Siren.Shadow",  	 id = 1303 },
+	{ choice = "the.Impaler",          	 id = 1304 },
+	{ choice = "the.Adamantine",      	 id = 1305 },
+	{ choice = "Calamity", 	   		 id = 1306 },
+	{ choice = "the.Claw",              	 id = 1307 },
+	{ choice = "Baleful.Bones",     	 id = 1308 }
 }
 
 local vp = player:getCurrency("valor_point")

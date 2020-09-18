@@ -20,10 +20,14 @@ require("scripts/globals/msg")
 -----------------------------------
 
 function onAbilityCheck(player, target, ability)
+    local mjob = player:getMainJob()
+
     if player:getPet() ~= nil then
         return tpz.msg.basic.ALREADY_HAS_A_PET, 0
     elseif target:getMaster() ~= nil and target:getMaster():isPC() then
         return tpz.msg.basic.THAT_SOMEONES_PET, 0
+    elseif (mjob ~= tpz.job.BST) then
+        return tpz.msg.basic.CANNOT_PERFORM, 0
     else
         return 0, 0
     end

@@ -113,10 +113,12 @@
 #include "../packets/guild_menu_buy.h"
 #include "../packets/independant_animation.h"
 #include "../packets/instance_entry.h"
+#include "../packets/inventory_assign.h"
 #include "../packets/inventory_finish.h"
 #include "../packets/inventory_modify.h"
 #include "../packets/inventory_size.h"
 #include "../packets/key_items.h"
+#include "../packets/linkshell_equip.h"
 #include "../packets/menu_mog.h"
 #include "../packets/menu_merit.h"
 #include "../packets/menu_raisetractor.h"
@@ -4246,9 +4248,16 @@ inline int32 CLuaBaseEntity::addShopItem(lua_State *L)
     uint16 itemID = (uint16)lua_tonumber(L, -2);
     uint32 price = (uint32)lua_tonumber(L, -1);
 
-    uint8 slotID = ((CCharEntity*)m_PBaseEntity)->Container->getItemsCount();
+    /*uint8 slotID = ((CCharEntity*)m_PBaseEntity)->Container->getItemsCount();*/
+    CCharEntity* PChar = (CCharEntity*)m_PBaseEntity;
+    uint8 slotID = PChar->Container->getItemsCount();
 
-    ((CCharEntity*)m_PBaseEntity)->Container->setItem(slotID, itemID, 0, price);
+    PChar->Container->setItem(slotID, itemID, 0, price);
+
+    /*((CCharEntity*)m_PBaseEntity)->Container->setItem(slotID, itemID, 0, price);*/
+    // Players can add items to the shop container during shop interaction,
+    // so track the shop's number of items separately from the container's size.
+    PChar->Container->setExSize(PChar->Container->getExSize() + 1);
 
     return 0;
 }
@@ -4320,17 +4329,17 @@ inline int32 CLuaBaseEntity::addLSpearl(lua_State* L)
             ((CItemLinkshell*)PItem)->SetLSColor(Sql_GetIntData(SqlHandle, 1));
             charutils::AddItem(PChar, LOC_INVENTORY, PItem, 1);
             // To force equip, UN comment the rest of this!
-            // uint8 invSlotID = PItem->getSlotID();
-            // linkshell::AddOnlineMember(PChar, PItem, PItem->GetLSID());
-            // PItem->setSubType(ITEM_LOCKED);
-            // PChar->equip[SLOT_LINK1] = invSlotID;
-            // PChar->equipLoc[SLOT_LINK1] = LOC_INVENTORY;
-            // PChar->pushPacket(new CInventoryAssignPacket(PItem, INV_LINKSHELL));
-            // charutils::SaveCharEquip(PChar);
-            // PChar->pushPacket(new CLinkshellEquipPacket(PChar, PItem->GetLSID()));
-            // PChar->pushPacket(new CInventoryItemPacket(PItem, LOC_INVENTORY, PItem->getSlotID()));
-            // PChar->pushPacket(new CInventoryFinishPacket());
-            // charutils::LoadInventory(PChar);
+            /* uint8 invSlotID = PItem->getSlotID();
+             linkshell::AddOnlineMember(PChar, PItem, PItem->GetLSID());
+             PItem->setSubType(ITEM_LOCKED);
+             PChar->equip[SLOT_LINK1] = invSlotID;
+             PChar->equipLoc[SLOT_LINK1] = LOC_INVENTORY;
+             PChar->pushPacket(new CInventoryAssignPacket(PItem, INV_LINKSHELL));
+             charutils::SaveCharEquip(PChar);
+             PChar->pushPacket(new CLinkshellEquipPacket(PChar, PItem->GetLSID()));
+             PChar->pushPacket(new CInventoryItemPacket(PItem, LOC_INVENTORY, PItem->getSlotID()));
+             PChar->pushPacket(new CInventoryFinishPacket());
+             charutils::LoadInventory(PChar);*/
 
             lua_pushboolean(L, true);
             return 1;

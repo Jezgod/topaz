@@ -1552,18 +1552,29 @@ namespace petutils
 
         if (PPet->getPetType() == PETTYPE_AVATAR)
         {
-            if (PMaster->GetMJob() == JOB_SMN)
+            uint8 smnlvcap = PMaster->m_Weapons[SLOT_MAIN]->getILvl();
+            uint8 masterLevel = PMaster->m_Weapons[SLOT_MAIN]->getReqLvl();
+            if ((PMaster->GetSJob() == JOB_SMN))
             {
-                PPet->SetMLevel(PMaster->GetMLevel());
+                PPet->SetMLevel(masterLevel / 2);
             }
-            else if (PMaster->GetSJob() == JOB_SMN)
+            else if (smnlvcap)
             {
-                PPet->SetMLevel(PMaster->GetSLevel());
+                PPet->SetMLevel(smnlvcap);
             }
-            else{ //should never happen
-                ShowDebug("%s summoned an avatar but is not SMN main or SMN sub! Please report. \n", PMaster->GetName());
-                PPet->SetMLevel(1);
+            else
+            {
+                if (PMaster->GetMJob() == JOB_SMN)
+                {
+                    PPet->SetMLevel(masterLevel);
+                    /*PPet->SetMLevel(PMaster->GetMLevel());*/
+                }
+                else { //should never happen
+                    ShowDebug("%s summoned an avatar but is not SMN main or SMN sub! Please report. \n", PMaster->GetName());
+                    PPet->SetMLevel(1);
+                }
             }
+            
             LoadAvatarStats(PPet); //follows PC calcs (w/o SJ)
 
             PPet->m_SpellListContainer = mobSpellList::GetMobSpellList(PPetData->spellList);
@@ -1626,7 +1637,6 @@ namespace petutils
                 }
             }
 
-
             if (PMaster->objtype == TYPE_PC)
             {
                 CCharEntity* PChar = (CCharEntity*)PMaster;
@@ -1643,17 +1653,29 @@ namespace petutils
             ((CItemWeapon*)PPet->m_Weapons[SLOT_MAIN])->setDelay((uint16)(floor(1000.0f*(240.0f / 60.0f))));
 
             //Get the Jug pet cap level
-            uint8 highestLvl = PPetData->maxLevel;
+            uint8 jugmaxLvl = PPetData->maxLevel;
 
             // Increase the pet's level cal by the bonus given by BEAST AFFINITY merits.
             CCharEntity* PChar = (CCharEntity*)PMaster;
+            uint8 highestLvl = jugmaxLvl;
             highestLvl += PChar->PMeritPoints->GetMeritValue(MERIT_BEAST_AFFINITY, PChar);
 
             // And cap it to the master's level or weapon ilvl, whichever is greater
-            auto capLevel = std::max(PMaster->GetMLevel(), PMaster->m_Weapons[SLOT_MAIN]->getILvl());
-            if (highestLvl > capLevel)
+            /*auto capLevel = std::max(PMaster->GetMLevel(), PMaster->m_Weapons[SLOT_MAIN]->getILvl());*/
+            uint8 capLevel = PMaster->m_Weapons[SLOT_MAIN]->getILvl();
+           /* uint8 masterLevel = PMaster->GetMLevel();*/
+            uint8 masterLevel = PMaster->m_Weapons[SLOT_MAIN]->getReqLvl();
+            if (capLevel > highestLvl && jugmaxLvl == 99)
             {
                 highestLvl = capLevel;
+            }
+            else if (highestLvl >= masterLevel)
+            {
+                highestLvl = masterLevel;
+            }
+            else
+            {
+                highestLvl = highestLvl;
             }
 
             // Randomize: 0-2 lvls lower, less Monster Gloves(+1/+2) bonus
@@ -1691,13 +1713,26 @@ namespace petutils
             //TEMP: should be MLevel when unsummoned, and PUP level when summoned
             if (PMaster->GetMJob() == JOB_PUP)
             {
-                PPet->SetMLevel(PMaster->GetMLevel());
-                PPet->SetSLevel(PMaster->GetMLevel() / 2); //Todo: SetSLevel() already reduces the level?
-            }
-            else
-            {
-                PPet->SetMLevel(PMaster->GetSLevel());
-                PPet->SetSLevel(PMaster->GetSLevel() / 2); //Todo: SetSLevel() already reduces the level?
+                uint8 puplvcap = PMaster->m_Weapons[SLOT_MAIN]->getILvl();
+                uint8 masterLevel = PMaster->m_Weapons[SLOT_MAIN]->getReqLvl();
+
+                if (puplvcap)
+                {
+                    PPet->SetMLevel(puplvcap);
+                    PPet->SetSLevel(puplvcap / 2);
+                }
+                else
+                {
+                    PPet->SetMLevel(masterLevel);
+                    PPet->SetSLevel(masterLevel / 2);
+                }
+            //    PPet->SetMLevel(PMaster->GetMLevel());
+            //    PPet->SetSLevel(PMaster->GetMLevel() / 2); //Todo: SetSLevel() already reduces the level?
+            //}
+            //else
+            //{
+            //    PPet->SetMLevel(PMaster->GetSLevel());
+            //    PPet->SetSLevel(PMaster->GetSLevel() / 2); //Todo: SetSLevel() already reduces the level?
             }
             LoadAutomatonStats((CCharEntity*)PMaster, PPet, g_PPetList.at(PetID)); //temp
             if (PMaster->objtype == TYPE_PC)
@@ -1775,7 +1810,19 @@ namespace petutils
             PPet->SetSJob(PMaster->GetSJob());
 
         PPet->SetMJob(JOB_DRG);
-        PPet->SetMLevel(PMaster->GetMLevel());
+
+        uint8 drglvcap = PMaster->m_Weapons[SLOT_MAIN]->getILvl();
+        uint8 masterLevel = PMaster->m_Weapons[SLOT_MAIN]->getReqLvl();
+
+        if (drglvcap)
+        {
+            PPet->SetMLevel(drglvcap);
+        }
+        else
+        {
+            PPet->SetMLevel(masterLevel);
+        }
+        /*PPet->SetMLevel(PMaster->GetMLevel());*/
 
         LoadAvatarStats(PPet); //follows PC calcs (w/o SJ)
         ((CItemWeapon*)PPet->m_Weapons[SLOT_MAIN])->setDelay((uint16)(floor(1000.0f * (320.0f / 60.0f)))); //320 delay

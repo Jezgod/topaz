@@ -894,6 +894,10 @@ void CZone::CharZoneIn(CCharEntity* PChar)
 
     PChar->PLatentEffectContainer->CheckLatentsZone();
     charutils::ResetPVPVar(PChar);
+    if (PChar->StatusEffectContainer->HasStatusEffect(EFFECT_PROWESS))
+    {
+        PChar->StatusEffectContainer->DelStatusEffect(EFFECT_PROWESS);
+    }
 }
 
 void CZone::CharZoneOut(CCharEntity* PChar)

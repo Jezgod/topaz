@@ -1,21 +1,21 @@
 -----------------------------------
--- Zone: Abyssea - Konschtat
+-- Zone: Abyssea - La_Theine
 --  NPC: Atma Fabricant
 -----------------------------------
 require("scripts/globals/keyitems")
-local ID = require("scripts/zones/Abyssea-Konschtat/IDs");
+local ID = require("scripts/zones/Abyssea-La_Theine/IDs");
 -----------------------------------
 
-local opt1  = "the.Voracious.Violet"
-local opt2  = "Cloak.and.Dagger"
-local opt3  = "the.Stormbird"
-local opt4  = "the.Noxious.Fang"    
-local opt5  = "Vicissitude"    
-local opt6  = "the.Beyond"
-local opt7  = "Stormbreath"   
-local opt8  = "Gales"   
-local opt9  = "Thrashing.Tendrils"   
-local opt10 = "the.Drifter"   
+local opt1  = "the.Lion"
+local opt2  = "the.Stout.Arm"
+local opt3  = "the.Twin.Claw"
+local opt4  = "Allure"    
+local opt5  = "Eternity"    
+local opt6  = "the.Heavens"
+local opt7  = "the.Baying.Moon"   
+local opt8  = "the.Ebon.Hoof"   
+local opt9  = "Tremors"   
+local opt10 = "the.Savage.Tiger"   
 
 function onTrade(player,npc,trade)
 end
@@ -30,16 +30,16 @@ end
 function onMenuSelection(player, npc, Choice)
 local AtmaData = 
 {
-	{ choice = "the.Voracious.Violet", id = 1289 },
-	{ choice = "Cloak.and.Dagger",     id = 1290 },
-	{ choice = "the.Stormbird",        id = 1291 },
-	{ choice = "the.Noxious.Fang",	   id = 1292 },
-	{ choice = "Vicissitude", 	   id = 1293 },
-	{ choice = "the.Beyond",           id = 1294 },
-	{ choice = "Stormbreath",          id = 1295 },
-	{ choice = "Gales", 		   id = 1296 },
-	{ choice = "Thrashing.Tendrils",   id = 1297 },
-	{ choice = "the.Drifter",          id = 1298 }
+	{ choice = "the.Lion",             id = 1279 },
+	{ choice = "the.Stout.Arm",        id = 1280 },
+	{ choice = "the.Twin.Claw",        id = 1281 },
+	{ choice = "Allure",    	   id = 1282 },
+	{ choice = "Eternity",  	   id = 1283 },
+	{ choice = "the.Heavens",          id = 1284 },
+	{ choice = "the.Baying.Moon",      id = 1285 },
+	{ choice = "the.Ebon.Hoof", 	   id = 1286 },
+	{ choice = "Tremors",              id = 1287 },
+	{ choice = "the.Savage.Tiger",     id = 1288 }
 }
 
 local vp = player:getCurrency("valor_point")

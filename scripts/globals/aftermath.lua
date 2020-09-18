@@ -188,7 +188,7 @@ tpz.aftermath.effects =
     [44] =
     {
         mod = tpz.mod.REM_OCC_DO_DOUBLE_DMG,
-        power = { 30, 40, 50 },
+        power = { 300, 400, 500 },
         duration = { 30, 60, 90 }
     },
 
@@ -198,7 +198,7 @@ tpz.aftermath.effects =
     [45] =
     {
         mod = tpz.mod.REM_OCC_DO_TRIPLE_DMG,
-        power = { 30, 40, 50 },
+        power = { 300, 400, 500 },
         duration = { 60, 120, 180 }
     }
 }

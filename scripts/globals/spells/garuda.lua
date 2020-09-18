@@ -9,12 +9,16 @@ require("scripts/globals/status")
 -----------------------------------------
 
 function onMagicCastingCheck(caster, target, spell)
+    local mjob = caster:getMainJob()
+
     if (not caster:canUseMisc(tpz.zoneMisc.PET)) then
         return tpz.msg.basic.CANT_BE_USED_IN_AREA
+    elseif (mjob ~= tpz.job.SMN) then
+        return tpz.msg.basic.CANNOT_PERFORM
     elseif (caster:hasPet()) then
         return tpz.msg.basic.ALREADY_HAS_A_PET
     elseif (caster:getObjType() == tpz.objType.PC) then
-        return avatarMiniFightCheck(caster)
+        return avatarMiniFightCheck(caster)    
     end
     return 0
 end

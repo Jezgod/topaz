@@ -11,12 +11,16 @@ require("scripts/globals/msg")
 -----------------------------------
 
 function onAbilityCheck(player, target, ability)
+    local weapon = player:getEquipID(0)
+
     if player:getPet() ~= nil then
         return tpz.msg.basic.ALREADY_HAS_A_PET, 0
     elseif not player:hasValidJugPetItem() then
         return tpz.msg.basic.NO_JUG_PET_ITEM, 0
     elseif not player:canUseMisc(tpz.zoneMisc.PET) then
         return tpz.msg.basic.CANT_BE_USED_IN_AREA, 0
+    elseif (weapon == 0) then
+	return tpz.msg.basic.CANNOT_PERFORM, 0
     else
         return 0, 0
     end
@@ -24,4 +28,5 @@ end
 
 function onUseAbility(player, target, ability)
     tpz.pet.spawnPet(player, player:getWeaponSubSkillType(tpz.slot.AMMO))
+    player:setCharVar("familiar", 0)
 end
