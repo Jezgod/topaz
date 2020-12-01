@@ -585,7 +585,7 @@ namespace conquest
             // 10% if region control is player's nation
             // 15% otherwise
 
-            double percentage = PChar->profile.nation == GetRegionOwner(region) ? 0.05 : 0.1;
+            double percentage = PChar->profile.nation == GetRegionOwner(region) ? 0.25 : 0.5;
             percentage += PChar->getMod(Mod::CONQUEST_BONUS) / 100.0;
             uint32 points = (uint32)(exp * percentage);
 

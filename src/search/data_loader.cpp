@@ -416,7 +416,7 @@ std::list<SearchEntity*> CDataLoader::GetPartyList(uint16 PartyID, uint16 Allian
 std::list<SearchEntity*> CDataLoader::GetLinkshellList(uint32 LinkshellID)
 {
     std::list<SearchEntity*> LinkshellList;
-    const char* fmtQuery = "SELECT charid, partyid, charname, pos_zone, nation, rank_sandoria, rank_bastok, rank_windurst, race, nameflags, mjob, sjob, "
+    const char* fmtQuery = "SELECT charid, partyid, charname, pos_prevzone, nation, rank_sandoria, rank_bastok, rank_windurst, race, nameflags, mjob, sjob, "
         "mlvl, slvl, linkshellid1, linkshellid2, "
         "linkshellrank1, linkshellrank2 "
         "FROM accounts_sessions "

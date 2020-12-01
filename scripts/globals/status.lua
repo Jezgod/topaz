@@ -57,14 +57,14 @@ Retrib.StatPoints =
 {
     Battlefield  	= 150,
     Enhancement 	=  10,
-    Mining 		=   1,
-    Logging 		=   1,
-    Harvesting 		=   1,
-    Excavating 		=   1,
+    Mining 		=  10,
+    Logging 		=  10,
+    Harvesting 		=  10,
+    Excavating 		=  10,
     Fishing 		=   1,
     Digging 		=   1,
     Supply 		=  15,
-    Valor               =  10
+    Valor               =  50,
 }
 
 Retrib.Event =

@@ -79,13 +79,13 @@ void CLinkshellListPacket::AddPlayer(SearchEntity* PPlayer)
         m_offset = packBitsLE(m_data, SEARCH_NATION, m_offset, 5);
         m_offset = packBitsLE(m_data, PPlayer->nation, m_offset, 2);
 
-        m_offset = packBitsLE(m_data, SEARCH_JOB, m_offset, 5);
+        /*m_offset = packBitsLE(m_data, SEARCH_JOB, m_offset, 5);
         m_offset = packBitsLE(m_data, PPlayer->mjob, m_offset, 5);
         m_offset = packBitsLE(m_data, PPlayer->sjob, m_offset, 5);
 
         m_offset = packBitsLE(m_data, SEARCH_LEVEL, m_offset, 5);
         m_offset = packBitsLE(m_data, PPlayer->mlvl, m_offset, 8);
-        m_offset = packBitsLE(m_data, PPlayer->slvl, m_offset, 8);
+        m_offset = packBitsLE(m_data, PPlayer->slvl, m_offset, 8);*/
 
         m_offset = packBitsLE(m_data, SEARCH_RACE, m_offset, 5);
         m_offset = packBitsLE(m_data, PPlayer->race, m_offset, 4);

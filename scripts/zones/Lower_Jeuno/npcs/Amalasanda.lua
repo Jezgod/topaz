@@ -32,6 +32,7 @@ function onTrigger(player, npc)
             1188,   125,    -- Sairui-Ran
             1191,   125,    -- Kodoku
             1194,   125,    -- Shinobi-Tabi
+            2553,   125,    -- Sanjaku-Tenugui
             1471,   316,    -- Sticky Rice
             1554,   645,    -- Turmeric
             1555,  1585,    -- Coriander

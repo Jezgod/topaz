@@ -1162,7 +1162,7 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
             //{
             //    battleutils::jumpAbility(this, PTarget, 3);
             //    action.messageID = 0;
-            //    this->loc.zone->PushPacket(this, CHAR_INRANGE_SELF, new CMessageBasicPacket(this, PTarget, PAbility->getID() + 16, 0, MSGBASIC_USES_JA));
+            //    this->loc.zone->PushPacket(this, CHAR_INRANGE_SELF, new CMessageBasicPacket(this, PTarget, PAbility->getID(), 0, MSGBASIC_USES_JA));
             //}
 
             //#TODO: move these 3 BST abilities to scripts
@@ -1750,10 +1750,9 @@ void CCharEntity::Die()
         }
 
         CCharEntity* PCharL = dynamic_cast<CCharEntity*>(PLastAttacker);
-        PCharL->RPC->AddStat(Retrib::Stat::STAT_PVP, Retrib::StatPoints::SP_PVP >> shift);
-
         uint16 infamy = 0;
         infamy = (uint16)((Retrib::StatPoints::SP_PVP >> shift) * (TMlvl / 99.0f));
+        PCharL->RPC->AddStat(Retrib::Stat::STAT_PVP, infamy);
         charutils::AddPoints(PCharL, "infamy", infamy);
 
         std::string M3 = "Infamy Obtained: " + std::to_string(infamy);

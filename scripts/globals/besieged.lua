@@ -149,7 +149,9 @@ end
 -- I decided to use the formula duration (with AC) = 3 hours + (mercenary rank - 1) * 20 minutes.
 -----------------------------------------------------------------------------------
 function getSanctionDuration(player)
-    local duration = 10800 + 1200 * (tpz.besieged.getMercenaryRank(player) - 1)
+    local mercRank = 12
+
+    local duration = 10800 + 1200 * (mercRank - 1)
 
     if tpz.besieged.getAstralCandescence() == 0 then
         duration = duration / 2

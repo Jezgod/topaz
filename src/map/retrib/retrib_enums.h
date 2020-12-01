@@ -133,7 +133,7 @@ namespace Retrib
     enum StatPoints
     {
 	SP_WEAPONSKILL =    1,  // Weapon Skill			    [ 0]  charutils::OnWeaponskillFinished
-	SP_DEATH       = 1000,  // Death			        [ 1]  CCharEntity::Die() NEGATIVE RESULT (DelStat)
+	SP_DEATH       =  100,  // Death			        [ 1]  CCharEntity::Die() NEGATIVE RESULT (DelStat)
 	SP_BATTLEFIELD =  150,  // BCNM				        [ 4]  CBattlefield::Cleanup()
 	SP_NQ_SYNTH    =    1,  // NQ Synth			        [ 5]  SynthUtils->doSynthResult
 	SP_HQ_SYNTH    =    5,  // HQ Synth			        [ 6]  SynthUtils->doSynthResult
@@ -148,7 +148,7 @@ namespace Retrib
     SP_SUPPLY      =   15,  // Supply Quest			    [15]  conquest.lua dsp.conquest.overseerOnEventFinish   ADD!!!!!!!!!!!
 	SP_QUEST       =   25,  // Quest			        [16]  LuaBaseEntity->completeQuest
 	SP_MISSION     =  250,  // Mission			        [17]  LuaBaseEntity->completeMission
-    SP_VALOR       =  100,  // Valor Points             [18]  regimes.lua->checkRegime
+    SP_VALOR       =   50,  // Valor Points             [18]  regimes.lua->checkRegime
     SP_PVP         = 1000,  // PVP Points               [19]  CCharEntity::Die() 
 	SP_JOBTO75     = 2500,  // Job to 75			    [20]  charutils::AddExperiencePoints->LevelUp
 	SP_CRAFTTO100  = 2500,  // Craft to 100			    [21]  SynthUtils->doSynthSkillUp

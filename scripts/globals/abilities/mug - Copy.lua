@@ -9,14 +9,13 @@ require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 
-function onAbilityCheck(player,target,ability)
-    return 0,0
+function onAbilityCheck(player, target, ability)
+    return 0, 0
 end
 
-function onUseAbility(player,target,ability,action)
+function onUseAbility(player, target, ability, action)
     local thfLevel
     local gil = 0
-    local fatpurse = 0
 
     if (player:getMainJob() == tpz.job.THF) then
         thfLevel = player:getMainLvl()
@@ -28,8 +27,8 @@ function onUseAbility(player,target,ability,action)
 
     if (target:isMob() and math.random(100) < mugChance and target:getMobMod(tpz.mobMod.MUG_GIL) > 0) then
         local purse = target:getMobMod(tpz.mobMod.MUG_GIL)
-        fatpurse = target:getGil()
-        gil = fatpurse / (8 + math.random(0,8))
+        local fatpurse = target:getGil()
+        gil = fatpurse / (8 + math.random(0, 8))
         if (gil == 0) then
             gil = fatpurse / 2
         end
@@ -48,27 +47,10 @@ function onUseAbility(player,target,ability,action)
             target:setMobMod(tpz.mobMod.MUG_GIL, target:getMobMod(tpz.mobMod.MUG_GIL) - gil)
             ability:setMsg(tpz.msg.basic.MUG_SUCCESS)
         end
-
-    --PvP Mug Attempt
-    elseif (target:isPC() and math.random(100) < (mugChance - 25)) then
-	fatpurse = target:getGil()
-	gil = fatpurse * math.random(10) / 100
-	--player:PrintToPlayer( fatpurse )
-	--player:PrintToPlayer( gil )
-	player:addGil(gil)
-	target:delGil(gil)
-	ability:setMsg(tpz.msg.basic.MUG_SUCCESS)
-
-    elseif (target:isPC()) then
-	player:setHP(1)
-	ability:setMsg(tpz.msg.basic.MUG_FAIL)
-        action:animation(target:getID(), 184)
-
     else
         ability:setMsg(tpz.msg.basic.MUG_FAIL)
         action:animation(target:getID(), 184)
     end
-	--player:PrintToPlayer( mugChance )
+
     return gil
-	
 end

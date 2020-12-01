@@ -3800,6 +3800,13 @@ namespace battleutils
         //IT                30 seconds  guess
         uint32 CharmTime = 0;
 
+        //Bind PC with Charm
+        if (PCharmer->objtype == TYPE_PC && PVictim->objtype == TYPE_PC)
+        {
+            PVictim->StatusEffectContainer->AddStatusEffect(new CStatusEffect(EFFECT_BIND, EFFECT_BIND, 1, 0, tpzrand::GetRandomNumber(1, 5)));
+            return;
+        }
+
         // player charming mob
         CMobEntity* PMob = dynamic_cast<CMobEntity*>(PVictim);
         if (PMob && PCharmer->objtype == TYPE_PC)
@@ -3968,10 +3975,9 @@ namespace battleutils
         if (PTargetAsMob)
         {
             // Cannot charm pets, or other non-charmable mobs
-            if (!PTargetAsMob->getMobMod(MOBMOD_CHARMABLE) || PTargetAsMob->PMaster)
+            if (!PTargetAsMob->getMobMod(MOBMOD_CHARMABLE) || PTargetAsMob->PMaster || PTarget->objtype == TYPE_PC)
                 return 0.f;
         }
-
 
         uint8 charmerLvl = PCharmer->GetMLevel();
         uint8 targetLvl = PTarget->GetMLevel();

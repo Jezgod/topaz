@@ -28,7 +28,7 @@ function onUseAbility(user,target,ability)
 	if (target:hasPet() == false) then
 	    return 0
 	else
-	    pet:wait(15000)
+	    pet:wait(10000)
         end
     else
     end

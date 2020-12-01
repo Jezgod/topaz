@@ -1,24 +1,24 @@
 ---------------------------------------------------------------------------------------------------
--- func: pvpflag
--- desc: enables PVP flag in an eligible zone
+-- func: onloot
+-- desc: sets loot flag
 ---------------------------------------------------------------------------------------------------
 
 cmdprops =
 {
     permission = 0,
     parameters = ""
-}
+};
 
 local zone_list =
 {
-	26,  -- Tavnazian Safehold 
-        32,  -- Sealion's Den
-	48,  -- Al Zahbi
-	50,  -- Aht Urhgan Whitegate
-        53,  -- Nashmau
-        80,  -- Southern San d'Oria [S]
-        87,  -- Bastok Markets [S]
-        94,  -- Windurst Waters [S]
+	 26, -- Tavnazian Safehold
+         32, -- Sealion's Den
+	 48, -- Al Zahbi
+	 50, -- Aht Urhgan Whitegate
+         53, -- Nashmau
+         80, -- Southern San d'Oria [S]
+         87, -- Bastok Markets [S]
+         94, -- Windurst Waters [S]
 	230, -- Southern San d'Oria
     	231, -- Northern San d'Oria
     	232, -- Port San d'Oria
@@ -53,8 +53,11 @@ local function validZone(zone_list, id)
 end
 
 function onTrigger(player)
+	local startTime = os.time()
+	--player:PrintToPlayer(startTime)
+	local endTime = startTime + 10
+	--player:PrintToPlayer(endTime)
 	zone = player:getZoneID()
-        pvp = player:getCharVar("pvp_flag")
 	local nationByNum = {
 		[0] = "None",
         	[1] = "Player",
@@ -64,32 +67,18 @@ function onTrigger(player)
     	}
 	
         -- set player status
-	nation = player:getNation()
-    	allegiance = 0
-	--player:setCharVar("lootvar", 0)
-	
+    	allegiance = 1
+	player:setCharVar("lootvar", 1)
+
 	if validZone(zone_list, zone) == true then
-		player:PrintToPlayer( string.format("This function is not valid in the current zone"), 14)
-        elseif (pvp == 1) then
-                player:PrintToPlayer( string.format("PVP already enabled"), 29 )
-                return 1
-    	else
-		--player:getCharVar("lootvar") == 0 then
-		allegiance = nation + 2
+		player:PrintToPlayer( string.format("This function is not valid here."))
+		goto done
+
+    	elseif player:getCharVar("lootvar") == 1 then
+		player:setAnimation(7)
      		player:setAllegiance( allegiance )
-		--player:lockstyleOn()
-		player:PrintToPlayer( string.format("*** PVP Flag Enabled ***"),29 )
-		player:PrintToPlayer( string.format("Allegiance set to %s", nationByNum[allegiance]), 29 )
-		player:setAnimation(33)
-		player:timer(5000, function(player)
-		player:setAnimation(0)
-		end)
+		player:PrintToPlayer( string.format("Allegiance set to %s", nationByNum[allegiance]) )
+   	end;
+::done::	
+end;
 
-		if (player:hasPet()) then
-		    player:despawnPet()
-		else
-		end
-
-		player:setCharVar("pvp_flag", 1)
-   	end	
-end

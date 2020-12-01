@@ -16,9 +16,9 @@ function onTrade(player,npc,trade)
 
 	if (abby1) then
 	    player:PrintToPlayer( string.format("You already possess the %s this zone provides.", name), 13 )
-	elseif (pLevel ~= 75) then
+	elseif (pLevel < 75) then
 	    player:PrintToPlayer( string.format("You are not yet strong enough.  Come back once you have achieved Level 75."), 13 )
-	elseif (pLevel == 75 and trade:hasItemQty(item, count)) and
+	elseif (pLevel >= 75 and trade:hasItemQty(item, count)) and
 	    trade:getItemCount() == count then
 	    player:tradeComplete();
     	    player:addKeyItem(ki1);
@@ -29,7 +29,7 @@ function onTrade(player,npc,trade)
 end
 
 function onTrigger(player,npc)
-	player:PrintToPlayer( string.format("Trade 100 Beastmen's Seals, at Level 75, to receive your first Lunar Abyssite."), 13 )
+	player:PrintToPlayer( string.format("Trade 100 Beastmen's Seals, at Level 75 or greater, to receive your first Lunar Abyssite."), 13 )
     
 end
 

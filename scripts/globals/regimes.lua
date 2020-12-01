@@ -1108,7 +1108,7 @@ tpz.regime.bookOnEventFinish = function(player, option, regimeType)
             player:showText(player, msgOffset + 2) -- Training regime canceled.
 
         elseif act == "REPATRIATION" then
-            player:addStatusEffectEx(tpz.effect.TELEPORT, 0, tpz.teleport.id.HOME_NATION, 0, 1)
+            player:addStatusEffectEx(tpz.effect.TELEPORT, 0, tpz.teleport.id.HOME_NATION, 0, 30)
 
         elseif act == "CIRCUMSPECTION" then
             player:delStatusEffectSilent(tpz.effect.SNEAK)
@@ -1117,7 +1117,7 @@ tpz.regime.bookOnEventFinish = function(player, option, regimeType)
             player:addStatusEffect(tpz.effect.INVISIBLE, 0, 10, 900 * SNEAK_INVIS_DURATION_MULTIPLIER)
 
         elseif act == "HOMING_INSTINCT" then
-            player:addStatusEffectEx(tpz.effect.TELEPORT, 0, tpz.teleport.id.WARP, 0, 1)
+            player:addStatusEffectEx(tpz.effect.TELEPORT, 0, tpz.teleport.id.WARP, 0, 30)
 
         elseif act == "RERAISE" then
             player:delStatusEffectSilent(tpz.effect.RERAISE)
@@ -1353,7 +1353,7 @@ tpz.regime.checkRegime = function(player, mob, regimeId, index, regimeType)
 	    if (govClears > 24) then
 		player:addStatusEffect(tpz.effect.PROWESS, 1, 0, 0)
 	    else
-		player:addStatusEffect(dsp.effect.PROWESS, govClears + 1, 0, 0)
+		player:addStatusEffect(tpz.effect.PROWESS, govClears + 1, 0, 0)
 	    end
         else
             -- keep track of number of clears
@@ -1374,7 +1374,8 @@ tpz.regime.checkRegime = function(player, mob, regimeId, index, regimeType)
         local tabs = math.floor(reward / 10) * TABS_RATE
         tabs = utils.clamp(tabs, 0, 50000 - player:getCurrency("valor_point")) -- Retail caps players at 50000 tabs
         player:addCurrency("valor_point", tabs)
-	player:AddRetribStat(Stats.Valor, Points.Valor)
+        local avatabs = math.floor(tabs / 10)
+	player:AddRetribStat(Stats.Valor, Points.Valor + avatabs)
         player:messageBasic(tpz.msg.basic.FOV_OBTAINS_TABS, tabs, player:getCurrency("valor_point"))
 
         player:setCharVar("[regime]lastReward", vanadielEpoch)

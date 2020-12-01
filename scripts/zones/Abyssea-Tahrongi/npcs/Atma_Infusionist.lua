@@ -24,9 +24,9 @@ function onTrade(player,npc,trade)
 	    player:PrintToPlayer( string.format("You require the second Lunar Abbysite from Abyssea - Konschtat."), 13 )
         elseif not (abby1) then
 	    player:PrintToPlayer( string.format("You require the first Lunar Abbysite from Abyssea - La Theine."), 13 )
-	elseif (pLevel ~= 75) then
+	elseif (pLevel < 75) then
 	    player:PrintToPlayer( string.format("You are not yet strong enough.  Come back once you have achieved Level 75."), 13 )
-	elseif (pLevel == 75 and trade:hasItemQty(item, count) and 
+	elseif (pLevel >= 75 and trade:hasItemQty(item, count) and 
 		abby1 and abby2 and
 	    	trade:getItemCount() == count) then
 	    	player:tradeComplete();

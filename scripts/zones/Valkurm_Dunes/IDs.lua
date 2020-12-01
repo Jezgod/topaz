@@ -61,6 +61,7 @@ zones[tpz.zone.VALKURM_DUNES] =
         MARCHELUTE         = 17199566,
         DOMAN              = 17199567,
         ONRYO              = 17199568,
+        VALKURM_EMPEROR	   = 17199438,
     },
     npc =
     {

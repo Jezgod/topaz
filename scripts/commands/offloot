@@ -1,13 +1,13 @@
 ---------------------------------------------------------------------------------------------------
--- func: pvpflag
--- desc: enables PVP flag in an eligible zone
+-- func: offloot
+-- desc: sets loot flag
 ---------------------------------------------------------------------------------------------------
 
 cmdprops =
 {
     permission = 0,
     parameters = ""
-}
+};
 
 local zone_list =
 {
@@ -54,7 +54,6 @@ end
 
 function onTrigger(player)
 	zone = player:getZoneID()
-        pvp = player:getCharVar("pvp_flag")
 	local nationByNum = {
 		[0] = "None",
         	[1] = "Player",
@@ -63,33 +62,22 @@ function onTrigger(player)
         	[4] = "Windurst"
     	}
 	
-        -- set player status
+    -- set player status
 	nation = player:getNation()
     	allegiance = 0
-	--player:setCharVar("lootvar", 0)
+	player:setCharVar("lootvar", 0)
 	
 	if validZone(zone_list, zone) == true then
-		player:PrintToPlayer( string.format("This function is not valid in the current zone"), 14)
-        elseif (pvp == 1) then
-                player:PrintToPlayer( string.format("PVP already enabled"), 29 )
-                return 1
-    	else
-		--player:getCharVar("lootvar") == 0 then
+		player:PrintToPlayer( string.format("This function is not valid here."))
+		goto done	
+
+    	elseif player:getCharVar("lootvar") == 0 then
 		allegiance = nation + 2
+		player:setAnimation(0)
      		player:setAllegiance( allegiance )
 		--player:lockstyleOn()
-		player:PrintToPlayer( string.format("*** PVP Flag Enabled ***"),29 )
-		player:PrintToPlayer( string.format("Allegiance set to %s", nationByNum[allegiance]), 29 )
-		player:setAnimation(33)
-		player:timer(5000, function(player)
-		player:setAnimation(0)
-		end)
+		player:PrintToPlayer( string.format("Allegiance set to %s", nationByNum[allegiance]) )
+   	end;
+::done::	
+end;
 
-		if (player:hasPet()) then
-		    player:despawnPet()
-		else
-		end
-
-		player:setCharVar("pvp_flag", 1)
-   	end	
-end

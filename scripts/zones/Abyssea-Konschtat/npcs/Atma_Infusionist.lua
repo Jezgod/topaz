@@ -20,9 +20,9 @@ function onTrade(player,npc,trade)
 	    player:PrintToPlayer( string.format("You already possess the %s this zone provides.", name), 13 )
         elseif not (abby1) then
 	    player:PrintToPlayer( string.format("You require the first Lunar Abbysite from Abyssea - La Theine.", name), 13 )
-	elseif (pLevel ~= 75) then
+	elseif (pLevel < 75) then
 	    player:PrintToPlayer( string.format("You are not yet strong enough.  Come back once you have achieved Level 75."), 13 )
-	elseif (pLevel == 75 and trade:hasItemQty(item, count)) and abby1 and
+	elseif (pLevel >= 75 and trade:hasItemQty(item, count)) and abby1 and
 	    trade:getItemCount() == count then
 	    player:tradeComplete();
     	    player:addKeyItem(ki2);
@@ -33,7 +33,7 @@ function onTrade(player,npc,trade)
 end
 
 function onTrigger(player,npc)
-	player:PrintToPlayer( string.format("Trade 100 Kindred Seals, at Level 75, to receive your second Lunar Abyssite."), 13 )
+	player:PrintToPlayer( string.format("Trade 100 Kindred Seals, at Level 75 or greater, to receive your second Lunar Abyssite."), 13 )
     
 end
 

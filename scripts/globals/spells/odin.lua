@@ -10,16 +10,21 @@ require("scripts/globals/status")
 -----------------------------------------
 
 function onMagicCastingCheck(caster, target, spell)
+    local weapon = caster:getEquipID(0)
+
     if (not caster:canUseMisc(tpz.zoneMisc.PET)) then
         return tpz.msg.basic.CANT_BE_USED_IN_AREA
     elseif (not caster:hasStatusEffect(tpz.effect.ASTRAL_FLOW)) then
         return 581
     elseif (caster:hasPet()) then
         return tpz.msg.basic.ALREADY_HAS_A_PET
+    elseif (weapon == 0) then
+	return tpz.msg.basic.CANNOT_PERFORM
     elseif (caster:getObjType() == tpz.objType.PC) then
         return avatarMiniFightCheck(caster)
+    else
+	return 0
     end
-    return 0
 end
 
 function onSpellCast(caster, target, spell)

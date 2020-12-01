@@ -12,6 +12,7 @@ local ID = require("scripts/zones/RuLude_Gardens/IDs")
 
 function onTrade(player, npc, trade)
     local meritCount = player:getMeritCount()
+
     if (trade:hasItemQty(1127, 5) == true and trade:getGil() == 0 and trade:getItemCount() == 5 and meritCount > 2) then
         if (player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.NEW_WORLDS_AWAIT) == QUEST_ACCEPTED) then
             player:startEvent(10135)
@@ -28,6 +29,10 @@ function onTrade(player, npc, trade)
         if (player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.DORMANT_POWERS_DISLODGED) == QUEST_ACCEPTED) then
             player:startEvent(10138)
         end
+    elseif (trade:hasItemQty(2956, 1) == true and trade:getGil() == 0 and trade:getItemCount() == 1 and player:getMainLvl() >= 96 and meritCount >= 15) then
+	player:setMerits(meritCount - 15)
+        player:addKeyItem(tpz.ki.HEART_OF_THE_BUSHIN)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.HEART_OF_THE_BUSHIN)
     end
 end
 
