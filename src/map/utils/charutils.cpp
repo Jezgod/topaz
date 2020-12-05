@@ -4627,11 +4627,11 @@ namespace charutils
         bool onLimitMode = false;
 
         // Incase player de-levels to 74 on the field
-        if (PChar->MeritMode == true && PChar->jobs.job[PChar->GetMJob()] > 98 && expFromRaise == false)
+        if (PChar->MeritMode == true && PChar->jobs.job[PChar->GetMJob()] > 74 && expFromRaise == false)
             onLimitMode = true;
 
         //we check if the player is level capped and max exp..
-        if (PChar->jobs.job[PChar->GetMJob()] > 98 && PChar->jobs.job[PChar->GetMJob()] >= PChar->jobs.genkai && PChar->jobs.exp[PChar->GetMJob()] == GetExpNEXTLevel(PChar->jobs.job[PChar->GetMJob()]) - 1)
+        if (PChar->jobs.job[PChar->GetMJob()] > 74 && PChar->jobs.job[PChar->GetMJob()] >= PChar->jobs.genkai && PChar->jobs.exp[PChar->GetMJob()] == GetExpNEXTLevel(PChar->jobs.job[PChar->GetMJob()]) - 1)
             onLimitMode = true;
 
         // exp added from raise shouldn't display a message. Don't need a message for zero exp either
@@ -4764,7 +4764,7 @@ namespace charutils
                 PChar->jobs.job[PChar->GetMJob()] += 1;
 
                 // RETRIB - Add Job to 75 Points
-                if (PChar->jobs.job[PChar->GetMJob()] == 99)
+                if (PChar->jobs.job[PChar->GetMJob()] == 75)
                 {
                     if (!PChar->RPC->HasJobTo75(PChar->GetMJob()))
                     {
@@ -4833,7 +4833,7 @@ namespace charutils
         {
             if ((currentExpSub + (exp * 0.5)) >= GetExpNEXTLevel(PChar->jobs.job[PChar->GetSJob()]))
             {
-                if (PChar->jobs.job[PChar->GetSJob()] >= PChar->jobs.genkai || PChar->jobs.job[PChar->GetSJob()] >=  49 )
+                if (PChar->jobs.job[PChar->GetSJob()] >= PChar->jobs.genkai || PChar->jobs.job[PChar->GetSJob()] >=  37 )
                 {
                     PChar->jobs.exp[PChar->GetSJob()] = GetExpNEXTLevel(PChar->jobs.job[PChar->GetSJob()]) - 1;
                 }

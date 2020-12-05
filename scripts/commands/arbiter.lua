@@ -105,8 +105,8 @@ function onTrigger(player, target)
     elseif (targ:isDead()) then
         player:PrintToPlayer( string.format("Target cannot be dead"), 14)
         return 1
-    elseif (pLevel < 90) then
-        player:PrintToPlayer( string.format("Level 90 is minimum level to arbiter"), 14)
+    elseif (pLevel < 50) then
+        player:PrintToPlayer( string.format("Level 50 is minimum level to arbiter"), 14)
         return 1
     elseif (targ:getMainLvl() < pLevel) then
         player:PrintToPlayer( string.format("Only an equal or higher level target can be arbitered"), 14)

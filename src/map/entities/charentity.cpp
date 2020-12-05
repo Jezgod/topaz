@@ -1704,11 +1704,7 @@ void CCharEntity::Die()
         }
 
         uint8 shift = 0;
-        if ((LMlvl - TMlvl) > 80)
-        {
-            shift = 10;
-        }
-        else if ((LMlvl - TMlvl) > 70)
+        if ((LMlvl - TMlvl) > 70)
         {
             shift = 9;
         }
@@ -1751,7 +1747,7 @@ void CCharEntity::Die()
 
         CCharEntity* PCharL = dynamic_cast<CCharEntity*>(PLastAttacker);
         uint16 infamy = 0;
-        infamy = (uint16)((Retrib::StatPoints::SP_PVP >> shift) * (TMlvl / 99.0f));
+        infamy = (uint16)((Retrib::StatPoints::SP_PVP >> shift) * (TMlvl / 75.0f));
         PCharL->RPC->AddStat(Retrib::Stat::STAT_PVP, infamy);
         charutils::AddPoints(PCharL, "infamy", infamy);
 

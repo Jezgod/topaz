@@ -1783,16 +1783,17 @@ void CBattleEntity::OnEngage(CAttackState& state)
     animation = ANIMATION_ATTACK;
     updatemask |= UPDATE_HP;
     auto PTarget = static_cast<CBattleEntity*>(state.GetTarget());
-    uint8 level = PTarget->GetMLevel();
-
+    //uint8 level = PTarget->GetMLevel();
+    
     if (objtype == TYPE_PC || objtype == TYPE_PET)
     {
-        if (PTarget->allegiance != 0 && level > 89)
+        if (PTarget->allegiance != 0) //&& level == 75)
         {
-            PTarget->StatusEffectContainer->AddStatusEffect(new CStatusEffect(EFFECT_MAX_HP_BOOST, EFFECT_MAX_HP_BOOST, 500, 0, 120));
-            PTarget->StatusEffectContainer->AddStatusEffect(new CStatusEffect(EFFECT_DEFENSE_BOOST, EFFECT_DEFENSE_BOOST, 250, 0, 120));
+            //PTarget->StatusEffectContainer->AddStatusEffect(new CStatusEffect(EFFECT_MAX_HP_BOOST, EFFECT_MAX_HP_BOOST, 500, 0, 120));
+            PTarget->StatusEffectContainer->AddStatusEffect(new CStatusEffect(EFFECT_DEFENSE_BOOST, EFFECT_DEFENSE_BOOST, 100, 0, 120));
+            PTarget->StatusEffectContainer->AddStatusEffect(new CStatusEffect(EFFECT_MAGIC_DEF_BOOST, EFFECT_MAGIC_DEF_BOOST, 150, 0, 120));
             //PTarget->StatusEffectContainer->AddStatusEffect(new CStatusEffect(EFFECT_MAGIC_DEF_BOOST, EFFECT_MAGIC_DEF_BOOST, 50, 0, 120));
-            PTarget->addHP(9999);
+            //PTarget->addHP(9999);
         }
     }
     else

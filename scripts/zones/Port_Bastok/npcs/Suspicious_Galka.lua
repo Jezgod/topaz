@@ -1,26 +1,29 @@
 -----------------------------------
---  Area: Northern San d'Oria
---  NPC: Suspicious Elvaan
+--  Area: Port Bastok
+--  NPC: Suspicious Galka
 --  Working 100%
 -----------------------------------
-local ID = require("scripts/zones/Northern_San_dOria/IDs")
+local ID = require("scripts/zones/Port_Bastok/IDs")
 require("scripts/globals/settings");
 -----------------------------------
 
 local job_map =
 {
-	[tpz.job.MNK]	=	{relic = {final = 18264, name = "SPHARAI",       base = 18260, ore1 = 1261, ore2 = 1255, qty1 = 12, qty2 = 12}},
-        [tpz.job.PUP]	=	{relic = {final = 18264, name = "SPHARAI",       base = 18260, ore1 = 1261, ore2 = 1255, qty1 = 12, qty2 = 12}},
-	[tpz.job.RDM]	=	{relic = {final = 18276, name = "EXCALIBUR",     base = 18272, ore1 = 1261, ore2 = 1255, qty1 = 12, qty2 = 12}},
-	[tpz.job.PLD]	=	{relic = {final = 18276, name = "EXCALIBUR",     base = 18272, ore1 = 1261, ore2 = 1255, qty1 = 12, qty2 = 12}},
-	[tpz.job.BLU]	=	{relic = {final = 18276, name = "EXCALIBUR",     base = 18272, ore1 = 1261, ore2 = 1255, qty1 = 12, qty2 = 12}},
-	[tpz.job.WAR]	=	{relic = {final = 18294, name = "BRAVURA",       base = 18290, ore1 = 1261, ore2 = 1255, qty1 = 12, qty2 = 12}},
-        [tpz.job.DRK]	=	{relic = {final = 18306, name = "APOCALYPSE",    base = 18302, ore1 = 1261, ore2 = 1255, qty1 = 12, qty2 = 12}},
-        [tpz.job.NIN]	=	{relic = {final = 18312, name = "KIKOKU",        base = 18308, ore1 = 1259, ore2 = 1257, qty1 = 12, qty2 = 12}},
-	[tpz.job.WHM]	=	{relic = {final = 18324, name = "MJOLLNIR",      base = 18320, ore1 = 1259, ore2 = 1257, qty1 = 12, qty2 = 12}},
-	[tpz.job.RNG]	=	{relic = {final = 18348, name = "YOICHINOYUMI",  base = 18344, ore1 = 1260, ore2 = 1256, qty1 = 12, qty2 = 12}},
-	[tpz.job.SAM]	=	{relic = {final = 18348, name = "YOICHINOYUMI",  base = 18344, ore1 = 1260, ore2 = 1256, qty1 = 12, qty2 = 12}},
-	[tpz.job.BRD]	=	{relic = {final = 18342, name = "GJALLAHORN",    base = 18338, ore1 = 1262, ore2 = 1261, qty1 = 12, qty2 = 12}}
+	[tpz.job.RDM]	=	{relic = {final = 18270, name = "MANDAU",        base = 18266, ore1 = 1262, ore2 = 1258, qty1 = 12, qty2 = 12}},
+	[tpz.job.THF]	=	{relic = {final = 18270, name = "MANDAU",        base = 18266, ore1 = 1262, ore2 = 1258, qty1 = 12, qty2 = 12}},
+	[tpz.job.BRD]	=	{relic = {final = 18270, name = "MANDAU",        base = 18266, ore1 = 1262, ore2 = 1258, qty1 = 12, qty2 = 12}},
+        [tpz.job.DNC]	=	{relic = {final = 18270, name = "MANDAU",        base = 18266, ore1 = 1262, ore2 = 1258, qty1 = 12, qty2 = 12}},
+	[tpz.job.WAR]	=	{relic = {final = 18282, name = "RAGNAROK",      base = 18278, ore1 = 1261, ore2 = 1255, qty1 = 12, qty2 = 12}},
+        [tpz.job.PLD]	=	{relic = {final = 18282, name = "RAGNAROK",      base = 18278, ore1 = 1261, ore2 = 1255, qty1 = 12, qty2 = 12}},
+        [tpz.job.DRK]	=	{relic = {final = 18282, name = "RAGNAROK",      base = 18278, ore1 = 1261, ore2 = 1255, qty1 = 12, qty2 = 12}},
+	[tpz.job.BST]	=	{relic = {final = 18288, name = "GUTTLER",       base = 18284, ore1 = 1262, ore2 = 1258, qty1 = 12, qty2 = 12}},
+	[tpz.job.DRG]	=	{relic = {final = 18300, name = "GUNGNIR",       base = 18296, ore1 = 1260, ore2 = 1256, qty1 = 12, qty2 = 12}},
+	[tpz.job.SAM]	=	{relic = {final = 18318, name = "AMANOMURAKUMO", base = 18314, ore1 = 1259, ore2 = 1257, qty1 = 12, qty2 = 12}},
+	[tpz.job.BLM]	=	{relic = {final = 18330, name = "CLAUSTRUM",     base = 18326, ore1 = 1260, ore2 = 1256, qty1 = 12, qty2 = 12}},
+	[tpz.job.SMN]	=	{relic = {final = 18330, name = "CLAUSTRUM",     base = 18326, ore1 = 1260, ore2 = 1256, qty1 = 12, qty2 = 12}},
+        [tpz.job.SCH]	=	{relic = {final = 18330, name = "CLAUSTRUM",     base = 18326, ore1 = 1260, ore2 = 1256, qty1 = 12, qty2 = 12}},
+	[tpz.job.RNG]	=	{relic = {final = 18336, name = "ANNIHILATOR",   base = 18332, ore1 = 1259, ore2 = 1257, qty1 = 12, qty2 = 12}},
+	[tpz.job.PLD]	=	{relic = {final = 15070, name = "AEGIS",         base = 15066, ore1 = 1262, ore2 = 1261, qty1 = 12, qty2 = 12}}
 }
 
 function onTrade(player,npc,trade)

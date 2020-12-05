@@ -192,6 +192,7 @@ tpz.homepoint.onTrigger = function(player, csid, index)
     if not player:hasTeleport(travelType, hpBit, hpSet) then
         player:addTeleport(travelType, hpBit, hpSet)
         params = bit.bor(params, 0x10000) -- OR in New HP Bit Flag
+        player:addExp(500)
     end
 
     if player:hasKeyItem(tpz.keyItem.RHAPSODY_IN_WHITE) then

@@ -233,7 +233,7 @@ std::list<SearchEntity*> CDataLoader::GetPlayersList(search_req sr, int* count)
             PPlayer->rank = (uint8)Sql_GetIntData(SqlHandle, 6 + PPlayer->nation);
 
             LevelCheck = PPlayer->mlvl;
-            if (LevelCheck < 75)
+            if (LevelCheck < 65)
             {
                 PPlayer->mjob = 0;
                 PPlayer->sjob = 0;
@@ -241,7 +241,7 @@ std::list<SearchEntity*> CDataLoader::GetPlayersList(search_req sr, int* count)
                 PPlayer->slvl = 0;
             }
 
-            if (LevelCheck > 89)
+            if (LevelCheck > 69)
             {
                 PPlayer->zone = (uint16)Sql_GetIntData(SqlHandle, 3);
             }

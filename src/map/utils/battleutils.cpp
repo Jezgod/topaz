@@ -1787,6 +1787,19 @@ namespace battleutils
         int32 baseDamage = damage;
         ATTACKTYPE attackType = ATTACK_PHYSICAL;
         DAMAGETYPE damageType = DAMAGE_NONE;
+
+        if (PAttacker->objtype == TYPE_PC || PAttacker->objtype == TYPE_PET)
+        {
+            if (PDefender->allegiance != 0 && PDefender->allegiance != PAttacker->allegiance && PAttacker->allegiance != 1) //&& level == 75)
+            {
+                //PTarget->StatusEffectContainer->AddStatusEffect(new CStatusEffect(EFFECT_MAX_HP_BOOST, EFFECT_MAX_HP_BOOST, 500, 0, 120));
+                PDefender->StatusEffectContainer->AddStatusEffect(new CStatusEffect(EFFECT_DEFENSE_BOOST, EFFECT_DEFENSE_BOOST, 100, 0, 120));
+                PDefender->StatusEffectContainer->AddStatusEffect(new CStatusEffect(EFFECT_MAGIC_DEF_BOOST, EFFECT_MAGIC_DEF_BOOST, 150, 0, 120));
+                //PTarget->StatusEffectContainer->AddStatusEffect(new CStatusEffect(EFFECT_MAGIC_DEF_BOOST, EFFECT_MAGIC_DEF_BOOST, 50, 0, 120));
+                //PTarget->addHP(9999);
+            }
+        }
+
         if (PAttacker->StatusEffectContainer->HasStatusEffect(EFFECT_FORMLESS_STRIKES) && !isCounter)
         {
             attackType = ATTACK_SPECIAL;
@@ -2157,6 +2170,17 @@ namespace battleutils
 
     int32 TakeSpellDamage(CBattleEntity* PDefender, CCharEntity* PAttacker, CSpell* PSpell, int32 damage, ATTACKTYPE attackType, DAMAGETYPE damageType)
     {
+        if (PAttacker->objtype == TYPE_PC || PAttacker->objtype == TYPE_PET)
+        {
+            if (PDefender->allegiance != 0 && PDefender->allegiance != PAttacker->allegiance && PAttacker->allegiance != 1) //&& level == 75)
+            {
+                //PTarget->StatusEffectContainer->AddStatusEffect(new CStatusEffect(EFFECT_MAX_HP_BOOST, EFFECT_MAX_HP_BOOST, 500, 0, 120));
+                PDefender->StatusEffectContainer->AddStatusEffect(new CStatusEffect(EFFECT_DEFENSE_BOOST, EFFECT_DEFENSE_BOOST, 100, 0, 120));
+                PDefender->StatusEffectContainer->AddStatusEffect(new CStatusEffect(EFFECT_MAGIC_DEF_BOOST, EFFECT_MAGIC_DEF_BOOST, 150, 0, 120));
+                //PTarget->StatusEffectContainer->AddStatusEffect(new CStatusEffect(EFFECT_MAGIC_DEF_BOOST, EFFECT_MAGIC_DEF_BOOST, 50, 0, 120));
+                //PTarget->addHP(9999);
+            }
+        }
         PDefender->takeDamage(damage, PAttacker, attackType, damageType);
 
         // Remove effects from damage

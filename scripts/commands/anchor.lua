@@ -3,7 +3,8 @@
 -- desc: Used to warp to a predfined destination
 ---------------------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------
-require("scripts/globals/status");
+require("scripts/globals/status")
+require("scripts/globals/zone")
 -------------------------------------------------------------------------------
 
 cmdprops =
@@ -69,6 +70,12 @@ local function denyZone(zone_list_deny_set, id)
  	end
 end
 
+-- invert tpz.zone table
+    local zoneNameByNum={}
+    for k, v in pairs(tpz.zone) do
+        zoneNameByNum[v]=k
+    end
+
 function onTrigger(PC, Command, Sub)
 
     Command = Command or nil
@@ -94,7 +101,7 @@ function onTrigger(PC, Command, Sub)
 	local zone = PC:getZoneID()
 
 	if denyZone(zone_list_deny_set, zone) == true then
-		PC:PrintToPlayer( string.format("This function is not valid in the current zone"), 14 )
+		PC:PrintToPlayer( string.format("This function is not valid in the current zone."), 14 )
 	else
         	PC:setCharVar("anchor_x",pos.x)
 		PC:setCharVar("anchor_y",pos.y)
@@ -113,16 +120,16 @@ function onTrigger(PC, Command, Sub)
 	local pzone = PC:getZoneID()
 
 	if validZone(zone_list, pzone) == true then
-		PC:PrintToPlayer( string.format("Sending %s to zone %i.", PC:getName(), zone) )
+		PC:PrintToPlayer( string.format("Sending %s to %s zone.", PC:getName(), zoneNameByNum[zone]), 29)
         	PC:setAnimation(33)
  		PC:timer(10000, function(PC)
 			PC:setPos(x, y, z, rot, zone)
 			end)
 		
 	elseif (zone == 0) then
-		PC:PrintToPlayer( string.format("No anchor point set"), 14 )
+		PC:PrintToPlayer( string.format("No anchor point set."), 14 )
 	else
-		PC:PrintToPlayer( string.format("This function is not valid in the current zone"), 14 )
+		PC:PrintToPlayer( string.format("This function is not valid in the current zone."), 14 )
 	end
 
     elseif Command == "where" then
@@ -132,7 +139,7 @@ function onTrigger(PC, Command, Sub)
     	local rot = PC:getCharVar("anchor_rot")
     	local zone = PC:getCharVar("anchor_zone")
 
-	PC:PrintToPlayer( string.format("x: %i y:%i, z: %i, rot: %i, zone: %i", x, y, z, rot, zone), 29 )
+	PC:PrintToPlayer( string.format("x: %i y:%i, z: %i, rot: %i, zone: %s", x, y, z, rot, zoneNameByNum[zone]), 29 )
 
     elseif Command == "clear" then
 
