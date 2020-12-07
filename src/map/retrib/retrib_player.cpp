@@ -1,4 +1,4 @@
-/**************************************************************************
+﻿/**************************************************************************
  Retrib Player Class
 **************************************************************************/
 #include "../utils/charutils.h"
@@ -269,6 +269,18 @@ auto CRetribPlayer::AddStat(uint8 Stat, int16 Points) -> void
     Sql_Query(SqlHandle, Query, StatColumn[Stat], StatColumn[Stat], Points, this->ID);
     
     if (ServerEvent->SA->IsActive() && ServerEvent->SA->GetTask() == Stat)
+    {
+        ServerEvent->SA->AddPoints(this->ID, Points);
+    }
+}
+
+auto CRetribPlayer::AddStatPVP(uint8 Stat, int16 Points) -> void
+{
+    Stats[Stat]++;
+    const char* Query = "UPDATE retrib_pc_stats SET %s = %s + 1, Points = Points + %u WHERE ID = %u;";
+    Sql_Query(SqlHandle, Query, StatColumn[Stat], StatColumn[Stat], Points, this->ID);
+
+    if (ServerEvent->SA->IsActive())
     {
         ServerEvent->SA->AddPoints(this->ID, Points);
     }

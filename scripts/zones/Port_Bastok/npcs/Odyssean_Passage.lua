@@ -4,7 +4,7 @@
 -- Working 100%
 -----------------------------------
 local ID = require("scripts/zones/Port_Bastok/IDs")
-require("scripts/globals/settings");
+require("scripts/globals/settings")
 require("scripts/globals/npc_util")
 -----------------------------------
 
@@ -59,10 +59,10 @@ function onTrade(player,npc,trade)
 	local scyldbonus = 0
 
         if (trade:getItemCount() ~= 2 or trade:getGil() ~= 0) then
-		player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED);
+		player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED)
 
 	elseif (weaponMap == nil or testimonyMap == nil) then
- 		player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED);
+ 		player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED)
 	
 	elseif (trade:getItemCount() == 2 and trade:getGil() == 0 and pCP >= rCP) then		
 		aug1 = weaponMap.augment
@@ -73,6 +73,7 @@ function onTrade(player,npc,trade)
 		    scyldbonus = 0
 		else
 		    scyldbonus = math.floor(scyld / 100)
+                    printf("scyld: %u", scyldbonus)
 		end
 		
                 if (scyldbonus > 0) then
@@ -93,29 +94,29 @@ function onTrade(player,npc,trade)
 			aug2t = math.floor(math.abs(math.random() - math.random()) * (1 + testimonyMap.max - testimonyMap.min) + testimonyMap.min)
 		end
 
-		player:tradeComplete();
-    		player:addItem(weapon, 1, aug1, aug1t, aug2, aug2t);
-       		player:delCP(rCP);
+		player:tradeComplete()
+    		player:addItem(weapon, 1, aug1, aug1t, aug2, aug2t)
+       		player:delCP(rCP)
 		if (scyldbonus > 0) then
-			player:PrintToPlayer( string.format("%u Scyld used.", scyld), 29 )
-			player:delCurrency("scyld", scyld);
+			player:PrintToPlayer( string.format("%u Scyld used.", scyldbonus * 100), 29 )
+			player:delCurrency("scyld", scyldbonus * 100)
 		else
 		end
-    		player:messageSpecial(ID.text.ITEM_OBTAINED,weapon);
+    		player:messageSpecial(ID.text.ITEM_OBTAINED,weapon)
         else
-		player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED);
+		player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED)
 	end
 
 	printf("random1: %u", aug1t)
 	printf("random2: %u", aug2t)
-end;
+end
 
 function onTrigger(player,npc)
 	player:PrintToPlayer( string.format("Increase the Strength of Relic Weapons Here..."), 29 )
-end;
+end
 
 function onEventUpdate(player,csid,option)
-end;
+end
 
 function onEventFinish(player,csid,option)
-end;
+end

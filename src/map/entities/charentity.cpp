@@ -1748,7 +1748,7 @@ void CCharEntity::Die()
         CCharEntity* PCharL = dynamic_cast<CCharEntity*>(PLastAttacker);
         uint16 infamy = 0;
         infamy = (uint16)((Retrib::StatPoints::SP_PVP >> shift) * (TMlvl / 75.0f));
-        PCharL->RPC->AddStat(Retrib::Stat::STAT_PVP, infamy);
+        PCharL->RPC->AddStatPVP(Retrib::Stat::STAT_PVP, infamy);
         charutils::AddPoints(PCharL, "infamy", infamy);
 
         std::string M3 = "Infamy Obtained: " + std::to_string(infamy);

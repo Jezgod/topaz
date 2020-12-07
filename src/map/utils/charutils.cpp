@@ -4699,7 +4699,7 @@ namespace charutils
             if (PChar->StatusEffectContainer->HasStatusEffect(EFFECT_SANCTION) &&
                 (region >= 28 && region <= 32))
             {
-                charutils::AddPoints(PChar, "imperial_standing", (int32)(exp * 1.0f));
+                charutils::AddPoints(PChar, "imperial_standing", (int32)(exp * 0.25f));
                 PChar->pushPacket(new CConquestPacket(PChar));
             }
 
@@ -4707,7 +4707,7 @@ namespace charutils
             if (PChar->StatusEffectContainer->HasStatusEffect(EFFECT_SIGIL) &&
                 (region >= 33 && region <= 40))
             {
-                charutils::AddPoints(PChar, "allied_notes", (int32)(exp * 1.0f));
+                charutils::AddPoints(PChar, "allied_notes", (int32)(exp * 0.25f));
                 PChar->pushPacket(new CConquestPacket(PChar));
             }
 
@@ -4718,7 +4718,7 @@ namespace charutils
             {
                 uint16 TextID = luautils::GetTextIDVariable(Pzone, "CRUOR_OBTAINED");
                 uint32 Total = charutils::GetPoints(PChar, "cruor");
-                uint32 Cruor = (uint32)(exp * 1.0f); // Need to work out how to do cruor chains, until then no cruor will drop unless this line is customized for non retail play.
+                uint32 Cruor = (uint32)(exp * 0.25f); // Need to work out how to do cruor chains, until then no cruor will drop unless this line is customized for non retail play.
 
                 if (TextID == 0)
                 {
@@ -4736,7 +4736,7 @@ namespace charutils
             if (PChar->StatusEffectContainer->HasStatusEffect(EFFECT_IONIS) &&
                 (region >= 42 && region <= 45))
             {
-                charutils::AddPoints(PChar, "bayld", (int32)(exp * 1.0f));
+                charutils::AddPoints(PChar, "bayld", (int32)(exp * 0.5f));
                 PChar->pushPacket(new CConquestPacket(PChar));
             }
         }

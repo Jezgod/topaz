@@ -9,21 +9,21 @@ require("scripts/globals/settings");
 
 local job_map =
 {
-	[tpz.job.RDM]	=	{relic = {final = 18270, name = "MANDAU",        base = 18266, ore1 = 1262, ore2 = 1258, qty1 = 12, qty2 = 12}},
-	[tpz.job.THF]	=	{relic = {final = 18270, name = "MANDAU",        base = 18266, ore1 = 1262, ore2 = 1258, qty1 = 12, qty2 = 12}},
-	[tpz.job.BRD]	=	{relic = {final = 18270, name = "MANDAU",        base = 18266, ore1 = 1262, ore2 = 1258, qty1 = 12, qty2 = 12}},
-        [tpz.job.DNC]	=	{relic = {final = 18270, name = "MANDAU",        base = 18266, ore1 = 1262, ore2 = 1258, qty1 = 12, qty2 = 12}},
-	[tpz.job.WAR]	=	{relic = {final = 18282, name = "RAGNAROK",      base = 18278, ore1 = 1261, ore2 = 1255, qty1 = 12, qty2 = 12}},
-        [tpz.job.PLD]	=	{relic = {final = 18282, name = "RAGNAROK",      base = 18278, ore1 = 1261, ore2 = 1255, qty1 = 12, qty2 = 12}},
-        [tpz.job.DRK]	=	{relic = {final = 18282, name = "RAGNAROK",      base = 18278, ore1 = 1261, ore2 = 1255, qty1 = 12, qty2 = 12}},
-	[tpz.job.BST]	=	{relic = {final = 18288, name = "GUTTLER",       base = 18284, ore1 = 1262, ore2 = 1258, qty1 = 12, qty2 = 12}},
-	[tpz.job.DRG]	=	{relic = {final = 18300, name = "GUNGNIR",       base = 18296, ore1 = 1260, ore2 = 1256, qty1 = 12, qty2 = 12}},
-	[tpz.job.SAM]	=	{relic = {final = 18318, name = "AMANOMURAKUMO", base = 18314, ore1 = 1259, ore2 = 1257, qty1 = 12, qty2 = 12}},
-	[tpz.job.BLM]	=	{relic = {final = 18330, name = "CLAUSTRUM",     base = 18326, ore1 = 1260, ore2 = 1256, qty1 = 12, qty2 = 12}},
-	[tpz.job.SMN]	=	{relic = {final = 18330, name = "CLAUSTRUM",     base = 18326, ore1 = 1260, ore2 = 1256, qty1 = 12, qty2 = 12}},
-        [tpz.job.SCH]	=	{relic = {final = 18330, name = "CLAUSTRUM",     base = 18326, ore1 = 1260, ore2 = 1256, qty1 = 12, qty2 = 12}},
-	[tpz.job.RNG]	=	{relic = {final = 18336, name = "ANNIHILATOR",   base = 18332, ore1 = 1259, ore2 = 1257, qty1 = 12, qty2 = 12}},
-	[tpz.job.PLD]	=	{relic = {final = 15070, name = "AEGIS",         base = 15066, ore1 = 1262, ore2 = 1261, qty1 = 12, qty2 = 12}}
+	[tpz.job.RDM]	=	{relic = {final = 18270, name = "MANDAU",        base = 18266, ore1 = 1262, ore2 = 1258, qty1 = 48, qty2 = 48}},
+	[tpz.job.THF]	=	{relic = {final = 18270, name = "MANDAU",        base = 18266, ore1 = 1262, ore2 = 1258, qty1 = 48, qty2 = 48}},
+	[tpz.job.BRD]	=	{relic = {final = 18270, name = "MANDAU",        base = 18266, ore1 = 1262, ore2 = 1258, qty1 = 48, qty2 = 48}},
+        [tpz.job.DNC]	=	{relic = {final = 18270, name = "MANDAU",        base = 18266, ore1 = 1262, ore2 = 1258, qty1 = 48, qty2 = 48}},
+	[tpz.job.WAR]	=	{relic = {final = 18282, name = "RAGNAROK",      base = 18278, ore1 = 1261, ore2 = 1255, qty1 = 48, qty2 = 48}},
+        [tpz.job.PLD]	=	{relic = {final = 18282, name = "RAGNAROK",      base = 18278, ore1 = 1261, ore2 = 1255, qty1 = 48, qty2 = 48}},
+        [tpz.job.DRK]	=	{relic = {final = 18282, name = "RAGNAROK",      base = 18278, ore1 = 1261, ore2 = 1255, qty1 = 48, qty2 = 48}},
+	[tpz.job.BST]	=	{relic = {final = 18288, name = "GUTTLER",       base = 18284, ore1 = 1262, ore2 = 1258, qty1 = 48, qty2 = 48}},
+	[tpz.job.DRG]	=	{relic = {final = 18300, name = "GUNGNIR",       base = 18296, ore1 = 1260, ore2 = 1256, qty1 = 48, qty2 = 48}},
+	[tpz.job.SAM]	=	{relic = {final = 18318, name = "AMANOMURAKUMO", base = 18314, ore1 = 1259, ore2 = 1257, qty1 = 48, qty2 = 48}},
+	[tpz.job.BLM]	=	{relic = {final = 18330, name = "CLAUSTRUM",     base = 18326, ore1 = 1260, ore2 = 1256, qty1 = 48, qty2 = 48}},
+	[tpz.job.SMN]	=	{relic = {final = 18330, name = "CLAUSTRUM",     base = 18326, ore1 = 1260, ore2 = 1256, qty1 = 48, qty2 = 48}},
+        [tpz.job.SCH]	=	{relic = {final = 18330, name = "CLAUSTRUM",     base = 18326, ore1 = 1260, ore2 = 1256, qty1 = 48, qty2 = 48}},
+	[tpz.job.RNG]	=	{relic = {final = 18336, name = "ANNIHILATOR",   base = 18332, ore1 = 1259, ore2 = 1257, qty1 = 48, qty2 = 48}},
+	[tpz.job.PLD]	=	{relic = {final = 15070, name = "AEGIS",         base = 15066, ore1 = 1262, ore2 = 1261, qty1 = 48, qty2 = 48}}
 }
 
 function onTrade(player,npc,trade)
@@ -37,7 +37,7 @@ function onTrade(player,npc,trade)
 	local item = 0
 	local qOne = pJobMap.relic.qty1
 	local qTwo = pJobMap.relic.qty2
-	local sum1 = (qOne + qTwo) / 2 + 1
+	local sum1 = (qOne + qTwo) / 12 + 1
 	local sum2 = (qOne + qTwo)
         local name = pJobMap.relic.name
 
@@ -59,8 +59,8 @@ function onTrade(player,npc,trade)
 
         if hasBase then
 	    if (pLevel == 75 and pCP >= rCP and
-	    	trade:hasItemQty(pJobMap.relic.ore1, qOne / 2) and
-                trade:hasItemQty(pJobMap.relic.ore2, qTwo / 2) and
+	    	trade:hasItemQty(pJobMap.relic.ore1, qOne / 12) and
+                trade:hasItemQty(pJobMap.relic.ore2, qTwo / 12) and
                 trade:getGil() == 0 and
                 trade:getItemCount() == sum1)  then
 
@@ -93,7 +93,7 @@ function onTrade(player,npc,trade)
 end
 
 function onTrigger(player,npc)
-	player:PrintToPlayer( string.format("Obtain stage five Relics here.  Trading the first stage Relic cuts the ore cost in half."), 29)
+	player:PrintToPlayer( string.format("Obtain stage five Relics here.  Trading the first stage Relic reduces the ore cost."), 29)
 end;
 
 function onEventUpdate(player,csid,option)

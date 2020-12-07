@@ -61,6 +61,7 @@ class CRetribPlayer
 
     auto GetStat                (uint8)         -> uint16;
     auto AddStat                (uint8, int16)  -> void;
+    auto AddStatPVP             (uint8, int16)  -> void;
     auto DelStat                (uint8, int16)  -> void;
     auto ObtainGear             (uint8, uint16) -> void;
     auto CalculatePoints        (void)          -> void;   

@@ -3,15 +3,15 @@
 -- desc: Adds the given atma to a player.
 ---------------------------------------------------------------------------------------------------
 
-require("scripts/globals/status");
-require("scripts/globals/atma");
-require("scripts/globals/keyitems");
+require("scripts/globals/status")
+require("scripts/globals/atma")
+require("scripts/globals/keyitems")
 
 cmdprops =
 {
     permission = 0,
     parameters = "i"
-};
+}
 
 local atma_map =
 {
@@ -119,73 +119,74 @@ local atma_map =
 
 local zone_list =
 {
-         --6,     --BEARCLAW PINNACLE
+        --6,     --BEARCLAW PINNACLE
         --8,     --BONEYARD GULLY
-        --10,     --THE SHROUDED MAW
-        --13,     --MINE SHAFT 2716
-	15, 	--Abyssea-Konschtat
-        --17,     --SPIRE OF HOLLA
-        --19,     --SPIRE OF DEM
-        --21,     --SPIRE OF MEA
-        --23,     --SPIRE OF VAHZL
-        --29,     --RIVERNE SITE #B01
-        --30,     --RIVERNE SITE #A01
-        --31,     --MONARCH LINN
-        --32,     --SEALION'S DEN
-        --33,     --AlTaieu
-        --34,     --Grand Palace of Hux
-        --35,     --THE GARDEN OF RU'HMET
-        --36,     --Empyreal Paradox
-        --37,     --TEMENOS
-        --38,     --APOLLYON
-        --39,     --Dynamis-Valkurm
-        --40,     --Dynamis-Buburimu
-        --41,     --Dynamis-Qufim
-        --42,     --Dynamis-Tavnazia
-        45, 	--Abyssea-Tahrongi
-        --57,     --TALACCA COVE
-        --64,     --NAVUKGO EXECUTION CHAMBER
-        --67,     --JADE SEPULCHER
-        --78,     --HAZHALM TESTING GROUNDS
-       --127,     --Behemoths_Dominion
-       --128,     --Valley_of_Sorrows
-       --130,     --RuAun_Gardens
-       132, 	--Abyssea-La_Theine
-       --134,     --Dynamis-Beaucedine
-       --135,     --Dynamis-Xarcabard
-       --139,     --HORLAIS PEAK
-       --140,     --GHELSBA OUTPOST
-       --144,     --WAUGHROON SHRINE
-       --146,     --BALGA'S DIAS
-       --154,     --Dragons_Aery
-       --156,     --THRONE ROOM [S]
-       --163,     --SACRIFICIAL CHAMBER
-       --165,     --THRONE ROOM
-       --168,     --CHAMBER OF ORACLES
-       --170,     --FULL MOON FOUNTAIN
-       --177,     --VeLugannon_Palace
-       --178,     --The_Shrine_of_RuAvitau
-       --179,     --STELLAR FULCRUM
-       --180,     --LALOFF AMPHITHEATER
-       --181,     --THE CELESTIAL NEXUS
-       --185,     --Dynamis-San_dOria
-       --186,     --Dynamis-Bastok
-       --187,     --Dynamis-Windurst
-       --188,     --Dynamis-Jeuno
-       --201,     --CLOISTER OF GALES
-       --202,     --CLOISTER OF STORMS
-       --203,     --CLOISTER OF FROST
-       --206,     --QU'BIA ARENA
-       --207,     --CLOISTER OF FLAMES
-       --209,     --CLOISTER OF TREMORS
-       --211,     --CLOISTER OF TIDES
-       215, 	--Abyssea-Attohwa
-       216, 	--Abyssea-Misareaux
-       217, 	--Abyssea-Vunkerl
-       218, 	--Abyssea-Altepa
-       253, 	--Abyssea-Uleguerand
-       254, 	--Abyssea-Grauberg
-       255 	--Abyssea-Empyreal_Paradox
+        --10,    --THE SHROUDED MAW
+        --13,    --MINE SHAFT 2716
+	--15, 	 --Abyssea-Konschtat
+        --17,    --SPIRE OF HOLLA
+        --19,    --SPIRE OF DEM
+        --21,    --SPIRE OF MEA
+        --23,    --SPIRE OF VAHZL
+        --29,    --RIVERNE SITE #B01
+        --30,    --RIVERNE SITE #A01
+        --31,    --MONARCH LINN
+        --32,    --SEALION'S DEN
+        --33,    --AlTaieu
+        --34,    --Grand Palace of Hux
+        --35,    --THE GARDEN OF RU'HMET
+        --36,    --Empyreal Paradox
+        --37,    --TEMENOS
+        --38,    --APOLLYON
+        --39,    --Dynamis-Valkurm
+        --40,    --Dynamis-Buburimu
+        --41,    --Dynamis-Qufim
+        --42,    --Dynamis-Tavnazia
+        --45, 	 --Abyssea-Tahrongi
+        --57,    --TALACCA COVE
+        --64,    --NAVUKGO EXECUTION CHAMBER
+        --67,    --JADE SEPULCHER
+	  71,	 -- THE_COLOSSUEM
+        --78,    --HAZHALM TESTING GROUNDS
+       --127,    --Behemoths_Dominion
+       --128,    --Valley_of_Sorrows
+       --130,    --RuAun_Gardens
+       --132, 	 --Abyssea-La_Theine
+       --134,    --Dynamis-Beaucedine
+       --135,    --Dynamis-Xarcabard
+       --139,    --HORLAIS PEAK
+       --140,    --GHELSBA OUTPOST
+       --144,    --WAUGHROON SHRINE
+       --146,    --BALGA'S DIAS
+       --154,    --Dragons_Aery
+       --156,    --THRONE ROOM [S]
+       --163,    --SACRIFICIAL CHAMBER
+       --165,    --THRONE ROOM
+       --168,    --CHAMBER OF ORACLES
+       --170,    --FULL MOON FOUNTAIN
+       --177,    --VeLugannon_Palace
+       --178,    --The_Shrine_of_RuAvitau
+       --179,    --STELLAR FULCRUM
+       --180,    --LALOFF AMPHITHEATER
+       --181,    --THE CELESTIAL NEXUS
+       --185,    --Dynamis-San_dOria
+       --186,    --Dynamis-Bastok
+       --187,    --Dynamis-Windurst
+       --188,    --Dynamis-Jeuno
+       --201,    --CLOISTER OF GALES
+       --202,    --CLOISTER OF STORMS
+       --203,    --CLOISTER OF FROST
+       --206,    --QU'BIA ARENA
+       --207,    --CLOISTER OF FLAMES
+       --209,    --CLOISTER OF TREMORS
+       --211,    --CLOISTER OF TIDES
+       --215, 	 --Abyssea-Attohwa
+       --216, 	 --Abyssea-Misareaux
+       --217, 	 --Abyssea-Vunkerl
+       --218, 	 --Abyssea-Altepa
+       --253, 	 --Abyssea-Uleguerand
+       --254, 	 --Abyssea-Grauberg
+       --255 	 --Abyssea-Empyreal_Paradox
 }
 
 local function validZone(zone_list, id)
@@ -197,9 +198,9 @@ local function validZone(zone_list, id)
 end
 
 function error(player, msg)
-    player:PrintToPlayer(msg);
-    player:PrintToPlayer("!atma <atma_offset>");
-end;
+    player:PrintToPlayer(msg)
+    player:PrintToPlayer("!atma <atma_offset>")
+end
 
 -- returns Lunar Abyssites
 function getLunarAbyssiteTotal(player, abyssite)
@@ -212,7 +213,7 @@ function getLunarAbyssiteTotal(player, abyssite)
     	end
         return LUNAR
     end
-end;
+end
 
 function onTrigger(player, arg1)
     local targ = player
@@ -226,20 +227,21 @@ function onTrigger(player, arg1)
     local ng_job = 0
     printf("Count Lunar: %i", abysstotal)
 
---    if validZone(zone_list, zone) ~= true then
---	    targ:PrintToPlayer( string.format( "This command is not valid in the current zone." ) )
---        return;
---    else
---    end;  
+    if validZone(zone_list, zone) == true then
+	    targ:PrintToPlayer( string.format( "This function is not valid in the current zone." ), 14)
+        return
+    else
+    end  
 
     if (abysstotal == 0) then
         targ:PrintToPlayer( string.format( "You do not possess any lunar abyssite to infuse atma." ), 14)
         return
     elseif (targ:getCharVar("infused_atma") == abyssmod) then
         targ:PrintToPlayer( string.format( "You cannot infuse any more atma." ), 14)
-        return;
+        return
     elseif (targ:getCharVar("infused_atma") < abyssmod) then
         if (arg1 == nil or arg1 < 1 or arg1 > 100) then
+	    --targ:PrintToPlayer( string.format( "Invalid atma.  Offset values are between 1 and 100." ), 14)
             error(player, "Invalid atma.  Offset values are between 1 and 100.")
             return
         else
@@ -262,6 +264,6 @@ function onTrigger(player, arg1)
             end
         end
     else
-        targ:PrintToPlayer( string.format( "You cannot infuse any more atma." ));
+        targ:PrintToPlayer( string.format( "You cannot infuse any more atma." ))
     end
 end

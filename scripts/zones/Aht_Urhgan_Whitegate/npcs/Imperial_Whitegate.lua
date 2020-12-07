@@ -10,9 +10,58 @@ require("scripts/globals/besieged")
 require("scripts/globals/npc_util")
 require("scripts/zones/Aht_Urhgan_Whitegate/Shared")
 local ID = require("scripts/zones/Aht_Urhgan_Whitegate/IDs")
+require("scripts/globals/settings")
 -----------------------------------
 
+local mythic_map =
+{
+	[tpz.job.WAR] = {base = 18971, testimony = 1426},
+	[tpz.job.MNK] = {base = 18972, testimony = 1427},
+	[tpz.job.WHM] = {base = 18973, testimony = 1428},
+	[tpz.job.BLM] = {base = 18974, testimony = 1429},
+	[tpz.job.RDM] = {base = 18975, testimony = 1430},
+	[tpz.job.THF] = {base = 18976, testimony = 1431},
+	[tpz.job.PLD] = {base = 18977, testimony = 1432},
+	[tpz.job.DRK] = {base = 18978, testimony = 1433},
+	[tpz.job.BST] = {base = 18979, testimony = 1434},
+	[tpz.job.BRD] = {base = 18980, testimony = 1435},
+	[tpz.job.RNG] = {base = 18981, testimony = 1436},
+	[tpz.job.SAM] = {base = 18982, testimony = 1437},
+	[tpz.job.NIN] = {base = 18983, testimony = 1438},
+	[tpz.job.DRG] = {base = 18984, testimony = 1439},
+	[tpz.job.SMN] = {base = 18985, testimony = 1440},
+	[tpz.job.BLU] = {base = 18986, testimony = 2331},
+	[tpz.job.COR] = {base = 18987, testimony = 2332},
+	[tpz.job.PUP] = {base = 18988, testimony = 2333},
+	[tpz.job.DNC] = {base = 18969, testimony = 2556},
+	[tpz.job.SCH] = {base = 18970, testimony = 2557}
+}
+
 function onTrade(player, npc, trade)
+    local mjob = player:getMainJob()
+    local pJobMap = mythic_map[mjob]
+    local pLevel = player:getMainLvl()
+    local currency = "infamy"
+    local pI = player:getCurrency(currency)
+    local rI = 1000
+    local hasItem = trade:hasItemQty(pJobMap.testimony, 1)
+
+    if pLevel ~= 75 then
+	player:PrintToPlayer( string.format("Please try again when you are level 75."), 14 )
+    elseif not hasItem then
+	player:PrintToPlayer( string.format("Please trade the appropriate testimony for your job."), 14 )
+    elseif pI < rI then
+	player:PrintToPlayer( string.format("Please try again when you have enough Infamy."), 14 )
+	player:PrintToPlayer( string.format("Player Amount: %u | Required Amount: %u", pI, rI), 14 )
+    elseif (hasItem and pLevel == 75 and pI >= rI and 
+	trade:getItemCount() == 1 and
+        trade:getGil() == 0) then
+              	
+	player:tradeComplete()
+    	player:addItem(pJobMap.base)
+       	player:delCurrency(currency,rI)
+    	player:messageSpecial(ID.text.ITEM_OBTAINED,pJobMap.base)
+    end
 end
 
 function onTrigger(player, npc)

@@ -13,488 +13,419 @@ tpz.hunts = tpz.hunts or {}
 
 local hunts =
 {
-        -- West Ronfaure
-	[147] = { bounty = 5 ,  fee = 0 }, -- Fungus Beetle
-	[148] = { bounty = 5 ,  fee = 0 }, -- Jaggedy-Eared Jack
-	[149] = { bounty = 5 ,  fee = 0 }, -- Amanita
-        -- East Ronfaure
-	[150] = { bounty = 5 ,  fee = 0 }, -- Swamfisk
-	[151] = { bounty = 5 ,  fee = 0 }, -- Bigmouth Billy
-	[152] = { bounty = 5 ,  fee = 0 }, -- Rambukk
-        -- La Theine Plateau
-	[153] = { bounty = 5 ,  fee = 0 }, -- Nihniknoovi
-	[154] = { bounty = 5 ,  fee = 0 }, -- Tumbling Truffle
-	[155] = { bounty = 5 ,  fee = 0 }, -- Slumbering Samwell
-	[156] = { bounty = 10 , fee = 0 }, -- Lumbering Lambert
-        -- Jugner Forest
-	[157] = { bounty = 5 ,  fee = 0 }, -- Panzer Percival
-	[158] = { bounty = 5 ,  fee = 0 }, -- Fraelissa
-	[159] = { bounty = 10 , fee = 0 }, -- Sappy Sycamore
-	[160] = { bounty = 15 , fee = 0 }, -- Supplespine Mujwuj
-        -- Battalia Downs
-	[161] = { bounty = 10 , fee = 0 }, -- Tottering Toby
-	[162] = { bounty = 10 , fee = 0 }, -- Skirling Liger
-	[163] = { bounty = 20 , fee = 0 }, -- Eyegouger
-	[164] = { bounty = 20 , fee = 0 }, -- Prankster Maverix
-        -- Carpenters Landing
-	[165] = { bounty = 10 , fee = 0 }, -- Hercules Beetle
-	[166] = { bounty = 10 , fee = 0 }, -- Mycophile
-	[167] = { bounty = 15 , fee = 0 }, -- Orctrap
-	[168] = { bounty = 10 , fee = 0 }, -- Tempest Tigon
-        -- Ghelsba Outpost
-	[169] = { bounty = 5 ,  fee = 0 }, -- Orcish Wallbreacher
-	[170] = { bounty = 5 ,  fee = 0 }, -- Thousandarm Deshglesh
-	[171] = { bounty = 5 ,  fee = 0 }, -- Orcish Barricader
-        -- Fort Ghelsba
-	[172] = { bounty = 5 ,  fee = 0 }, -- Hundredscar Hajwaj
-	[173] = { bounty = 5 ,  fee = 0 }, -- Kegpaunch Doshgnosh
-	[174] = { bounty = 5 ,  fee = 0 }, -- Chariotbuster Byakzak
-        -- King Ranperres Tomb
-	[175] = { bounty = 5 ,  fee = 0 }, -- Barbastelle
-	[176] = { bounty = 5 ,  fee = 0 }, -- Ankou
-	[177] = { bounty = 10 , fee = 0 }, -- Gwyllgi
-        -- Bostaunieux Oubliette
-	[178] = { bounty = 25 , fee = 0 }, -- Arioch
-	[179] = { bounty = 30 , fee = 0 }, -- Shii
-	[180] = { bounty = 30 , fee = 0 }, -- Manes
-        -- Ordelles Caves
-	[181] = { bounty = 15 , fee = 0 }, -- Donggu
-	[182] = { bounty = 10 , fee = 0 }, -- Bombast
-	[183] = { bounty = 20 , fee = 0 }, -- Agar Agar
-        -- The Eldieme Necropolis
-	[184] = { bounty = 25 , fee = 0 }, -- Skull of Gluttony
-	[185] = { bounty = 25 , fee = 0 }, -- Skull of Greed
-	[186] = { bounty = 25 , fee = 0 }, -- Skull of Sloth
-	[187] = { bounty = 25 , fee = 0 }, -- Skull of Lust
-	[188] = { bounty = 25 , fee = 0 }, -- Skull of Pride
-	[189] = { bounty = 25 , fee = 0 }, -- Skull of Envy
-	[190] = { bounty = 25 , fee = 0 }, -- Skull of Wrath
-	[191] = { bounty = 25 , fee = 0 }, -- Cwn Cyrff
-        -- Davoi
-	[192] = { bounty = 10 , fee = 0 }, -- Hawkeyed Dnatbat
-	[193] = { bounty = 5 ,  fee = 0 }, -- Tigerbane Bakdak
-	[194] = { bounty = 5 ,  fee = 0 }, -- Steelbiter Gudrud
-	[195] = { bounty = 15 , fee = 0 }, -- Poisonhand Gnadgad
-	[196] = { bounty = 20 , fee = 0 }, -- Blubbery Bulge
-        -- North Gustaberg
-	[197] = { bounty = 5 ,  fee = 0 }, -- Stinging Sophie
-	[198] = { bounty = 5 ,  fee = 0 }, -- Maighdean Uaine
-	[199] = { bounty = 5 ,  fee = 0 }, -- Bedrock Barry
-        -- South Gustaberg
-	[200] = { bounty = 5 ,  fee = 0 }, -- Leaping Lizzy
-	[201] = { bounty = 5 ,  fee = 0 }, -- Tococo
-	[202] = { bounty = 5 ,  fee = 0 }, -- Carnero
-        -- Konschtat Highlands
-	[203] = { bounty = 5 ,  fee = 0 }, -- Stray Mary
-	[204] = { bounty = 5 ,  fee = 0 }, -- Ghillie Dhu
-	[205] = { bounty = 10 , fee = 0 }, -- Rampaging Ram
-	[206] = { bounty = 10 , fee = 0 }, -- Highlander Lizard
-        -- Valkurm Dunes
-	[207] = { bounty = 5 ,  fee = 0 }, -- Metal Shears
-	[208] = { bounty = 10 , fee = 0 }, -- Golden Bat
-	[209] = { bounty = 10 , fee = 0 }, -- Valkurm Emperor
-	[210] = { bounty = 10 , fee = 0 }, -- Hippomaritimus
-        -- Pashhow Marshlands
-	[211] = { bounty = 5 ,  fee = 0 }, -- Bloodpool Vorax
-	[212] = { bounty = 10 , fee = 0 }, -- Jolly Green
-	[213] = { bounty = 15 , fee = 0 }, -- Toxic Tamlyn
-	[214] = { bounty = 15 , fee = 0 }, -- Ni'Zho Bladebender
-        -- Rolanberry Fields
-	[215] = { bounty = 10 , fee = 0 }, -- Black Triple Stars
-	[216] = { bounty = 15 , fee = 0 }, -- Drooling Daisy
-	[217] = { bounty = 10 , fee = 0 }, -- Ravenous Crawler
-	[218] = { bounty = 20 , fee = 0 }, -- Eldritch Edge
-        -- Palborough Mines
-	[219] = { bounty = 5 ,  fee = 0 }, -- Bu'Ghi Howlblade
-	[220] = { bounty = 5 ,  fee = 0 }, -- Zi'Ghi Boneeater
-	[221] = { bounty = 5 ,  fee = 0 }, -- Qu'Vho Deathhurler
-	[222] = { bounty = 5 ,  fee = 0 }, -- Be'Hya Hundredwall
-        -- Dangruf Wadi
-	[223] = { bounty = 5 ,  fee = 0 }, -- Teporingo
-	[224] = { bounty = 5 ,  fee = 0 }, -- Chocoboleech
-	[225] = { bounty = 10 , fee = 0 }, -- Geyser Lizard
-        -- Korroloka Tunnel
-	[226] = { bounty = 10 , fee = 0 }, -- Cargo Crab Colin
-	[227] = { bounty = 10 , fee = 0 }, -- Falcatus Aranei
-	[228] = { bounty = 15 , fee = 0 }, -- Dame Blanche
-	[229] = { bounty = 10 , fee = 0 }, -- Thoon
-        -- Gusgen Mines
-	[230] = { bounty = 15 , fee = 0 }, -- Smothered Schmidt
-	[231] = { bounty = 15 , fee = 0 }, -- Crushed Krause
-	[232] = { bounty = 15 , fee = 0 }, -- Pulverized Pfeffer
-	[233] = { bounty = 15 , fee = 0 }, -- Burned Bergmann
-	[234] = { bounty = 15 , fee = 0 }, -- Wounded Wurfel
-	[235] = { bounty = 15 , fee = 0 }, -- Asphyxiated Amsel
-  	-- Crawlers Nest
-	[236] = { bounty = 25 , fee = 0 }, -- Demonic Tiphia
-	[237] = { bounty = 20 , fee = 0 }, -- Dynast Beetle
-	[238] = { bounty = 30 , fee = 0 }, -- Aqrabuamelu
-    	-- Beadeaux
-	[239] = { bounty = 5 ,  fee = 0 }, -- Bi'Gho Headtaker
-	[240] = { bounty = 10 , fee = 0 }, -- Ge'Dha Evileye
-	[241] = { bounty = 10 , fee = 0 }, -- Da'Dha Hundredmask
-	[242] = { bounty = 15 , fee = 0 }, -- Zo'Khu Blackcloud
-	[243] = { bounty = 15 , fee = 0 }, -- Ga'Bhu Unvanquished
-	-- Oldton Movalpolos
-	[244] = { bounty = 15 , fee = 0 }, -- Bugbear Strongman
-	[245] = { bounty = 20 , fee = 0 }, -- Goblin Wolfman
-	[246] = { bounty = 15 , fee = 0 }, -- Bugbear Muscleman
-	-- Newton Movalpolos
-	[247] = { bounty = 35 , fee = 0 }, -- Swashstox Beadblinker
-	[248] = { bounty = 35 , fee = 0 }, -- Bugbear Matman
-	[249] = { bounty = 35 , fee = 0 }, -- Sword Sorcerer Solisoq
-	-- West Sarutabaruta
-	[250] = { bounty = 5 ,  fee = 0 }, -- Tom Tit Tat
-	[251] = { bounty = 5 ,  fee = 0 }, -- Nunyenunc
-	[252] = { bounty = 5 ,  fee = 0 }, -- Numbing Norman
-	-- East Sarutabaruta
-	[253] = { bounty = 5 ,  fee = 0 }, -- Spiny Spipi
-	[254] = { bounty = 5 ,  fee = 0 }, -- Sharp-Eared Ropipi
-	[255] = { bounty = 5 ,  fee = 0 }, -- Duke Decapod
-	-- Tahrongi Canyon
-	[256] = { bounty = 5 ,  fee = 0 }, -- Yara Ma Yha Who
-	[257] = { bounty = 5 ,  fee = 0 }, -- Serpopard Ishtar
-	[258] = { bounty = 5 ,  fee = 0 }, -- Habrok
-	[259] = { bounty = 10 , fee = 0 }, -- Herbage Hunter
-	-- Buburimu Peninsula
-	[260] = { bounty = 5 ,  fee = 0 }, -- Wake Warder Wanda
-	[261] = { bounty = 10 , fee = 0 }, -- Buburimboo
-	[262] = { bounty = 10 , fee = 0 }, -- Helldiver
-	[263] = { bounty = 15 , fee = 0 }, -- Backoo
-	-- Bibiki Bay
-	[264] = { bounty = 15 , fee = 0 }, -- Serra
-	[265] = { bounty = 15 , fee = 0 }, -- Intulo
-	[266] = { bounty = 15 , fee = 0 }, -- Shankha
-	[267] = { bounty = 30 , fee = 0 }, -- Splacknuck
-	-- Meriphataud Mountains
-	[268] = { bounty = 10 , fee = 0 }, -- Daggerclaw Dracos
-	[269] = { bounty = 10 , fee = 0 }, -- Patripatan
-	[270] = { bounty = 10 , fee = 0 }, -- Chonchon
-	[271] = { bounty = 20 , fee = 0 }, -- Naa Zeku the Unwaiting
- 	-- Sauromugue Champaign
-	[272] = { bounty = 15 , fee = 0 }, -- Deadly Dodo
-	[273] = { bounty = 15 , fee = 0 }, -- Bashe
-	[274] = { bounty = 15 , fee = 0 }, -- Thunderclaw Thuban
-	[275] = { bounty = 20 , fee = 0 }, -- Blighting Brand
- 	-- Attohwa Chasm
-	[276] = { bounty = 15 , fee = 0 }, -- Sekhmet
-	[277] = { bounty = 30 , fee = 0 }, -- Ambusher Antlion
-	[278] = { bounty = 30 , fee = 0 }, -- Citipati
-	[279] = { bounty = 35 , fee = 0 }, -- Sargas
-	-- Giddeus
-	[280] = { bounty = 5 ,  fee = 0 }, -- Juu Duzu the Whirlwind
-	[281] = { bounty = 5 ,  fee = 0 }, -- Hoo Mjuu the Torrent
-	[282] = { bounty = 5 ,  fee = 0 }, -- Vuu Puqu the Beguiler
-	[283] = { bounty = 5 ,  fee = 0 }, -- Quu Xijo the Illusory
-	-- Toraimarai Canal
-	[284] = { bounty = 30 , fee = 0 }, -- Canal Moocher
-	[285] = { bounty = 35 , fee = 0 }, -- Konjac
-	[286] = { bounty = 35 , fee = 0 }, -- Brazen Bones
-	-- Inner Horutoto Ruins
-	[287] = { bounty = 5 ,  fee = 0 }, -- Nocuous Weapon
-	[288] = { bounty = 5 ,  fee = 0 }, -- Maltha
-	[289] = { bounty = 5 ,  fee = 0 }, -- Slendlix Spindlethumb
-	-- Outer Horutoto Ruins
-	[290] = { bounty = 5 ,  fee = 0 }, -- Desmodont
-	[291] = { bounty = 10 , fee = 0 }, -- Ah Puch
-	[292] = { bounty = 10 , fee = 0 }, -- Legalox Heftyhind
-	-- Maze of Shakhrami
-	[293] = { bounty = 15 , fee = 0 }, -- Trembler Tabitha
-	[294] = { bounty = 10 , fee = 0 }, -- Lesath
-	[295] = { bounty = 15 , fee = 0 }, -- Gloombound Lurker
-	-- Labyrinth of Onzozo
-	[296] = { bounty = 25 , fee = 0 }, -- Hellion
-	[297] = { bounty = 25 , fee = 0 }, -- Peg Powler
-	[298] = { bounty = 30 , fee = 0 }, -- Soulstealer Skullnix
-	[299] = { bounty = 30 , fee = 0 }, -- Narasimha
-	-- Garlaige Citadel
-	[300] = { bounty = 25 , fee = 0 }, -- Hazmat
-	[301] = { bounty = 25 , fee = 0 }, -- Hovering Hotpot
-	[302] = { bounty = 25 , fee = 0 }, -- Frogamander
-	-- Castle Oztroja
-	[303] = { bounty = 10 , fee = 0 }, -- Moo Ouzi the Swiftblade
-	[304] = { bounty = 10 , fee = 0 }, -- Saa Doyi the Fervid
-	[305] = { bounty = 15 , fee = 0 }, -- Yaa Haqa the Profane
-	[306] = { bounty = 10 , fee = 0 }, -- Lii Jixa the Somnolist
-	-- Qufim Island
-	[307] = { bounty = 10 , fee = 0 }, -- Trickster Kinetix
-	[308] = { bounty = 15 , fee = 0 }, -- Slippery Sucker
-	[309] = { bounty = 15 , fee = 0 }, -- Qoofim
-	[310] = { bounty = 25 , fee = 0 }, -- Atkorkamuy
-	-- Beaucedine Glacier
-	[311] = { bounty = 15 , fee = 0 }, -- Kirata
-	[312] = { bounty = 15 , fee = 0 }, -- Gargantua
-	[313] = { bounty = 20 , fee = 0 }, -- Calcabrina
-	[314] = { bounty = 25 , fee = 0 }, -- Humbaba
-	-- Xarcabard
-	[315] = { bounty = 15 , fee = 0 }, -- Shadow Eye
-	[316] = { bounty = 15 , fee = 0 }, -- Duke Focalor
-	[317] = { bounty = 25 , fee = 0 }, -- Timeworn Warrior
-	[318] = { bounty = 30 , fee = 0 }, -- Barbaric Weapon
-	-- Uleguerand Range
-	[319] = { bounty = 25 , fee = 0 }, -- Bonnacon
-	[320] = { bounty = 25 , fee = 0 }, -- Frost Flambeau
-	[321] = { bounty = 35 , fee = 0 }, -- Skvader
-	[322] = { bounty = 40 , fee = 0 }, -- Magnotaur
-	-- The Sanctuary of Zi'Tah
-	[323] = { bounty = 15 , fee = 0 }, -- Elusive Edwin
-	[324] = { bounty = 20 , fee = 0 }, -- Keeper of Halidom
-	[325] = { bounty = 25 , fee = 0 }, -- Bastet
-	[326] = { bounty = 25 , fee = 0 }, -- Huwasi
-	-- Ro'Maeve
-	[327] = { bounty = 25 , fee = 0 }, -- Nightmare Vase
-	[328] = { bounty = 30 , fee = 0 }, -- Rogue Receptacle
-	[329] = { bounty = 25 , fee = 0 }, -- Martinet
-	[330] = { bounty = 35 , fee = 0 }, -- Nargun
-	-- Upper Delkfutt's Tower
-	[331] = { bounty = 15 , fee = 0 }, -- Enkelados
-	[332] = { bounty = 25 , fee = 0 }, -- Ixtab
-	[333] = { bounty = 35 , fee = 0 }, -- Autarch
-	-- Middle Delkfutt's Tower
-	[334] = { bounty = 10 , fee = 0 }, -- Eurytos
-	[335] = { bounty = 10 , fee = 0 }, -- Polybotes
-	[336] = { bounty = 10 , fee = 0 }, -- Rhoitos
-	[337] = { bounty = 10 , fee = 0 }, -- Ophion
-	[338] = { bounty = 10 , fee = 0 }, -- Rhoikos
-	[339] = { bounty = 10 , fee = 0 }, -- Ogygos
-	-- Lower Delkfutt's Tower
-	[340] = { bounty = 10 , fee = 0 }, -- Epialtes
-	[341] = { bounty = 10 , fee = 0 }, -- Hippolytos
-	[342] = { bounty = 10 , fee = 0 }, -- Eurymedon
-	[343] = { bounty = 10 , fee = 0 }, -- Tyrant
-	-- Ranguemont Pass
-	[344] = { bounty = 15 , fee = 0 }, -- Hyakume
-	[345] = { bounty = 15 , fee = 0 }, -- Mucoid Mass
-	[346] = { bounty = 30 , fee = 0 }, -- Gloom Eye
-	-- Fei'Yin
-	[347] = { bounty = 20 , fee = 0 }, -- Mind Hoarder
-	[348] = { bounty = 25 , fee = 0 }, -- Jenglot
-	[349] = { bounty = 35 , fee = 0 }, -- Sluagh
-	-- Castle Zvahl Baileys
-	[350] = { bounty = 20 , fee = 0 }, -- Marquis Naberius
-	[351] = { bounty = 25 , fee = 0 }, -- Likho
-	[352] = { bounty = 30 , fee = 0 }, -- Marquis Sabnock
-	-- Castle Zvahl Keep
-	[353] = { bounty = 25 , fee = 0 }, -- Baronet Romwe
-	[354] = { bounty = 25 , fee = 0 }, -- Baron Vapula
-	[355] = { bounty = 25 , fee = 0 }, -- Count Bifrons
-	[356] = { bounty = 25 , fee = 0 }, -- Viscount Morax
-	-- The Boyahda Tree
-	[357] = { bounty = 25 , fee = 0 }, -- Ellyllon
-	[358] = { bounty = 25 , fee = 0 }, -- Aquarius
-	[359] = { bounty = 30 , fee = 0 }, -- Unut
-	[360] = { bounty = 35 , fee = 0 }, -- Leshonki
-	-- Yuhtunga Jungle
-	[361] = { bounty = 10 , fee = 0 }, -- Koropokkur
-	[362] = { bounty = 15 , fee = 0 }, -- Mischievous Micholas
-	[363] = { bounty = 25 , fee = 0 }, -- Bayawak
-	[364] = { bounty = 30 , fee = 0 }, -- Pyuu the Spatemaker
-	-- Yhoator Jungle
-	[365] = { bounty = 15 , fee = 0 }, -- Powderer Penny
-	[366] = { bounty = 20 , fee = 0 }, -- Edacious Opo-opo
-	[367] = { bounty = 25 , fee = 0 }, -- Acolnahuacatl
-	[368] = { bounty = 30 , fee = 0 }, -- Hoar-knuckled Rimberry
-	-- Sea Serpent Grotto
-	[369] = { bounty = 15 , fee = 0 }, -- Namtar
-	[370] = { bounty = 15 , fee = 0 }, -- Wuur the Sandcomber
-	[371] = { bounty = 20 , fee = 0 }, -- Masan
-	[372] = { bounty = 20 , fee = 0 }, -- Fyuu the Seabellow
-	[373] = { bounty = 20 , fee = 0 }, -- Qull the Shellbuster
-	[374] = { bounty = 15 , fee = 0 }, -- Seww the Squidlimbed
-	[375] = { bounty = 25 , fee = 0 }, -- Pahh the Gullcaller
-	[376] = { bounty = 20 , fee = 0 }, -- Sea Hog
-	[377] = { bounty = 20 , fee = 0 }, -- Yarr the Pearleyed
-	[378] = { bounty = 20 , fee = 0 }, -- Voll the Sharkfinned
-	[379] = { bounty = 20 , fee = 0 }, -- Denn the Orcavoiced
-	[380] = { bounty = 20 , fee = 0 }, -- Mouu the Waverider
-	[381] = { bounty = 25 , fee = 0 }, -- Worr the Clawfisted
-	[382] = { bounty = 30 , fee = 0 }, -- Zuug the Shoreleaper
-	-- Temple of Uggalepih
-	[383] = { bounty = 25 , fee = 0 }, -- Manipulator
-	[384] = { bounty = 20 , fee = 0 }, -- Flauros
-	[385] = { bounty = 25 , fee = 0 }, -- Death from Above
-	[386] = { bounty = 25 , fee = 0 }, -- Habetrot
-	[387] = { bounty = 25 , fee = 0 }, -- Beryl-footed Molberry
-	[388] = { bounty = 20 , fee = 0 }, -- Sozu Sarberry
-	[389] = { bounty = 20 , fee = 0 }, -- Sozu Terberry
-	[390] = { bounty = 25 , fee = 0 }, -- Sozu Rogberry
-	[391] = { bounty = 30 , fee = 0 }, -- Sacrificial Goblet
-	[392] = { bounty = 30 , fee = 0 }, -- Crimson-toothed Pawberry
-	-- Den of Rancor
-	[393] = { bounty = 20 , fee = 0 }, -- Sozu Bliberry
-	[394] = { bounty = 30 , fee = 0 }, -- Friar Rush
-	[395] = { bounty = 30 , fee = 0 }, -- Celeste-eyed Tozberry
-	[396] = { bounty = 30 , fee = 0 }, -- Tawny-fingered Mugberry
-	[397] = { bounty = 30 , fee = 0 }, -- Bistre-hearted Malberry
-	[398] = { bounty = 35 , fee = 0 }, -- Ogama
-	-- Ifrit's Cauldron
-	[399] = { bounty = 30 , fee = 0 }, -- Foreseer Oramix
-	[400] = { bounty = 30 , fee = 0 }, -- Tyrannic Tunnok
-	[401] = { bounty = 30 , fee = 0 }, -- Lindwurm
-	[402] = { bounty = 35 , fee = 0 }, -- Vouivre
-	[403] = { bounty = 35 , fee = 0 }, -- Tarasque
-	-- Cape Teriggan
-	[404] = { bounty = 25 , fee = 0 }, -- Tegmine
-	[405] = { bounty = 30 , fee = 0 }, -- Frostmane
-	[406] = { bounty = 35 , fee = 0 }, -- Zmey Gorynych
-	[407] = { bounty = 40 , fee = 0 }, -- Killer Jonny
-	-- Eastern Altepa Desert
-	[408] = { bounty = 15 , fee = 0 }, -- Dune Widow
-	[409] = { bounty = 15 , fee = 0 }, -- Nandi
-	[410] = { bounty = 5 ,  fee = 0 }, -- Donnergugi
-	[411] = { bounty = 25 , fee = 0 }, -- Sabotender Corrido
-	-- Western Altepa Desert
-	[412] = { bounty = 20 , fee = 0 }, -- Cactuar Cantautor
-	[413] = { bounty = 25 , fee = 0 }, -- Dahu
-	[414] = { bounty = 25 , fee = 0 }, -- Picolaton
-	[415] = { bounty = 30 , fee = 0 }, -- Calchas
-	-- Kuftal Tunnel
-	[416] = { bounty = 25 , fee = 0 }, -- Cancer
-	[417] = { bounty = 30 , fee = 0 }, -- Sabotender Mariachi
-	[418] = { bounty = 25 , fee = 0 }, -- Amemet
-	[419] = { bounty = 25 , fee = 0 }, -- Yowie
-	[420] = { bounty = 25 , fee = 0 }, -- Arachne
-	[421] = { bounty = 30 , fee = 0 }, -- Bloodthirster Madkix
-	[422] = { bounty = 40 , fee = 0 }, -- Pelican
-	-- Gustav Tunnel
-	[423] = { bounty = 20 , fee = 0 }, -- Goblinsavior Heronox
-	[424] = { bounty = 35 , fee = 0 }, -- Taxim
-	[425] = { bounty = 30 , fee = 0 }, -- Baobhan Sith
-	-- Quicksand Caves
-	[426] = { bounty = 25 , fee = 0 }, -- Centurio X-I
-	[427] = { bounty = 25 , fee = 0 }, -- Sagittarius X-XIII
-	[428] = { bounty = 30 , fee = 0 }, -- Diamond Daig
-	[429] = { bounty = 20 , fee = 0 }, -- Antican Magister
-	[430] = { bounty = 20 , fee = 0 }, -- Antican Proconsul
-	[431] = { bounty = 20 , fee = 0 }, -- Antican Praefectus
-	[432] = { bounty = 20 , fee = 0 }, -- Antican Tribunus
-	[433] = { bounty = 20 , fee = 0 }, -- Sabotender Bailarin
-	[434] = { bounty = 25 , fee = 0 }, -- Tribunus VII-I
-	[435] = { bounty = 30 , fee = 0 }, -- Nussknacker
-	[436] = { bounty = 30 , fee = 0 }, -- Triarius X-XV
-	[437] = { bounty = 25 , fee = 0 }, -- Proconsul XII
-	[438] = { bounty = 40 , fee = 0 }, -- Sabotender Bailarina
-[439] = { bounty = 15 , fee = 0 }, -- Megalobugard
-[440] = { bounty = 20 , fee = 0 }, -- Yal-un Eke
-[441] = { bounty = 20 , fee = 0 }, -- Sengann
-[442] = { bounty = 40 , fee = 0 }, -- Flockbock
-[443] = { bounty = 15 , fee = 0 }, -- Odqan
-[444] = { bounty = 15 , fee = 0 }, -- Goaftrap
-[445] = { bounty = 20 , fee = 0 }, -- Ziphius
-[446] = { bounty = 25 , fee = 0 }, -- Okyupete
-[447] = { bounty = 25 , fee = 0 }, -- Zoraal Ja's Pkuucha
-[448] = { bounty = 35 , fee = 0 }, -- Jaded Jody
-[449] = { bounty = 35 , fee = 0 }, -- Chelicerata
-[450] = { bounty = 35 , fee = 0 }, -- Gharial
-[451] = { bounty = 25 , fee = 0 }, -- Harvestman
-[452] = { bounty = 35 , fee = 0 }, -- Emergent Elm
-[453] = { bounty = 35 , fee = 0 }, -- Nis Puk
-[454] = { bounty = 40 , fee = 0 }, -- Mahishasura
-[455] = { bounty = 35 , fee = 0 }, -- Energetic Eruca
-[456] = { bounty = 40 , fee = 0 }, -- Chary Apkallu
-[457] = { bounty = 40 , fee = 0 }, -- Ignamoth
-[458] = { bounty = 35 , fee = 0 }, -- Fahrafahr the Bloodied
-[459] = { bounty = 35 , fee = 0 }, -- Venomfang
-[460] = { bounty = 35 , fee = 0 }, -- Zizzy Zillah
-[461] = { bounty = 40 , fee = 0 }, -- Firedance Magmaal Ja
-[462] = { bounty = 25 , fee = 0 }, -- Lizardtrap
-[463] = { bounty = 30 , fee = 0 }, -- Crystal Eater
-[464] = { bounty = 30 , fee = 0 }, -- Bluestreak Gyugyuroon
-[465] = { bounty = 35 , fee = 0 }, -- Copper Borer
-[466] = { bounty = 40 , fee = 0 }, -- Big Bomb
-[467] = { bounty = 40 , fee = 0 }, -- Flammeri
-[468] = { bounty = 25 , fee = 0 }, -- Peallaidh
-[469] = { bounty = 35 , fee = 0 }, -- Zikko
-[470] = { bounty = 35 , fee = 0 }, -- Aynu-kaysey
-[471] = { bounty = 40 , fee = 0 }, -- Vidhuwa the Wrathborn
-[472] = { bounty = 35 , fee = 0 }, -- Bloody Bones
-[473] = { bounty = 40 , fee = 0 }, -- Amikiri
-[474] = { bounty = 40 , fee = 0 }, -- Euryale
-[475] = { bounty = 40 , fee = 0 }, -- Ungur
-[476] = { bounty = 35 , fee = 0 }, -- Boompadu
-[477] = { bounty = 40 , fee = 0 }, -- Cookieduster Lipiroon
-[478] = { bounty = 45 , fee = 0 }, -- Oupire
-[479] = { bounty = 15 , fee = 0 }, -- Skogs Fru
-[480] = { bounty = 15 , fee = 0 }, -- Myradrosh
-[481] = { bounty = 20 , fee = 0 }, -- Goblintrap
-[482] = { bounty = 25 , fee = 0 }, -- Melusine
-[483] = { bounty = 20 , fee = 0 }, -- Boll Weevil
-[484] = { bounty = 35 , fee = 0 }, -- Drumskull Zogdregg
-[485] = { bounty = 40 , fee = 0 }, -- Vulkodlac
-[486] = { bounty = 40 , fee = 0 }, -- Voirloup
-[487] = { bounty = 25 , fee = 0 }, -- Warabouc
-[488] = { bounty = 35 , fee = 0 }, -- Big Bang
-[489] = { bounty = 35 , fee = 0 }, -- Pallas
-[490] = { bounty = 35 , fee = 0 }, -- Judgmental Julika
-[491] = { bounty = 15 , fee = 0 }, -- La Velue
-[492] = { bounty = 20 , fee = 0 }, -- Chaneque
-[493] = { bounty = 25 , fee = 0 }, -- Habergoass
-[494] = { bounty = 30 , fee = 0 }, -- Burlibix Brawnback
-[495] = { bounty = 35 , fee = 0 }, -- Laelaps
-[496] = { bounty = 45 , fee = 0 }, -- Tethra
-[497] = { bounty = 45 , fee = 0 }, -- Ethniu
-[498] = { bounty = 15 , fee = 0 }, -- Gloomanita
-[499] = { bounty = 15 , fee = 0 }, -- Olgoi-Khorkhoi
-[500] = { bounty = 20 , fee = 0 }, -- Ankabut
-[501] = { bounty = 25 , fee = 0 }, -- Peaseblossom
-[502] = { bounty = 25 , fee = 0 }, -- Sarcopsylla
-[503] = { bounty = 35 , fee = 0 }, -- Scitalis
-[504] = { bounty = 35 , fee = 0 }, -- Kotan-kor Kamuy
-[505] = { bounty = 40 , fee = 0 }, -- Vasiliceratops
-[506] = { bounty = 35 , fee = 0 }, -- Croque-mitaine
-[507] = { bounty = 35 , fee = 0 }, -- Kinepikwa
-[508] = { bounty = 35 , fee = 0 }, -- Sugaar
-[509] = { bounty = 40 , fee = 0 }, -- Nommo
-[510] = { bounty = 20 , fee = 0 }, -- Lamina
-[511] = { bounty = 20 , fee = 0 }, -- Dyinyinga
-[512] = { bounty = 25 , fee = 0 }, -- Erle
-[513] = { bounty = 30 , fee = 0 }, -- Delicieuse Delphine
-[514] = { bounty = 35 , fee = 0 }, -- Abatwa
-[515] = { bounty = 35 , fee = 0 }, -- Morille Mortelle
-[516] = { bounty = 45 , fee = 0 }, -- Lugh
-[517] = { bounty = 5 ,  fee = 0 }, -- Jeduah
-[518] = { bounty = 15 , fee = 0 }, -- Belladonna
-[519] = { bounty = 20 , fee = 0 }, -- Ramponneau
-[520] = { bounty = 25 , fee = 0 }, -- Tiffenotte
-[521] = { bounty = 15 , fee = 0 }, -- Emela-ntouka
-[522] = { bounty = 25 , fee = 0 }, -- Ratatoskr
-[523] = { bounty = 20 , fee = 0 }, -- Kirtimukha
-[524] = { bounty = 35 , fee = 0 }, -- Demoiselle Desolee
-[525] = { bounty = 25 , fee = 0 }, -- Muq Shabeel
-[526] = { bounty = 35 , fee = 0 }, -- Bloodlapper
-[527] = { bounty = 35 , fee = 0 }, -- Hemodrosophila
-[528] = { bounty = 40 , fee = 0 }, -- Centipedal Centruroides
-[529] = { bounty = 15 , fee = 0 }, -- Balam-Quitz
-[530] = { bounty = 20 , fee = 0 }, -- Hyakinthos
-[531] = { bounty = 25 , fee = 0 }, -- Herensugue
-[532] = { bounty = 30 , fee = 0 }, -- Coquecigrue
-[533] = { bounty = 35 , fee = 0 }, -- Citadel Pipistrelles
-[534] = { bounty = 45 , fee = 0 }, -- Buarainech
-[535] = { bounty = 45 , fee = 0 }, -- Elatha
-[536] = { bounty = 35 , fee = 0 }, -- Came-cruse
-[537] = { bounty = 35 , fee = 0 }, -- Becut
-[538] = { bounty = 40 , fee = 0 }, -- Grand'Goule
-[539] = { bounty = 45 , fee = 0 }, -- Scylla
-[540] = { bounty = 35 , fee = 0 }, -- Tikbalang
-[541] = { bounty = 40 , fee = 0 }, -- Prince Orobas
-[542] = { bounty = 40 , fee = 0 }, -- Graoully
-[543] = { bounty = 45 , fee = 0 }, -- Zirnitra
-[544] = { bounty = 50 , fee = 0 }, -- Krabkatoa
-[545] = { bounty = 40 , fee = 0 }, -- Yacumama
-[546] = { bounty = 40 , fee = 0 }, -- Capricornus
-[547] = { bounty = 50 , fee = 0 }, -- Blobdingnag
-[548] = { bounty = 40 , fee = 0 }, -- Shoggoth
-[549] = { bounty = 40 , fee = 0 }, -- Lamprey Lord
-[550] = { bounty = 50 , fee = 0 }, -- Orcus
-[551] = { bounty = 40 , fee = 0 }, -- Jyeshtha
-[552] = { bounty = 40 , fee = 0 }, -- Farruca Fly
-[553] = { bounty = 50 , fee = 0 }, -- Verthandi
-[554] = { bounty = 40 , fee = 0 }, -- Urd
-[555] = { bounty = 40 , fee = 0 }, -- Skuld
-[556] = { bounty = 50 , fee = 0 }, -- Lord Ruthven
-[557] = { bounty = 40 , fee = 0 }, -- Erebus
-[558] = { bounty = 40 , fee = 0 }, -- Feuerunke
-[559] = { bounty = 60 , fee = 0 }, -- Yilbegan
+    [147] = { bounty =  5, fee =   0 }, -- Fungus Beetle
+    [148] = { bounty =  5, fee =   0 }, -- Jaggedy-Eared Jack
+    [149] = { bounty =  5, fee =   0 }, -- Amanita
+    [150] = { bounty =  5, fee =   0 }, -- Swamfisk
+    [151] = { bounty =  5, fee =   0 }, -- Bigmouth Billy
+    [152] = { bounty =  5, fee =   0 }, -- Rambukk
+    [153] = { bounty =  5, fee =   0 }, -- Nihniknoovi
+    [154] = { bounty =  5, fee =  15 }, -- Tumbling Truffle
+    [155] = { bounty =  5, fee =  15 }, -- Slumbering Samwell
+    [156] = { bounty = 10, fee =   0 }, -- Lumbering Lambert
+    [157] = { bounty =  5, fee =   0 }, -- Panzer Percival
+    [158] = { bounty =  5, fee =   0 }, -- Fraelissa
+    [159] = { bounty = 10, fee =  40 }, -- Sappy Sycamore
+    [160] = { bounty = 15, fee =  40 }, -- Supplespine Mujwuj
+    [161] = { bounty = 10, fee =  25 }, -- Tottering Toby
+    [162] = { bounty = 10, fee =  40 }, -- Skirling Liger
+    [163] = { bounty = 20, fee =   0 }, -- Eyegouger
+    [164] = { bounty = 20, fee =   0 }, -- Prankster Maverix
+    [165] = { bounty = 10, fee =   0 }, -- Hercules Beetle
+    [166] = { bounty = 10, fee =  30 }, -- Mycophile
+    [167] = { bounty = 15, fee =   0 }, -- Orctrap
+    [168] = { bounty = 10, fee =   0 }, -- Tempest Tigon
+    [169] = { bounty =  5, fee =   0 }, -- Orcish Wallbreacher
+    [170] = { bounty =  5, fee =   0 }, -- Thousandarm Deshglesh
+    [171] = { bounty =  5, fee =   0 }, -- Orcish Barricader
+    [172] = { bounty =  5, fee =  10 }, -- Hundredscar Hajwaj
+    [173] = { bounty =  5, fee =   0 }, -- Kegpaunch Doshgnosh
+    [174] = { bounty =  5, fee =   0 }, -- Chariotbuster Byakzak
+    [175] = { bounty =  5, fee =   0 }, -- Barbastelle
+    [176] = { bounty =  5, fee =   0 }, -- Ankou
+    [177] = { bounty = 10, fee =   0 }, -- Gwyllgi
+    [178] = { bounty = 25, fee =   0 }, -- Arioch
+    [179] = { bounty = 30, fee =   0 }, -- Shii
+    [180] = { bounty = 30, fee =   0 }, -- Manes
+    [181] = { bounty = 15, fee =  40 }, -- Donggu
+    [182] = { bounty = 10, fee =  40 }, -- Bombast
+    [183] = { bounty = 20, fee =   0 }, -- Agar Agar
+    [184] = { bounty = 25, fee =   0 }, -- Skull of Gluttony
+    [185] = { bounty = 25, fee =   0 }, -- Skull of Greed
+    [186] = { bounty = 25, fee =   0 }, -- Skull of Sloth
+    [187] = { bounty = 25, fee =   0 }, -- Skull of Lust
+    [188] = { bounty = 25, fee =   0 }, -- Skull of Pride
+    [189] = { bounty = 25, fee =   0 }, -- Skull of Envy
+    [190] = { bounty = 25, fee =   0 }, -- Skull of Wrath
+    [191] = { bounty = 25, fee =   0 }, -- Cwn Cyrff
+    [192] = { bounty = 10, fee =  25 }, -- Hawkeyed Dnatbat
+    [193] = { bounty =  5, fee =   0 }, -- Tigerbane Bakdak
+    [194] = { bounty =  5, fee =   0 }, -- Steelbiter Gudrud
+    [195] = { bounty = 15, fee =  35 }, -- Poisonhand Gnadgad
+    [196] = { bounty = 20, fee =   0 }, -- Blubbery Bulge
+    [197] = { bounty =  5, fee =   0 }, -- Stinging Sophie
+    [198] = { bounty =  5, fee =   0 }, -- Maighdean Uaine
+    [199] = { bounty =  5, fee =   0 }, -- Bedrock Barry
+    [200] = { bounty =  5, fee =   0 }, -- Leaping Lizzy
+    [201] = { bounty =  5, fee =   0 }, -- Tococo
+    [202] = { bounty =  5, fee =  10 }, -- Carnero
+    [203] = { bounty =  5, fee =   0 }, -- Stray Mary
+    [204] = { bounty =  5, fee =   0 }, -- Ghillie Dhu
+    [205] = { bounty = 10, fee =   0 }, -- Rampaging Ram
+    [206] = { bounty = 10, fee =  25 }, -- Highlander Lizard
+    [207] = { bounty =  5, fee =   0 }, -- Metal Shears
+    [208] = { bounty = 10, fee =   0 }, -- Golden Bat
+    [209] = { bounty = 10, fee =   0 }, -- Valkurm Emperor
+    [210] = { bounty = 10, fee =   0 }, -- Hippomaritimus
+    [211] = { bounty =  5, fee =   0 }, -- Bloodpool Vorax
+    [212] = { bounty = 10, fee =   0 }, -- Jolly Green
+    [213] = { bounty = 15, fee =   0 }, -- Toxic Tamlyn
+    [214] = { bounty = 15, fee =  40 }, -- Ni'Zho Bladebender
+    [215] = { bounty = 10, fee =   0 }, -- Black Triple Stars
+    [216] = { bounty = 15, fee =   0 }, -- Drooling Daisy
+    [217] = { bounty = 10, fee =   0 }, -- Ravenous Crawler
+    [218] = { bounty = 20, fee =   0 }, -- Eldritch Edge
+    [219] = { bounty =  5, fee =   0 }, -- Bu'Ghi Howlblade
+    [220] = { bounty =  5, fee =  15 }, -- Zi'Ghi Boneeater
+    [221] = { bounty =  5, fee =   0 }, -- Qu'Vho Deathhurler
+    [222] = { bounty =  5, fee =   0 }, -- Be'Hya Hundredwall
+    [223] = { bounty =  5, fee =   0 }, -- Teporingo
+    [224] = { bounty =  5, fee =   0 }, -- Chocoboleech
+    [225] = { bounty = 10, fee =   0 }, -- Geyser Lizard
+    [226] = { bounty = 10, fee =   0 }, -- Cargo Crab Colin
+    [227] = { bounty = 10, fee =   0 }, -- Falcatus Aranei
+    [228] = { bounty = 15, fee =   0 }, -- Dame Blanche
+    [229] = { bounty = 10, fee =  40 }, -- Thoon
+    [230] = { bounty = 15, fee =   0 }, -- Smothered Schmidt
+    [231] = { bounty = 15, fee =   0 }, -- Crushed Krause
+    [232] = { bounty = 15, fee =   0 }, -- Pulverized Pfeffer
+    [233] = { bounty = 15, fee =   0 }, -- Burned Bergmann
+    [234] = { bounty = 15, fee =   0 }, -- Wounded Wurfel
+    [235] = { bounty = 15, fee =   0 }, -- Asphyxiated Amsel
+    [236] = { bounty = 25, fee =   0 }, -- Demonic Tiphia
+    [237] = { bounty = 20, fee =   0 }, -- Dynast Beetle
+    [238] = { bounty = 30, fee =   0 }, -- Aqrabuamelu
+    [239] = { bounty =  5, fee =  20 }, -- Bi'Gho Headtaker
+    [240] = { bounty = 10, fee =   0 }, -- Ge'Dha Evileye
+    [241] = { bounty = 10, fee =  25 }, -- Da'Dha Hundredmask
+    [242] = { bounty = 15, fee =   0 }, -- Zo'Khu Blackcloud
+    [243] = { bounty = 15, fee =  45 }, -- Ga'Bhu Unvanquished
+    [244] = { bounty = 15, fee =  45 }, -- Bugbear Strongman
+    [245] = { bounty = 20, fee =   0 }, -- Goblin Wolfman
+    [246] = { bounty = 15, fee =  50 }, -- Bugbear Muscleman
+    [247] = { bounty = 35, fee =  75 }, -- Swashstox Beadblinker
+    [248] = { bounty = 35, fee =  75 }, -- Bugbear Matman
+    [249] = { bounty = 35, fee =  80 }, -- Sword Sorcerer Solisoq
+    [250] = { bounty =  5, fee =   0 }, -- Tom Tit Tat
+    [251] = { bounty =  5, fee =   0 }, -- Nunyenunc
+    [252] = { bounty =  5, fee =   0 }, -- Numbing Norman
+    [253] = { bounty =  5, fee =   0 }, -- Spiny Spipi
+    [254] = { bounty =  5, fee =   0 }, -- Sharp-Eared Ropipi
+    [255] = { bounty =  5, fee =   0 }, -- Duke Decapod
+    [256] = { bounty =  5, fee =  10 }, -- Yara Ma Yha Who
+    [257] = { bounty =  5, fee =   0 }, -- Serpopard Ishtar
+    [258] = { bounty =  5, fee =   0 }, -- Habrok
+    [259] = { bounty = 10, fee =   0 }, -- Herbage Hunter
+    [260] = { bounty =  5, fee =   0 }, -- Wake Warder Wanda
+    [261] = { bounty = 10, fee =   0 }, -- Buburimboo
+    [262] = { bounty = 10, fee =   0 }, -- Helldiver
+    [263] = { bounty = 15, fee =  35 }, -- Backoo
+    [264] = { bounty = 15, fee =   0 }, -- Serra
+    [265] = { bounty = 15, fee =   0 }, -- Intulo
+    [266] = { bounty = 15, fee =   0 }, -- Shankha
+    [267] = { bounty = 30, fee =  65 }, -- Splacknuck
+    [268] = { bounty = 10, fee =   0 }, -- Daggerclaw Dracos
+    [269] = { bounty = 10, fee =   0 }, -- Patripatan
+    [270] = { bounty = 10, fee =   0 }, -- Chonchon
+    [271] = { bounty = 20, fee =  45 }, -- Naa Zeku the Unwaiting
+    [272] = { bounty = 15, fee =   0 }, -- Deadly Dodo
+    [273] = { bounty = 15, fee =   0 }, -- Bashe
+    [274] = { bounty = 15, fee =   0 }, -- Thunderclaw Thuban
+    [275] = { bounty = 20, fee =   0 }, -- Blighting Brand
+    [276] = { bounty = 15, fee =   0 }, -- Sekhmet
+    [277] = { bounty = 30, fee =   0 }, -- Ambusher Antlion
+    [278] = { bounty = 30, fee =   0 }, -- Citipati
+    [279] = { bounty = 35, fee =  75 }, -- Sargas
+    [280] = { bounty =  5, fee =   0 }, -- Juu Duzu the Whirlwind
+    [281] = { bounty =  5, fee =  15 }, -- Hoo Mjuu the Torrent
+    [282] = { bounty =  5, fee =   0 }, -- Vuu Puqu the Beguiler
+    [283] = { bounty =  5, fee =   0 }, -- Quu Xijo the Illusory
+    [284] = { bounty = 30, fee =   0 }, -- Canal Moocher
+    [285] = { bounty = 35, fee =  75 }, -- Konjac
+    [286] = { bounty = 35, fee =   0 }, -- Brazen Bones
+    [287] = { bounty =  5, fee =   0 }, -- Nocuous Weapon
+    [288] = { bounty =  5, fee =   0 }, -- Maltha
+    [289] = { bounty =  5, fee =   0 }, -- Slendlix Spindlethumb
+    [290] = { bounty =  5, fee =   0 }, -- Desmodont
+    [291] = { bounty = 10, fee =   0 }, -- Ah Puch
+    [292] = { bounty = 10, fee =   0 }, -- Legalox Heftyhind
+    [293] = { bounty = 15, fee =   0 }, -- Trembler Tabitha
+    [294] = { bounty = 10, fee =   0 }, -- Lesath
+    [295] = { bounty = 15, fee =   0 }, -- Gloombound Lurker
+    [296] = { bounty = 25, fee =  60 }, -- Hellion
+    [297] = { bounty = 25, fee =   0 }, -- Peg Powler
+    [298] = { bounty = 30, fee =   0 }, -- Soulstealer Skullnix
+    [299] = { bounty = 30, fee =  75 }, -- Narasimha
+    [300] = { bounty = 25, fee =   0 }, -- Hazmat
+    [301] = { bounty = 25, fee =   0 }, -- Hovering Hotpot
+    [302] = { bounty = 25, fee =   0 }, -- Frogamander
+    [303] = { bounty = 10, fee =  25 }, -- Moo Ouzi the Swiftblade
+    [304] = { bounty = 10, fee =   0 }, -- Saa Doyi the Fervid
+    [305] = { bounty = 15, fee =  40 }, -- Yaa Haqa the Profane
+    [306] = { bounty = 10, fee =  40 }, -- Lii Jixa the Somnolist
+    [307] = { bounty = 10, fee =   0 }, -- Trickster Kinetix
+    [308] = { bounty = 15, fee =   0 }, -- Slippery Sucker
+    [309] = { bounty = 15, fee =   0 }, -- Qoofim
+    [310] = { bounty = 25, fee =   0 }, -- Atkorkamuy
+    [311] = { bounty = 15, fee =   0 }, -- Kirata
+    [312] = { bounty = 15, fee =   0 }, -- Gargantua
+    [313] = { bounty = 20, fee =   0 }, -- Calcabrina
+    [314] = { bounty = 25, fee =  60 }, -- Humbaba
+    [315] = { bounty = 15, fee =   0 }, -- Shadow Eye
+    [316] = { bounty = 15, fee =   0 }, -- Duke Focalor
+    [317] = { bounty = 25, fee =   0 }, -- Timeworn Warrior
+    [318] = { bounty = 30, fee =   0 }, -- Barbaric Weapon
+    [319] = { bounty = 25, fee =   0 }, -- Bonnacon
+    [320] = { bounty = 25, fee =  70 }, -- Frost Flambeau
+    [321] = { bounty = 35, fee =  75 }, -- Skvader
+    [322] = { bounty = 40, fee =   0 }, -- Magnotaur
+    [323] = { bounty = 15, fee =   0 }, -- Elusive Edwin
+    [324] = { bounty = 20, fee =   0 }, -- Keeper of Halidom
+    [325] = { bounty = 25, fee =   0 }, -- Bastet
+    [326] = { bounty = 25, fee =   0 }, -- Huwasi
+    [327] = { bounty = 25, fee =   0 }, -- Nightmare Vase
+    [328] = { bounty = 30, fee =   0 }, -- Rogue Receptacle
+    [329] = { bounty = 25, fee =   0 }, -- Martinet
+    [330] = { bounty = 35, fee =  75 }, -- Nargun
+    [331] = { bounty = 15, fee =  35 }, -- Enkelados
+    [332] = { bounty = 25, fee =   0 }, -- Ixtab
+    [333] = { bounty = 35, fee =  85 }, -- Autarch
+    [334] = { bounty = 10, fee =   0 }, -- Eurytos
+    [335] = { bounty = 10, fee =   0 }, -- Polybotes
+    [336] = { bounty = 10, fee =   0 }, -- Rhoitos
+    [337] = { bounty = 10, fee =   0 }, -- Ophion
+    [338] = { bounty = 10, fee =   0 }, -- Rhoikos
+    [339] = { bounty = 10, fee =   0 }, -- Ogygos
+    [340] = { bounty = 10, fee =   0 }, -- Epialtes
+    [341] = { bounty = 10, fee =   0 }, -- Hippolytos
+    [342] = { bounty = 10, fee =  30 }, -- Eurymedon
+    [343] = { bounty = 10, fee =  40 }, -- Tyrant
+    [344] = { bounty = 15, fee =   0 }, -- Hyakume
+    [345] = { bounty = 15, fee =   0 }, -- Mucoid Mass
+    [346] = { bounty = 30, fee =   0 }, -- Gloom Eye
+    [347] = { bounty = 20, fee =   0 }, -- Mind Hoarder
+    [348] = { bounty = 25, fee =   0 }, -- Jenglot
+    [349] = { bounty = 35, fee =  75 }, -- Sluagh
+    [350] = { bounty = 20, fee =   0 }, -- Marquis Naberius
+    [351] = { bounty = 25, fee =   0 }, -- Likho
+    [352] = { bounty = 30, fee =  70 }, -- Marquis Sabnock
+    [353] = { bounty = 25, fee =   0 }, -- Baronet Romwe
+    [354] = { bounty = 25, fee =   0 }, -- Baron Vapula
+    [355] = { bounty = 25, fee =   0 }, -- Count Bifrons
+    [356] = { bounty = 25, fee =  65 }, -- Viscount Morax
+    [357] = { bounty = 25, fee =   0 }, -- Ellyllon
+    [358] = { bounty = 25, fee =   0 }, -- Aquarius
+    [359] = { bounty = 30, fee =   0 }, -- Unut
+    [360] = { bounty = 35, fee =  75 }, -- Leshonki
+    [361] = { bounty = 10, fee =   0 }, -- Koropokkur
+    [362] = { bounty = 15, fee =   0 }, -- Mischievous Micholas
+    [363] = { bounty = 25, fee =   0 }, -- Bayawak
+    [364] = { bounty = 30, fee =   0 }, -- Pyuu the Spatemaker
+    [365] = { bounty = 15, fee =  45 }, -- Powderer Penny
+    [366] = { bounty = 20, fee =   0 }, -- Edacious Opo-opo
+    [367] = { bounty = 25, fee =   0 }, -- Acolnahuacatl
+    [368] = { bounty = 30, fee =   0 }, -- Hoar-knuckled Rimberry
+    [369] = { bounty = 15, fee =   0 }, -- Namtar
+    [370] = { bounty = 15, fee =   0 }, -- Wuur the Sandcomber
+    [371] = { bounty = 20, fee =   0 }, -- Masan
+    [372] = { bounty = 20, fee =  45 }, -- Fyuu the Seabellow
+    [373] = { bounty = 20, fee =  45 }, -- Qull the Shellbuster
+    [374] = { bounty = 15, fee =  45 }, -- Seww the Squidlimbed
+    [375] = { bounty = 25, fee =   0 }, -- Pahh the Gullcaller
+    [376] = { bounty = 20, fee =   0 }, -- Sea Hog
+    [377] = { bounty = 20, fee =   0 }, -- Yarr the Pearleyed
+    [378] = { bounty = 20, fee =   0 }, -- Voll the Sharkfinned
+    [379] = { bounty = 20, fee =   0 }, -- Denn the Orcavoiced
+    [380] = { bounty = 20, fee =  60 }, -- Mouu the Waverider
+    [381] = { bounty = 25, fee =   0 }, -- Worr the Clawfisted
+    [382] = { bounty = 30, fee =   0 }, -- Zuug the Shoreleaper
+    [383] = { bounty = 25, fee =   0 }, -- Manipulator
+    [384] = { bounty = 20, fee =   0 }, -- Flauros
+    [385] = { bounty = 25, fee =   0 }, -- Death from Above
+    [386] = { bounty = 25, fee =   0 }, -- Habetrot
+    [387] = { bounty = 25, fee =   0 }, -- Beryl-footed Molberry
+    [388] = { bounty = 20, fee =   0 }, -- Sozu Sarberry
+    [389] = { bounty = 20, fee =   0 }, -- Sozu Terberry
+    [390] = { bounty = 25, fee =   0 }, -- Sozu Rogberry
+    [391] = { bounty = 30, fee =   0 }, -- Sacrificial Goblet
+    [392] = { bounty = 30, fee =   0 }, -- Crimson-toothed Pawberry
+    [393] = { bounty = 20, fee =   0 }, -- Sozu Bliberry
+    [394] = { bounty = 30, fee =  65 }, -- Friar Rush
+    [395] = { bounty = 30, fee =   0 }, -- Celeste-eyed Tozberry
+    [396] = { bounty = 30, fee =   0 }, -- Tawny-fingered Mugberry
+    [397] = { bounty = 30, fee =   0 }, -- Bistre-hearted Malberry
+    [398] = { bounty = 35, fee =   0 }, -- Ogama
+    [399] = { bounty = 30, fee =   0 }, -- Foreseer Oramix
+    [400] = { bounty = 30, fee =   0 }, -- Tyrannic Tunnok
+    [401] = { bounty = 30, fee =   0 }, -- Lindwurm
+    [402] = { bounty = 35, fee =   0 }, -- Vouivre
+    [403] = { bounty = 35, fee =  75 }, -- Tarasque
+    [404] = { bounty = 25, fee =   0 }, -- Tegmine
+    [405] = { bounty = 30, fee =  75 }, -- Frostmane
+    [406] = { bounty = 35, fee =   0 }, -- Zmey Gorynych
+    [407] = { bounty = 40, fee =  80 }, -- Killer Jonny
+    [408] = { bounty = 15, fee =  40 }, -- Dune Widow
+    [409] = { bounty = 15, fee =  45 }, -- Nandi
+    [410] = { bounty =  5, fee =   0 }, -- Donnergugi
+    [411] = { bounty = 25, fee =   0 }, -- Sabotender Corrido
+    [412] = { bounty = 20, fee =   0 }, -- Cactuar Cantautor
+    [413] = { bounty = 25, fee =   0 }, -- Dahu
+    [414] = { bounty = 25, fee =   0 }, -- Picolaton
+    [415] = { bounty = 30, fee =  70 }, -- Calchas
+    [416] = { bounty = 25, fee =   0 }, -- Cancer
+    [417] = { bounty = 30, fee =   0 }, -- Sabotender Mariachi
+    [418] = { bounty = 25, fee =   0 }, -- Amemet
+    [419] = { bounty = 25, fee =   0 }, -- Yowie
+    [420] = { bounty = 25, fee =   0 }, -- Arachne
+    [421] = { bounty = 30, fee =   0 }, -- Bloodthirster Madkix
+    [422] = { bounty = 40, fee =   0 }, -- Pelican
+    [423] = { bounty = 20, fee =   0 }, -- Goblinsavior Heronox
+    [424] = { bounty = 35, fee =  75 }, -- Taxim
+    [425] = { bounty = 30, fee =  75 }, -- Baobhan Sith
+    [426] = { bounty = 25, fee =  55 }, -- Centurio X-I
+    [427] = { bounty = 25, fee =  55 }, -- Sagittarius X-XIII
+    [428] = { bounty = 30, fee =   0 }, -- Diamond Daig
+    [429] = { bounty = 20, fee =   0 }, -- Antican Magister
+    [430] = { bounty = 20, fee =   0 }, -- Antican Proconsul
+    [431] = { bounty = 20, fee =   0 }, -- Antican Praefectus
+    [432] = { bounty = 20, fee =   0 }, -- Antican Tribunus
+    [433] = { bounty = 20, fee =   0 }, -- Sabotender Bailarina
+    [434] = { bounty = 25, fee =   0 }, -- Tribunus VII-I
+    [435] = { bounty = 30, fee =   0 }, -- Nussknacker
+    [436] = { bounty = 30, fee =   0 }, -- Triarius X-XV
+    [437] = { bounty = 25, fee =   0 }, -- Proconsul XII
+    [438] = { bounty = 40, fee =  75 }, -- Sabotender Bailarina
+    [439] = { bounty = 15, fee =   0 }, -- Megalobugard
+    [440] = { bounty = 20, fee =   0 }, -- Yal-un Eke
+    [441] = { bounty = 20, fee =  55 }, -- Sengann
+    [442] = { bounty = 40, fee =  80 }, -- Flockbock
+    [443] = { bounty = 15, fee =   0 }, -- Odqan
+    [444] = { bounty = 15, fee =   0 }, -- Goaftrap
+    [445] = { bounty = 20, fee =   0 }, -- Ziphius
+    [446] = { bounty = 25, fee =   0 }, -- Okyupete
+    [447] = { bounty = 25, fee =   0 }, -- Zoraal Ja's Pkuucha
+    [448] = { bounty = 35, fee =   0 }, -- Jaded Jody
+    [449] = { bounty = 35, fee =  75 }, -- Chelicerata
+    [450] = { bounty = 35, fee =   0 }, -- Gharial
+    [451] = { bounty = 25, fee =   0 }, -- Harvestman
+    [452] = { bounty = 35, fee =  75 }, -- Emergent Elm
+    [453] = { bounty = 35, fee =  75 }, -- Nis Puk
+    [454] = { bounty = 40, fee =  75 }, -- Mahishasura
+    [455] = { bounty = 35, fee =  75 }, -- Energetic Eruca
+    [456] = { bounty = 40, fee =  75 }, -- Chary Apkallu
+    [457] = { bounty = 40, fee =  80 }, -- Ignamoth
+    [458] = { bounty = 35, fee =  85 }, -- Fahrafahr the Bloodied
+    [459] = { bounty = 35, fee =  75 }, -- Venomfang
+    [460] = { bounty = 35, fee =  80 }, -- Zizzy Zillah
+    [461] = { bounty = 40, fee =  85 }, -- Firedance Magmaal Ja
+    [462] = { bounty = 25, fee =   0 }, -- Lizardtrap
+    [463] = { bounty = 30, fee =   0 }, -- Crystal Eater
+    [464] = { bounty = 30, fee =  75 }, -- Bluestreak Gyugyuroon
+    [465] = { bounty = 35, fee =  80 }, -- Copper Borer
+    [466] = { bounty = 40, fee =  80 }, -- Big Bomb
+    [467] = { bounty = 40, fee =  85 }, -- Flammeri
+    [468] = { bounty = 25, fee =   0 }, -- Peallaidh
+    [469] = { bounty = 35, fee =  75 }, -- Zikko
+    [470] = { bounty = 35, fee =  80 }, -- Aynu-kaysey
+    [471] = { bounty = 40, fee =  85 }, -- Vidhuwa the Wrathborn
+    [472] = { bounty = 35, fee =  80 }, -- Bloody Bones
+    [473] = { bounty = 40, fee =  80 }, -- Amikiri
+    [474] = { bounty = 40, fee =  85 }, -- Euryale
+    [475] = { bounty = 40, fee =  80 }, -- Ungur
+    [476] = { bounty = 35, fee =  80 }, -- Boompadu
+    [477] = { bounty = 40, fee =  85 }, -- Cookieduster Lipiroon
+    [478] = { bounty = 45, fee = 100 }, -- Oupire
+    [479] = { bounty = 15, fee =   0 }, -- Skogs Fru
+    [480] = { bounty = 15, fee =   0 }, -- Myradrosh
+    [481] = { bounty = 20, fee =   0 }, -- Goblintrap
+    [482] = { bounty = 25, fee =   0 }, -- Melusine
+    [483] = { bounty = 20, fee =   0 }, -- Boll Weevil
+    [484] = { bounty = 35, fee =  80 }, -- Drumskull Zogdregg
+    [485] = { bounty = 40, fee =  80 }, -- Vulkodlac
+    [486] = { bounty = 40, fee =  85 }, -- Voirloup
+    [487] = { bounty = 25, fee =   0 }, -- Warabouc
+    [488] = { bounty = 35, fee =  75 }, -- Big Bang
+    [489] = { bounty = 35, fee =  80 }, -- Pallas
+    [490] = { bounty = 35, fee =  80 }, -- Judgmental Julika
+    [491] = { bounty = 15, fee =   0 }, -- La Velue
+    [492] = { bounty = 20, fee =   0 }, -- Chaneque
+    [493] = { bounty = 25, fee =   0 }, -- Habergoass
+    [494] = { bounty = 30, fee =   0 }, -- Burlibix Brawnback
+    [495] = { bounty = 35, fee =  75 }, -- Laelaps
+    [496] = { bounty = 45, fee = 100 }, -- Tethra
+    [497] = { bounty = 45, fee = 100 }, -- Ethniu
+    [498] = { bounty = 15, fee =   0 }, -- Gloomanita
+    [499] = { bounty = 15, fee =   0 }, -- Olgoi-Khorkhoi
+    [500] = { bounty = 20, fee =   0 }, -- Ankabut
+    [501] = { bounty = 25, fee =   0 }, -- Peaseblossom
+    [502] = { bounty = 25, fee =  70 }, -- Sarcopsylla
+    [503] = { bounty = 35, fee =  80 }, -- Scitalis
+    [504] = { bounty = 35, fee =  80 }, -- Kotan-kor Kamuy
+    [505] = { bounty = 40, fee =  85 }, -- Vasiliceratops
+    [506] = { bounty = 35, fee =   0 }, -- Croque-mitaine
+    [507] = { bounty = 35, fee =  75 }, -- Kinepikwa
+    [508] = { bounty = 35, fee =  80 }, -- Sugaar
+    [509] = { bounty = 40, fee =  85 }, -- Nommo
+    [510] = { bounty = 20, fee =   0 }, -- Lamina
+    [511] = { bounty = 20, fee =   0 }, -- Dyinyinga
+    [512] = { bounty = 25, fee =   0 }, -- Erle
+    [513] = { bounty = 30, fee =   0 }, -- Delicieuse Delphine
+    [514] = { bounty = 35, fee =  75 }, -- Abatwa
+    [515] = { bounty = 35, fee =  80 }, -- Morille Mortelle
+    [516] = { bounty = 45, fee = 100 }, -- Lugh
+    [517] = { bounty =  5, fee =   0 }, -- Jeduah
+    [518] = { bounty = 15, fee =   0 }, -- Belladonna
+    [519] = { bounty = 20, fee =   0 }, -- Ramponneau
+    [520] = { bounty = 25, fee =   0 }, -- Tiffenotte
+    [521] = { bounty = 15, fee =   0 }, -- Emela-ntouka
+    [522] = { bounty = 25, fee =   0 }, -- Ratatoskr
+    [523] = { bounty = 20, fee =   0 }, -- Kirtimukha
+    [524] = { bounty = 35, fee =  80 }, -- Demoiselle Desolee
+    [525] = { bounty = 25, fee =   0 }, -- Muq Shabeel
+    [526] = { bounty = 35, fee =  75 }, -- Bloodlapper
+    [527] = { bounty = 35, fee =  80 }, -- Hemodrosophila
+    [528] = { bounty = 40, fee =  85 }, -- Centipedal Centruroides
+    [529] = { bounty = 15, fee =   0 }, -- Balam-Quitz
+    [530] = { bounty = 20, fee =   0 }, -- Hyakinthos
+    [531] = { bounty = 25, fee =   0 }, -- Herensugue
+    [532] = { bounty = 30, fee =   0 }, -- Coquecigrue
+    [533] = { bounty = 35, fee =  75 }, -- Citadel Pipistrelles
+    [534] = { bounty = 45, fee = 100 }, -- Buarainech
+    [535] = { bounty = 45, fee = 100 }, -- Elatha
+    [536] = { bounty = 35, fee =  80 }, -- Came-cruse
+    [537] = { bounty = 35, fee =  80 }, -- Becut
+    [538] = { bounty = 40, fee =  85 }, -- Grand'Goule
+    [539] = { bounty = 45, fee = 100 }, -- Scylla
+    [540] = { bounty = 35, fee =  80 }, -- Tikbalang
+    [541] = { bounty = 40, fee =  85 }, -- Prince Orobas
+    [542] = { bounty = 40, fee =  85 }, -- Graoully
+    [543] = { bounty = 45, fee = 100 }, -- Zirnitra
+    [544] = { bounty = 50, fee = 125 }, -- Krabkatoa
+    [545] = { bounty = 40, fee =   0 }, -- Yacumama
+    [546] = { bounty = 40, fee =   0 }, -- Capricornus
+    [547] = { bounty = 50, fee = 125 }, -- Blobdingnag
+    [548] = { bounty = 40, fee =   0 }, -- Shoggoth
+    [549] = { bounty = 40, fee =   0 }, -- Lamprey Lord
+    [550] = { bounty = 50, fee = 125 }, -- Orcus
+    [551] = { bounty = 40, fee =   0 }, -- Jyeshtha
+    [552] = { bounty = 40, fee =   0 }, -- Farruca Fly
+    [553] = { bounty = 50, fee = 125 }, -- Verthandi
+    [554] = { bounty = 40, fee =   0 }, -- Urd
+    [555] = { bounty = 40, fee =   0 }, -- Skuld
+    [556] = { bounty = 50, fee = 125 }, -- Lord Ruthven
+    [557] = { bounty = 40, fee =   0 }, -- Erebus
+    [558] = { bounty = 40, fee =   0 }, -- Feuerunke
+    [559] = { bounty = 60, fee = 150 }, -- Yilbegan
 }
 
 local zone =
@@ -588,16 +519,16 @@ local zone =
         -- The Boyahda Tree
         [ 370] = { params = 104805, huntId = 357 },
         [ 626] = { params = 122214, huntId = 358 },
-        [ 882] = { params = 122215, huntId = 359 },
-        [1138] = { params = 139624, huntId = 360 },
+        [ 874] = { params = 122215, huntId = 359 },
+        [1130] = { params = 139624, huntId = 360 },
         -- Habitat Unknown (Ru'lude Gardens)
-        --[ 378] = { params = 157226, huntId = 554 },
-        --[ 634] = { params = 157227, huntId = 555 },
-        --[ 890] = { params = 157229, huntId = 557 },
-        --[1146] = { params = 157230, huntId = 558 },
-        --[ 634] = { params = 174633, huntId = 553 },
-        --[ 890] = { params = 174636, huntId = 556 },
-        --[1146] = { params = 174639, huntId = 559 },
+        [ 378] = { params = 157226, huntId = 554 },
+        [ 634] = { params = 157227, huntId = 555 },
+        [ 890] = { params = 157229, huntId = 557 },
+        [1146] = { params = 157230, huntId = 558 },
+        [ 634] = { params = 174633, huntId = 553 },
+        [ 890] = { params = 174636, huntId = 556 },
+        [1146] = { params = 174639, huntId = 559 },
     },
 
     [tpz.zone.NORTHERN_SAN_DORIA] =
@@ -690,9 +621,9 @@ local zone =
         [1138] = { params =  69827, huntId = 195 },
         [1394] = { params =  88260, huntId = 196 },
         -- Habitat Unknown (Northern San d'Oria)
-        --[ 378] = { params = 157217, huntId = 545 },
-        --[ 634] = { params = 157218, huntId = 546 },
-        --[ 890] = { params = 174624, huntId = 544 },
+        [ 378] = { params = 157217, huntId = 545 },
+        [ 634] = { params = 157218, huntId = 546 },
+        [ 890] = { params = 174624, huntId = 544 },
     },
 
     [tpz.zone.BASTOK_MINES] =
@@ -784,9 +715,9 @@ local zone =
         [ 626] = { params = 140536, huntId = 248 },
         [ 882] = { params = 155897, huntId = 249 },
         -- Habitat Unknown (Bastok Mines)
-        --[ 378] = { params = 157220, huntId = 548 },
-        --[ 634] = { params = 157221, huntId = 549 },
-        --[ 890] = { params = 174627, huntId = 547 },
+        [ 378] = { params = 157220, huntId = 548 },
+        [ 634] = { params = 157221, huntId = 549 },
+        [ 890] = { params = 174627, huntId = 547 },
     },
 
     [tpz.zone.PORT_WINDURST] =
@@ -886,9 +817,9 @@ local zone =
         [ 898] = { params =  69937, huntId = 305 },
         [1154] = { params =  68914, huntId = 306 },
         -- Habitat Unknown (Port Windurst)
-        --[ 394] = { params = 157223, huntId = 551 },
-        --[ 650] = { params = 157224, huntId = 552 },
-        --[ 898] = { params = 174630, huntId = 550 },
+        [ 394] = { params = 157223, huntId = 551 },
+        [ 650] = { params = 157224, huntId = 552 },
+        [ 898] = { params = 174630, huntId = 550 },
     },
 
     [tpz.zone.KAZHAM] =
@@ -1311,7 +1242,7 @@ local zone =
       lock |   Scyld Qty    | NM pageId #  | status
                                           (Has distinct values) ]]--
 
-function tpz.hunts.onTrigger(player,npc,event)
+function tpz.hunts.onTrigger(player, npc, event)
     local huntId = player:getCharVar("[hunt]id")
     local huntStatus = player:getCharVar("[hunt]status")
     local scyldBits = bit.lshift(player:getCurrency("scyld"), 14)
@@ -1336,15 +1267,15 @@ function tpz.hunts.onTrigger(player,npc,event)
     player:startEvent(1500, scyldBits, zone[player:getZoneID()].huntMenu[1])
 end
 
-function tpz.hunts.onEventUpdate(player,csid,option)
+function tpz.hunts.onEventUpdate(player, csid, option)
     local registryZone = zone[player:getZoneID()]
     local region = registryZone[option]
-    player:updateEvent(0,0,registryZone.huntMenu[option])
+    player:updateEvent(0, 0, registryZone.huntMenu[option])
 
     -- handles region select
     option = bit.band(option, 0xFF)
     if registryZone.huntMenu[option] then
-        player:updateEvent(0,1,registryZone.huntMenu[option])
+        player:updateEvent(0, 1, registryZone.huntMenu[option])
     end
 
     -- gets progress of current hunt (param controls the display of kills needed)
@@ -1352,13 +1283,13 @@ function tpz.hunts.onEventUpdate(player,csid,option)
         player:updateEvent(1)
     end
 
-    -- displays hunt info (kills required,0,0,0,zoneId,huntId,scyld bounty+fee,?)
+    -- displays hunt info (kills required, 0, 0, 0, zoneId, huntId, scyld bounty+fee, ?)
     if region then
         local huntPage = hunts[region.huntId]
         local bountyBit = bit.lshift(huntPage.bounty, 10)
         local feeBit = huntPage.fee
         local scyldParam = bountyBit + feeBit
-        player:updateEvent(1,0,0,0,0,region.params,scyldParam,1)
+        player:updateEvent(1, 0, 0, 0, 0, region.params, scyldParam, 1)
     end
 end
 
@@ -1396,7 +1327,7 @@ function tpz.hunts.onEventFinish(player, csid, option)
         local huntId = player:getCharVar("[hunt]id")
         local scyldBounty = hunts[huntId].bounty
         -- give player evoliths here
-        --player:setCharVar("[hunt]nextHunt", getVanaMidnight())
+        player:setCharVar("[hunt]nextHunt", getVanaMidnight())
         tpz.hunts.clearHuntVars(player)
 
         -- scylds cap at 1000

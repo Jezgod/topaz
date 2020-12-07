@@ -1,23 +1,35 @@
 -----------------------------------
---  Area: Northern San d'Oria
+-- Area: Pashhow Marshlands
 --  NPC: Odyssean Passage
---  Working 100%
+-- Working 100%
 -----------------------------------
-local ID = require("scripts/zones/Northern_San_dOria/IDs")
+local ID = require("scripts/zones/Pashhow_Marshlands/IDs")
 require("scripts/globals/settings")
 require("scripts/globals/npc_util")
 -----------------------------------
 
 local skill_map =
 {
-	[18264] = {augment = 257, min = 0, max = 31}, 	--Spharai / Hand-to-Hand
-	[18276] = {augment = 259, min = 0, max = 31}, 	--Excalibur / Sword
-	[18294] = {augment = 262, min = 0, max = 31}, 	--Bravura / Great Axe
-	[18306] = {augment = 263, min = 0, max = 31}, 	--Apocalypse / Scythe
-	[18312] = {augment = 265, min = 0, max = 31}, 	--Kikoku / Katana
-	[18324] = {augment = 267, min = 0, max = 31}, 	--Mjollnir / Club
-	[18348] = {augment = 281, min = 0, max = 31}, 	--Yoichinoyumi / Great Katana
-	[18342] = {augment = 298, min = 0, max = 31}, 	--Gjallahorn / Wind Instrument
+	[18991] = {augment = 262, min = 0, max = 31},--Conqueror / Great Axe
+	[18992] = {augment = 257, min = 0, max = 31},--Glanzfaust / Hand-to-Hand
+	[18993] = {augment = 267, min = 0, max = 31},--Yagrush / Club
+	[18994] = {augment = 268, min = 0, max = 31},--Laevateinn / Staff
+	[18995] = {augment = 259, min = 0, max = 31},--Murgleis / Sword
+	[18996] = {augment = 258, min = 0, max = 31},--Vajra / Dagger
+	[18997] = {augment = 259, min = 0, max = 31},--Burtgang / Sword
+	[18998] = {augment = 263, min = 0, max = 31},--Liberator / Scythe
+	[18999] = {augment = 261, min = 0, max = 31},--Aymur / Axe
+	[19000] = {augment = 258, min = 0, max = 31},--Carnwenhan / Dagger
+	[19001] = {augment = 282, min = 0, max = 31},--Gastraphetes / Marskmanship
+	[19002] = {augment = 266, min = 0, max = 31},--Kogarasumaru / Great Katana
+	[19003] = {augment = 265, min = 0, max = 31},--Nagi / Katana
+	[19004] = {augment = 264, min = 0, max = 31},--Ryunohige / Polearm
+	[19005] = {augment = 268, min = 0, max = 31},--Nirvana / Staff
+	[19006] = {augment = 259, min = 0, max = 31},--Tizona / Sword
+	[19007] = {augment = 282, min = 0, max = 31},--Death Penalty / Marskmanship
+	[19008] = {augment = 257, min = 0, max = 31},--Kenkonken / Great Axe
+	[18989] = {augment = 258, min = 0, max = 31},--Terpsichore / Dagger
+	[18990] = {augment = 268, min = 0, max = 31},--Tupsimati / Staff
 }
 
 local testimony_map =
@@ -45,8 +57,9 @@ local testimony_map =
 }
 
 function onTrade(player,npc,trade)
-	local pCP = player:getCP()
-	local rCP = 100000
+	local currency = "imperial_standing"
+	local pIS = player:getCurrency(currency)
+        local rIS = 100000
         local weapon = trade:getItemId(0)
         local weaponMap = skill_map[weapon]
 	local testimony = trade:getItemId(1)
@@ -55,31 +68,27 @@ function onTrade(player,npc,trade)
         local aug2 = 0
 	local aug1t = 0
 	local aug2t = 0
-        local scyld = player:getCurrency("scyld")
+	local scyld = player:getCurrency("scyld")
 	local scyldbonus = 0
 
         if (trade:getItemCount() ~= 2 or trade:getGil() ~= 0) then
-		player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED)
-	        printf("A")
+		player:messageSpecial(ID.text.NOTHING_HAPPENS)
 
 	elseif (weaponMap == nil or testimonyMap == nil) then
- 		player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED)
-		printf("B")
+ 		player:messageSpecial(ID.text.NOTHING_HAPPENS)
 	
-	elseif (trade:getItemCount() == 2 and trade:getGil() == 0 and pCP >= rCP) then		
+	elseif (trade:getItemCount() == 2 and trade:getGil() == 0 and pIS >= rIS) then		
 		aug1 = weaponMap.augment
  		aug2 = testimonyMap.augment
 		math.randomseed (os.time())
-		
+
 		if (scyld == nil or scyld == 0) then
 		    scyldbonus = 0
- 		    printf("C")
 		else
 		    scyldbonus = math.floor(scyld / 100)
-		    printf("D")
-		    printf("scyld: %u", scyldbonus)
+		    printf("scyld: %u", scyldbonus)	
 		end
-
+		
                 if (scyldbonus > 0) then
 			aug1t = math.floor(math.abs(math.random() - math.random()) * (scyldbonus + 1 + weaponMap.max - weaponMap.min) + weaponMap.min)
 			aug2t = math.floor(math.abs(math.random() - math.random()) * (scyldbonus + 1 + testimonyMap.max - testimonyMap.min) + testimonyMap.min)
@@ -97,27 +106,26 @@ function onTrade(player,npc,trade)
                 	aug1t = math.floor(math.abs(math.random() - math.random()) * (1 + weaponMap.max - weaponMap.min) + weaponMap.min)
 			aug2t = math.floor(math.abs(math.random() - math.random()) * (1 + testimonyMap.max - testimonyMap.min) + testimonyMap.min)
 		end
-		
+
 		player:tradeComplete()
     		player:addItem(weapon, 1, aug1, aug1t, aug2, aug2t)
-       		player:delCP(rCP)
-  		if (scyldbonus > 0) then
+       		player:delCurrency(currency, rIS)
+		if (scyldbonus > 0) then
 			player:PrintToPlayer( string.format("%u Scyld used.", scyldbonus * 100), 29 )
 			player:delCurrency("scyld", scyldbonus * 100)
 		else
 		end
     		player:messageSpecial(ID.text.ITEM_OBTAINED,weapon)
-	        player:PrintToPlayer( string.format("Scyld Bonus: %u", scyldbonus), 29 )
         else
 		player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED)
-	end	
+	end
 
 	printf("random1: %u", aug1t)
 	printf("random2: %u", aug2t)
 end
 
 function onTrigger(player,npc)
-	player:PrintToPlayer( string.format("Increase the Strength of Relic Weapons Here..."), 29 )
+	player:PrintToPlayer( string.format("Increase the Strength of Mythic Weapons Here..."), 29 )
 end
 
 function onEventUpdate(player,csid,option)

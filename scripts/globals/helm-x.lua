@@ -341,7 +341,6 @@ local helmInfo =
                     { 420,  1236}, -- Cactus Stems
                     { 420,  1473}, -- High Quality Scorpion Shell
                     { 420,   769}, -- Colored Rock
-                    {  10,  1255}, -- Elemental Ore
                 },
                 points =
                 {
@@ -428,7 +427,6 @@ local helmInfo =
                     { 230,   703}, -- Petrified Log
                     { 100,   769}, -- Colored Rock
                     { 470,  1888}, -- Silica
-                    {   5,  1255}, -- Elemental Ore
                 },
                 points =
                 {
@@ -943,7 +941,6 @@ local helmInfo =
                     { 140,  737}, -- Gold Ore
                     { 340,  738}, -- Platium Ore
                     {  70,  769}, -- Colored Rock
-                    {  50, 1255}, -- Elemental Ore
                 },
                 points =
                 {
@@ -1109,7 +1106,6 @@ local helmInfo =
                     { 840,   768}, -- Flint Stone
                     { 360,   736}, -- Silver Ore
                     { 170,   769}, -- Colored Rock
-                    {  85,  1255}, -- Elemental Ore
                     { 150,   645}, -- Darksteel Ore
                     { 110,   737}, -- Gold Ore
                 },
@@ -1242,7 +1238,6 @@ local helmInfo =
                     { 810,   736}, -- Silver Ore
                     { 590,   645}, -- Darksteel Ore
                     { 400,   769}, -- Colored Rock
-                    {  75,  1255}, -- Elemental Ore
                     {  80,   737}, -- Gold Ore
                 },
                 points =
@@ -1282,7 +1277,6 @@ local helmInfo =
                     {1520,  2126}, -- Orpiment
                     { 100,   739}, -- Orichalcum Ore
                     { 220,   769}, -- Colored Rock
-                    { 150,  1255}, -- Elemental Ore
                 },
                 points =
                 {
@@ -1316,13 +1310,7 @@ local helmInfo =
 -- colored rocks. do not change this order!
 -------------------------------------------------
 
-local rocks = {769,771,770,772,773,774,776,775}
-
--------------------------------------------------
--- elemental ores. do not change this order!
--------------------------------------------------
-
-local ores = {1255,1258,1260,1257,1256,1259,1261,1262}
+local rocks = {769, 771, 770, 772, 773, 774, 776, 775}
 
 -------------------------------------------------
 -- local functions
@@ -1378,11 +1366,6 @@ function pickItem(player, info)
         item = rocks[VanadielDayElement() + 1]
     end
 
-    -- if we picked an elemental ore, change it to the day's element
-    if item == 1255 then
-        item = ores[VanadielDayElement() + 1]
-    end
-
     return item
 end
 
@@ -1435,13 +1418,13 @@ tpz.helm.onTrade = function(player, npc, trade, helmType, csid)
             player:addItem(item)
 
 	    -- RETRIB
-		if helmType == tpz.helm.type.HARVESTING then
+		if helmType == dsp.helm.type.HARVESTING then
 			player:AddRetribStat(Stats.Harvesting, Points.Harvesting)
-		elseif helmType == tpz.helm.type.EXCAVATION then
+		elseif helmType == dsp.helm.type.EXCAVATION then
                 	player:AddRetribStat(Stats.Excavating, Points.Excavating)
-		elseif helmType == tpz.helm.type.LOGGING then
+		elseif helmType == dsp.helm.type.LOGGING then
                 	player:AddRetribStat(Stats.Logging, Points.Logging)
-		elseif helmType == tpz.helm.type.MINING then
+		elseif helmType == dsp.helm.type.MINING then
                 	player:AddRetribStat(Stats.Mining, Points.Mining)
 		end
 			
@@ -1457,7 +1440,7 @@ tpz.helm.onTrade = function(player, npc, trade, helmType, csid)
         -- quest stuff
         if
             helmType == tpz.helm.type.HARVESTING and
-            player:getQuestStatus(AHT_URHGAN,tpz.quest.id.ahtUrhgan.VANISHING_ACT) == QUEST_ACCEPTED and
+            player:getQuestStatus(AHT_URHGAN, tpz.quest.id.ahtUrhgan.VANISHING_ACT) == QUEST_ACCEPTED and
             not player:hasKeyItem(tpz.ki.RAINBOW_BERRY) and
             broke ~= 1 and
             zoneId == tpz.zone.WAJAOM_WOODLANDS
@@ -1466,7 +1449,7 @@ tpz.helm.onTrade = function(player, npc, trade, helmType, csid)
         end
 
         local amkChance = 20
-        if 
+        if
             player:getCurrentMission(AMK) == tpz.mission.id.amk.WELCOME_TO_MY_DECREPIT_DOMICILE and
             broke ~= 1
         then
