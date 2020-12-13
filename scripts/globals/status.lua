@@ -28,8 +28,9 @@ Retrib.Stat =
 	Quest 			= 16,
 	Mission 		= 17,
         Valor                   = 18,
-	JobTo75 		= 19,
-	CrafTo100 		= 20
+	Hunt			= 19,
+	JobTo75 		= 20,
+	CrafTo100 		= 21
 
 }
 
@@ -65,6 +66,7 @@ Retrib.StatPoints =
     Digging 		=   1,
     Supply 		=  15,
     Valor               =  50,
+    Hunt		= 100,
 }
 
 Retrib.Event =
@@ -864,7 +866,7 @@ tpz.effect =
     -- GoV Prowess bonus effects, real effect at ID 474
     PROWESS_CASKET_RATE      = 777, -- (Unimplemented)
     PROWESS_SKILL_RATE       = 778, -- (Unimplemented)
-    PROWESS_CRYSTAL_YEILD    = 779, -- (Unimplemented)
+    PROWESS_CRYSTAL_YIELD    = 779, -- (Unimplemented)
     PROWESS_TH               = 780, -- +1 per tier
     PROWESS_ATTACK_SPEED     = 781, -- *flat 4% for now
     PROWESS_HP_MP            = 782, -- Base 3% and another 1% per tier.

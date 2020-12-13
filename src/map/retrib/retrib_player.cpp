@@ -56,7 +56,7 @@ int16 StatPoints[20] =
     Retrib::StatPoints::SP_CRAFTTO100
 };
 
-const char* StatColumn [22] = 
+const char* StatColumn [23] = 
 {
     "WS",             // 0
     "DTH",            // 1
@@ -77,9 +77,10 @@ const char* StatColumn [22] =
     "QST",            // 16
     "MSN",            // 17
     "VLR",            // 18
-    "PVP",            // 19
-    "J75",            // 20
-    "CFT"             // 21
+    "HNT",            // 19
+    "PVP",            // 20
+    "J75",            // 21
+    "CFT"             // 22
 };
 
 CRetribPlayer::CRetribPlayer(CCharEntity* PChar)
@@ -152,31 +153,32 @@ auto CRetribPlayer::Initialize(uint16 ID) -> void
             "B.QST, "            // 28
             "B.MSN, "            // 29
             "B.VLR, "            // 30
-            "B.PVP, "            // 31
-            "B.J75, "            // 32
-            "B.CFT, "            // 33
-            "C.S0, "             // 34
-            "C.S1, "             // 35
-            "C.S2, "             // 36
-            "C.S3, "             // 37
-            "C.S4, "             // 38
-            "C.S5, "             // 39
-            "C.S6, "             // 40
-            "C.S7, "             // 41
-            "C.S8, "             // 42
-            "C.S9, "             // 43
-            "C.I0, "             // 44
-            "C.I1, "             // 45
-            "C.I2, "             // 46
-            "C.I3, "             // 47
-            "C.I4, "             // 48
-            "C.I5, "             // 49
-            "C.I6, "             // 50
-            "C.I7, "             // 51
-            "C.I8, "             // 52
-            "C.I9, "             // 53
-            "C.Cap, "            // 54
-            "C.Jail "            // 55
+            "B.HNT, "            // 31
+            "B.PVP, "            // 32
+            "B.J75, "            // 33
+            "B.CFT, "            // 34
+            "C.S0, "             // 35
+            "C.S1, "             // 36
+            "C.S2, "             // 37
+            "C.S3, "             // 38
+            "C.S4, "             // 39
+            "C.S5, "             // 40
+            "C.S6, "             // 41
+            "C.S7, "             // 42
+            "C.S8, "             // 43
+            "C.S9, "             // 44
+            "C.I0, "             // 45
+            "C.I1, "             // 46
+            "C.I2, "             // 47
+            "C.I3, "             // 48
+            "C.I4, "             // 49
+            "C.I5, "             // 50
+            "C.I6, "             // 51
+            "C.I7, "             // 52
+            "C.I8, "             // 53
+            "C.I9, "             // 54
+            "C.Cap, "            // 55
+            "C.Jail "            // 56
             "FROM retrib_pc AS A "
             "LEFT JOIN retrib_pc_stats AS B ON (A.ID = B.ID) "
             "LEFT JOIN retrib_pc_synergy AS C ON (A.ID = C.ID) "

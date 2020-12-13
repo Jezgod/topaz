@@ -180,6 +180,7 @@ local loot =
             {itemid =   745, droprate =  151}, -- gold_ingot
             {itemid =   774, droprate =   19}, -- purple_rock
             {itemid =   776, droprate =   19}, -- white_rock
+	    {itemid =  1255, droprate =   60}, -- elemental_ore
         },
         {
             {itemid =   652, droprate =  132}, -- steel_ingot
@@ -454,8 +455,10 @@ end
 
 function onTrigger(player, npc)
     local battlefield = player:getBattlefield()
+    local pLvl = player:getMainLvl()
     if battlefield then
         tpz.battlefield.HandleLootRolls(battlefield, loot[battlefield:getID()], nil, npc)
+	player:addExp(pLvl * 100)
     end
 end
 

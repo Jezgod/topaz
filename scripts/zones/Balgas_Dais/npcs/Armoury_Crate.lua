@@ -36,6 +36,7 @@ local loot =
             {itemid =   771, droprate =  125}, -- yellow_rock
             {itemid =   772, droprate =  125}, -- green_rock
             {itemid =   775, droprate =  125}, -- black_rock
+	    {itemid =  1255, droprate =   40}, -- elemental_ore
         },
         {
             {itemid =   790, droprate =   50}, -- garnet
@@ -91,6 +92,7 @@ local loot =
             {itemid =   775, droprate =  167}, -- black_rock
             {itemid =   771, droprate =  167}, -- yellow_rock
             {itemid =   776, droprate =  167}, -- white_rock
+	    {itemid =  1255, droprate =   60}, -- elemental_ore
         },
         {
             {itemid =   797, droprate =  125}, -- painite
@@ -601,6 +603,7 @@ local loot =
             {itemid =   784, droprate =   98}, -- jadeite
             {itemid =   797, droprate =   98}, -- painite
             {itemid =  4175, droprate =   99}, -- vile_elixir_+1
+	    {itemid =  1255, droprate =   60}, -- elemental_ore
         },
     },
 }
@@ -609,8 +612,10 @@ end
 
 function onTrigger(player, npc)
     local battlefield = player:getBattlefield()
+    local pLvl = player:getMainLvl()
     if battlefield then
         tpz.battlefield.HandleLootRolls(battlefield, loot[battlefield:getID()], nil, npc)
+	player:addExp(pLvl * 100)
     end
 end
 

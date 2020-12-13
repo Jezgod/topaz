@@ -36,13 +36,14 @@ local loot =
             {itemid = 18170, droprate = 139}, -- Platoon Edge
             {itemid = 18085, droprate = 42}, -- Platoon Lance
             {itemid = 16959, droprate = 181}, -- Platoon Sword
-            {itemid = 774, droprate = 97},   -- Purple Rock
-            {itemid = 769, droprate = 69},   -- Red Rock
-            {itemid = 776, droprate = 14},   -- White Rock
-            {itemid = 775, droprate = 28},   -- Black Rock
-            {itemid = 772, droprate = 28},   -- Green Rock
-            {itemid = 771, droprate = 14},   -- Yellow Rock
-            {itemid = 770, droprate = 69},   -- Blue Rock
+            {itemid =   774, droprate = 97},   -- Purple Rock
+            {itemid =   769, droprate = 69},   -- Red Rock
+            {itemid =   776, droprate = 14},   -- White Rock
+            {itemid =   775, droprate = 28},   -- Black Rock
+            {itemid =   772, droprate = 28},   -- Green Rock
+            {itemid =   771, droprate = 14},   -- Yellow Rock
+            {itemid =   770, droprate = 69},   -- Blue Rock
+	    {itemid =  1255, droprate = 20},   -- elemental_ore
         },
         {
             {itemid =     0, droprate = 389}, -- nothing
@@ -183,8 +184,10 @@ end
 
 function onTrigger(player, npc)
     local battlefield = player:getBattlefield()
+    local pLvl = player:getMainLvl()
     if battlefield then
         tpz.battlefield.HandleLootRolls(battlefield, loot[battlefield:getID()], nil, npc)
+	player:addExp(pLvl * 100)
     end
 end
 

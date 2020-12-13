@@ -11,6 +11,9 @@ require("scripts/globals/regimes")
 tpz = tpz or {}
 tpz.hunts = tpz.hunts or {}
 
+local Stats = Retrib.Stat
+local Points = Retrib.StatPoints
+
 local hunts =
 {
         -- West Ronfaure
@@ -1405,6 +1408,7 @@ function tpz.hunts.onEventFinish(player, csid, option)
         else
             player:addCurrency("scyld", scyldBounty)
         end
+	player:AddRetribStat(Stats.Hunt, Points.Hunt + scyldBounty)
         player:messageSpecial(msg.HUNT_RECORDED)
         player:messageSpecial(msg.OBTAIN_SCYLDS, scyldBounty, player:getCurrency("scyld"))
     end

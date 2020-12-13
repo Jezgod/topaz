@@ -3941,38 +3941,47 @@ namespace charutils
                     if (region >= 0 && region <= 27)
                     {
                         exp = charutils::AddExpBonus(PMember, exp);
-                        float expR = exp * (1 + (conquest::GetConquestRatio(nation) / 100.f));
+                        float ratio = (conquest::GetConquestRatio(nation) / 100.f);
+                        ratio = std::clamp<float>(ratio, 0, 0.5);
+                        float expR = exp * (1 + ratio);
                         charutils::AddExperiencePoints(false, PMember, PMob, (uint32)expR, mobCheck, chainactive);
                     }
-
                     else if (region >= 28 && region <= 32)
                     {
                         exp = charutils::AddExpBonus(PMember, exp);
-                        float expR = exp * (1 + (conquest::GetImperialRatio(nation) / 100.f));
+                        float ratio = (conquest::GetImperialRatio(nation) / 100.f);
+                        ratio = std::clamp<float>(ratio, 0, 0.5);
+                        float expR = exp * (1 + ratio);
+                        expR = std::clamp<float>(expR, 0, 50);
                         charutils::AddExperiencePoints(false, PMember, PMob, (uint32)expR, mobCheck, chainactive);
                     }
-
                     else if (region >= 33 && region <= 40)
                     {
                         exp = charutils::AddExpBonus(PMember, exp);
-                        float expR = exp * (1 + (conquest::GetAlliedRatio(nation) / 100.f));
+                        float ratio = (conquest::GetAlliedRatio(nation) / 100.f);
+                        ratio = std::clamp<float>(ratio, 0, 0.5);
+                        float expR = exp * (1 + ratio);
+                        expR = std::clamp<float>(expR, 0, 50);
                         charutils::AddExperiencePoints(false, PMember, PMob, (uint32)expR, mobCheck, chainactive);
                     }
-
                     else if (region == 41)
                     {
                         exp = charutils::AddExpBonus(PMember, exp);
-                        float expR = exp * (1 + (conquest::GetCruorRatio(nation) / 100.f));
+                        float ratio = (conquest::GetCruorRatio(nation) / 100.f);
+                        ratio = std::clamp<float>(ratio, 0, 0.5);
+                        float expR = exp * (1 + ratio);
+                        expR = std::clamp<float>(expR, 0, 50);
                         charutils::AddExperiencePoints(false, PMember, PMob, (uint32)expR, mobCheck, chainactive);
                     }
-
                     else if (region >= 42 && region <= 45)
                     {
                         exp = charutils::AddExpBonus(PMember, exp);
-                        float expR = exp * (1 + (conquest::GetBayldRatio(nation) / 100.f));
+                        float ratio = (conquest::GetBayldRatio(nation) / 100.f);
+                        ratio = std::clamp<float>(ratio, 0, 0.5);
+                        float expR = exp * (1 + ratio);
+                        expR = std::clamp<float>(expR, 0, 50);
                         charutils::AddExperiencePoints(false, PMember, PMob, (uint32)expR, mobCheck, chainactive);
                     }
-
                     else
                     {
 
@@ -4847,7 +4856,7 @@ namespace charutils
                     PChar->jobs.job[PChar->GetSJob()] += 1;
 
                     if (PChar->m_LevelRestriction == 0 ||
-                        PChar->m_LevelRestriction > PChar->GetMLevel())
+                        PChar->m_LevelRestriction > PChar->GetSLevel())
                     {
                         PChar->SetSLevel(PChar->jobs.job[PChar->GetSJob()]);
 

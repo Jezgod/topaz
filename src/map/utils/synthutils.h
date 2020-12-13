@@ -57,6 +57,7 @@ namespace synthutils
 
 	int32 startSynth(CCharEntity* PChar);
 	int32 sendSynthDone(CCharEntity* PChar);
+    void  saveSynthResult(CCharEntity* PChar, uint8 result);
 };
 
 #endif

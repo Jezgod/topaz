@@ -1278,14 +1278,14 @@ tpz.regime.bookOnEventFinish = function(player, option, regimeType)
             player:showText(player, msgOffset + 1)
 
             -- Records of Eminence: Undertake a FoV Training Regime
-            if player:getEminenceProgress(3) and regimeType == tpz.regime.type.FIELDS then
-                tpz.roe.onRecordTrigger(player, 3)
-            end
+            --if player:getEminenceProgress(3) and regimeType == tpz.regime.type.FIELDS then
+            --    tpz.roe.onRecordTrigger(player, 3)
+            --end
 
             -- Records of Eminence: Undertake a GoV Training Regime
-            if player:getEminenceProgress(11) and regimeType == tpz.regime.type.GROUNDS then
-                tpz.roe.onRecordTrigger(player, 11)
-            end
+            --if player:getEminenceProgress(11) and regimeType == tpz.regime.type.GROUNDS then
+            --    tpz.roe.onRecordTrigger(player, 11)
+            --end
         end
     end
 end

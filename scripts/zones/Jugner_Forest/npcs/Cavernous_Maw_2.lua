@@ -14,7 +14,7 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    if ENABLE_ABYSSEA == 1 and player:getMainLvl() >= 30 then
+    if ENABLE_ABYSSEA == 1 and player:getMainLvl() >= 1 then
         if
             tpz.abyssea.getTravStonesTotal(player) >= 1 and
             player:getQuestStatus(ABYSSEA, tpz.quest.id.abyssea.DAWN_OF_DEATH) == QUEST_ACCEPTED and

@@ -58,12 +58,6 @@ tpz.battlefield.leaveCode =
     LOST = 4
 }
 
--------------------------------------------------
--- elemental ores. do not change this order!
--------------------------------------------------
-
-local ores = {1255,1258,1260,1257,1256,1259,1261,1262}
-
 function tpz.battlefield.onBattlefieldTick(battlefield, timeinside, players)
     local killedallmobs = true
     local mobs = battlefield:getMobs(true, false)
@@ -108,7 +102,6 @@ function tpz.battlefield.onBattlefieldTick(battlefield, timeinside, players)
         battlefield:cleanup(true)
     end
 
-    --if killedallmobs then
     if killedallmobs and phaseChange == 0 then
         battlefield:setStatus(tpz.battlefield.status.WON)
     end
@@ -209,18 +202,15 @@ function tpz.battlefield.HandleLootRolls(battlefield, lootTable, players, npc)
                     max = max - entry.droprate
                     if roll > max then
                         if entry.itemid ~= 0 then
-                            if entry.itemid == 1255 then
-                                entry.itemid = ores[VanadielDayElement() + 1]
-                            end
-                                if entry.itemid == 65535 then
-                                    local gil = entry.amount/#players
-                                    for i = 1, #players, 1 do
-                                        players[i]:addGil(gil)
-                                        players[i]:messageSpecial(zones[players[1]:getZoneID()].text.GIL_OBTAINED, gil)
-                                    end
-                                    break
+                            if entry.itemid == 65535 then
+                                local gil = entry.amount/#players
+                                for i = 1, #players, 1 do
+                                    players[i]:addGil(gil)
+                                    players[i]:messageSpecial(zones[players[1]:getZoneID()].text.GIL_OBTAINED, gil)
                                 end
-                                players[1]:addTreasure(entry.itemid, npc)
+                                break
+                            end
+                            players[1]:addTreasure(entry.itemid, npc)
                         end
                         break
                     end
@@ -253,8 +243,6 @@ function tpz.battlefield.HealPlayers(battlefield, players)
         player:addHP(recoverHP)
         player:addMP(recoverMP)
         player:resetRecasts()
-        --player:messageBasic(msgBasic.RECOVERS_HP_AND_MP, recoverHP, recoverMP)
-        --player:messageBasic(msgBasic.ALL_ABILITIES_RECHARGED)
         player:messageBasic(tpz.msg.basic.RECOVERS_HP_AND_MP, recoverHP, recoverMP)
         player:messageBasic(tpz.msg.basic.ALL_ABILITIES_RECHARGED)
     end

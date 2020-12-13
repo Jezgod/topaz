@@ -85,31 +85,34 @@ function onTrigger(player, target)
     end
 
     if validZone(zone_list, zone) == true then
-	player:PrintToPlayer( string.format("Target cannot be arbitered due to location"), 14)
+	player:PrintToPlayer( string.format("Target cannot be arbitered due to their current location."), 14)
         return 1
     elseif (infamy < arbiter_cost ) then
-        player:PrintToPlayer( string.format("Target cannot be arbitered due to lack of infamy"), 14)
+        player:PrintToPlayer( string.format("Target cannot be arbitered due to lack of infamy."), 14)
         return 1
     elseif (t_cooldown > os.time()) then
-        player:PrintToPlayer( string.format("Target cannot be arbitered at the current time"), 14)
+        player:PrintToPlayer( string.format("Target cannot be arbitered at the current time."), 14)
         return 1
     elseif (p_cooldown > os.time()) then
-        player:PrintToPlayer( string.format("Target cannot be arbitered at the current time"), 14)
+        player:PrintToPlayer( string.format("Target cannot be arbitered at the current time."), 14)
         return 1
     elseif (targ:isEngaged()) then
-        player:PrintToPlayer( string.format("Target cannot be engaged in battle"), 14)
+        player:PrintToPlayer( string.format("Target cannot be engaged in battle."), 14)
         return 1
     elseif (pNation == targ:getNation()) then
-        player:PrintToPlayer( string.format("Target must be from a different nation"), 14)
+        player:PrintToPlayer( string.format("Target must be from a different nation."), 14)
         return 1
     elseif (targ:isDead()) then
-        player:PrintToPlayer( string.format("Target cannot be dead"), 14)
+        player:PrintToPlayer( string.format("Target cannot be dead."), 14)
         return 1
     elseif (pLevel < 50) then
-        player:PrintToPlayer( string.format("Level 50 is minimum level to arbiter"), 14)
+        player:PrintToPlayer( string.format("Level 50 is minimum level to arbiter."), 14)
         return 1
     elseif (targ:getMainLvl() < pLevel) then
-        player:PrintToPlayer( string.format("Only an equal or higher level target can be arbitered"), 14)
+        player:PrintToPlayer( string.format("Only an equal or higher level target can be arbitered."), 14)
+        return 1
+    elseif (player:isInMogHouse()) then
+	player:PrintToPlayer( string.format("Target cannot be arbitered due to your current location."), 14)
         return 1
     elseif targ then
         player:setPos(targ:getXPos() + math.random(1,5), targ:getYPos(), targ:getZPos() + math.random(1,5), targ:getRotPos() + math.random(1,180), targ:getZoneID())
@@ -120,7 +123,7 @@ function onTrigger(player, target)
 		targ:setAnimation(0)
 		end)
 	targ:setCharVar("arbiter_t" ,os.time() + 3600)
-        player:setCharVar("arbiter_p" ,os.time() + 120)
+        player:setCharVar("arbiter_p" ,os.time() + 600)
         player:delCurrency("infamy", arbiter_cost)
         targ:setCharVar("pvp_flag", 1)
 

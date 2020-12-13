@@ -58,7 +58,7 @@ function onEventFinish(player, csid, option)
         -- Soon !
     elseif csid == 60 then
         local time_elapsed = os.time() - player:getCharVar("started_painting")
-        if time_elapsed >= 30 then
+        if time_elapsed >= 0 then
             player:messageSpecial(ID.text.PAINTBRUSH_OFFSET + 22) -- You succeeded in projecting the image in your soul to the blank canvas. The door to the Rancor Den has opened!<Prompt>
             GetNPCByID(ID.npc.DOOR_TO_RANCOR):openDoor(45) -- Open the door to Den of Rancor for 45 sec
         else

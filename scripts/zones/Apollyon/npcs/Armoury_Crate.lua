@@ -886,6 +886,7 @@ end
 
 function onTrigger(player, npc)
     local battlefield = player:getBattlefield()
+    local pLvl = player:getMainLvl()
     if not battlefield then
         return
     end
@@ -916,6 +917,7 @@ function onTrigger(player, npc)
                     end
                 else
                     tpz.limbus.handleLootRolls(battlefield, loot[bfid][5], nil, npc)
+    		    player:addExp(pLvl * 100)
                     battlefield:setLocalVar("cutsceneTimer", 10)
                     battlefield:setLocalVar("lootSeen", 1)
                 end
@@ -982,6 +984,7 @@ function onTrigger(player, npc)
                     end
                 else
                     tpz.limbus.handleLootRolls(battlefield, loot[bfid][4], nil, npc)
+		    player:addExp(pLvl * 100)
                     battlefield:setLocalVar("cutsceneTimer", 10)
                     battlefield:setLocalVar("lootSeen", 1)
                 end
@@ -1003,6 +1006,7 @@ function onTrigger(player, npc)
                     end
                 else
                     tpz.limbus.handleLootRolls(battlefield, loot[bfid][5], nil, npc)
+		    player:addExp(pLvl * 100)
                     battlefield:setLocalVar("cutsceneTimer", 10)
                     battlefield:setLocalVar("lootSeen", 1)
                 end
@@ -1027,6 +1031,7 @@ function onTrigger(player, npc)
                         GetMobByID(ID.mob.APOLLYON_SE_MOB[4]+i):setStatus(tpz.status.DISAPPEAR)
                     end
                     tpz.limbus.handleLootRolls(battlefield, loot[bfid][4], nil, npc)
+	  	    player:addExp(pLvl * 100)
                     battlefield:setLocalVar("cutsceneTimer", 10)
                     battlefield:setLocalVar("lootSeen", 1)
                 end

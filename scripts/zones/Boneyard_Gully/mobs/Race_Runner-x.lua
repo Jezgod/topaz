@@ -8,7 +8,7 @@ require("scripts/globals/status")
 require("scripts/globals/titles")
 -----------------------------------
 
-local pathNodes =
+local path =
 {
     -539, 0, -481,
     -556, 0, -478,
@@ -20,18 +20,16 @@ local pathNodes =
 }
 
 function onMobSpawn(mob)
-    mob:speed(100)
     onMobRoam(mob)
 end
 
-function onPath(mob)
-    tpz.path.patrol(mob, pathNodes, tpz.path.flag.RUN);
-end;
+function onMobRoamAction(mob)
+    tpz.path.patrol(mob, path, tpz.path.flag.REVERSE)
+end
 
 function onMobRoam(mob)
-    -- move to start position if not moving
     if not mob:isFollowingPath() then
-        mob:pathThrough(tpz.path.first(pathNodes), tpz.path.flag.REVERSE)
+        mob:pathThrough(tpz.path.first(path))
     end
 end
 

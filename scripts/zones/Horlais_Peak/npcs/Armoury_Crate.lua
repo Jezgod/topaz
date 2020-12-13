@@ -33,7 +33,7 @@ local loot =
             {itemid = 748,  droprate =  70}, -- gold beastcoin
             {itemid = 749,  droprate =  50}, -- mythril beastcoin
             {itemid = 771,  droprate =  53}, -- yellow rock
-            {itemid = 0,    droprate =   0}, -- nothing
+            {itemid =   0,  droprate =   0}, -- nothing
         },
         {
             {itemid = 4751, droprate = 125}, -- erase
@@ -74,6 +74,7 @@ local loot =
             {itemid = 815,  droprate =  17}, -- sphene
             {itemid = 790,  droprate =  20}, -- garnet
             {itemid = 811,  droprate =  18}, -- ametrine
+	    {itemid = 1255, droprate =  40}, -- elemental_ore
             {itemid = 0,    droprate =   0}, -- nothing
         },
         {
@@ -114,6 +115,7 @@ local loot =
             {itemid =   772, droprate =  200}, -- green_rock
             {itemid =   771, droprate =  200}, -- yellow_rock
             {itemid =   774, droprate =  200}, -- purple_rock
+	    {itemid =  1255, droprate =   60}, -- elemental_ore
         },
         {
             {itemid =   797, droprate =  100}, -- painite
@@ -527,6 +529,7 @@ local loot =
             {itemid = 798, droprate = 23},   -- Turquoise
             {itemid = 4172, droprate = 21},  -- Reraiser
             {itemid = 4174, droprate = 16},  -- Vile Elixir
+            {itemid = 1255, droprate = 40},  -- elemental_ore
         },
         {
             {itemid = 4896, droprate = 116}, -- Fire Spirit Pact
@@ -769,8 +772,10 @@ end
 
 function onTrigger(player, npc)
     local battlefield = player:getBattlefield()
+    local pLvl = player:getMainLvl()
     if battlefield then
         tpz.battlefield.HandleLootRolls(battlefield, loot[battlefield:getID()], nil, npc)
+	player:addExp(pLvl * 100)
     end
 end
 

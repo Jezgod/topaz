@@ -18,19 +18,19 @@ local loot =
             {itemid = 13161, droprate = 250}, -- Wind Torque
         },
         {
-            {itemid = 751, droprate = 500},   -- Platinum Beastcoin
+            {itemid = 751, droprate = 884},   -- Platinum Beastcoin
             {itemid = 4874, droprate = 48},   -- Scroll Of Absorb-STR
             {itemid = 4751, droprate = 143},  -- Scroll Of Erase
             {itemid = 4714, droprate = 119},  -- Scroll Of Phalanx
             {itemid = 4896, droprate = 48},   -- Fire Spirit Pact
-            {itemid = 1255, droprate = 48},   -- Chunk Of Fire Ore
-            {itemid = 1256, droprate = 48},   -- Chunk Of Ice Ore
-            {itemid = 1257, droprate = 48},   -- Chunk Of Wind Ore
-            {itemid = 1258, droprate = 48},   -- Chunk Of Earth Ore
-            {itemid = 1259, droprate = 48},   -- Chunk Of Lightning Ore
-            {itemid = 1260, droprate = 48},   -- Chunk Of Water Ore
-            {itemid = 1261, droprate = 48},   -- Chunk Of Light Ore
-            {itemid = 1262, droprate = 48},   -- Chunk Of Dark Ore
+            --{itemid = 1255, droprate = 48},   -- Chunk Of Fire Ore
+            --{itemid = 1256, droprate = 48},   -- Chunk Of Ice Ore
+            --{itemid = 1257, droprate = 48},   -- Chunk Of Wind Ore
+            --{itemid = 1258, droprate = 48},   -- Chunk Of Earth Ore
+            --{itemid = 1259, droprate = 48},   -- Chunk Of Lightning Ore
+            --{itemid = 1260, droprate = 48},   -- Chunk Of Water Ore
+            --{itemid = 1261, droprate = 48},   -- Chunk Of Light Ore
+            --{itemid = 1262, droprate = 48},   -- Chunk Of Dark Ore
         },
         {
             {itemid = 751, droprate = 833},   -- Platinum Beastcoin
@@ -76,6 +76,7 @@ local loot =
             {itemid = 775, droprate = 30},    -- Black Rock
             {itemid = 776, droprate = 30},    -- White Rock
             {itemid = 810, droprate = 50},    -- Fluorite
+	    {itemid = 1255, droprate = 60},   -- elemental_ore
         },
     },
 
@@ -95,14 +96,15 @@ local loot =
             {itemid = 13154, droprate =  250}, -- Enhancing Torque
         },
         {
-            {itemid =  1260, droprate =  125}, -- Chunk Of Water Ore
-            {itemid =  1257, droprate =  125}, -- Chunk Of Wind Ore
-            {itemid =  1256, droprate =  125}, -- Chunk Of Ice Ore
-            {itemid =  1259, droprate =  125}, -- Chunk Of Lightning Ore
-            {itemid =  1261, droprate =  125}, -- Chunk Of Light Ore
-            {itemid =  1255, droprate =  125}, -- Chunk Of Fire Ore
-            {itemid =  1262, droprate =  125}, -- Chunk Of Dark Ore
-            {itemid =  1258, droprate =  125}, -- Chunk Of Earth Ore
+	    {itemid =  0, droprate =   1000}, -- nothing
+            --{itemid =  1260, droprate =  125}, -- Chunk Of Water Ore
+            --{itemid =  1257, droprate =  125}, -- Chunk Of Wind Ore
+            --{itemid =  1256, droprate =  125}, -- Chunk Of Ice Ore
+            --{itemid =  1259, droprate =  125}, -- Chunk Of Lightning Ore
+            --{itemid =  1261, droprate =  125}, -- Chunk Of Light Ore
+            --{itemid =  1255, droprate =  125}, -- Chunk Of Fire Ore
+            --{itemid =  1262, droprate =  125}, -- Chunk Of Dark Ore
+            --{itemid =  1258, droprate =  125}, -- Chunk Of Earth Ore
         },
         {
             {itemid =     0, droprate =  750}, -- nothing
@@ -140,6 +142,7 @@ local loot =
             {itemid =   801, droprate =  150}, -- Chrysoberyl
             {itemid =   775, droprate =   50}, -- Black Rock
             {itemid =   774, droprate =   50}, -- Purple Rock
+	    {itemid =  1255, droprate =   60}, -- elemental_ore
         },
         {
             {itemid =   751, droprate =  500}, -- Platinum Beastcoin
@@ -156,8 +159,10 @@ end
 
 function onTrigger(player, npc)
     local battlefield = player:getBattlefield()
+    local pLvl = player:getMainLvl()
     if battlefield then
         tpz.battlefield.HandleLootRolls(battlefield, loot[battlefield:getID()], nil, npc)
+	player:addExp(pLvl * 100)
     end
 end
 

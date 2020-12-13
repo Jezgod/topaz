@@ -44,7 +44,7 @@ class CRetribPlayer
     bool                        Aggro;              // If player is currently engaged
     uint32                      JobsTo75;	 		// Jobs in which characters have reached 75
     uint8                       Areas;              // Areas the player has access to
-    uint32		  		       	Stats[22];      	// Retrib character stats
+    uint32		  		       	Stats[23];      	// Retrib character stats
     std::set<uint16>            Gear[20];           // Holds gear that the player has previously obtained
     uint8        			    AHP[23];	        // GID,YUG,PAL,QUF,STA,STB,MIS,FEY,RNG,ATT,QCK,TER,CAS,IFR,DEN,TOR,BOY,TOW,PSO,NEW,SKY,SEA,TOA
     Coordinates			        LastPosition;   	// Last coordinates before a warp  

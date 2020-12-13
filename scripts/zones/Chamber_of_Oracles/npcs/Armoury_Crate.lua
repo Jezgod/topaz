@@ -54,17 +54,18 @@ local loot =
             {itemid =   776, droprate =   50}, -- white_rock
             {itemid =   702, droprate =  125}, -- ebony_log
             {itemid =   751, droprate =  775}, -- platinum_beastcoin
+	    {itemid =  1255, droprate =   60}, -- elemental_ore
         },
         {
-            {itemid =     0, droprate =  600}, -- nothing
-            {itemid =  1260, droprate =   50}, -- chunk_of_water_ore
-            {itemid =  1256, droprate =   50}, -- chunk_of_ice_ore
-            {itemid =  1259, droprate =   50}, -- chunk_of_lightning_ore
-            {itemid =  1258, droprate =   50}, -- chunk_of_earth_ore
-            {itemid =  1255, droprate =   50}, -- chunk_of_fire_ore
-            {itemid =  1261, droprate =   50}, -- chunk_of_light_ore
-            {itemid =  1262, droprate =   50}, -- chunk_of_dark_ore
-            {itemid =  1257, droprate =   50}, -- chunk_of_wind_ore
+            {itemid =     0, droprate =  1000}, -- nothing
+            --{itemid =  1260, droprate =   50}, -- chunk_of_water_ore
+            --{itemid =  1256, droprate =   50}, -- chunk_of_ice_ore
+            --{itemid =  1259, droprate =   50}, -- chunk_of_lightning_ore
+            --{itemid =  1258, droprate =   50}, -- chunk_of_earth_ore
+            --{itemid =  1255, droprate =   50}, -- chunk_of_fire_ore
+            --{itemid =  1261, droprate =   50}, -- chunk_of_light_ore
+            --{itemid =  1262, droprate =   50}, -- chunk_of_dark_ore
+            --{itemid =  1257, droprate =   50}, -- chunk_of_wind_ore
         },
     },
     -- KSNM Eye of the Storm
@@ -144,8 +145,10 @@ end
 
 function onTrigger(player, npc)
     local battlefield = player:getBattlefield()
+    local pLvl = player:getMainLvl()
     if battlefield then
         tpz.battlefield.HandleLootRolls(battlefield, loot[battlefield:getID()], nil, npc)
+	player:addExp(pLvl * 100)
     end
 end
 

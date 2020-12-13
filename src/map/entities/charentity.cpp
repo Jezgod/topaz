@@ -216,6 +216,7 @@ CCharEntity::CCharEntity()
     m_LastYell = 0;
     m_moghouseID = 0;
     m_moghancementID = 0;
+    m_SaveSynthResult = 0;
 
     PAI = std::make_unique<CAIContainer>(this, nullptr, std::make_unique<CPlayerController>(this),
         std::make_unique<CTargetFind>(this));

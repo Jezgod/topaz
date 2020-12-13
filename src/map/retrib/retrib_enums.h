@@ -121,13 +121,14 @@ namespace Retrib
         STAT_QUEST,             // 16
         STAT_MISSION,           // 17
         STAT_VALOR,             // 18
-        STAT_PVP,               // 19
-        STAT_JOBTO75,           // 20
-        STAT_CRAFTTO100,        // 21
-        STAT_AREA,              // 22
-        STAT_SKILL,             // 23
-        STAT_GEAR,              // 24
-        STAT_EXPERIENCE         // 25
+        STAT_HUNT,              // 19
+        STAT_PVP,               // 20
+        STAT_JOBTO75,           // 21
+        STAT_CRAFTTO100,        // 22
+        STAT_AREA,              // 23
+        STAT_SKILL,             // 24
+        STAT_GEAR,              // 25
+        STAT_EXPERIENCE         // 26
     };
 
     enum StatPoints
@@ -149,10 +150,11 @@ namespace Retrib
 	SP_QUEST       =   25,  // Quest			        [16]  LuaBaseEntity->completeQuest
 	SP_MISSION     =  250,  // Mission			        [17]  LuaBaseEntity->completeMission
     SP_VALOR       =   50,  // Valor Points             [18]  regimes.lua->checkRegime
-    SP_PVP         = 1000,  // PVP Points               [19]  CCharEntity::Die() 
-	SP_JOBTO75     = 2500,  // Job to 75			    [20]  charutils::AddExperiencePoints->LevelUp
-	SP_CRAFTTO100  = 2500,  // Craft to 100			    [21]  SynthUtils->doSynthSkillUp
-    SP_AREA        =   20,  // Areas Found     	        [22]  ZoneUtils->LoadChar (Only for SA)
+    SP_HUNT        =  100,  // Hunt Points              [19]  hunts.lua->OnEventFinish
+    SP_PVP         = 1000,  // PVP Points               [20]  CCharEntity::Die() 
+	SP_JOBTO75     = 2500,  // Job to 75			    [21]  charutils::AddExperiencePoints->LevelUp
+	SP_CRAFTTO100  = 2500,  // Craft to 100			    [22]  SynthUtils->doSynthSkillUp
+    SP_AREA        =   20,  // Areas Found     	        [23]  ZoneUtils->LoadChar (Only for SA)
     SP_CRAFT       =    1,  // Craft Skillups           [  ]  Synthutils->doSynthSkillUp (Bit Shift for SA)
     SP_EXPERIENCE  =    3   // Experience Multiplier    [25]  Charutils->AddExperiencePoints (Bit Shift for SA) 
     };

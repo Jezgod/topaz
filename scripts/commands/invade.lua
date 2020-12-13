@@ -339,33 +339,33 @@ function onTrigger(player, target)
 
    if (targ ~= nil and targ:getID() ~= player:getID()) then
         if (targ:getObjType() ~= 1) then
-            player:PrintToPlayer( string.format("Only a PC can be invaded"), 14)
+            player:PrintToPlayer( string.format("Only a PC can be invaded."), 14)
             return 1
         elseif (targ:getCharVar("arbiter_p") > os.time()) then
-            player:PrintToPlayer( string.format("Arbiter cannot be invaded at the current time"), 14)
+            player:PrintToPlayer( string.format("Arbiter cannot be invaded at the current time."), 14)
             return 1
-        elseif (targ:getCharVar("arbiter_t") - 3480 > os.time()) then
-            player:PrintToPlayer( string.format("Arbiter target cannot be invaded at the current time"), 14)
+        elseif (targ:getCharVar("arbiter_t") - 3000 > os.time()) then
+            player:PrintToPlayer( string.format("Arbiter target cannot be invaded at the current time."), 14)
             return 1
         elseif (pNation == targ:getNation()) then
-            player:PrintToPlayer( string.format("Target must be from a different nation"), 14)
+            player:PrintToPlayer( string.format("Target must be from a different nation."), 14)
             return 1
         elseif (targ:isDead()) then
-            player:PrintToPlayer( string.format("Target cannot be dead"), 14)
+            player:PrintToPlayer( string.format("Target cannot be dead."), 14)
             return 1
         elseif (targ:checkSoloPartyAlliance() ~= 0 and targ:getPartySize() > 1) then
-            player:PrintToPlayer( string.format("Only a solo player can be invaded"), 14)
+            player:PrintToPlayer( string.format("Only a solo player can be invaded."), 14)
             --printf("State : %i",targ:checkSoloPartyAlliance())
             --printf("Size : %i",targ:getPartySize())
             return 1
         elseif (targ:getMainLvl() > pHlvl or targ:getMainLvl() < pLlvl) then
-            player:PrintToPlayer( string.format("Only a player of similar level can be invaded"), 14)
+            player:PrintToPlayer( string.format("Only a player of similar level can be invaded."), 14)
             return 1
         elseif (pLife < 90) then
-            player:PrintToPlayer( string.format("Cannot invade with the current health status"), 14)
+            player:PrintToPlayer( string.format("Cannot invade with the current health status."), 14)
             return 1
         elseif (player:getZoneID() == zone) then
-            player:PrintToPlayer( string.format("This function cannot be used here"), 14)
+            player:PrintToPlayer( string.format("This function cannot be used here."), 14)
             return 1
         else
         end
@@ -384,6 +384,6 @@ function onTrigger(player, target)
         player:PrintToPlayer( string.format("*** Successful invasion attempt ***"), 29)
         targ:PrintToPlayer( string.format("*** Successful invasion attempt ***"), 29)
     else
-    	player:PrintToPlayer(("Must select a valid target using in game cursor first"), 29)
+    	player:PrintToPlayer(("Must select a valid target using in game cursor first."), 29)
     end
 end

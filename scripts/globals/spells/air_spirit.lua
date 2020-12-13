@@ -14,7 +14,7 @@ function onMagicCastingCheck(caster, target, spell)
     local mjob = caster:getMainJob()
 
     if (caster:hasPet()) then
-        result tpz.msg.basic.ALREADY_HAS_A_PET
+        return tpz.msg.basic.ALREADY_HAS_A_PET
     elseif (not caster:canUseMisc(tpz.zoneMisc.PET)) then
         return tpz.msg.basic.CANT_BE_USED_IN_AREA
     elseif (mjob ~= tpz.job.SMN) then

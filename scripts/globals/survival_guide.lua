@@ -35,6 +35,7 @@ local function checkForRegisteredSurvivalGuide(player, guide)
     if not hasRegisteredGuide then
         player:messageSpecial(zones[guide.zoneId].text.COMMON_SENSE_SURVIVAL)
         player:addTeleport(travelType, guide.groupIndex - 1, guide.group - 1)
+	player:addExp(500)
 
         return false
     end

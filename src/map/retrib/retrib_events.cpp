@@ -21,11 +21,11 @@ const char* DT[7] = {"D1","D2","D3","D4","D5","D6","D7"};
 std::vector<std::vector<uint8>> Tasks =
 {
     {Retrib::Stat::STAT_BATTLEFIELD},
-    {Retrib::Stat::STAT_MINING,      Retrib::Stat::STAT_LOGGING,  Retrib::Stat::STAT_HARVESTING, Retrib::Stat::STAT_EXCAVATING},
+    {Retrib::Stat::STAT_MINING,      Retrib::Stat::STAT_LOGGING,   Retrib::Stat::STAT_HARVESTING, Retrib::Stat::STAT_EXCAVATING},
     {Retrib::Stat::STAT_QUEST,       Retrib::Stat::STAT_MISSION},
     {Retrib::Stat::STAT_NQ_SYNTH,    Retrib::Stat::STAT_HQ_SYNTH}, //Retrib::Stat::STAT_ENHANCEMENT
     {Retrib::Stat::STAT_MOB_KILL,    Retrib::Stat::STAT_NM_KILL},
-    {Retrib::Stat::STAT_VALOR},
+    {Retrib::Stat::STAT_VALOR,       Retrib::Stat::STAT_HUNT},
     {Retrib::Stat::STAT_EXPERIENCE}
 };
 
@@ -33,10 +33,10 @@ std::vector<std::vector<std::string>> TaskTexts =
 {
     {"Win BCNMs and Battlefield Events"},
     {"Mine Materials", "Log Materials", "Harvest Materials", "Excavate Materials"},
-    {"Complete Quests", "Complete Missions", "Gain PVP Victories"},
+    {"Complete Quests", "Complete Missions"},
     {"Create Normal-Quality Items", "Create High-Quality Items"}, //"Enhance Gear"
     {"Kill Experience-Granting Mobs", "Kill NMs"},
-    {"Complete Regimes (FoV and GoV)"},
+    {"Complete Regimes (FoV and GoV)", "Complete Hunts"},
     {"Gain Experience Points"}
 };
 

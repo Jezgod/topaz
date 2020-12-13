@@ -15,7 +15,7 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    if (ENABLE_ABYSSEA == 1 and player:getMainLvl() >= 30) then
+    if (ENABLE_ABYSSEA == 1 and player:getMainLvl() >= 1) then
         local HasStone = tpz.abyssea.getTravStonesTotal(player)
         if (HasStone >= 1 and player:getQuestStatus(ABYSSEA, tpz.quest.id.abyssea.DAWN_OF_DEATH) == QUEST_ACCEPTED
         and player:getQuestStatus(ABYSSEA, tpz.quest.id.abyssea.A_DELECTABLE_DEMON) == QUEST_AVAILABLE) then

@@ -43,7 +43,7 @@ function onTrade(player, npc, trade)
     local pLevel = player:getMainLvl()
     local currency = "infamy"
     local pI = player:getCurrency(currency)
-    local rI = 1000
+    local rI = 10000
     local hasItem = trade:hasItemQty(pJobMap.testimony, 1)
 
     if pLevel ~= 75 then

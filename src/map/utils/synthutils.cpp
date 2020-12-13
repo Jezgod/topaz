@@ -365,6 +365,21 @@ uint8 calcSynthResult(CCharEntity* PChar)
             ShowDebug(CL_CYAN"Success: %g  Random: %g\n" CL_RESET, success, random);
             #endif
 
+            // RETRIBUTION - Special areas give better HQ rate
+            switch (PChar->getZone())
+            {
+            case 165: if (crystalElement == ELEMENT_LIGHT) 	     finalhqtier += 1; break; //Throne Room
+            case 170: if (crystalElement == ELEMENT_DARK) 		 finalhqtier += 1; break; //Full Moon Fountain
+            case 201: if (crystalElement == ELEMENT_ICE) 		 finalhqtier += 1; break; //Cloister of Gales
+            case 202: if (crystalElement == ELEMENT_EARTH) 	     finalhqtier += 1; break; //Cloister of Storms
+            case 203: if (crystalElement == ELEMENT_FIRE) 		 finalhqtier += 1; break; //Cloister of Frost
+            case 207: if (crystalElement == ELEMENT_WATER) 	     finalhqtier += 1; break; //Cloister of Flames
+            case 209: if (crystalElement == ELEMENT_WIND) 		 finalhqtier += 1; break; //Cloister of Tremors
+            case 211: if (crystalElement == ELEMENT_LIGHTNING)   finalhqtier += 1; break; //Cloister of Tides
+            default: finalhqtier = finalhqtier;  break;
+            }
+            // RETRIBUTION END
+
             if(random >= success) // Synthesis broke
             {
                 // keep the skill, because of which the synthesis failed.
@@ -380,6 +395,7 @@ uint8 calcSynthResult(CCharEntity* PChar)
     {
         switch(finalhqtier)
         {
+            case 5:  chance = 0.667;    break; // 1 in 1.5
             case 4:  chance = 0.5;      break; // 1 in 2
             case 3:  chance = 0.25;     break; // 1 in 4
             case 2:  chance = 0.0625;   break; // 1 in 16
@@ -419,7 +435,7 @@ uint8 calcSynthResult(CCharEntity* PChar)
             if (PChar->CraftContainer->getCraftType() ==  1)
                 chance = std::clamp(chance, 0., 0.800);
             else
-                chance = std::clamp(chance, 0., 0.500);
+                chance = std::clamp(chance, 0., 0.667);
         }
 
         #ifdef _TPZ_SYNTH_DEBUG_MESSAGES_
@@ -600,6 +616,15 @@ int32 doSynthSkillUp(CCharEntity* PChar)
                     exp = skillAmount * 75;
                 }
 
+                if (PChar->m_SaveSynthResult == 1)
+                {
+                    PChar->RPC->AddStat(Retrib::Stat::STAT_NQ_SYNTH, skillAmount);
+                }
+                else
+                {
+                    PChar->RPC->AddStat(Retrib::Stat::STAT_HQ_SYNTH, skillAmount);
+                }
+                
                 PChar->RealSkills.skill[skillID] += skillAmount;
                 PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, skillID, skillAmount, 38));
 
@@ -880,6 +905,8 @@ int32 doSynthResult(CCharEntity* PChar)
         return 0;
     }
 
+    saveSynthResult(PChar, m_synthResult);
+
     // Retribution - Add Synthesis Points
     if (m_synthResult == SYNTHESIS_SUCCESS)
     {
@@ -983,6 +1010,11 @@ int32 sendSynthDone(CCharEntity* PChar)
     PChar->updatemask |= UPDATE_HP;
     PChar->pushPacket(new CCharUpdatePacket(PChar));
     return 0;
+}
+
+void saveSynthResult(CCharEntity* PChar, uint8 result)
+{
+    PChar->m_SaveSynthResult = result;
 }
 
 } // namespace synth
