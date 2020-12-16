@@ -225,9 +225,7 @@ function onTrigger(player, arg1)
     local infused = 0
     local mJob = player:getMainJob()
     local ng_job = 0
-    local arg2
-    local arg3
-    local arg4
+    printf("Count Lunar: %i", abysstotal)
 
     if validZone(zone_list, zone) == true then
 	    targ:PrintToPlayer( string.format( "This function is not valid in the current zone." ), 14)
@@ -247,97 +245,24 @@ function onTrigger(player, arg1)
             error(player, "Invalid atma.  Offset values are between 1 and 100.")
             return
         else
-            if (targ:getLocalVar("atma_1")) == 0 then
-	            arg1 = arg1
-            elseif  (targ:getLocalVar("atma_2")) == 0 then
-	            arg2 = arg1
-            elseif (targ:getLocalVar("atma_3")) == 0 then
-	            arg3 = arg1
-            elseif (targ:getLocalVar("atma_4")) == 0 then
-	            arg4 = arg1
-            end
-        end
-
-	    if (arg4) then
-            atma = arg4 + 1278
-            if (player:getCharVar("ng_job") ~= nil) then
-                ng_job = player:getCharVar("ng_job")
-    	    end
-
-	    if (targ:hasKeyItem(atma) and targ:getLocalVar("atma_1") ~= arg4 and targ:getLocalVar("atma_2") ~= arg4 and 
-                targ:getLocalVar("atma_3") ~= arg4 and mJob == ng_job) then
-	        targ:addStatusEffect(id, arg4, 3, duration)
-                targ:PrintToPlayer( string.format( "%s has been successfully infused.", atma_map[atma] ), 29)
-                targ:addCharVar("infused_atma", 1)
-                targ:setLocalVar("atma_4", arg4)
-                targ:setLocalVar("atma_cooldown", os.time() + 1800)
-	    elseif (targ:getLocalVar("atma_1") == arg4) or (targ:getLocalVar("atma_2") == arg4 or targ:getLocalVar("atma_3") == arg4) then
-                targ:PrintToPlayer( string.format( "The same atma cannot be infused." ), 14)
-            elseif (mJob ~= ng_job) then
-                targ:PrintToPlayer( string.format( "This job cannot infuse atma." ), 14)
-            else
-	        targ:PrintToPlayer( string.format( "You do not possess the proper key item to infuse %s.", atma_map[atma] ), 14)
-            end
-
-        elseif (arg3) then
-            atma = arg3 + 1278
-            if (player:getCharVar("ng_job") ~= nil) then
-                ng_job = player:getCharVar("ng_job")
-    	    end
-
-            if (targ:hasKeyItem(atma) and targ:getLocalVar("atma_1") ~= arg3 and targ:getLocalVar("atma_2") ~= arg3 and mJob == ng_job) then
-	        targ:addStatusEffect(id, arg3, 3, duration)
-                targ:PrintToPlayer( string.format( "%s has been successfully infused.", atma_map[atma] ), 29)
-                targ:addCharVar("infused_atma", 1)
-                targ:setLocalVar("atma_3", arg3)
-                targ:setLocalVar("atma_cooldown", os.time() + 1800)
-	        elseif (targ:getLocalVar("atma_1") == arg3) or (targ:getLocalVar("atma_2") == arg3) then
-                targ:PrintToPlayer( string.format( "The same atma cannot be infused." ), 14)
-            elseif (mJob ~= ng_job) then
-                targ:PrintToPlayer( string.format( "This job cannot infuse atma." ), 14)
-            else
-	        targ:PrintToPlayer( string.format( "You do not possess the proper key item to infuse %s.", atma_map[atma] ), 14)
-            end
-
-        elseif (arg2) then
-            atma = arg2 + 1278
-            if (player:getCharVar("ng_job") ~= nil) then
-                ng_job = player:getCharVar("ng_job")
-    	    end
-            if (targ:hasKeyItem(atma) and targ:getLocalVar("atma_1") ~= arg2 and mJob == ng_job) then
-	        targ:addStatusEffect(id, arg2, 3, duration)
-                targ:PrintToPlayer( string.format( "%s has been successfully infused.", atma_map[atma] ), 29)
-                targ:addCharVar("infused_atma", 1)
-                targ:setLocalVar("atma_2", arg2)
-                targ:setLocalVar("atma_cooldown", os.time() + 1800)
-	        elseif (targ:getLocalVar("atma_1") == arg2) then
-                targ:PrintToPlayer( string.format( "The same atma cannot be infused." ), 14)
-            elseif (mJob ~= ng_job) then
-                targ:PrintToPlayer( string.format( "This job cannot infuse atma." ), 14)
-            else
-	        targ:PrintToPlayer( string.format( "You do not possess the proper key item to infuse %s.", atma_map[atma] ), 14)
-            end
-
-        elseif (arg1) then
             atma = arg1 + 1278
             if (player:getCharVar("ng_job") ~= nil) then
                 ng_job = player:getCharVar("ng_job")
     	    end
-            if (targ:hasKeyItem(atma) and targ:getLocalVar("atma_1") ~= arg1 and mJob == ng_job) then
+	    if (targ:hasKeyItem(atma) and targ:getLocalVar("last_atma") ~= arg1 and mJob == ng_job) then
 	        targ:addStatusEffect(id, arg1, 3, duration)
                 targ:PrintToPlayer( string.format( "%s has been successfully infused.", atma_map[atma] ), 29)
                 targ:addCharVar("infused_atma", 1)
-                targ:setLocalVar("atma_1", arg1)
+                targ:setLocalVar("last_atma", arg1)
                 targ:setLocalVar("atma_cooldown", os.time() + 1800)
-	    elseif (targ:getLocalVar("atma_1") == arg1) then
-                targ:PrintToPlayer( string.format( "The same atma cannot be infused." ), 14)
+            elseif (targ:getLocalVar("last_atma") == arg1) then
+                targ:PrintToPlayer( string.format( "The same atma cannot be infused consecutively." ), 14)
             elseif (mJob ~= ng_job) then
                 targ:PrintToPlayer( string.format( "This job cannot infuse atma." ), 14)
             else
-	        targ:PrintToPlayer( string.format( "You do not possess the proper key item to infuse %s.", atma_map[atma] ), 14)
+	       targ:PrintToPlayer( string.format( "You do not possess the proper key item to infuse %s", atma_map[atma] ), 14)
             end
         end
-        
     else
         targ:PrintToPlayer( string.format( "You cannot infuse any more atma." ))
     end

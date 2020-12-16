@@ -3520,41 +3520,86 @@ namespace charutils
                     if (region >= 0 && region <= 27)
                     {
                         gilPerPerson += gilPerPerson * PMember->getMod(Mod::GILFINDER) / 100;
-                        float gilPerPersonR = gilPerPerson * (1 + (conquest::GetConquestRatio(gnation) / 100.f));
-                        UpdateItem(PMember, LOC_INVENTORY, 0, (int32)gilPerPersonR);
-                        PMember->pushPacket(new CMessageBasicPacket(PMember, PMember, (int32)gilPerPersonR, 0, 565));
+                        uint8 pvp = GetPVPVar(PMember);
+                        if (pvp == 1)
+                        {
+                            float gilPerPersonR = gilPerPerson * (1 + (conquest::GetConquestRatio(gnation) / 100.f));
+                            UpdateItem(PMember, LOC_INVENTORY, 0, (int32)gilPerPersonR);
+                            PMember->pushPacket(new CMessageBasicPacket(PMember, PMember, (int32)gilPerPersonR, 0, 565));
+                        }
+                        else
+                        {
+                            UpdateItem(PMember, LOC_INVENTORY, 0, (int32)gilPerPerson);
+                            PMember->pushPacket(new CMessageBasicPacket(PMember, PMember, (int32)gilPerPerson, 0, 565));
+                        }
                     }
 
                     else if (region >= 28 && region <= 32)
                     {
                         gilPerPerson += gilPerPerson * PMember->getMod(Mod::GILFINDER) / 100;
-                        float gilPerPersonR = gilPerPerson * (1 + (conquest::GetImperialRatio(gnation) / 100.f));
-                        UpdateItem(PMember, LOC_INVENTORY, 0, (int32)gilPerPersonR);
-                        PMember->pushPacket(new CMessageBasicPacket(PMember, PMember, (int32)gilPerPersonR, 0, 565));
+                        uint8 pvp = GetPVPVar(PMember);
+                        if (pvp == 1)
+                        {
+                            float gilPerPersonR = gilPerPerson * (1 + (conquest::GetImperialRatio(gnation) / 100.f));
+                            UpdateItem(PMember, LOC_INVENTORY, 0, (int32)gilPerPersonR);
+                            PMember->pushPacket(new CMessageBasicPacket(PMember, PMember, (int32)gilPerPersonR, 0, 565));
+                        }
+                        else
+                        {
+                            UpdateItem(PMember, LOC_INVENTORY, 0, (int32)gilPerPerson);
+                            PMember->pushPacket(new CMessageBasicPacket(PMember, PMember, (int32)gilPerPerson, 0, 565));
+                        }
                     }
 
                     else if (region >= 33 && region <= 40)
                     {
                         gilPerPerson += gilPerPerson * PMember->getMod(Mod::GILFINDER) / 100;
-                        float gilPerPersonR = gilPerPerson * (1 + (conquest::GetAlliedRatio(gnation) / 100.f));
-                        UpdateItem(PMember, LOC_INVENTORY, 0, (int32)gilPerPersonR);
-                        PMember->pushPacket(new CMessageBasicPacket(PMember, PMember, (int32)gilPerPersonR, 0, 565));
+                        uint8 pvp = GetPVPVar(PMember);
+                        if (pvp == 1)
+                        {
+                            float gilPerPersonR = gilPerPerson * (1 + (conquest::GetAlliedRatio(gnation) / 100.f));
+                            UpdateItem(PMember, LOC_INVENTORY, 0, (int32)gilPerPersonR);
+                            PMember->pushPacket(new CMessageBasicPacket(PMember, PMember, (int32)gilPerPersonR, 0, 565));
+                        }
+                        else
+                        {
+                            UpdateItem(PMember, LOC_INVENTORY, 0, (int32)gilPerPerson);
+                            PMember->pushPacket(new CMessageBasicPacket(PMember, PMember, (int32)gilPerPerson, 0, 565));
+                        }
                     }
 
                     else if (region == 41)
                     {
                         gilPerPerson += gilPerPerson * PMember->getMod(Mod::GILFINDER) / 100;
-                        float gilPerPersonR = gilPerPerson * (1 + (conquest::GetCruorRatio(gnation) / 100.f));
-                        UpdateItem(PMember, LOC_INVENTORY, 0, (int32)gilPerPersonR);
-                        PMember->pushPacket(new CMessageBasicPacket(PMember, PMember, (int32)gilPerPersonR, 0, 565));
+                        uint8 pvp = GetPVPVar(PMember);
+                        if (pvp == 1)
+                        {
+                            float gilPerPersonR = gilPerPerson * (1 + (conquest::GetCruorRatio(gnation) / 100.f));
+                            UpdateItem(PMember, LOC_INVENTORY, 0, (int32)gilPerPersonR);
+                            PMember->pushPacket(new CMessageBasicPacket(PMember, PMember, (int32)gilPerPersonR, 0, 565));
+                        }
+                        else
+                        {
+                            UpdateItem(PMember, LOC_INVENTORY, 0, (int32)gilPerPerson);
+                            PMember->pushPacket(new CMessageBasicPacket(PMember, PMember, (int32)gilPerPerson, 0, 565));
+                        }
                     }
 
                     else if (region >= 42 && region <= 45)
                     {
                         gilPerPerson += gilPerPerson * PMember->getMod(Mod::GILFINDER) / 100;
-                        float gilPerPersonR = gilPerPerson * (1 + (conquest::GetBayldRatio(gnation) / 100.f));
-                        UpdateItem(PMember, LOC_INVENTORY, 0, (int32)gilPerPersonR);
-                        PMember->pushPacket(new CMessageBasicPacket(PMember, PMember, (int32)gilPerPersonR, 0, 565));
+                        uint8 pvp = GetPVPVar(PMember);
+                        if (pvp == 1)
+                        {
+                            float gilPerPersonR = gilPerPerson * (1 + (conquest::GetBayldRatio(gnation) / 100.f));
+                            UpdateItem(PMember, LOC_INVENTORY, 0, (int32)gilPerPersonR);
+                            PMember->pushPacket(new CMessageBasicPacket(PMember, PMember, (int32)gilPerPersonR, 0, 565));
+                        }
+                        else
+                        {
+                            UpdateItem(PMember, LOC_INVENTORY, 0, (int32)gilPerPerson);
+                            PMember->pushPacket(new CMessageBasicPacket(PMember, PMember, (int32)gilPerPerson, 0, 565));
+                        }
                     }
 
                     else
@@ -3573,41 +3618,86 @@ namespace charutils
             if (region >= 0 && region <= 27)
             {
                 gil += gil * PChar->getMod(Mod::GILFINDER) / 100;
-                float gilR = gil * (1 + (conquest::GetConquestRatio(snation) / 100.f));
-                UpdateItem(PChar, LOC_INVENTORY, 0, static_cast<int32>(gilR));
-                PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, static_cast<int32>(gilR), 0, 565));
+                uint8 pvp = GetPVPVar(PChar);
+                if (pvp == 1)
+                {
+                    float gilR = gil * (1 + (conquest::GetConquestRatio(snation) / 100.f));
+                    UpdateItem(PChar, LOC_INVENTORY, 0, static_cast<int32>(gilR));
+                    PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, static_cast<int32>(gilR), 0, 565));
+                }
+                else
+                {
+                    UpdateItem(PChar, LOC_INVENTORY, 0, static_cast<int32>(gil));
+                    PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, static_cast<int32>(gil), 0, 565));
+                }
             }
 
             else if (region >= 28 && region <= 32)
             {
                 gil += gil * PChar->getMod(Mod::GILFINDER) / 100;
-                float gilR = gil * (1 + (conquest::GetImperialRatio(snation) / 100.f));
-                UpdateItem(PChar, LOC_INVENTORY, 0, static_cast<int32>(gilR));
-                PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, static_cast<int32>(gilR), 0, 565));
+                uint8 pvp = GetPVPVar(PChar);
+                if (pvp == 1)
+                {
+                    float gilR = gil * (1 + (conquest::GetImperialRatio(snation) / 100.f));
+                    UpdateItem(PChar, LOC_INVENTORY, 0, static_cast<int32>(gilR));
+                    PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, static_cast<int32>(gilR), 0, 565));
+                }
+                else
+                {
+                    UpdateItem(PChar, LOC_INVENTORY, 0, static_cast<int32>(gil));
+                    PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, static_cast<int32>(gil), 0, 565));
+                }
             }
 
             else if (region >= 33 && region <= 40)
             {
                 gil += gil * PChar->getMod(Mod::GILFINDER) / 100;
-                float gilR = gil * (1 + (conquest::GetAlliedRatio(snation) / 100.f));
-                UpdateItem(PChar, LOC_INVENTORY, 0, static_cast<int32>(gilR));
-                PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, static_cast<int32>(gilR), 0, 565));
+                uint8 pvp = GetPVPVar(PChar);
+                if (pvp == 1)
+                {
+                    float gilR = gil * (1 + (conquest::GetAlliedRatio(snation) / 100.f));
+                    UpdateItem(PChar, LOC_INVENTORY, 0, static_cast<int32>(gilR));
+                    PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, static_cast<int32>(gilR), 0, 565));
+                }
+                else
+                {
+                    UpdateItem(PChar, LOC_INVENTORY, 0, static_cast<int32>(gil));
+                    PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, static_cast<int32>(gil), 0, 565));
+                }
             }
 
             else if (region == 41)
             {
                 gil += gil * PChar->getMod(Mod::GILFINDER) / 100;
-                float gilR = gil * (1 + (conquest::GetCruorRatio(snation) / 100.f));
-                UpdateItem(PChar, LOC_INVENTORY, 0, static_cast<int32>(gilR));
-                PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, static_cast<int32>(gilR), 0, 565));
+                uint8 pvp = GetPVPVar(PChar);
+                if (pvp == 1)
+                {
+                    float gilR = gil * (1 + (conquest::GetCruorRatio(snation) / 100.f));
+                    UpdateItem(PChar, LOC_INVENTORY, 0, static_cast<int32>(gilR));
+                    PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, static_cast<int32>(gilR), 0, 565));
+                }
+                else
+                {
+                    UpdateItem(PChar, LOC_INVENTORY, 0, static_cast<int32>(gil));
+                    PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, static_cast<int32>(gil), 0, 565));
+                }
             }
 
             else if (region >= 42 && region <= 45)
             {
                 gil += gil * PChar->getMod(Mod::GILFINDER) / 100;
-                float gilR = gil * (1 + (conquest::GetBayldRatio(snation) / 100.f));
-                UpdateItem(PChar, LOC_INVENTORY, 0, static_cast<int32>(gilR));
-                PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, static_cast<int32>(gilR), 0, 565));
+                uint8 pvp = GetPVPVar(PChar);
+                if (pvp == 1)
+                {
+                    float gilR = gil * (1 + (conquest::GetBayldRatio(snation) / 100.f));
+                    UpdateItem(PChar, LOC_INVENTORY, 0, static_cast<int32>(gilR));
+                    PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, static_cast<int32>(gilR), 0, 565));
+                }
+                else
+                {
+                    UpdateItem(PChar, LOC_INVENTORY, 0, static_cast<int32>(gil));
+                    PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, static_cast<int32>(gil), 0, 565));
+                }
             }
 
             else
@@ -3941,46 +4031,82 @@ namespace charutils
                     if (region >= 0 && region <= 27)
                     {
                         exp = charutils::AddExpBonus(PMember, exp);
-                        float ratio = (conquest::GetConquestRatio(nation) / 100.f);
-                        ratio = std::clamp<float>(ratio, 0, 0.5);
-                        float expR = exp * (1 + ratio);
-                        charutils::AddExperiencePoints(false, PMember, PMob, (uint32)expR, mobCheck, chainactive);
+                        uint8 pvp = GetPVPVar(PMember);
+                        if (pvp == 1)
+                        {
+                            float ratio = (conquest::GetConquestRatio(nation) / 100.f);
+                            ratio = std::clamp<float>(ratio, 0.0f, 0.5f);
+                            float expR = exp * (1 + ratio);
+                            charutils::AddExperiencePoints(false, PMember, PMob, (uint32)expR, mobCheck, chainactive);
+                        }
+                        else
+                        {
+                            charutils::AddExperiencePoints(false, PMember, PMob, (uint32)exp, mobCheck, chainactive);
+                        }
                     }
                     else if (region >= 28 && region <= 32)
                     {
                         exp = charutils::AddExpBonus(PMember, exp);
-                        float ratio = (conquest::GetImperialRatio(nation) / 100.f);
-                        ratio = std::clamp<float>(ratio, 0, 0.5);
-                        float expR = exp * (1 + ratio);
-                        expR = std::clamp<float>(expR, 0, 50);
-                        charutils::AddExperiencePoints(false, PMember, PMob, (uint32)expR, mobCheck, chainactive);
+                        uint8 pvp = GetPVPVar(PMember);
+                        if (pvp == 1)
+                        {
+                            float ratio = (conquest::GetImperialRatio(nation) / 100.f);
+                            ratio = std::clamp<float>(ratio, 0.0f, 0.5f);
+                            float expR = exp * (1 + ratio);
+                            charutils::AddExperiencePoints(false, PMember, PMob, (uint32)expR, mobCheck, chainactive);
+                        }
+                        else
+                        {
+                            charutils::AddExperiencePoints(false, PMember, PMob, (uint32)exp, mobCheck, chainactive);
+                        }
                     }
                     else if (region >= 33 && region <= 40)
                     {
                         exp = charutils::AddExpBonus(PMember, exp);
-                        float ratio = (conquest::GetAlliedRatio(nation) / 100.f);
-                        ratio = std::clamp<float>(ratio, 0, 0.5);
-                        float expR = exp * (1 + ratio);
-                        expR = std::clamp<float>(expR, 0, 50);
-                        charutils::AddExperiencePoints(false, PMember, PMob, (uint32)expR, mobCheck, chainactive);
+                        uint8 pvp = GetPVPVar(PMember);
+                        if (pvp == 1)
+                        {
+                            float ratio = (conquest::GetAlliedRatio(nation) / 100.f);
+                            ratio = std::clamp<float>(ratio, 0.0f, 0.5f);
+                            float expR = exp * (1 + ratio);
+                            charutils::AddExperiencePoints(false, PMember, PMob, (uint32)expR, mobCheck, chainactive);
+                        }
+                        else
+                        {
+                            charutils::AddExperiencePoints(false, PMember, PMob, (uint32)exp, mobCheck, chainactive);
+                        }
                     }
                     else if (region == 41)
                     {
                         exp = charutils::AddExpBonus(PMember, exp);
-                        float ratio = (conquest::GetCruorRatio(nation) / 100.f);
-                        ratio = std::clamp<float>(ratio, 0, 0.5);
-                        float expR = exp * (1 + ratio);
-                        expR = std::clamp<float>(expR, 0, 50);
-                        charutils::AddExperiencePoints(false, PMember, PMob, (uint32)expR, mobCheck, chainactive);
+                        uint8 pvp = GetPVPVar(PMember);
+                        if (pvp == 1)
+                        {
+                            float ratio = (conquest::GetCruorRatio(nation) / 100.f);
+                            ratio = std::clamp<float>(ratio, 0.0f, 0.5f);
+                            float expR = exp * (1 + ratio);
+                            charutils::AddExperiencePoints(false, PMember, PMob, (uint32)expR, mobCheck, chainactive);
+                        }
+                        else
+                        {
+                            charutils::AddExperiencePoints(false, PMember, PMob, (uint32)exp, mobCheck, chainactive);
+                        }
                     }
                     else if (region >= 42 && region <= 45)
                     {
                         exp = charutils::AddExpBonus(PMember, exp);
-                        float ratio = (conquest::GetBayldRatio(nation) / 100.f);
-                        ratio = std::clamp<float>(ratio, 0, 0.5);
-                        float expR = exp * (1 + ratio);
-                        expR = std::clamp<float>(expR, 0, 50);
-                        charutils::AddExperiencePoints(false, PMember, PMob, (uint32)expR, mobCheck, chainactive);
+                        uint8 pvp = GetPVPVar(PMember);
+                        if (pvp == 1)
+                        {
+                            float ratio = (conquest::GetBayldRatio(nation) / 100.f);
+                            ratio = std::clamp<float>(ratio, 0.0f, 0.5f);
+                            float expR = exp * (1 + ratio);
+                            charutils::AddExperiencePoints(false, PMember, PMob, (uint32)expR, mobCheck, chainactive);
+                        }
+                        else
+                        {
+                            charutils::AddExperiencePoints(false, PMember, PMob, (uint32)exp, mobCheck, chainactive);
+                        }
                     }
                     else
                     {
@@ -4029,7 +4155,7 @@ namespace charutils
         uint8 mLevel = (PChar->m_LevelRestriction != 0 && PChar->m_LevelRestriction < PChar->GetMLevel()) ? PChar->m_LevelRestriction : PChar->GetMLevel();
 
         uint16 exploss = 0;
-        if (mLevel == 99)
+        if (mLevel == 75)
         {
             exploss = 1000;
         }

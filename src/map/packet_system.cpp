@@ -2643,7 +2643,7 @@ void SmallPacket0x052(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 ************************************************************************/
 void SmallPacket0x053(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
-    uint8 count = data.ref<uint8>(0x04);
+    /*uint8 count = data.ref<uint8>(0x04);
     uint8 type = data.ref<uint8>(0x05);
 
     if (type == 0 && PChar->getStyleLocked())
@@ -2711,7 +2711,7 @@ void SmallPacket0x053(map_session_data_t* session, CCharEntity* PChar, CBasicPac
         PChar->pushPacket(new CCharSyncPacket(PChar));
     }
 
-    return;
+    return;*/
 }
 
 /************************************************************************

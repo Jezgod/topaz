@@ -69,9 +69,9 @@ function onTrigger(player)
 	--player:setCharVar("lootvar", 0)
 	
 	if validZone(zone_list, zone) == true then
-		player:PrintToPlayer( string.format("This function is not valid in the current zone"), 14)
+		player:PrintToPlayer( string.format("This function is not valid in the current zone."), 14)
         elseif (pvp == 1) then
-                player:PrintToPlayer( string.format("PVP already enabled"), 29 )
+                player:PrintToPlayer( string.format("PVP already enabled."), 29 )
                 return 1
     	else
 		--player:getCharVar("lootvar") == 0 then

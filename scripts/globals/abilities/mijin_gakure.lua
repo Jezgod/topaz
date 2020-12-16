@@ -8,10 +8,17 @@
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
+require("scripts/globals/msg")
 -----------------------------------
 
 function onAbilityCheck(player, target, ability)
-    return 0, 0
+    if (target:getObjType() == 1) then
+        --player:timer(10000, function(player)
+	--end)
+        return tpz.msg.basic.CANNOT_ON_THAT_TARG, 0
+    else
+        return 0, 0
+    end
 end
 
 function onUseAbility(player, target, ability)

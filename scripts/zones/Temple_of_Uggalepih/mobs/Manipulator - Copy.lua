@@ -63,7 +63,7 @@ local path =
 }
 
 function onMobSpawn(mob)
-    mob:pathThrough(path)
+    onMobRoam(mob) -- what?
 end
 
 function onPath(mob)
@@ -72,8 +72,8 @@ end
 
 function onMobRoam(mob)
     -- move to start position if not moving
-    if not mob:isFollowingPath() then        
-        mob:pathThrough(path)
+    if not mob:isFollowingPath() then
+        mob:pathThrough(tpz.path.first(path))
     end
 end
 
