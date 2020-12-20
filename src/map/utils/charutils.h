@@ -217,6 +217,8 @@ namespace charutils
     int32   GetCharVar(CCharEntity* PChar, const char* var);
     int32   ResetPVPVar(CCharEntity* PChar);
     int32   GetPVPVar(CCharEntity* PChar);
+    int32   GetNGVar(CCharEntity* PChar);
+    int32   GetNGJobVar(CCharEntity* PChar);
 };
 
 #endif

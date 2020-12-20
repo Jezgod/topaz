@@ -62,6 +62,10 @@ function onTrigger(player, target)
    local pNation = player:getNation()
    local infamy = player:getCurrency("infamy")
    local arbiter_cost = 100
+   local aJob = player:getMainJob()
+   local a_ng = player:getCharVar("ng")
+   local a_ng_job = player:getCharVar("ng_job")
+   local tJob
    local zone
    local nation
    local t_alleg
@@ -79,9 +83,12 @@ function onTrigger(player, target)
     if targ ~= nil then
         zone = targ:getZoneID()
         nation = targ:getNation()
+        tJob = targ:getMainJob()
         t_alleg = nation + 2
         t_cooldown = targ:getCharVar("arbiter_t")
         p_cooldown = targ:getCharVar("arbiter_p")
+	t_ng = targ:getCharVar("ng")
+        t_ng_job = targ:getCharVar("ng_job")
     end
 
     if validZone(zone_list, zone) == true then
@@ -114,7 +121,15 @@ function onTrigger(player, target)
     elseif (player:isInMogHouse()) then
 	player:PrintToPlayer( string.format("Target cannot be arbitered due to your current location."), 14)
         return 1
-    elseif targ then
+    elseif (aJob == a_ng_job and tJob ~= t_ng_job) then
+	player:PrintToPlayer( string.format("Target cannot be arbitered due to NG job inconsistency."), 14)
+        return 1
+    elseif (aJob ~= a_ng_job and tJob == t_ng_job) then
+	player:PrintToPlayer( string.format("Target cannot be arbitered due to NG job inconsistency."), 14)
+        return 1
+    end
+
+    if targ then
         player:setPos(targ:getXPos() + math.random(1,5), targ:getYPos(), targ:getZPos() + math.random(1,5), targ:getRotPos() + math.random(1,180), targ:getZoneID())
 	targ:PrintToPlayer( string.format("An arbiter player has appeared..."), 29)
         targ:setAllegiance( t_alleg )

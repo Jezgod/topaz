@@ -5,7 +5,7 @@
 -- 
 -----------------------------------
 require("scripts/globals/settings")
-local ID = require("scripts/zones/Empyreal_Paradox/IDs")
+local ID = require("scripts/zones/Abyssea-Uleguerand/IDs")
 -----------------------------------
 
 local opt1  = "Atma.Token"
@@ -32,11 +32,11 @@ local data =
 		if v.choice == Choice then
 			if (v.id == 1) then
 				player:setLocalVar("atma_method",v.id)
-				player:PrintToPlayer( string.format("Atma Token will be used to obtain atma from Prishe."), 29 )
+				player:PrintToPlayer( string.format("Atma Token will be used to obtain atma from the Atma Fabricant."), 29 )
 				return
 			elseif (v.id == 2) then
 				player:setLocalVar("atma_method",v.id)
-				player:PrintToPlayer( string.format("Valor Points will be used to obtain atma from Prishe."), 29 )
+				player:PrintToPlayer( string.format("Valor Points will be used to obtain atma from the Atma Fabricant."), 29 )
 				return
 			else
 				player:PrintToPlayer(("Please try again."), 29)

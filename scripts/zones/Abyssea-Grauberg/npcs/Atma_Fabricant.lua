@@ -49,27 +49,39 @@ local AtmaData =
 local vp = player:getCurrency("valor_point")
 local token = player:getCharVar("atma_token")
 local cost = 25000
+local token_cost = 1
+local currency = player:getLocalVar("atma_method")
 
         for _, v in pairs(AtmaData) do
 		if v.choice == Choice then
 			if (player:hasKeyItem(v.id)) then
 				player:PrintToPlayer(string.format("Atma.of.%s already obtained.", v.choice), 29)
 				return
-			elseif (token > 0) then
-				player:addKeyItem(v.id)
-				player:setCharVar("atma_token", token - 1)
-				player:PrintToPlayer(string.format("Atma Tokens Remaining: %u", player:getCharVar("atma_token")), 29)
-    				player:messageSpecial(ID.text.KEYITEM_OBTAINED, v.id)
-				return
-			elseif (vp < cost) then
-				player:PrintToPlayer(string.format("Not enough Valor Points to obtain the selected atma."), 14)
-				player:PrintToPlayer(string.format("Required: %i | Player Amount: %i", cost, vp), 14)
-				return
+ 			elseif (currency == 1) then
+			        if (token > 0) then
+				    player:addKeyItem(v.id)
+				    player:setCharVar("atma_token", token - 1)
+				    player:PrintToPlayer(string.format("Atma Tokens Remaining: %u", player:getCharVar("atma_token")), 29)
+    				    player:messageSpecial(ID.text.KEYITEM_OBTAINED, v.id)
+				    return
+				else
+				   player:PrintToPlayer(string.format("Not enough Atma Tokens to obtain the selected atma."), 14)
+				   player:PrintToPlayer(string.format("Required: %i | Player Amount: %i", token_cost, token), 14)
+				   return
+				end
+			elseif (currency == 2) then
+				if (vp < cost) then
+				    player:PrintToPlayer(string.format("Not enough Valor Points to obtain the selected atma."), 14)
+				    player:PrintToPlayer(string.format("Required: %i | Player Amount: %i", cost, vp), 14)
+				    return
+			        else
+				    player:addKeyItem(v.id)
+				    player:delCurrency("valor_point", cost)
+				    player:PrintToPlayer(string.format("Valor Points Remaining: %u", player:getCurrency("valor_point")), 29)
+    				    player:messageSpecial(ID.text.KEYITEM_OBTAINED, v.id)
+				end
 			else
-				player:addKeyItem(v.id)
-				player:delCurrency("valor_point", cost)
-				player:PrintToPlayer(string.format("Valor Points Remaining: %u", player:getCurrency("valor_point")), 29)
-    				player:messageSpecial(ID.text.KEYITEM_OBTAINED, v.id)
+				player:PrintToPlayer(string.format("Please choose method to obtain the atma from the Atma Infusionist."), 29)
 			end
                 end
         end

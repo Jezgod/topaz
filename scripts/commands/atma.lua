@@ -224,6 +224,7 @@ function onTrigger(player, arg1)
     local duration = 3600
     local infused = 0
     local mJob = player:getMainJob()
+    local pvpflag = targ:getCharVar("pvp_flag")
     local ng_job = 0
     local arg2
     local arg3
@@ -237,6 +238,9 @@ function onTrigger(player, arg1)
 
     if (abysstotal == 0) then
         targ:PrintToPlayer( string.format( "You do not possess any lunar abyssite to infuse atma." ), 14)
+        return
+    elseif (pvpflag == 0) then
+      	targ:PrintToPlayer( string.format( "Atma cannot be infused with PVP unflagged." ), 14)
         return
     elseif (targ:getCharVar("infused_atma") == abyssmod) then
         targ:PrintToPlayer( string.format( "You cannot infuse any more atma." ), 14)

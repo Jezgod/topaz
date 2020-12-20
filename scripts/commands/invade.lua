@@ -336,6 +336,15 @@ function onTrigger(player, target)
    local pLlvl = pLevel - 1
    local pLife = player:getHPP()
    local pNation = player:getNation()
+   local pJob = player:getMainJob()
+   local p_ng_job = player:getCharVar("ng_job")
+   local tJob
+   local t_ng_job
+
+   if targ ~= nil then
+        tJob = targ:getMainJob()
+        t_ng_job = targ:getCharVar("ng_job")
+    end
 
    if (targ ~= nil and targ:getID() ~= player:getID()) then
         if (targ:getObjType() ~= 1) then
@@ -367,7 +376,12 @@ function onTrigger(player, target)
         elseif (player:getZoneID() == zone) then
             player:PrintToPlayer( string.format("This function cannot be used here."), 14)
             return 1
-        else
+        elseif (pJob == p_ng_job and tJob ~= t_ng_job) then
+	    player:PrintToPlayer( string.format("Target cannot be invaded due to NG job inconsistency."), 14)
+            return 1
+        elseif (pJob ~= p_ng_job and tJob == t_ng_job) then
+	    player:PrintToPlayer( string.format("Target cannot be invaded due to NG job inconsistency."), 14)
+            return 1
         end
 
         -- db entry for fights player/target

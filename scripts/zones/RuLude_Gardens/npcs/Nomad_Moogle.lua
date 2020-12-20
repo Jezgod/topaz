@@ -117,10 +117,11 @@ function onTrade(player, npc, trade)
         targ:delExp(499)
         targ:PrintToPlayer( string.format("Job reset for NG++, but your power potential has increased further."), 29 )
     elseif (mLvl == 75 and ng == 3 and ng_job == mJob and hasItem) then
+        targ:tradeComplete()
         targ:setCharVar("ng", 4)
         targ:setCharVar("ng_job", mJob)
         targ:setCharVar("atma_token", atma_token + 1)
-        targ:PrintToPlayer( string.format("Your power potential has reached its maximum on this job."), 29 )
+        targ:PrintToPlayer( string.format("This job has been fully ascended to its final stage."), 29 )
     elseif (mLvl == 75 and ng == 3 and ng_job ~= mJob and hasItem) then
         targ:tradeComplete()
         targ:setCharVar("ng_job", mJob)

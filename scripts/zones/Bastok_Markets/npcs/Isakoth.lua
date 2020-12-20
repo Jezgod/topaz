@@ -426,51 +426,51 @@ require("scripts/globals/shop")
     {
  
         16423, 103300, 3, --manoples
-	18782, 30000, 3, --eyra_baghnakhs
+	--18782, 30000, 3, --eyra_baghnakhs
 	16470, 30000, 3, --gully
-	16485, 68700, 3, --yataghan
-	19138, 68700, 3, --verus_knife
-	17664, 68700, 3, --firmament
-	18901, 85200, 3, --falcata
+	--16485, 68700, 3, --yataghan
+	--19138, 68700, 3, --verus_knife
+	--17664, 68700, 3, --firmament
+	--18901, 85200, 3, --falcata
 	19151, 162500, 3, --bahadur
-	19165, 68700, 3, --cratus_sword
-	19170, 86600, 3, --kardia_faussar
-	16660, 69400, 3, --doom_tabar
-	18537, 70100, 3, --maiden_tabar
+	--19165, 68700, 3, --cratus_sword
+	--19170, 86600, 3, --kardia_faussar
+	--16660, 69400, 3, --doom_tabar
+	--18537, 70100, 3, --maiden_tabar
 	16707, 79000, 3, --bhuj
-	18511, 68700, 3, --dolor_bhuj
-	18517, 68700, 3, --elephas_axe
+	--18511, 68700, 3, --dolor_bhuj
+	--18517, 68700, 3, --elephas_axe
 	16777, 67500, 3, --death_scythe
-	18964, 68700, 3, --dire_scythe
-	18555, 76200, 3, --sectum_sickle
+	--18964, 68700, 3, --dire_scythe
+	--18555, 76200, 3, --sectum_sickle
 	16840, 79500, 3, --ox_tongue
 	16861, 30000, 3, --ice_lance
-	19317, 39100, 3, --borian_spear
+	--19317, 39100, 3, --borian_spear
 	18420, 92600, 3, --hayabusa
-	19285, 68700, 3, --kakko
-	19293, 56100, 3, --ichi-an
-	16971, 70100, 3, --yukitsugu
-	16963, 39100, 3, --taimakuniyuki
+	--19285, 68700, 3, --kakko
+	--19293, 56100, 3, --ichi-an
+	--16971, 70100, 3, --yukitsugu
+	--16963, 39100, 3, --taimakuniyuki
 	18848, 30000, 3, --brass_jadagna
-	18875, 68700, 3, --vodun_mace
-	18877, 30200, 3, --robur_mace
+	--18875, 68700, 3, --vodun_mace
+	--18877, 30200, 3, --robur_mace
 	17102, 30000, 3, --eight-sided_pole
-	18621, 70800, 3, --warmages_pole
+	--18621, 70800, 3, --warmages_pole
 	18695, 51600, 3, --cerberus_bow
-	19733, 36100, 3, --beursault_bow
+	--19733, 36100, 3, --beursault_bow
 	17252, 80800, 3, --culverin
 	17213, 65000, 3, --staurobow
-	19265, 68700, 3, --darkwing
-	19267, 68700, 3, --ribauldequin
-	19735, 65600, 3, --cecchinos_fucile
+	--19265, 68700, 3, --darkwing
+	--19267, 68700, 3, --ribauldequin
+	--19735, 65600, 3, --cecchinos_fucile
         17359, 70000, 3, --mythic_harp
         12359, 20400, 3, --hickory_shield
 	12309, 64400, 3, --ritter_shield
 	12305, 55600, 3, --ice_shield
 	12387, 223100, 3, --koenig_shield
 	12385, 275500, 3, --acheron_shield
-	16189, 30000, 3, --gleaming_shield
-        
+	--16189, 30000, 3, --gleaming_shield  
+  
     }
 
 function onTrade(player,npc,trade)
