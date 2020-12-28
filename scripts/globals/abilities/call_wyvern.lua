@@ -13,7 +13,6 @@ require("scripts/globals/msg")
 -----------------------------------
 
 function onAbilityCheck(player, target, ability)
-    local weapon = player:getEquipID(0)
 
     if player:getPet() ~= nil then
          return tpz.msg.basic.ALREADY_HAS_A_PET, 0
@@ -21,8 +20,6 @@ function onAbilityCheck(player, target, ability)
         return tpz.msg.basic.UNABLE_TO_USE_JA, 0
     elseif not player:canUseMisc(tpz.zoneMisc.PET) then
         return tpz.msg.basic.CANT_BE_USED_IN_AREA, 0
-    elseif (weapon == 0) then
-	return tpz.msg.basic.CANNOT_PERFORM, 0
     else
         return 0, 0
     end

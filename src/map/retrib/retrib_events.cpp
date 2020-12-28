@@ -484,7 +484,7 @@ auto CStrongest::GetRankings(std::string Top3[], uint32 Totals[], uint16 ID, boo
 
 auto CStrongest::GetTotalPoints(uint16 ID, bool Daily)->uint32
 {
-    uint16 Value = 0;
+    uint32 Value = 0;
 
     if (!Daily) //Weekly
     {

@@ -103,12 +103,17 @@ function onTrigger(PC, Command, Sub)
 	if denyZone(zone_list_deny_set, zone) == true then
 		PC:PrintToPlayer( string.format("This function is not valid in the current zone."), 14 )
 	else
-        	PC:setCharVar("anchor_x",pos.x)
-		PC:setCharVar("anchor_y",pos.y)
-		PC:setCharVar("anchor_z",pos.z)
-		PC:setCharVar("anchor_rot",pos.rot)
-		PC:setCharVar("anchor_zone",zone)        
-        	PC:PrintToPlayer("Anchor point set.", 29)
+		PC:setAnimation(33)
+		PC:PrintToPlayer("Setting anchor point...", 29)
+		PC:timer(10000, function(PC)
+    			PC:setAnimation(0)
+        	    	PC:setCharVar("anchor_x",pos.x)
+		    	PC:setCharVar("anchor_y",pos.y)
+			PC:setCharVar("anchor_z",pos.z)
+			PC:setCharVar("anchor_rot",pos.rot)
+			PC:setCharVar("anchor_zone",zone)   
+			PC:PrintToPlayer("Anchor point set.", 29)
+			end)
 	end
 
     elseif Command == "go" then
@@ -120,7 +125,7 @@ function onTrigger(PC, Command, Sub)
 	local pzone = PC:getZoneID()
 
 	if validZone(zone_list, pzone) == true then
-		PC:PrintToPlayer( string.format("Sending %s to %s zone.", PC:getName(), zoneNameByNum[zone]), 29)
+		PC:PrintToPlayer( string.format("Sending %s to %s zone...", PC:getName(), zoneNameByNum[zone]), 29)
         	PC:setAnimation(33)
  		PC:timer(10000, function(PC)
 			PC:setPos(x, y, z, rot, zone)

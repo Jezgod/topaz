@@ -775,7 +775,7 @@ function onTrigger(player, npc)
     local pLvl = player:getMainLvl()
     if battlefield then
         tpz.battlefield.HandleLootRolls(battlefield, loot[battlefield:getID()], nil, npc)
-	player:addExp(pLvl * 100)
+	player:addExp(pLvl * 50)
     end
 end
 

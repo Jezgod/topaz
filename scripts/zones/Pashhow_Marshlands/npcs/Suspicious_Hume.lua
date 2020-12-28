@@ -42,7 +42,7 @@ function onTrade(player,npc,trade)
 	local item = 0
 	local qOne = 48
 	local qTwo = 48
-	local sum1 = (qOne + qTwo) / 12 + 1
+	local sum1 = (qOne + qTwo) / 4 + 1
 	local sum2 = (qOne + qTwo)
         local name = pJobMap.mythic.name
 
@@ -64,8 +64,8 @@ function onTrade(player,npc,trade)
 
         if hasBase then
 	    if (pLevel == 75 and pIS >= rIS and
-	    	trade:hasItemQty(pJobMap.mythic.ore1, qOne / 10) and
-                trade:hasItemQty(pJobMap.mythic.ore2, qTwo / 10) and
+	    	trade:hasItemQty(pJobMap.mythic.ore1, qOne / 4) and
+                trade:hasItemQty(pJobMap.mythic.ore2, qTwo / 4) and
                 trade:getGil() == 0 and
                 trade:getItemCount() == sum1)  then
 

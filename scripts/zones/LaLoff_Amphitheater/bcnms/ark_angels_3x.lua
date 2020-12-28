@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: LaLoff Amphitheater
--- Name: Ark Angels 2 (Tarutaru)
+-- Name: Ark Angels 3 (Mithra)
 -----------------------------------
 local ID = require("scripts/zones/LaLoff_Amphitheater/IDs")
 require("scripts/globals/battlefield")
@@ -34,8 +34,8 @@ end
 function onEventFinish(player, csid, option)
     if csid == 32001 then
         if player:getCurrentMission(ZILART) == tpz.mission.id.zilart.ARK_ANGELS and player:getCharVar("ZilartStatus") == 1 then
-            player:addKeyItem(tpz.ki.SHARD_OF_COWARDICE)
-            player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.SHARD_OF_COWARDICE)
+            player:addKeyItem(tpz.ki.SHARD_OF_ENVY)
+            player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.SHARD_OF_ENVY)
             if
                 player:hasKeyItem(tpz.ki.SHARD_OF_APATHY) and
                 player:hasKeyItem(tpz.ki.SHARD_OF_ARROGANCE) and
@@ -46,7 +46,6 @@ function onEventFinish(player, csid, option)
                 player:completeMission(ZILART, tpz.mission.id.zilart.ARK_ANGELS)
                 player:addMission(ZILART, tpz.mission.id.zilart.THE_SEALED_SHRINE)
                 player:setCharVar("ZilartStatus", 0)
-                player:setCharVar("DM_alt", 1)
             end
         end
     end

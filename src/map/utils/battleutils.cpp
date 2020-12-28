@@ -3968,6 +3968,15 @@ namespace battleutils
             {
                 PEntity->Die();
             }
+            CCharEntity* PChar = dynamic_cast<CCharEntity*>(PEntity);
+            //uint8 nation = PChar->profile.nation;
+            PEntity->allegiance = ALLEGIANCE_PLAYER;
+            charutils::ResetPVPVar(PChar);
+            PChar->SetLocalVar("atma_cooldown", 0);
+            while (PChar->StatusEffectContainer->HasStatusEffect(EFFECT_ATMA))
+            {
+                PChar->StatusEffectContainer->DelStatusEffectSilent(EFFECT_ATMA);
+            }
             PEntity->updatemask |= UPDATE_ALL_CHAR;
         }
     }

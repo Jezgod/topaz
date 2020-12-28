@@ -11,37 +11,6 @@ require("scripts/globals/settings")
 -----------------------------------
 
 function onTrade(player, npc, trade)
-    local keyitems = 0
-    local earrings = 0
-    local status = player:getCharVar("DM_alt")
-    local item = trade:getItemId(0)
-    local count = trade:getItemCount()
-
-    -- Count keyitems
-    for i=tpz.ki.SHARD_OF_APATHY, tpz.ki.SHARD_OF_RAGE do
-        if (player:hasKeyItem(i) == true) then
-            keyitems = keyitems + 1
-        end
-    end
-
-     -- Count earrings
-    for i=14739, 14743 do
-        if (player:hasItem(i) == true) then
-            earrings = earrings + 1
-        end
-    end
-
-    if (keyitems == 5 and earrings == 0 and status == 1 and item == 1550 and count == 1) then
-        player:delItem(item, count)
-        player:setCharVar("DivineMight", 2)
-        player:startEvent(55, 14739, 14740, 14741, 14742, 14743)
-        --for i = tpz.ki.SHARD_OF_APATHY, tpz.ki.SHARD_OF_RAGE do
-        --        player:delKeyItem(i)
-        --end
-        player:setCharVar("DM_alt", 0)
-    else
-        player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY) -- Need some kind of feedback
-    end 
 end
 
 function onTrigger(player, npc)

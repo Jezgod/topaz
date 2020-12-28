@@ -34,7 +34,7 @@ function onTrade(player,npc,trade)
 	local item = 0
 	local qOne = pJobMap.relic.qty1
 	local qTwo = pJobMap.relic.qty2
-	local sum1 = (qOne + qTwo) / 12 + 1
+	local sum1 = (qOne + qTwo) / 4 + 1
 	local sum2 = (qOne + qTwo)
         local name = pJobMap.relic.name
 
@@ -56,8 +56,8 @@ function onTrade(player,npc,trade)
 
         if hasBase then
 	    if (pLevel == 75 and pCP >= rCP and
-	    	trade:hasItemQty(pJobMap.relic.ore1, qOne / 12) and
-                trade:hasItemQty(pJobMap.relic.ore2, qTwo / 12) and
+	    	trade:hasItemQty(pJobMap.relic.ore1, qOne / 4) and
+                trade:hasItemQty(pJobMap.relic.ore2, qTwo / 4) and
                 trade:getGil() == 0 and
                 trade:getItemCount() == sum1)  then
 

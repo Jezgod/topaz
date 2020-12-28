@@ -10,7 +10,6 @@ require("scripts/globals/status")
 -----------------------------------------
 
 function onMagicCastingCheck(caster, target, spell)
-    local weapon = caster:getEquipID(0)
     local mjob = caster:getMainJob()
 
     if (not caster:canUseMisc(tpz.zoneMisc.PET)) then
@@ -19,8 +18,6 @@ function onMagicCastingCheck(caster, target, spell)
         return tpz.msg.basic.ALREADY_HAS_A_PET
     elseif (mjob ~= tpz.job.SMN) then
         return tpz.msg.basic.CANNOT_PERFORM
-    elseif (weapon == 0) then
-	return tpz.msg.basic.CANNOT_PERFORM
     elseif (caster:getObjType() == tpz.objType.PC) then
         return avatarMiniFightCheck(caster)
     else

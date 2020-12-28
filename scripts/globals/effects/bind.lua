@@ -5,7 +5,11 @@
 -----------------------------------
 
 function onEffectGain(target, effect)
-    effect:setPower(target:speed())
+    if (target:getObjType() == 1) then
+        effect:setPower(50)
+    else
+        effect:setPower(target:speed())
+    end
     target:speed(0)
 end
 

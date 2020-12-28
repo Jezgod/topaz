@@ -85,7 +85,7 @@ auto CRetribPlayerEvent::GetRankings(std::string Top3[], uint32 Totals[]) -> uin
 //************************************************************************************/
 auto CRetribPlayerEvent::GetTotalPoints(uint16 ID)->uint32
 {
-    uint16 Value = 0;
+    uint32 Value = 0;
 
     const char* Query = "SELECT Points FROM retrib_pc_stats WHERE ID = %u;";
     int32 Result = Sql_Query(SqlHandle, Query, ID);
