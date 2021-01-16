@@ -74,6 +74,7 @@ function onZoneIn(player,prevZone)
     printf("Job : %i",mjob)
     printf("Ability : %i",jobmap.effect)
 
+--[[
     if (player:hasStatusEffect(tpz.effect.SIGNET)) then
     	player:delStatusEffect(tpz.effect.SIGNET)
     	player:addStatusEffect(tpz.effect.SANCTION,0,0,300)
@@ -83,6 +84,9 @@ function onZoneIn(player,prevZone)
     else
 	player:addStatusEffect(tpz.effect.SANCTION,0,0,300)
     end
+--]]
+    player:delStatusEffectsByFlag(tpz.effectFlag.INFLUENCE, true)
+    player:addStatusEffect(tpz.effect.SANCTION,0,0,300)
 
     player:addStatusEffectEx(tpz.effect.TELEPORT, 0, tpz.teleport.id.HOME_NATION, 0, 300)
     return cs

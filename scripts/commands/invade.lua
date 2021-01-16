@@ -340,10 +340,12 @@ function onTrigger(player, target)
    local p_ng_job = player:getCharVar("ng_job")
    local tJob
    local t_ng_job
+   local tCooldown
 
    if targ ~= nil then
         tJob = targ:getMainJob()
         t_ng_job = targ:getCharVar("ng_job")
+        tCooldown = targ:getCharVar("inv_cooldown")
     end
 
    if (targ ~= nil and targ:getID() ~= player:getID()) then
@@ -355,6 +357,9 @@ function onTrigger(player, target)
             return 1
         elseif (targ:getCharVar("arbiter_t") - 3000 > os.time()) then
             player:PrintToPlayer( string.format("Arbiter target cannot be invaded at the current time."), 14)
+            return 1
+        elseif (tCooldown > os.time()) then
+            player:PrintToPlayer( string.format("Target cannot be invaded due to invasion cooldown."), 14)
             return 1
         elseif (pNation == targ:getNation()) then
             player:PrintToPlayer( string.format("Target must be from a different nation."), 14)
@@ -387,6 +392,7 @@ function onTrigger(player, target)
         -- db entry for fights player/target
         player:addCharVar("invasion_player", 1)
         targ:addCharVar("invasion_target", 1)
+        targ:setCharVar("inv_cooldown", os.time() + 3600)
 
         -- send target to destination
     	--player:setPos(x1, y1, z1, rot1, zone)

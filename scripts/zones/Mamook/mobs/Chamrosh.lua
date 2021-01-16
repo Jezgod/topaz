@@ -58,7 +58,7 @@ function onMagicHit(caster, target, spell)
         target:setLocalVar("LAST_CAST", target:getBattleTime())
     end
 
-    return 1
+    return 0
 end
 
 function onMobDeath(mob, player, isKiller)

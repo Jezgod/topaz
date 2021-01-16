@@ -8,8 +8,10 @@ require("scripts/globals/npc_util")
 -----------------------------------
 
 function onTrade(player, npc, trade)
-    if npcUtil.tradeHas(trade, 1298) and npcUtil.popFromQM(player, npc, ID.mob.HAKUTAKU) then
-        player:confirmTrade()
+    --if npcUtil.tradeHas(trade, 1298) and npcUtil.popFromQM(player, npc, ID.mob.HAKUTAKU) then
+    if npcUtil.tradeHasExactly(trade, { 1288, 1289, 1290, 1291, 1292, 924, {4110, 24}}) and 
+           npcUtil.popFromQM(player, npc, ID.mob.HAKUTAKU) then
+           player:confirmTrade()
     end
 end
 

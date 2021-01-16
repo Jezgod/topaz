@@ -16,6 +16,7 @@ function onTrigger(player, npc)
     -- RoV Missions
     if player:getCurrentMission(ROV) == tpz.mission.id.rov.THE_PATH_UNTRAVELED and player:getRank() >= 3 then
         player:startEvent(3)
+    --[[
     elseif player:getCharVar("LionIICipher") == 1 then
         if npcUtil.giveItem(player, 10159) then -- Cipher: Lion II
             npcUtil.giveKeyItem(player, tpz.ki.RHAPSODY_IN_UMBER)
@@ -26,7 +27,7 @@ function onTrigger(player, npc)
     elseif player:getCurrentMission(ROV) == tpz.mission.id.rov.A_LAND_AFTER_TIME then
         local rank6 = (player:getRank(player:getNation()) >= 6) and 1 or 0
         player:startEvent(4, player:getZoneID(), 0, 0, 0, 0, 0, rank6)
-
+    --]]
     -- CoP Missions
     elseif player:getCurrentMission(COP) == tpz.mission.id.cop.BELOW_THE_ARKS and player:getCharVar("PromathiaStatus") == 1 then
         player:startEvent(913, 0, 0, 1) -- first time in promy -> have you made your preparations cs

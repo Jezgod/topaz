@@ -1656,11 +1656,11 @@ namespace petutils
             highestLvl += PChar->PMeritPoints->GetMeritValue(MERIT_BEAST_AFFINITY, PChar);
 
             // And cap it to the master's level or weapon ilvl, whichever is greater
-            auto capLevel = std::max(PMaster->GetMLevel(), PMaster->m_Weapons[SLOT_MAIN]->getILvl());
+            /*auto capLevel = std::max(PMaster->GetMLevel(), PMaster->m_Weapons[SLOT_MAIN]->getILvl());
             if (highestLvl > capLevel)
             {
                 highestLvl = capLevel;
-            }
+            }*/
 
             // Randomize: 0-2 lvls lower, less Monster Gloves(+1/+2) bonus
             highestLvl -= tpzrand::GetRandomNumber(3 - std::clamp<int16>(PChar->getMod(Mod::JUG_LEVEL_RANGE), 0, 2));

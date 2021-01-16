@@ -13,8 +13,13 @@ end
 
 function onMobSpawn(mob)
     mob:setLocalVar("[rage]timer", 3600) -- 60 minutes
+    mob:addMod(tpz.mod.MDEF, 150)
+    mob:addMod(tpz.mod.DEF, 150)
+    mob:addMod(tpz.mod.ATT, 300)
+    mob:addMod(tpz.mod.CRITHITRATE, 100)
+    mob:addMod(tpz.mod.REGEN, math.floor(mob:getMaxHP()*.008))
 end
 
-function onMobDeath(mob, player, isKiller)
+function onMobDeath(mob)
     mob:setRespawnTime(math.random(300, 600)) -- 5 to 10 minutes
 end

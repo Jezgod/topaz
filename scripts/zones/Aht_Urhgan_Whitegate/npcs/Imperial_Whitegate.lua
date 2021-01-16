@@ -45,11 +45,20 @@ function onTrade(player, npc, trade)
     local pI = player:getCurrency(currency)
     local rI = 10000
     local hasItem = trade:hasItemQty(pJobMap.testimony, 1)
+    local merits = player:getMeritCount()
 
     if pLevel ~= 75 then
 	player:PrintToPlayer( string.format("Please try again when you are level 75."), 14 )
     elseif not hasItem then
 	player:PrintToPlayer( string.format("Please trade the appropriate testimony for your job."), 14 )
+    elseif (merits == 40 and
+        trade:getItemCount() == 1 and
+        trade:getGil() == 0) then
+              	
+	player:tradeComplete()
+    	player:addItem(pJobMap.base)
+       	player:setMerits(0)
+    	player:messageSpecial(ID.text.ITEM_OBTAINED,pJobMap.base)
     elseif pI < rI then
 	player:PrintToPlayer( string.format("Please try again when you have enough Infamy."), 14 )
 	player:PrintToPlayer( string.format("Player Amount: %u | Required Amount: %u", pI, rI), 14 )
@@ -61,6 +70,8 @@ function onTrade(player, npc, trade)
     	player:addItem(pJobMap.base)
        	player:delCurrency(currency,rI)
     	player:messageSpecial(ID.text.ITEM_OBTAINED,pJobMap.base)
+    else
+	player:PrintToPlayer( string.format("Please try again after meeting the specified requirements."), 14 )
     end
 end
 

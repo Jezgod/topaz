@@ -3144,9 +3144,12 @@ void SmallPacket0x06E(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
             uint8 Pall_p = PChar->profile.nation;
             uint8 Tall_p = 0;
+            //uint8 Ppvp_p = charutils::GetPVPVar(PChar);
+            //uint8 Tpvp_p = 0;
             if (PInvitee)
             {
                 Tall_p = PInvitee->profile.nation;
+                //Tpvp_p = charutils::GetPVPVar(PInvitee);
             }
             
             if (PInvitee)

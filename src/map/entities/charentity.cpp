@@ -614,16 +614,16 @@ bool CCharEntity::ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags)
         return true;
     }
 
-    if (CBattleEntity::ValidTarget(PInitiator, targetFlags))
-    {
-        return true;
-    }
-
     if (((targetFlags & TARGET_PLAYER_PARTY) || ((targetFlags & TARGET_PLAYER_PARTY_PIANISSIMO) &&
         PInitiator->StatusEffectContainer->HasStatusEffect(EFFECT_PIANISSIMO))) &&
         ((PParty && PInitiator->PParty == PParty) ||
         (PInitiator->PMaster && PInitiator->PMaster->PParty == PParty)) &&
         PInitiator != this)
+    {
+        return true;
+    }
+
+    if (CBattleEntity::ValidTarget(PInitiator, targetFlags))
     {
         return true;
     }

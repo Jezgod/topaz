@@ -12,64 +12,10 @@ local ID = require("scripts/zones/Windurst_Waters/IDs")
 -----------------------------------
 
 function onTrade(player, npc, trade)
-    local whisper = player:hasKeyItem(tpz.ki.WHISPER_OF_THE_MOON)
-    local staff = 0
-
     if npcUtil.tradeHasExactly(trade, { 1696, 1697, 1698 }) -- Magicked Steel Ingot, Spruce Lumber, Extra-fine File
         and player:getQuestStatus(WINDURST, tpz.quest.id.windurst.TUNING_IN) == QUEST_ACCEPTED
     then
         player:startEvent(886)
-    end
-
-    if (trade:getGil() == 1000000 and 
-	trade:hasItemQty(18632,1) and  
-	whisper == true and
-	trade:getItemCount() == 2) then
-
-	staff = 18633
-    	player:tradeComplete()
-    	player:addItem(staff)
-       	player:delKeyItem(tpz.ki.WHISPER_OF_THE_MOON)
-    	player:messageSpecial(ID.text.ITEM_OBTAINED,staff)    
-
-    elseif (trade:getGil() == 1000000 and 
-	trade:hasItemQty(17546,1) and 
-	trade:hasItemQty(17548,1) and 
-	trade:hasItemQty(17550,1) and 
-	trade:hasItemQty(17552,1) and 
-	trade:hasItemQty(17554,1) and 
-	trade:hasItemQty(17556,1) and 
-	trade:hasItemQty(17558,1) and 
-	trade:hasItemQty(17560,1) and 
-	whisper == true and
-	trade:getItemCount() == 9) then
-
-	staff = 18633
-    	player:tradeComplete()
-    	player:addItem(staff)
-       	player:delKeyItem(tpz.ki.WHISPER_OF_THE_MOON)
-    	player:messageSpecial(ID.text.ITEM_OBTAINED,staff)
-    
-    elseif (trade:getGil() == 500000 and 
-	trade:hasItemQty(17545,1) and 
-	trade:hasItemQty(17547,1) and 
-	trade:hasItemQty(17549,1) and 
-	trade:hasItemQty(17551,1) and 
-	trade:hasItemQty(17553,1) and 
-	trade:hasItemQty(17555,1) and 
-	trade:hasItemQty(17557,1) and 
-	trade:hasItemQty(17559,1) and 
-	whisper == true and
-	trade:getItemCount() == 9) then
-
-        staff = 18632
-    	player:tradeComplete()
-    	player:addItem(staff)
-       	player:delKeyItem(tpz.ki.WHISPER_OF_THE_MOON)
-    	player:messageSpecial(ID.text.ITEM_OBTAINED,staff)
-
-    else
-	player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED,staff)
     end
 end
 

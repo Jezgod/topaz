@@ -10,14 +10,52 @@ local ID = require("scripts/zones/Aht_Urhgan_Whitegate/IDs")
 -----------------------------------
 
 local zeni = math.random(250,500)
+local itemId
+local bonus
 
 function onTrade(player,npc,trade)
+    itemId = trade:getItemId()
+
     local trophies =
     {
         2616, 2617, 2618, 2613, 2614, 2615, 2610, 2611, 2612,
         2609, 2626, 2627, 2628, 2623, 2624, 2625, 2620, 2621,
         2622, 2619, 2636, 2637, 2638, 2633, 2634, 2635, 2630,
         2631, 2632, 2629
+    }
+
+    local tier =
+    {
+	[2616]  = 1,	-- Vulpangue's Wing
+    	[2617]  = 1,	-- Chamrosh's Beak
+        [2618]  = 1,	-- Gigiroon's Cape
+ 	[2626]  = 1,	-- Brass Borer's Cacoon
+    	[2627]  = 1,	-- Calret Globule
+        [2628]  = 1,	-- Ob's Arm
+	[2636]  = 1,	-- Velionis' Bone
+    	[2637]  = 1,	-- Lil' Apkallu's Egg
+        [2638]  = 1,	-- Chigre
+	[2613]  = 2,
+    	[2614]  = 2,
+        [2615]  = 2,
+ 	[2623]  = 2,
+    	[2624]  = 2,
+        [2625]  = 2,
+	[2633]  = 2,
+    	[2634]  = 2,
+        [2635]  = 2,
+        [2610]  = 3,
+    	[2611]  = 3,
+        [2612]  = 3,
+ 	[2620]  = 3,
+    	[2621]  = 3,
+        [2622]  = 3,
+	[2630]  = 3,
+    	[2631]  = 3,
+        [2632]  = 3,
+	[2609]  = 4,
+    	[2619]  = 4,
+        [2629]  = 4
     }
 
     local seals =
@@ -59,7 +97,9 @@ function onTrade(player,npc,trade)
                     player:addKeyItem(seals[znm])
                     player:startEvent(912,0,0,0,seals[znm])
                 else
-                    player:messageSpecial(ID.text.SANCTION + 8,seals[znm]) -- You already possess .. (not sure this is authentic)
+                    --player:messageSpecial(ID.text.SANCTION + 8,seals[znm]) -- You already possess .. (not sure this is authentic)
+		    bonus = tier[itemId]
+                    zeni = zeni * bonus
 		    player:addCurrency("zeni_point", zeni)
                     player:tradeComplete()
                     player:startEvent(910,zeni)

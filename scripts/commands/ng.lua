@@ -58,7 +58,7 @@ function onTrigger(player, arg1)
     
     if (targ ~= nil) then
         local tokens = targ:getCharVar("atma_token")
-        player:PrintToPlayer(string.format("%s's NG Status: %u | Job: %s | Level: %u | Atma Token(s): %u", targ:getName(), ng, jobNameByNum[ng_job], targ:getJobLevel(ng_job), tokens), 29)
+        player:PrintToPlayer(string.format("%s's NG Status: %u | Job: %s | Level: %u | Atma Tokens: %u", targ:getName(), ng, jobNameByNum[ng_job], targ:getJobLevel(ng_job), tokens), 29)
     else
         player:PrintToPlayer("Must select a target using in game cursor first.")
     end

@@ -1203,6 +1203,36 @@ bool CBattleEntity::ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags)
             }
             else if (PInitiator->allegiance != allegiance)
                 {
+                    if (PInitiator->objtype == TYPE_PET || PInitiator->objtype == TYPE_MOB)
+                    {
+                        PInitiator = PInitiator->PMaster;
+                    }
+                    if (this->objtype == TYPE_PET || this->objtype == TYPE_MOB)
+                    {
+                        CCharEntity* PInit = dynamic_cast<CCharEntity*>(PInitiator);
+                        CCharEntity* PChar = dynamic_cast<CCharEntity*>(PMaster);
+                        //uint8 Pinit_ng = charutils::GetNGVar(PInit);
+                        uint8 Pinit_ng_job = charutils::GetNGJobVar(PInit);
+                        //uint8 Pchar_ng = charutils::GetNGVar(PChar);
+                        uint8 Pchar_ng_job = charutils::GetNGJobVar(PChar);
+                        if (Pinit_ng_job == PInit->GetMJob() && Pchar_ng_job == PChar->GetMJob())
+                        {
+                            return true;
+                        }
+
+                        else if (Pinit_ng_job == PInit->GetMJob() && Pchar_ng_job != PChar->GetMJob())
+                        {
+                            return false;
+                        }
+
+                        else if (Pinit_ng_job != PInit->GetMJob() && Pchar_ng_job == PChar->GetMJob())
+                        {
+                            return false;
+                        }
+
+                        return true;
+                    }
+
                     CCharEntity* PInit = dynamic_cast<CCharEntity*>(PInitiator);
                     CCharEntity* PChar = dynamic_cast<CCharEntity*>(this);
                     //uint8 Pinit_ng = charutils::GetNGVar(PInit);

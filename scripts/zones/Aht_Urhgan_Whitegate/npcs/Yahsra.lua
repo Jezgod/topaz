@@ -12,10 +12,32 @@ require("scripts/globals/npc_util")
 -----------------------------------
 
 function onTrade(player, npc, trade)
+    local hasRunic = tpz.besieged.hasRunicPortal(player, tpz.teleport.runic_portal.AZOUPH)
+    local pIS = player:getCurrency("imperial_standing")
+    local gil = trade:getGil()
+    local gilsink = gil / 100
+    local currency = "leujaoam_assault_point"
+    local name = "Leujaoam Assault Points"
+
+    if (hasRunic == true) then
+        --player:PrintToPlayer( string.format( "%s", hasRunic ), 29)
+        if (gilsink <= pIS and trade:getItemCount() == 1) then
+	    player:tradeComplete()
+            --player:AddAssaultPoint(0, gilsink)
+            player:addCurrency(currency, gilsink)
+	    player:delCurrency("imperial_standing", gilsink)
+            player:PrintToPlayer( string.format( "Successful conversion of %u Imperial Standing to %u %s for %u gil.", gilsink, gilsink, name, gil ), 29)
+        else
+	    player:PrintToPlayer( string.format( "You do not have enough Imperial Standing currency for this conversion." ), 14)
+        end
+    else
+        player:PrintToPlayer( string.format( "You have not interacted with the proper runic portal." ), 14)
+    end
 end
 
 function onTrigger(player, npc)
-    local rank = tpz.besieged.getMercenaryRank(player)
+    --local rank = tpz.besieged.getMercenaryRank(player)
+    local rank = 12
     local haveimperialIDtag
     local assaultPoints = player:getAssaultPoint(LEUJAOAM_ASSAULT_POINT)
 
@@ -25,26 +47,30 @@ function onTrigger(player, npc)
         haveimperialIDtag = 0
     end
 
-    --[[if (rank > 0) then
+    if (rank > 0 and haveimperialIDtag == 1) then
         player:startEvent(273, rank, haveimperialIDtag, assaultPoints, player:getCurrentAssault())
-    else]]
+    else
         player:startEvent(279) -- no rank
-    --end
+    end
 end
 
 function onEventUpdate(player, csid, option)
 end
 
 function onEventFinish(player, csid, option)
+    local currency = "leujaoam_assault_point"
+
     if csid == 273 then
         local selectiontype = bit.band(option, 0xF)
+	--[[
         if selectiontype == 1 then
             -- taken assault mission
             player:addAssault(bit.rshift(option, 4))
             player:delKeyItem(tpz.ki.IMPERIAL_ARMY_ID_TAG)
             player:addKeyItem(tpz.ki.LEUJAOAM_ASSAULT_ORDERS)
             player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.LEUJAOAM_ASSAULT_ORDERS)
-        elseif selectiontype == 2 then
+	--]]
+        if selectiontype == 2 then
             -- purchased an item
             local item = bit.rshift(option, 14)
             local itemID = 0
@@ -66,7 +92,8 @@ function onEventFinish(player, csid, option)
 
             local choice = items[item]
             if choice and npcUtil.giveItem(player, choice.itemid) then
-                player:delAssaultPoint("LEUJAOAM_ASSAULT_POINT", choice.price)
+                --player:delAssaultPoint(LEUJAOAM_ASSAULT_POINT, choice.price)
+		player:delCurrency(currency, choice.price)
             end
         end
     end

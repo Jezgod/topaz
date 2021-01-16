@@ -41,7 +41,9 @@ local zone_list =
     	249, -- Mhaura
     	250, -- Kazham
     	251, -- Hall of the Gods
-    	252  -- Norg
+    	252, -- Norg
+	256, -- Western Adoulin
+	257, -- Eastern Adoulin
 }
 
 local function validZone(zone_list, id)

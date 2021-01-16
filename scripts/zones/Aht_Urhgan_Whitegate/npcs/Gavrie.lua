@@ -22,7 +22,7 @@ function onTrigger(player, npc)
         18731,   50,    -- Automaton Oil
         18732,  250,    -- Automaton Oil +1
         18733,  500,    -- Automaton Oil +2
-        19185, 1000     -- Automaton Oil +3
+        --19185, 1000     -- Automaton Oil +3
     }
 
     player:showText(npc, ID.text.GAVRIE_SHOP_DIALOG)

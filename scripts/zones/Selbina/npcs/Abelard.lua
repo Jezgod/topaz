@@ -64,7 +64,8 @@ function onTrade(player, npc, trade)
 
     if
         player:getCurrentMission(ROV) == tpz.mission.id.rov.SET_FREE and
-        npcUtil.tradeHas(trade,{{9082, 3}}) and
+        --npcUtil.tradeHas(trade,{{9082, 3}}) and
+	npcUtil.tradeHas(trade,{{1267, 1}}) and
         player:getCharVar("RhapsodiesStatus") == 1
     then
         player:startEvent(178)
@@ -165,11 +166,11 @@ function onEventFinish(player, csid, option)
     -- RoV: Set Free
     elseif csid == 178 then
         player:confirmTrade()
-        if player:hasJob(0) == 0 then -- Is Subjob Unlocked
-            npcUtil.giveKeyItem(player, tpz.ki.GILGAMESHS_INTRODUCTORY_LETTER)
-        else
-            if not npcUtil.giveItem(player, 8711) then return end
-        end
+        --if player:hasJob(0) == 0 then -- Is Subjob Unlocked
+        --    npcUtil.giveKeyItem(player, tpz.ki.GILGAMESHS_INTRODUCTORY_LETTER)
+        --else
+        --    if not npcUtil.giveItem(player, 8711) then return end
+        --end
         player:completeMission(ROV, tpz.mission.id.rov.SET_FREE)
         player:addMission(ROV, tpz.mission.id.rov.THE_BEGINNING)
     end

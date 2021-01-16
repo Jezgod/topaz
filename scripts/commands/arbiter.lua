@@ -2,6 +2,8 @@
 -- func: arbiter
 -- desc: Goes to the target player and initiates a PVP encounter
 ---------------------------------------------------------------------------------------------------
+require("scripts/globals/status")
+---------------------------------------------------------------------------------------------------
 
 local zone_list =
 {
@@ -38,6 +40,30 @@ local zone_list =
     	252  -- Norg
 }
 
+local job_map =
+{
+	[tpz.job.WAR] = {effect = tpz.effect.MIGHTY_STRIKES},
+	[tpz.job.MNK] = {effect = tpz.effect.HUNDRED_FISTS},
+	[tpz.job.WHM] = {effect = 0},
+	[tpz.job.BLM] = {effect = tpz.effect.MANAFONT},	
+	[tpz.job.RDM] = {effect = tpz.effect.CHAINSPELL},
+	[tpz.job.THF] = {effect = tpz.effect.PERFECT_DODGE},
+	[tpz.job.PLD] = {effect = tpz.effect.INVINCIBLE},
+	[tpz.job.DRK] = {effect = tpz.effect.BLOOD_WEAPON},
+	[tpz.job.BST] = {effect = 0},
+	[tpz.job.BRD] = {effect = tpz.effect.SOUL_VOICE},
+	[tpz.job.RNG] = {effect = 0},
+	[tpz.job.SAM] = {effect = tpz.effect.MEIKYO_SHISUI},
+	[tpz.job.NIN] = {effect = 0},
+	[tpz.job.DRG] = {effect = 0},
+	[tpz.job.SMN] = {effect = tpz.effect.ASTRAL_FLOW},
+	[tpz.job.BLU] = {effect = tpz.effect.AZURE_LORE},
+	[tpz.job.COR] = {effect = 0},
+	[tpz.job.PUP] = {effect = 0},
+	[tpz.job.DNC] = {effect = tpz.effect.TRANCE},
+	[tpz.job.SCH] = {effect = tpz.effect.TABULA_RASA},
+}
+
 local function validZone(zone_list, id)
 	for k,v in pairs(zone_list) do
 		if v == id then
@@ -63,6 +89,7 @@ function onTrigger(player, target)
    local infamy = player:getCurrency("infamy")
    local arbiter_cost = 100
    local aJob = player:getMainJob()
+   local jobmap = job_map[aJob]
    local a_ng = player:getCharVar("ng")
    local a_ng_job = player:getCharVar("ng_job")
    local tJob
@@ -71,6 +98,7 @@ function onTrigger(player, target)
    local t_alleg
    local t_cooldown
    local p_cooldown
+   local battle
 
     -- validate target
     if not target then
@@ -89,6 +117,7 @@ function onTrigger(player, target)
         p_cooldown = targ:getCharVar("arbiter_p")
 	t_ng = targ:getCharVar("ng")
         t_ng_job = targ:getCharVar("ng_job")
+        battle = targ:hasStatusEffect(tpz.effect.BATTLEFIELD)
     end
 
     if validZone(zone_list, zone) == true then
@@ -105,6 +134,9 @@ function onTrigger(player, target)
         return 1
     elseif (targ:isEngaged()) then
         player:PrintToPlayer( string.format("Target cannot be engaged in battle."), 14)
+        return 1
+    elseif (battle) then
+        player:PrintToPlayer( string.format("Target cannot be entered in a battlefield."), 14)
         return 1
     elseif (pNation == targ:getNation()) then
         player:PrintToPlayer( string.format("Target must be from a different nation."), 14)
@@ -130,11 +162,13 @@ function onTrigger(player, target)
     end
 
     if targ then
+  	player:setCharVar("arbiter", 1)
+        player:delStatusEffect(jobmap.effect)
         player:setPos(targ:getXPos() + math.random(1,5), targ:getYPos(), targ:getZPos() + math.random(1,5), targ:getRotPos() + math.random(1,180), targ:getZoneID())
 	targ:PrintToPlayer( string.format("An arbiter player has appeared..."), 29)
         targ:setAllegiance( t_alleg )
         targ:setAnimation(33)
-        targ:timer(12000, function(player)
+        targ:timer(6000, function(player)
 		targ:setAnimation(0)
 		end)
 	targ:setCharVar("arbiter_t" ,os.time() + 3600)

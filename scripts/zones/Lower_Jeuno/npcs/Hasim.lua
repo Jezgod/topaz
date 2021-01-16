@@ -12,20 +12,20 @@ end
 function onTrigger(player, npc)
     local stock =
     {
-        4612,  234000,    -- Scroll of Cure IV
-        4616,  112000,    -- Scroll of Curaga II
-        4617,  199320,    -- Scroll of Curaga III
-        4625,   23300,    -- Scroll of Silena
-        4626,  192000,    -- Scroll of Stona
-        4627,  133000,    -- Scroll of Viruna
-        4628,   85860,    -- Scroll of Cursna
-        4653,  320000,    -- Scroll of Protect III
-        4734,   70740,    -- Scroll of Protectra II
-        4735,  192000,    -- Scroll of Protectra III
-        4658,  262440,    -- Scroll of Shell III
-        4738,   17600,    -- Scroll of Shellra
-        4739,  140800,    -- Scroll of Shellra II
-        4740,  262440,    -- Scroll of Shellra III
+        4612,  23400,    -- Scroll of Cure IV
+        4616,  11200,    -- Scroll of Curaga II
+        4617,  19932,    -- Scroll of Curaga III
+        4625,   2330,    -- Scroll of Silena
+        4626,  19200,    -- Scroll of Stona
+        4627,  13300,    -- Scroll of Viruna
+        4628,   8586,    -- Scroll of Cursna
+        4653,  32000,    -- Scroll of Protect III
+        4734,   7074,    -- Scroll of Protectra II
+        4735,  19200,    -- Scroll of Protectra III
+        4658,  26244,    -- Scroll of Shell III
+        4738,   1760,    -- Scroll of Shellra
+        4739,  14080,    -- Scroll of Shellra II
+        4740,  26244,    -- Scroll of Shellra III
         4668,   1760,    -- Scroll of Barfire
         4669,   3624,    -- Scroll of Barblizzard
         4670,    930,    -- Scroll of Baraero
@@ -52,26 +52,26 @@ function onTrigger(player, npc)
         4686,   9600,    -- Scroll of Barvirus
         4699,  15120,    -- Scroll of Barpetra
         4700,   9600,    -- Scroll of Barvira
-        5089,  737400,    -- Scroll of Gain-VIT
-        5092,  775000,    -- Scroll of Gain-MND
-        5090,  856800,    -- Scroll of Gain-AGI
-        5093,  819000,    -- Scroll of Gain-CHR
-        5087,  898040,    -- Scroll of Gain-STR
-        5091,  944610,    -- Scroll of Gain-INT
-        5088,  996130,    -- Scroll of Gain-DEX
-        5096,  737400,    -- Scroll of Boost-VIT
-        5099,  775000,    -- Scroll of Boost-MND
-        5097,  856800,    -- Scroll of Boost-AGI
-        5100,  819000,    -- Scroll of Boost-CHR
-        5094,  898040,    -- Scroll of Boost-STR
-        5098,  944610,    -- Scroll of Boost-INT
-        5095,  996130,    -- Scroll of Boost-DEX
-        5106,  735000,    -- Scroll of Inundation
-        4849, 1303780,    -- Scroll of Addle
-        4629,  350000,    -- Scroll of Holy
-        4647,  200000,    -- Scroll of Banishga II
-        4737, 1192400,    -- Scroll of Protecra V
-        4742, 1245400,    -- Scroll of Shellra V
+        --5089,  73740,    -- Scroll of Gain-VIT
+        --5092,  77500,    -- Scroll of Gain-MND
+        --5090,  85680,    -- Scroll of Gain-AGI
+        --5093,  81900,    -- Scroll of Gain-CHR
+        --5087,  89804,    -- Scroll of Gain-STR
+        --5091,  94461,    -- Scroll of Gain-INT
+        --5088,  99613,    -- Scroll of Gain-DEX
+        --5096,  73740,    -- Scroll of Boost-VIT
+        --5099,  77500,    -- Scroll of Boost-MND
+        --5097,  85680,    -- Scroll of Boost-AGI
+        --5100,  81900,    -- Scroll of Boost-CHR
+        --5094,  89804,    -- Scroll of Boost-STR
+        --5098,  94461,    -- Scroll of Boost-INT
+        --5095,  99613,    -- Scroll of Boost-DEX
+        --5106,  73500,    -- Scroll of Inundation
+        --4849, 1303780,    -- Scroll of Addle
+        4629,  35000,     -- Scroll of Holy
+        4647,  20000,     -- Scroll of Banishga II
+        4737, 119240,    -- Scroll of Protecra V
+        4742, 124540,    -- Scroll of Shellra V
         4633, 1391350,    -- Scroll of Dia III
         6569, 1391350,    -- Scroll of Slow II
         6570, 1391350,    -- Scroll of Paralyze II

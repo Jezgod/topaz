@@ -7,6 +7,15 @@
 local ID = require("scripts/zones/Windurst_Woods/IDs")
 require("scripts/globals/shop")
 
+local opt1	=	  "1-9"
+local opt2	=	"10-19"
+local opt3	=	"20-29"
+local opt4	=	"30-39"
+local opt5	=	"40-50"
+local opt6	=	"51-59"
+local opt7	=	"60-69"
+local opt8	=	  "70+"
+
 -- Level 1-9
     local stockA =
     {
@@ -474,92 +483,38 @@ require("scripts/globals/shop")
     }
 
 function onTrade(player,npc,trade)
-    local tier = 0
-
-    if (trade:getGil() == nil and trade:getItemCount() >= 1) then
-	    player:messageSpecial(ID.text.NOT_HAVE_ENOUGH_GIL);
-            return 0;
-	
-    elseif (trade:getGil() == 900 and
-	    trade:getItemCount() == 1) then
-            player:tradeComplete();
-            tier = stockA
-
-    elseif (trade:getGil() == 1900 and
-	    trade:getItemCount() == 1) then
-	    player:tradeComplete();            
-            tier = stockB
-
-    elseif (trade:getGil() == 2900 and
-	    trade:getItemCount() == 1) then
-            player:tradeComplete();            
-            tier = stockC
-
-    elseif (trade:getGil() == 3900 and
-	    trade:getItemCount() == 1) then
-            player:tradeComplete();            
-            tier = stockD
-
-    elseif (trade:getGil() == 5000 and
-	    trade:getItemCount() == 1) then
-            player:tradeComplete();            
-            tier = stockE
-
-    elseif (trade:getGil() == 5900 and
-	    trade:getItemCount() == 1) then
-            player:tradeComplete();            
-            tier = stockF
-
-    elseif (trade:getGil() == 6900 and
-	    trade:getItemCount() == 1) then
-            player:tradeComplete();            
-            tier = stockG
-
-    elseif (trade:getGil() == 7000 and
-	    trade:getItemCount() == 1) then
-            player:tradeComplete();            
-            tier = stockH
-    else
-            player:messageSpecial(ID.text.NOT_HAVE_ENOUGH_GIL);
-            return 0;
-    end
-
-    tpz.shop.nation(player, tier, tpz.nation.WINDURST)
-
-end;
+end
 
 function onTrigger(player,npc)
-    local stock = 0
-    local pLevel = player:getMainLvl()
     local pNation = player:getNation()
-    
-    if pLevel <= 9 then
-	stock = stockA
-    elseif pLevel <= 19 then
-	stock = stockB
-    elseif pLevel <= 29 then
-	stock = stockC
-    elseif pLevel <= 39 then
-	stock = stockD
-    elseif pLevel <= 50 then
-	stock = stockE
-    elseif pLevel <= 59 then
-	stock = stockF
-    elseif pLevel <= 69 then
-	stock = stockG
-    elseif pLevel >= 70 then
-	stock = stockH
-    end
 
     if (pNation ~= 2) then
-        player:PrintToPlayer( string.format("Please see the Sparks of Eminence representative from your nation"),29 )
+        player:PrintToPlayer( string.format("Please see the Sparks of Eminence representative from your nation."),29 )
         printf("Nation : %i",pNation)
     else	
-        printf("Main Level : %i",pLevel)
-        --player:showText(npc, ID.text.THANK_YOU)
-        player:PrintToPlayer( string.format("For gear outside of your current tier, please trade the following amounts:"),29 )
-        player:PrintToPlayer( string.format("Lv1-9 - 900g Lv10-19 - 1900g Lv20-29 - 2900g Lv30-39 - 3900g "),29 )
-        player:PrintToPlayer( string.format("Lv40-50 - 5000g Lv51-59 - 5900g Lv60-69 - 6900g Lv70+ - 7000g"),29 )
-        tpz.shop.nation(player, stock, tpz.nation.WINDURST)
-    end   
+        player:SetEventNPC(npc:getID())
+        player:PrintToPlayer(string.format("Select level range."), 29);
+        player:PrintToPlayer(string.format("Level? %s %s %s %s %s %s %s %s",opt1, opt2, opt3, opt4, opt5, opt6, opt7, opt8), 12)
+    end
+end
+
+function onMenuSelection(player, npc, Choice)
+    local ChoiceData = 
+    {
+	{ choice =   "1-9",         stock = stockA   },
+	{ choice = "10-19",         stock = stockB   },
+	{ choice = "20-29",         stock = stockC   },
+	{ choice = "30-39",         stock = stockD   },
+	{ choice = "40-50",         stock = stockE   },
+	{ choice = "51-59",         stock = stockF   },
+	{ choice = "60-69",         stock = stockG   },
+	{ choice =   "70+",         stock = stockH   },
+    }
+
+    for _, v in pairs(ChoiceData) do
+        if v.choice == Choice then
+            player:PrintToPlayer(string.format("Level range: %s", v.choice), 29);
+            tpz.shop.nation(player, v.stock, tpz.nation.WINDURST)
+        end
+    end
 end

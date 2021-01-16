@@ -118,6 +118,7 @@ function onTrigger(player,npc)
     player:PrintToPlayer( string.format("Result? %s %s %s %s %s",opt1, opt2, opt3, opt4, opt5), 12 )
     player:PrintToPlayer( string.format("Choose currency to convert Infamy into."), 29 )
     player:PrintToPlayer( string.format("Current multiplier for %s: %i", nationByNum[pNation], multiplier ), 29 )
+    player:PrintToPlayer( string.format("Current multiplier for %s: %i" ), 29 )
 end
 
 function onMenuSelection(player, npc, Choice)
@@ -134,18 +135,23 @@ local data =
 		if v.choice == Choice then
 			if (v.id == 1) then
 				player:setLocalVar("convert_infamy",v.id)
+                                player:PrintToPlayer( string.format("%s currency chosen.  Please trade gil equaling the amount of Infamy you wish to convert.", v.choice ), 29 )
 				return
 			elseif (v.id == 2) then
 				player:setLocalVar("convert_infamy",v.id)
+                                player:PrintToPlayer( string.format("%s currency chosen.  Please trade gil equaling the amount of Infamy you wish to convert.", v.choice ), 29 )
 				return
 			elseif (v.id == 3) then
 				player:setLocalVar("convert_infamy",v.id)
+                                player:PrintToPlayer( string.format("%s currency chosen.  Please trade gil equaling the amount of Infamy you wish to convert.", v.choice ), 29 )
 				return
 			elseif (v.id == 4) then
 				player:setLocalVar("convert_infamy",v.id)
+				player:PrintToPlayer( string.format("%s currency chosen.  Please trade gil equaling the amount of Infamy you wish to convert.", v.choice ), 29 )
 				return
 			elseif (v.id == 5) then
 				player:setLocalVar("convert_infamy",v.id)
+				player:PrintToPlayer( string.format("%s currency chosen.  Please trade gil equaling the amount of Infamy you wish to convert.", v.choice ), 29 )
 				return
 			else
 				player:PrintToPlayer(("Please try again."), 29)

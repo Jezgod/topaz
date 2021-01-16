@@ -70,6 +70,7 @@ zones[tpz.zone.NORTH_GUSTABERG] =
             [17211711] = 17211702, -- 289.709 -0.297 750.252
         },
         GAMBILOX_WANDERLING = 17211848,
+        SALLOW_SEYMOUR      = 17211882,
     },
     npc =
     {

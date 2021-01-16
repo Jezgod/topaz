@@ -2462,288 +2462,288 @@ namespace charutils
         }
         if (PPet->getPetType() == PETTYPE_JUG_PET)
         {
-            //int32 abilityidindex = 656;
-            //int16 ab1 = -1; // always highest id
-            //int16 ab2 = -1;
-            //int16 ab3 = -1;
-            //int16 ab4 = -1;
-            //int16 ab5 = -1;
-            //int16 ab6 = -1;
-            //int16 ab7 = -1;
-            //int16 ab8 = -1;
+            int32 abilityidindex = 656;
+            int16 ab1 = -1; // always highest id
+            int16 ab2 = -1;
+            int16 ab3 = -1;
+            int16 ab4 = -1;
+            int16 ab5 = -1;
+            int16 ab6 = -1;
+            int16 ab7 = -1;
+            int16 ab8 = -1;
 
-            //if (PetID == 21) // SHEEP FAMILIAR
-            //{
-            //    ab1 = 676;
-            //    ab2 = 675;
-            //    ab3 = 674;
-            //    ab4 = 673;
-            //}
+            if (PetID == 21) // sheep familiar
+            {
+                ab1 = 676;
+                ab2 = 675;
+                ab3 = 674;
+                ab4 = 673;
+            }
 
-            //if (PetID == 22) // HARE FAMILIAR
-            //{
-            //    ab1 = 719;
-            //    ab2 = 658;
-            //    ab3 = 657;
-            //    ab4 = 656;
-            //}
+            if (PetID == 22) // hare familiar
+            {
+                ab1 = 719;
+                ab2 = 658;
+                ab3 = 657;
+                ab4 = 656;
+            }
 
-            //if (PetID == 23) // CRAB FAMILIAR
-            //{
-            //    ab1 = 681;
-            //    ab2 = 680;
-            //    ab3 = 679;
-            //    ab4 = 678;
-            //    ab5 = 677;
-            //}
+            if (PetID == 23) // crab familiar
+            {
+                ab1 = 681;
+                ab2 = 680;
+                ab3 = 679;
+                ab4 = 678;
+                ab5 = 677;
+            }
 
-            //if (PetID == 24) // COURIER CARRIE
-            //{
-            //    ab1 = 681;
-            //    ab2 = 680;
-            //    ab3 = 679;
-            //    ab4 = 678;
-            //    ab5 = 677;
-            //}
+            if (PetID == 24) // courier carrie
+            {
+                ab1 = 681;
+                ab2 = 680;
+                ab3 = 679;
+                ab4 = 678;
+                ab5 = 677;
+            }
 
-            //if (PetID == 25) // HOMUNCULUS
-            //{
-            //    ab1 = 663;
-            //    ab2 = 662;
-            //    ab3 = 661;
-            //    ab4 = 660;
-            //    ab5 = 659;
-            //}
+            if (PetID == 25) // homunculus
+            {
+                ab1 = 663;
+                ab2 = 662;
+                ab3 = 661;
+                ab4 = 660;
+                ab5 = 659;
+            }
 
-            //if (PetID == 26) // FLYTRAP FAMILIAR
-            //{
-            //    ab1 = 704;
-            //    ab2 = 703;
-            //    ab3 = 702;
-            //}
+            if (PetID == 26) // flytrap familiar
+            {
+                ab1 = 704;
+                ab2 = 703;
+                ab3 = 702;
+            }
 
-            //if (PetID == 27) // TIGER FAMILIAR
-            //{
-            //    ab1 = 666;
-            //    ab2 = 665;
-            //    ab3 = 664;
-            //}
+            if (PetID == 27) // tiger familiar
+            {
+                ab1 = 666;
+                ab2 = 665;
+                ab3 = 664;
+            }
 
-            //if (PetID == 28) // FLOWERPOT BILL
-            //{
-            //    ab1 = 663;
-            //    ab2 = 662;
-            //    ab3 = 661;
-            //    ab4 = 660;
-            //    ab5 = 659;
-            //}
+            if (PetID == 28) // flowerpot bill
+            {
+                ab1 = 663;
+                ab2 = 662;
+                ab3 = 661;
+                ab4 = 660;
+                ab5 = 659;
+            }
 
-            //if (PetID == 29) // EFT FAMILIAR
-            //{
-            //    ab1 = 709;
-            //    ab2 = 708;
-            //    ab3 = 707;
-            //    ab4 = 706;
-            //    ab5 = 705;
-            //}
+            if (PetID == 29) // eft familiar
+            {
+                ab1 = 709;
+                ab2 = 708;
+                ab3 = 707;
+                ab4 = 706;
+                ab5 = 705;
+            }
 
-            //if (PetID == 30) // LIZARD FAMILIAR
-            //{
-            //    ab1 = 672;
-            //    ab2 = 671;
-            //    ab3 = 670;
-            //    ab4 = 669;
-            //    ab5 = 668;
-            //    ab6 = 667;
-            //}
+            if (PetID == 30) // lizard familiar
+            {
+                ab1 = 672;
+                ab2 = 671;
+                ab3 = 670;
+                ab4 = 669;
+                ab5 = 668;
+                ab6 = 667;
+            }
 
-            //if (PetID == 31) // MAYFLY FAMILIAR
-            //{
-            //    ab1 = 697;
-            //    ab2 = 696;
-            //}
+            if (PetID == 31) // mayfly familiar
+            {
+                ab1 = 697;
+                ab2 = 696;
+            }
 
-            //if (PetID == 32) // FUNGUAR FAMILIAR
-            //{
-            //    ab1 = 690;
-            //    ab2 = 689;
-            //    ab3 = 688;
-            //    ab4 = 687;
-            //    ab5 = 686;
-            //    ab6 = 685;
-            //    ab7 = 684;
-            //}
+            if (PetID == 32) // funguar familiar
+            {
+                ab1 = 690;
+                ab2 = 689;
+                ab3 = 688;
+                ab4 = 687;
+                ab5 = 686;
+                ab6 = 685;
+                ab7 = 684;
+            }
 
-            //if (PetID == 33) // BEETLE FAMILIAR
-            //{
-            //    ab1 = 695;
-            //    ab2 = 694;
-            //    ab3 = 693;
-            //    ab4 = 692;
-            //    ab5 = 691;
-            //}
+            if (PetID == 33) // beetle familiar
+            {
+                ab1 = 695;
+                ab2 = 694;
+                ab3 = 693;
+                ab4 = 692;
+                ab5 = 691;
+            }
 
-            //if (PetID == 34) // ANTLION FAMILIAR
-            //{
-            //    ab1 = 701;
-            //    ab2 = 700;
-            //    ab3 = 699;
-            //    ab4 = 698;
-            //}
+            if (PetID == 34) // antlion familiar
+            {
+                ab1 = 701;
+                ab2 = 700;
+                ab3 = 699;
+                ab4 = 698;
+            }
 
-            //if (PetID == 35) // MITE FAMILIAR
-            //{
-            //    ab1 = 713;
-            //    ab2 = 712;
-            //    ab3 = 711;
-            //    ab4 = 710;
-            //}
+            if (PetID == 35) // mite familiar
+            {
+                ab1 = 713;
+                ab2 = 712;
+                ab3 = 711;
+                ab4 = 710;
+            }
 
-            //if (PetID == 36) // LULLABY MELODIA
-            //{
-            //    ab1 = 676;
-            //    ab2 = 675;
-            //    ab3 = 674;
-            //    ab4 = 673;
-            //}
+            if (PetID == 36) // lullaby melodia
+            {
+                ab1 = 676;
+                ab2 = 675;
+                ab3 = 674;
+                ab4 = 673;
+            }
 
-            //if (PetID == 37) // KEENEARED STEFFI
-            //{
-            //    ab1 = 658;
-            //    ab2 = 657;
-            //    ab3 = 656;
-            //}
+            if (PetID == 37) // keeneared steffi
+            {
+                ab1 = 658;
+                ab2 = 657;
+                ab3 = 656;
+            }
 
-            //if (PetID == 38) // FLOWERPOT BEN
-            //{
-            //    ab1 = 663;
-            //    ab2 = 662;
-            //    ab3 = 661;
-            //    ab4 = 660;
-            //    ab5 = 659;
-            //}
+            if (PetID == 38) // flowerpot ben
+            {
+                ab1 = 663;
+                ab2 = 662;
+                ab3 = 661;
+                ab4 = 660;
+                ab5 = 659;
+            }
 
-            //if (PetID == 39) // SABER SIRAVARDE
-            //{
-            //    ab1 = 666;
-            //    ab2 = 665;
-            //    ab3 = 664;
-            //}
+            if (PetID == 39) // saber siravarde
+            {
+                ab1 = 666;
+                ab2 = 665;
+                ab3 = 664;
+            }
 
-            //if (PetID == 40) // COLDBLOOD COMO
-            //{
-            //    ab1 = 672;
-            //    ab2 = 671;
-            //    ab3 = 670;
-            //    ab4 = 669;
-            //    ab5 = 668;
-            //    ab6 = 667;
-            //}
+            if (PetID == 40) // coldblood como
+            {
+                ab1 = 672;
+                ab2 = 671;
+                ab3 = 670;
+                ab4 = 669;
+                ab5 = 668;
+                ab6 = 667;
+            }
 
-            //if (PetID == 41) // SHELLBUSTER OROB
-            //{
-            //    ab1 = 697;
-            //    ab2 = 696;
-            //}
+            if (PetID == 41) // shellbuster orob
+            {
+                ab1 = 697;
+                ab2 = 696;
+            }
 
-            //if (PetID == 42) // VORACIOUS AUDREY
-            //{
-            //    ab1 = 704;
-            //    ab2 = 703;
-            //    ab3 = 702;
-            //}
+            if (PetID == 42) // voracious audrey
+            {
+                ab1 = 704;
+                ab2 = 703;
+                ab3 = 702;
+            }
 
-            //if (PetID == 43) // AMBUSHER ALLIE
-            //{
-            //    ab1 = 709;
-            //    ab2 = 708;
-            //    ab3 = 707;
-            //    ab4 = 706;
-            //    ab5 = 705;
-            //}
+            if (PetID == 43) // ambusher allie
+            {
+                ab1 = 709;
+                ab2 = 708;
+                ab3 = 707;
+                ab4 = 706;
+                ab5 = 705;
+            }
 
-            //if (PetID == 44) // LIFEDRINKER LARS
-            //{
-            //    ab1 = 713;
-            //    ab2 = 712;
-            //    ab3 = 711;
-            //    ab4 = 710;
-            //}
+            if (PetID == 44) // lifedrinker lars
+            {
+                ab1 = 713;
+                ab2 = 712;
+                ab3 = 711;
+                ab4 = 710;
+            }
 
-            //if (PetID == 45) // PANZER GALAHAD
-            //{
-            //    ab1 = 695;
-            //    ab2 = 694;
-            //    ab3 = 693;
-            //    ab4 = 692;
-            //    ab5 = 691;
-            //}
+            if (PetID == 45) // panzer galahad
+            {
+                ab1 = 695;
+                ab2 = 694;
+                ab3 = 693;
+                ab4 = 692;
+                ab5 = 691;
+            }
 
-            //if (PetID == 46) // CHOPSUEY CHUCKY
-            //{
-            //    ab1 = 701;
-            //    ab2 = 700;
-            //    ab3 = 699;
-            //    ab4 = 698;
-            //}
+            if (PetID == 46) // chopsuey chucky
+            {
+                ab1 = 701;
+                ab2 = 700;
+                ab3 = 699;
+                ab4 = 698;
+            }
 
-            //if (PetID == 47) // AMIGO SABOTENDER
-            //{
-            //    ab1 = 683;
-            //    ab2 = 682;
-            //}
+            if (PetID == 47) // amigo sabotender
+            {
+                ab1 = 683;
+                ab2 = 682;
+            }
 
-            //if (PetID == 50) // BLOODCLAW SHASRA
-            //{
-            //    ab1 = 729;
-            //    ab2 = 715;
-            //    ab3 = 714;
-            //}
+            if (PetID == 50) // bloodclaw shasra
+            {
+                ab1 = 729;
+                ab2 = 715;
+                ab3 = 714;
+            }
 
-            //if (PetID == 52) // FATSO FARGANN
-            //{
-            //    ab1 = 724;
-            //    ab2 = 723;
-            //    ab3 = 717;
-            //    ab4 = 716;
-            //}
+            if (PetID == 52) // fatso fargann
+            {
+                ab1 = 724;
+                ab2 = 723;
+                ab3 = 717;
+                ab4 = 716;
+            }
 
-            //if (PetID == 64) // FAITHFUL FALCORR
-            //{
-            //    ab1 = 735;
-            //    ab2 = 734;
-            //    ab3 = 733;
-            //    ab4 = 732;
-            //}
+            if (PetID == 64) // faithful falcorr
+            {
+                ab1 = 735;
+                ab2 = 734;
+                ab3 = 733;
+                ab4 = 732;
+            }
 
-            //if (PetID == 68) // TURBID TOLOI
-            //{
-            //    ab1 = 743;
-            //    ab2 = 742;
-            //}
+            if (PetID == 68) // turbid toloi
+            {
+                ab1 = 743;
+                ab2 = 742;
+            }
 
-            //if (ab1 != -1) { abilityidindex = ab1; }
-            //if (ab2 != -1) { abilityidindex = ab2; }
-            //if (ab3 != -1) { abilityidindex = ab3; }
-            //if (ab4 != -1) { abilityidindex = ab4; }
-            //if (ab5 != -1) { abilityidindex = ab5; }
-            //if (ab6 != -1) { abilityidindex = ab6; }
-            //if (ab7 != -1) { abilityidindex = ab7; }
-            //if (ab8 != -1) { abilityidindex = ab8; }
+            if (ab1 != -1) { abilityidindex = ab1; }
+            if (ab2 != -1) { abilityidindex = ab2; }
+            if (ab3 != -1) { abilityidindex = ab3; }
+            if (ab4 != -1) { abilityidindex = ab4; }
+            if (ab5 != -1) { abilityidindex = ab5; }
+            if (ab6 != -1) { abilityidindex = ab6; }
+            if (ab7 != -1) { abilityidindex = ab7; }
+            if (ab8 != -1) { abilityidindex = ab8; }
 
-            //while (abilityidindex <= ab1)
-            //{
-            //    if (abilityidindex == ab1 || abilityidindex == ab2 || abilityidindex == ab3 || abilityidindex == ab4 || abilityidindex == ab5 || abilityidindex == ab6 || abilityidindex == ab7 || abilityidindex == ab8)
-            //    {
-            //        addPetAbility(PChar, abilityidindex - ABILITY_HEALING_RUBY);
-            //    }
-            //    abilityidindex++;
-            //}
-            auto skillList {battleutils::GetMobSkillList(PPet->m_MobSkillList)};
+            while (abilityidindex <= ab1)
+            {
+                if (abilityidindex == ab1 || abilityidindex == ab2 || abilityidindex == ab3 || abilityidindex == ab4 || abilityidindex == ab5 || abilityidindex == ab6 || abilityidindex == ab7 || abilityidindex == ab8)
+                {
+                    addPetAbility(PChar, abilityidindex - ABILITY_HEALING_RUBY);
+                }
+                abilityidindex++;
+            }
+            /*auto skillList {battleutils::GetMobSkillList(PPet->m_MobSkillList)};
             for (auto&& abilityid : skillList)
             {
                 addPetAbility(PChar, abilityid - ABILITY_HEALING_RUBY);
-            }
+            }*/
         }
         PChar->pushPacket(new CCharAbilitiesPacket(PChar));
     }
@@ -4835,6 +4835,7 @@ namespace charutils
                 (region >= 28 && region <= 32))
             {
                 charutils::AddPoints(PChar, "imperial_standing", (int32)(exp * 0.25f));
+                charutils::AddPoints(PChar, "imperial_standing", (int32)((exp * 0.25f) * (PChar->expChain.chainNumber / 100.0f)));
                 PChar->pushPacket(new CConquestPacket(PChar));
             }
 
@@ -4843,6 +4844,7 @@ namespace charutils
                 (region >= 33 && region <= 40))
             {
                 charutils::AddPoints(PChar, "allied_notes", (int32)(exp * 0.25f));
+                charutils::AddPoints(PChar, "allied_notes", (int32)((exp * 0.25f) * (PChar->expChain.chainNumber / 100.0f)));
                 PChar->pushPacket(new CConquestPacket(PChar));
             }
 
@@ -4853,7 +4855,7 @@ namespace charutils
             {
                 uint16 TextID = luautils::GetTextIDVariable(Pzone, "CRUOR_OBTAINED");
                 uint32 Total = charutils::GetPoints(PChar, "cruor");
-                uint32 Cruor = (uint32)(exp * 0.25f); // Need to work out how to do cruor chains, until then no cruor will drop unless this line is customized for non retail play.
+                uint32 Cruor = (uint32)(exp * 0.5f); // Need to work out how to do cruor chains, until then no cruor will drop unless this line is customized for non retail play.
 
                 if (TextID == 0)
                 {
@@ -4864,6 +4866,7 @@ namespace charutils
                 {
                     PChar->pushPacket(new CMessageSpecialPacket(PChar, TextID, Cruor, Total + Cruor, 0, 0));
                     charutils::AddPoints(PChar, "cruor", Cruor);
+                    charutils::AddPoints(PChar, "cruor", (int32)(Cruor * (PChar->expChain.chainNumber / 100.0f)));
                 }
             }
 
@@ -4872,6 +4875,7 @@ namespace charutils
                 (region >= 42 && region <= 45))
             {
                 charutils::AddPoints(PChar, "bayld", (int32)(exp * 0.5f));
+                charutils::AddPoints(PChar, "bayld", (int32)((exp * 0.5f) * (PChar->expChain.chainNumber / 100.0f)));
                 PChar->pushPacket(new CConquestPacket(PChar));
             }
         }

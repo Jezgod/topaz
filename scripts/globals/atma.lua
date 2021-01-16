@@ -17,7 +17,7 @@ local atmaMods =
 {
     -- GROUP 1
     [tpz.ki.ATMA_OF_THE_LION]                   = {tpz.mod.TRIPLE_ATTACK, 7, tpz.mod.DMGPHYS, -10, tpz.mod.THUNDERATT, 30},
-    [tpz.ki.ATMA_OF_THE_STOUT_ARM]              = {tpz.mod.STR, 40, tpz.mod.ATT, 50, tpz.mod.RATT, 40},
+    [tpz.ki.ATMA_OF_THE_STOUT_ARM]              = {tpz.mod.STR, 40, tpz.mod.ATT, 50, tpz.mod.RATT, 120},
     [tpz.ki.ATMA_OF_THE_TWIN_CLAW]              = {tpz.mod.DEF, 40, tpz.mod.MDEF, 20, tpz.mod.CHARMRES, 20},
     [tpz.ki.ATMA_OF_ALLURE]                     = {tpz.mod.MPP, 30, tpz.mod.MND, 30, tpz.mod.ENMITY, -30},
     [tpz.ki.ATMA_OF_ETERNITY]                   = {tpz.mod.ENEMYCRITRATE, -20, tpz.mod.SLOWRES, 30, tpz.mod.CURSERES, 30},
@@ -107,7 +107,7 @@ local atmaMods =
     [tpz.ki.ATMA_OF_THE_WINGED_GLOOM]           = {tpz.mod.DMG, -25, tpz.mod.REGEN, 2},
     [tpz.ki.ATMA_OF_THE_SEA_DAUGHTER]           = {tpz.mod.REGAIN, 50, tpz.mod.HASTE_GEAR, -1500, tpz.mod.REGEN, 30},
     [tpz.ki.ATMA_OF_THE_HATEFUL_STREAM]         = {}, -- Not yet implemented. No easy way to do this ATMA. No way I am doing bit crap in onTick for it..
-    [tpz.ki.ATMA_OF_THE_FOE_FLAYER]             = {tpz.mod.MPP, 20, tpz.mod.REFRESH, 20, tpz.mod.FASTCAST, 20, tpz.mod.MACC, 50},
+    [tpz.ki.ATMA_OF_THE_FOE_FLAYER]             = {tpz.mod.MP, 100, tpz.mod.REFRESH, 7},
     [tpz.ki.ATMA_OF_THE_ENDLESS_NIGHTMARE]      = {tpz.mod.MND, 20, tpz.mod.DARKRES, 100, tpz.mod.FORCE_DARK_DWBONUS, 1},
     [tpz.ki.ATMA_OF_THE_SUNDERING_SLASH]        = {tpz.mod.ATT, 20, tpz.mod.REGAIN, 30},
     [tpz.ki.ATMA_OF_ENTWINED_SERPENTS]          = {tpz.mod.ATT, 20, tpz.mod.DOUBLE_ATTACK, 15},

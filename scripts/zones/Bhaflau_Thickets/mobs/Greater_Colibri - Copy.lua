@@ -12,15 +12,31 @@ function onMobFight(mob, target)
     local changeTime = mob:getLocalVar("changeTime")
 
     if spell > 0 and mob:hasStatusEffect(tpz.effect.SILENCE) == false and target:AnimationSub() == 1 then
-        if delay >= 2 then
             mob:castSpell(spell)
             mob:setLocalVar("COPY_SPELL", 0)
             mob:setLocalVar("delay", 0)
-            target:AnimationSub(4)
+            target:AnimationSub(0)
+        --[[if delay >= 3 then
+            mob:castSpell(spell)
+            mob:setLocalVar("COPY_SPELL", 0)
+            mob:setLocalVar("delay", 0)
+            target:AnimationSub(0)
         else
             mob:setLocalVar("delay", delay+1)
         end
+        --]]
     end
+    --[[
+    if mob:getBattleTime() == changeTime then
+        if mob:AnimationSub() == 0 then
+            mob:AnimationSub(1)
+            mob:setLocalVar("changeTime", mob:getBattleTime() + 150)
+        else
+            mob:AnimationSub(0)
+            mob:setLocalVar("changeTime", mob:getBattleTime() + 150)
+        end
+    end
+    --]]
 end
 
 function onMagicHit(caster, target, spell)
@@ -28,6 +44,9 @@ function onMagicHit(caster, target, spell)
         target:setLocalVar("COPY_SPELL", spell:getID())
         target:setLocalVar("LAST_CAST", target:getBattleTime())
         target:AnimationSub(1)
+        caster:PrintToPlayer("A")
+    else
+ 	caster:PrintToPlayer( string.format( "%u", target:AnimationSub() ), 14)
     end
 
     return 0

@@ -894,6 +894,20 @@ void CZone::CharZoneIn(CCharEntity* PChar)
 
     PChar->PLatentEffectContainer->CheckLatentsZone();
     charutils::ResetPVPVar(PChar);
+    uint8 arbiter = 0;
+    arbiter = charutils::GetCharVar(PChar, "arbiter");
+    if (arbiter == 1)
+    {
+        uint8 nation = PChar->profile.nation;
+        PChar->allegiance = 2 + nation;
+        const char* fmtQuery = "UPDATE char_vars SET value = 1 WHERE charid = %u AND varname = 'pvp_flag' LIMIT 1;";
+
+        Sql_Query(SqlHandle, fmtQuery, PChar->id);
+
+        fmtQuery = "UPDATE char_vars SET value = 0 WHERE charid = %u AND varname = 'arbiter' LIMIT 1;";
+
+        Sql_Query(SqlHandle, fmtQuery, PChar->id);
+    }
     if (PChar->StatusEffectContainer->HasStatusEffect(EFFECT_PROWESS))
     {
         PChar->StatusEffectContainer->DelStatusEffect(EFFECT_PROWESS);
