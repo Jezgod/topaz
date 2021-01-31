@@ -20,7 +20,7 @@ function onEffectGain(target, effect)
         pet:addMod(tpz.mod.EVA, 50)
         pet:addMod(tpz.mod.MEVA, 50)
         pet:addMod(tpz.mod.REVA, 50)
-        pet:addMod(tpz.mod.DMG, -50)
+        pet:addMod(tpz.mod.DMG, 50)
     end
 end
 
@@ -42,6 +42,6 @@ function onEffectLose(target, effect)
         pet:delMod(tpz.mod.EVA, 50)
         pet:delMod(tpz.mod.MEVA, 50)
         pet:delMod(tpz.mod.REVA, 50)
-        pet:delMod(tpz.mod.DMG, -50)
+        pet:delMod(tpz.mod.DMG, 50)
     end
 end

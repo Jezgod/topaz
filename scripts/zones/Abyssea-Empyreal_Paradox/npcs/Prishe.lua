@@ -6,7 +6,8 @@ require("scripts/globals/keyitems")
 local ID = require("scripts/zones/Empyreal_Paradox/IDs")
 -----------------------------------
 
-local opt1  = "the.Apocalypse"   
+local opt1  = "the.Hateful.Stream"
+local opt2  = "the.Apocalypse"   
 
 function onTrade(player,npc,trade)
 end
@@ -15,19 +16,18 @@ function onTrigger(player,npc)
     --player:startEvent(2182)
     player:SetEventNPC(npc:getID())
 
-    player:PrintToPlayer(string.format("Atma.of? %s",opt1), 12)
+    player:PrintToPlayer(string.format("Atma.of? %s %s",opt1, opt2), 12)
 end
 
 function onMenuSelection(player, npc, Choice)
 local AtmaData = 
 {
-	{ choice = "the.Apocalypse",             id = 1378 }
+	{ choice = "the.Hateful.Stream",  	 id = 1369,	cost = 25000,	token = 1 },
+	{ choice = "the.Apocalypse",             id = 1378,	cost = 50000, 	token = 2}
 }
 
 local vp = player:getCurrency("valor_point")
 local token = player:getCharVar("atma_token")
-local cost = 50000
-local token_cost = 2
 local currency = player:getLocalVar("atma_method")
 
         for _, v in pairs(AtmaData) do
@@ -36,25 +36,25 @@ local currency = player:getLocalVar("atma_method")
 				player:PrintToPlayer(string.format("Atma.of.%s already obtained.", v.choice), 29)
 				return
  			elseif (currency == 1) then
-			        if (token > 0) then
+			        if (token >= v.token) then
 				    player:addKeyItem(v.id)
-				    player:setCharVar("atma_token", token - 2)
+				    player:setCharVar("atma_token", token - v.token)
 				    player:PrintToPlayer(string.format("Atma Tokens Remaining: %u", player:getCharVar("atma_token")), 29)
     				    player:messageSpecial(ID.text.KEYITEM_OBTAINED, v.id)
 				    return
 				else
 				   player:PrintToPlayer(string.format("Not enough Atma Tokens to obtain the selected atma."), 14)
-				   player:PrintToPlayer(string.format("Required: %i | Player Amount: %i", token_cost, token), 14)
+				   player:PrintToPlayer(string.format("Required: %i | Player Amount: %i", v.token, token), 14)
 				   return
 				end
 			elseif (currency == 2) then
-				if (vp < cost) then
+				if (vp < v.cost) then
 				    player:PrintToPlayer(string.format("Not enough Valor Points to obtain the selected atma."), 14)
-				    player:PrintToPlayer(string.format("Required: %i | Player Amount: %i", cost, vp), 14)
+				    player:PrintToPlayer(string.format("Required: %i | Player Amount: %i", v.cost, vp), 14)
 				    return
 			        else
 				    player:addKeyItem(v.id)
-				    player:delCurrency("valor_point", cost)
+				    player:delCurrency("valor_point", v.cost)
 				    player:PrintToPlayer(string.format("Valor Points Remaining: %u", player:getCurrency("valor_point")), 29)
     				    player:messageSpecial(ID.text.KEYITEM_OBTAINED, v.id)
 				end
@@ -63,14 +63,6 @@ local currency = player:getLocalVar("atma_method")
 			end
                 end
         end
-
-        if Choice == "Next>" then
-                player:PrintToPlayer(string.format("Atma.of? %s %s %s <Back",opt8, opt9, opt10), 12)
-	end
-
-        if Choice == "<Back" then
-		player:PrintToPlayer(string.format("Atma.of? %s %s %s %s %s %s %s Next>",opt1, opt2, opt3, opt4, opt5, opt6, opt7), 12)
-	end
 
         if Choice == "Canceled." then
 		player:PrintToPlayer(string.format("Selection cancelled."), 29)

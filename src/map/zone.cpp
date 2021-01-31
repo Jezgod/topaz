@@ -864,6 +864,28 @@ void CZone::CharZoneIn(CCharEntity* PChar)
 
     PChar->ReloadPartyInc();
 
+    /*if (PChar->PParty != nullptr)
+    {
+        CCharEntity* PLeader = (CCharEntity*)PChar->PParty->GetLeader();
+        uint16 l_zone = 0;
+        if (PLeader)
+        {
+            l_zone = charutils::GetCharVar(PLeader, "[p]zone");
+        }
+        if (PChar->loc.zone->GetID() == l_zone)
+        {
+            uint8 nation = PChar->profile.nation;
+            PChar->allegiance = 2 + nation;
+            const char* fmtQuery = "UPDATE char_vars SET value = 1 WHERE charid = %u AND varname = 'pvp_flag' LIMIT 1;";
+
+            Sql_Query(SqlHandle, fmtQuery, PChar->id);
+        }
+    }
+    else
+    {
+        ShowDebug(CL_CYAN"%s\n" CL_RESET, PChar->GetName());
+    }*/
+
     if (PChar->PParty != nullptr)
     {
         if (m_TreasurePool != nullptr)
@@ -894,6 +916,7 @@ void CZone::CharZoneIn(CCharEntity* PChar)
 
     PChar->PLatentEffectContainer->CheckLatentsZone();
     charutils::ResetPVPVar(PChar);
+    charutils::SetStyleLock(PChar, false);
     uint8 arbiter = 0;
     arbiter = charutils::GetCharVar(PChar, "arbiter");
     if (arbiter == 1)

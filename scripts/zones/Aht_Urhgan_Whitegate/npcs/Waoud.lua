@@ -13,14 +13,39 @@ require("scripts/globals/npc_util")
 local ID = require("scripts/zones/Aht_Urhgan_Whitegate/IDs")
 -----------------------------------
 
+local bluespells =
+{
+	[2755]	=  { item = 2755, spellID = 654, level = 72, name = "Sub-Zero Smash" },	-- Ruszor Hide -> Sub-Zero Smash
+}
+
 function onTrade(player, npc, trade)
     local anEmptyVessel = player:getQuestStatus(AHT_URHGAN, tpz.quest.id.ahtUrhgan.AN_EMPTY_VESSEL)
     local anEmptyVesselProgress = player:getCharVar("AnEmptyVesselProgress")
     local StoneID = player:getCharVar("EmptyVesselStone")
+    local itemId = trade:getItemId()
+    local BlueSpellMap = bluespells[itemId]
+    local hasItem = trade:hasItemQty(BlueSpellMap.item, 1)
+    local mJob = player:getMainJob()
+    local pLevel = player:getMainLvl()
+    local killcount = player:getCharVar("[blu]" .. BlueSpellMap.spellID)
 
     -- AN EMPTY VESSEL (dangruf stone, valkurm sunsand, or siren's tear)
     if anEmptyVessel == QUEST_ACCEPTED and anEmptyVesselProgress == 3 and trade:hasItemQty(StoneID, 1) and trade:getItemCount() == 1 then
         player:startEvent(67, StoneID) -- get the stone to Aydeewa
+    end
+   
+    -- Learn BLU magic by mob kills
+    if (hasItem and mJob == tpz.job.BLU and 
+        pLevel >= BlueSpellMap.level and 
+        killcount == 10 and
+        trade:getItemCount() == 1) then
+
+      	player:tradeComplete()
+	player:addSpell(BlueSpellMap.spellID)
+	player:PrintToPlayer( string.format("%s learned.", BlueSpellMap.name), 29 )
+	player:setCharVar("[blu]" .. BlueSpellMap.spellID, 0)
+    else
+   	player:PrintToPlayer("You do not meet the requirements to learn the spell.", 14)
     end
 end
 

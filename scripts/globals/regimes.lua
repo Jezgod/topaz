@@ -1124,7 +1124,8 @@ tpz.regime.bookOnEventFinish = function(player, option, regimeType)
 
     option = bit.band(option, 0x7FFFFFFF)
 
-    if option == 7 then
+    if option == 6 then
+      --printf("%u", option)
       tpz.hunts.clearHuntVars(player)
     end
 
@@ -1133,6 +1134,7 @@ tpz.regime.bookOnEventFinish = function(player, option, regimeType)
     local opt = opts[option]
 
     if not opt then
+        --printf("%u", option)
         return
     end
 

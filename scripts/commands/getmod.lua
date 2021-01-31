@@ -50,4 +50,5 @@ function onTrigger(player, id)
     end
 
     player:PrintToPlayer(string.format("%s's Mod %i (%s) is %i", effectTarget:getName(), modId, modName, effectTarget:getMod(modId)))
+    player:PrintToPlayer(string.format("%s's HP %i", effectTarget:getName(), effectTarget:getHP()))
 end

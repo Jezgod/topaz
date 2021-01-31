@@ -43,6 +43,7 @@ function onMobDespawn(mob)
             UpdateNMSpawnPoint(ID.mob.ADAMANTOISE)
             GetMobByID(ID.mob.ADAMANTOISE):setRespawnTime(75600 + math.random(0, 6) * 1800) -- 21 - 24 hours with half hour windows
             SetServerVariable("[PH]Aspidochelone", kills + 1)
+            GetNPCByID(ID.npc.ADAMANTOISE_QM):setStatus(tpz.status.NORMAL)
         end
     end
 end

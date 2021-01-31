@@ -45,7 +45,6 @@ function onUseAbility(player, target, ability)
         end
 
         player:charmPet(target)
-   	player:setCharVar("familiar", 0)
 
         if Tamed then
             player:delMod(tpz.mod.CHARM_CHANCE, 10)

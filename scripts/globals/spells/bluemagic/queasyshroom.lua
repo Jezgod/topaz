@@ -18,6 +18,8 @@ require("scripts/globals/magic")
 -----------------------------------------
 
 function onMagicCastingCheck(caster, target, spell)
+    spell:setFlag(tpz.magic.spellFlag.WIPE_SHADOWS)
+
     return 0
 end
 

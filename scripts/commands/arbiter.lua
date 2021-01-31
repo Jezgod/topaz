@@ -37,7 +37,9 @@ local zone_list =
     	249, -- Mhaura
     	250, -- Kazham
     	251, -- Hall of the Gods
-    	252  -- Norg
+    	252, -- Norg
+	256, -- Western Adoulin
+	257, -- Eastern Adoulin
 }
 
 local job_map =
@@ -168,7 +170,7 @@ function onTrigger(player, target)
 	targ:PrintToPlayer( string.format("An arbiter player has appeared..."), 29)
         targ:setAllegiance( t_alleg )
         targ:setAnimation(33)
-        targ:timer(6000, function(player)
+        targ:timer(8000, function(player)
 		targ:setAnimation(0)
 		end)
 	targ:setCharVar("arbiter_t" ,os.time() + 3600)

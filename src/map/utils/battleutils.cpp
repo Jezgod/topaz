@@ -1790,7 +1790,7 @@ namespace battleutils
 
         if (PAttacker->objtype == TYPE_PC || PAttacker->objtype == TYPE_PET)
         {
-            if (PDefender->allegiance != 0 && PDefender->allegiance != PAttacker->allegiance && PAttacker->allegiance != 1) //&& level == 75)
+            if (PDefender->allegiance != 0 && PDefender->allegiance != PAttacker->allegiance && PAttacker->allegiance != 1 && PDefender->objtype == TYPE_PC) //&& level == 75)
             {
                 //PTarget->StatusEffectContainer->AddStatusEffect(new CStatusEffect(EFFECT_MAX_HP_BOOST, EFFECT_MAX_HP_BOOST, 500, 0, 120));
                 PDefender->StatusEffectContainer->AddStatusEffect(new CStatusEffect(EFFECT_DEFENSE_BOOST, EFFECT_DEFENSE_BOOST, 100, 0, 120));
@@ -2172,7 +2172,7 @@ namespace battleutils
     {
         if (PAttacker->objtype == TYPE_PC || PAttacker->objtype == TYPE_PET)
         {
-            if (PDefender->allegiance != 0 && PDefender->allegiance != PAttacker->allegiance && PAttacker->allegiance != 1) //&& level == 75)
+            if (PDefender->allegiance != 0 && PDefender->allegiance != PAttacker->allegiance && PAttacker->allegiance != 1 && PDefender->objtype == TYPE_PC) //&& level == 75)
             {
                 //PTarget->StatusEffectContainer->AddStatusEffect(new CStatusEffect(EFFECT_MAX_HP_BOOST, EFFECT_MAX_HP_BOOST, 500, 0, 120));
                 PDefender->StatusEffectContainer->AddStatusEffect(new CStatusEffect(EFFECT_DEFENSE_BOOST, EFFECT_DEFENSE_BOOST, 100, 0, 120));
@@ -2187,6 +2187,7 @@ namespace battleutils
         if (PSpell->canTargetEnemy() && damage > 0 && PSpell->dealsDamage())
         {
             PDefender->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_DAMAGE);
+            PDefender->StatusEffectContainer->DelStatusEffect(EFFECT_MOUNTED);
             // Check for bind breaking
             BindBreakCheck(PAttacker, PDefender);
 

@@ -1838,7 +1838,7 @@ void CBattleEntity::OnEngage(CAttackState& state)
     
     if (objtype == TYPE_PC || objtype == TYPE_PET)
     {
-        if (PTarget->allegiance != 0) //&& level == 75)
+        if (PTarget->allegiance != 0 && PTarget->objtype == TYPE_PC) //&& level == 75)
         {
             //PTarget->StatusEffectContainer->AddStatusEffect(new CStatusEffect(EFFECT_MAX_HP_BOOST, EFFECT_MAX_HP_BOOST, 500, 0, 120));
             PTarget->StatusEffectContainer->AddStatusEffect(new CStatusEffect(EFFECT_DEFENSE_BOOST, EFFECT_DEFENSE_BOOST, 100, 0, 120));

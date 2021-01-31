@@ -3142,23 +3142,24 @@ void SmallPacket0x06E(map_session_data_t* session, CCharEntity* PChar, CBasicPac
                 PInvitee = zoneutils::GetChar(charid);
             }
 
-            uint8 Pall_p = PChar->profile.nation;
-            uint8 Tall_p = 0;
-            //uint8 Ppvp_p = charutils::GetPVPVar(PChar);
-            //uint8 Tpvp_p = 0;
+            uint8 Pnat_p = PChar->profile.nation;
+            uint8 Palleg_p = PChar->allegiance;
+            uint8 Tnat_p = 0;
+            uint8 Talleg_p = 0;
+
             if (PInvitee)
             {
-                Tall_p = PInvitee->profile.nation;
-                //Tpvp_p = charutils::GetPVPVar(PInvitee);
+                Tnat_p = PInvitee->profile.nation;
+                Talleg_p = PInvitee->allegiance;
             }
             
             if (PInvitee)
             {
                 ShowDebug(CL_CYAN"%s sent party invite to %s\n" CL_RESET, PChar->GetName(), PInvitee->GetName());
                 //make sure invitee isn't dead or in jail, they aren't a party member and don't already have an invite pending, and your party is not full
-                if (Pall_p != Tall_p || PInvitee->isDead() || jailutils::InPrison(PInvitee) || PInvitee->InvitePending.id != 0 || PInvitee->PParty != nullptr)
+                if (Pnat_p != Tnat_p || Palleg_p != Talleg_p || PInvitee->isDead() || jailutils::InPrison(PInvitee) || PInvitee->InvitePending.id != 0 || PInvitee->PParty != nullptr)
                 {
-                    ShowDebug(CL_CYAN"%s is a different nation. dead, in jail, has a pending invite, or is already in a party\n" CL_RESET, PInvitee->GetName());
+                    ShowDebug(CL_CYAN"%s is a different nation or allegiance, dead, in jail, has a pending invite, or is already in a party\n" CL_RESET, PInvitee->GetName());
                     PChar->pushPacket(new CMessageStandardPacket(PChar, 0, 0, MsgStd::CannotInvite));
                     break;
                 }
@@ -3620,6 +3621,9 @@ void SmallPacket0x074(map_session_data_t* session, CCharEntity* PChar, CBasicPac
                     {
                         ShowDebug(CL_CYAN"Added %s to %s's party\n" CL_RESET, PChar->GetName(), PInviter->GetName());
                         PInviter->PParty->AddMember(PChar);
+                        /*const char* fmtQuery = "UPDATE char_vars SET value = 0 WHERE charid = %u AND varname = '[p]zone' LIMIT 1;";
+
+                        Sql_Query(SqlHandle, fmtQuery, PChar->id);*/
                     }
                 }
             }

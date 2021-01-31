@@ -37,5 +37,6 @@ function onMobDespawn(mob)
         DisallowRespawn(ID.mob.ADAMANTOISE, false)
         UpdateNMSpawnPoint(ID.mob.ADAMANTOISE)
         GetMobByID(ID.mob.ADAMANTOISE):setRespawnTime(75600 + math.random(0, 6) * 1800) -- 21 - 24 hours with half hour windows
+        GetNPCByID(ID.npc.ADAMANTOISE_QM):setStatus(tpz.status.NORMAL)
     end
 end

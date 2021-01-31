@@ -93,5 +93,7 @@ function onTrigger(player)
 		end
 
 		player:setCharVar("pvp_flag", 1)
+                --player:setCharVar("[p]zone", zone)
+		player:lockstyleOn()
    	end	
 end

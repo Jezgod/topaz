@@ -5422,6 +5422,27 @@ inline int32 CLuaBaseEntity::setCampaignAllegiance(lua_State *L)
     return 0;
 }
 
+// LOCKSTYLE
+inline int32 CLuaBaseEntity::lockstyleOn(lua_State* L)
+{
+    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
+    TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+
+    /*TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));*/
+    TPZ_DEBUG_BREAK_IF(lua_tointeger(L, 1) > 99);
+
+    if (auto PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity))
+    {
+
+        charutils::SetStyleLock(PChar, true);
+
+        PChar->pushPacket(new CCharAppearancePacket(PChar));
+        PChar->pushPacket(new CCharSyncPacket(PChar));
+    }
+
+    return 0;
+}
+
 //GET CONQUEST POINT RATIO
 inline int32 CLuaBaseEntity::getConquestPointRatio(lua_State* L)
 {
@@ -15179,6 +15200,7 @@ Lunar<CLuaBaseEntity>::Register_t CLuaBaseEntity::methods[] =
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,setAllegiance),
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,getCampaignAllegiance),
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,setCampaignAllegiance),
+    LUNAR_DECLARE_METHOD(CLuaBaseEntity, lockstyleOn),
     LUNAR_DECLARE_METHOD(CLuaBaseEntity, getConquestPointRatio),    //CP RATIO
     LUNAR_DECLARE_METHOD(CLuaBaseEntity, getImperialPointRatio),    //IS RATIO
     LUNAR_DECLARE_METHOD(CLuaBaseEntity, getAlliedPointRatio),      //AN RATIO

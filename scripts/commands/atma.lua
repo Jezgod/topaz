@@ -105,7 +105,7 @@ local atma_map =
 	[1366]		=	"ATMA_OF_THE_SOLITARY_ONE",
 	[1367]		=	"ATMA_OF_THE_WINGED_GLOOM",
 	[1368]		=	"ATMA_OF_THE_SEA_DAUGHTER",
-	[1369]		=	"ATMA_OF_THE_HATEFUL_STREAM",
+	--[1369]	=	"ATMA_OF_THE_HATEFUL_STREAM",
 	[1370]		=	"ATMA_OF_THE_FOE_FLAYER",
 	[1371]		=	"ATMA_OF_THE_ENDLESS_NIGHTMARE",
 	[1372]		=	"ATMA_OF_THE_SUNDERING_SLASH",
@@ -231,16 +231,18 @@ function onTrigger(player, arg1)
     local arg4
 
     if validZone(zone_list, zone) == true then
-	    targ:PrintToPlayer( string.format( "This function is not valid in the current zone." ), 14)
+	targ:PrintToPlayer( string.format( "This function is not valid in the current zone." ), 14)
         return
-    else
-    end  
+    end
 
     if (abysstotal == 0) then
         targ:PrintToPlayer( string.format( "You do not possess any lunar abyssite to infuse atma." ), 14)
         return
     elseif (pvpflag == 0) then
       	targ:PrintToPlayer( string.format( "Atma cannot be infused with PVP unflagged." ), 14)
+        return
+    elseif (arg1 == 91 or arg2 == 91 or arg3 == 91 or arg4 == 91) then
+	targ:PrintToPlayer( string.format( "Atma cannot be infused using this method." ), 14)
         return
     elseif (targ:getCharVar("infused_atma") == abyssmod) then
         targ:PrintToPlayer( string.format( "You cannot infuse any more atma." ), 14)

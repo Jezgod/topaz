@@ -43,6 +43,7 @@ function onMobDespawn(mob)
             UpdateNMSpawnPoint(ID.mob.FAFNIR)
             GetMobByID(ID.mob.FAFNIR):setRespawnTime(75600 + math.random(0, 6) * 1800) -- 21 - 24 hours with half hour windows
             SetServerVariable("[PH]Nidhogg", kills + 1)
+	    GetNPCByID(ID.npc.FAFNIR_QM):setStatus(tpz.status.NORMAL)
         end
     end
 end

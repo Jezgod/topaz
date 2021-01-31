@@ -381,12 +381,14 @@ function onTrigger(player, target)
         elseif (player:getZoneID() == zone) then
             player:PrintToPlayer( string.format("This function cannot be used here."), 14)
             return 1
+	==[[
         elseif (pJob == p_ng_job and tJob ~= t_ng_job) then
 	    player:PrintToPlayer( string.format("Target cannot be invaded due to NG job inconsistency."), 14)
             return 1
         elseif (pJob ~= p_ng_job and tJob == t_ng_job) then
 	    player:PrintToPlayer( string.format("Target cannot be invaded due to NG job inconsistency."), 14)
             return 1
+	==]]
         end
 
         -- db entry for fights player/target

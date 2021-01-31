@@ -14,5 +14,7 @@ function onAbilityCheck(player, target, ability)
 end
 
 function onUseAbility(player, target, ability)
-   player:addStatusEffect(tpz.effect.TRICK_ATTACK, 1, 0, 60)
+    local duration = 60
+
+    player:addStatusEffect(tpz.effect.TRICK_ATTACK, 1, 0, duration)
 end

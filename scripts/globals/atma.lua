@@ -106,7 +106,7 @@ local atmaMods =
     [tpz.ki.ATMA_OF_THE_SOLITARY_ONE]           = {tpz.mod.TRIPLE_ATTACK, 7, tpz.mod.DMGBREATH, -25, tpz.mod.ZANSHIN, 10},
     [tpz.ki.ATMA_OF_THE_WINGED_GLOOM]           = {tpz.mod.DMG, -25, tpz.mod.REGEN, 2},
     [tpz.ki.ATMA_OF_THE_SEA_DAUGHTER]           = {tpz.mod.REGAIN, 50, tpz.mod.HASTE_GEAR, -1500, tpz.mod.REGEN, 30},
-    [tpz.ki.ATMA_OF_THE_HATEFUL_STREAM]         = {}, -- Not yet implemented. No easy way to do this ATMA. No way I am doing bit crap in onTick for it..
+    --[tpz.ki.ATMA_OF_THE_HATEFUL_STREAM]         = {}, -- Not yet implemented. No easy way to do this ATMA. No way I am doing bit crap in onTick for it..
     [tpz.ki.ATMA_OF_THE_FOE_FLAYER]             = {tpz.mod.MP, 100, tpz.mod.REFRESH, 7},
     [tpz.ki.ATMA_OF_THE_ENDLESS_NIGHTMARE]      = {tpz.mod.MND, 20, tpz.mod.DARKRES, 100, tpz.mod.FORCE_DARK_DWBONUS, 1},
     [tpz.ki.ATMA_OF_THE_SUNDERING_SLASH]        = {tpz.mod.ATT, 20, tpz.mod.REGAIN, 30},
@@ -169,8 +169,30 @@ local atmaMods =
 --tpz.atma.onEffectGain = function(target, effect)
 function tpz.atma.onEffectGain(target, effect)
     local atma = ATMA_OFFSET + effect:getPower()
-    local mods = atmaMods[atma]
-    local count = #mods
+    local mods
+    local count
+    local mod1 = 0
+    local val1 = 0
+    local mod2 = 0
+    local val2 = 0
+    local mod3 = 0
+    local val3 = 0
+
+  if atma == 1369 then
+    mod1 = target:getLocalVar("[atma]mod1")
+    val1 = target:getLocalVar("[atma]val1")
+    mod2 = target:getLocalVar("[atma]mod2")
+    val2 = target:getLocalVar("[atma]val2")
+    mod3 = target:getLocalVar("[atma]mod3")
+    val3 = target:getLocalVar("[atma]val3")
+   
+    target:addMod(mod1,val1)
+    target:addMod(mod2,val2)
+    target:addMod(mod3,val3)
+  else
+    mods = atmaMods[atma]
+    count = #mods
+
     if count == 2 then
 	target:addMod(mods[1],mods[2])
         printf("Count: %i", count)
@@ -190,13 +212,30 @@ function tpz.atma.onEffectGain(target, effect)
         target:addMod(mods[7],mods[8])
     	printf("Count: %i", count)
     end
+  end
 end
 
 --tpz.atma.onEffectLose = function(target, effect)
 function tpz.atma.onEffectLose(target, effect)
     local atma = ATMA_OFFSET + effect:getPower()
-    local mods = atmaMods[atma]
-    local count = #mods
+    local mods
+    local count
+    local mod1 = target:getLocalVar("[atma]mod1")
+    local val1 = target:getLocalVar("[atma]val1")
+    local mod2 = target:getLocalVar("[atma]mod2")
+    local val2 = target:getLocalVar("[atma]val2")
+    local mod3 = target:getLocalVar("[atma]mod3")
+    local val3 = target:getLocalVar("[atma]val3")
+
+  if atma == 1369 then
+
+       target:delMod(mod1,val1)
+       target:delMod(mod2,val2)
+       target:delMod(mod3,val3)
+  else
+    mods = atmaMods[atma]
+    count = #mods
+
     if count == 2 then
 	target:delMod(mods[1],mods[2])
     elseif count == 4 then
@@ -213,4 +252,5 @@ function tpz.atma.onEffectLose(target, effect)
     	target:delMod(mods[5],mods[6])
     	target:delMod(mods[7],mods[8])
     end
+  end
 end

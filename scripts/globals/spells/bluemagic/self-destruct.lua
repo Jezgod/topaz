@@ -12,15 +12,20 @@
 -- Magic Bursts on: Liquefaction, Fusion, and Light
 -- Combos: Auto Refresh
 -----------------------------------------
-
 require("scripts/globals/settings")
 require("scripts/globals/magic")
 require("scripts/globals/status")
 require("scripts/globals/bluemagic")
+require("scripts/globals/msg")
+-----------------------------------------
 
 function onMagicCastingCheck(caster, target, spell)
-    caster:setLocalVar("self-destruct_hp", caster:getHP())
-    return 0
+    if (target:getObjType() == 1) then
+	return tpz.msg.basic.CANNOT_ON_THAT_TARG, 0
+    else
+        caster:setLocalVar("self-destruct_hp", caster:getHP())
+        return 0
+    end
 end
 
 function onSpellCast(caster, target, spell)
